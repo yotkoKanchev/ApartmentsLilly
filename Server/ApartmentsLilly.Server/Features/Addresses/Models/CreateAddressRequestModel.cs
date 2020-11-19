@@ -15,8 +15,10 @@
         [MinLength(MinLength)]
         [MaxLength(MaxLength)]
         public string City { get; set; }
+        
+        public string CityImageUrl { get; set; }
 
-        [MaxLength(MaxPostalCode)]
+        [MaxLength(MaxPostalCodeLength)]
         public string PostalCode { get; set; }
 
         [MaxLength(MaxLength)]
@@ -24,7 +26,7 @@
 
         [Required]
         [MinLength(MinLength)]
-        [MaxLength(MaxLength)]
+        [MaxLength(MaxStreetAddressLength)]
         public string StreetAddress { get; set; }
     }
 }

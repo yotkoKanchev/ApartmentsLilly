@@ -25,7 +25,9 @@
         [MaxLength(MaxLength)]
         public string City { get; set; }
 
-        [MaxLength(MaxPostalCode)]
+        public string CityImageUrl { get; set; }
+
+        [MaxLength(MaxPostalCodeLength)]
         public string PostalCode { get; set; }
 
         [MaxLength(MaxLength)]
@@ -33,7 +35,7 @@
 
         [Required]
         [MinLength(MinLength)]
-        [MaxLength(MaxLength)]
+        [MaxLength(MaxStreetAddressLength)]
         public string StreetAddress { get; set; }
 
         public virtual ICollection<Apartment> Apartments { get; set; } = new HashSet<Apartment>();

@@ -19,8 +19,8 @@
         {
             public const int MinLength = 2;
             public const int MaxLength = 30;
-            public const int MinPostalCode = 3;
-            public const int MaxPostalCode = 10;
+            public const int MaxPostalCodeLength = 10;
+            public const int MaxStreetAddressLength = 30;
         }
     }
 }

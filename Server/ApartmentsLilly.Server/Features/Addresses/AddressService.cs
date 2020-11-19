@@ -19,12 +19,13 @@
             this.data = data;
         }
 
-        public async Task<string> Create(string city, string country, string postalCode, string neighborhood, string streetAddress)
+        public async Task<string> Create(string country, string city, string cityImageUrl, string postalCode, string neighborhood, string streetAddress)
         {
             var address = new Address
             {
-                City = city,
                 Country = country,
+                City = city,
+                CityImageUrl = cityImageUrl,
                 PostalCode = postalCode,
                 Neighborhood = neighborhood,
                 StreetAddress = streetAddress,
@@ -47,7 +48,7 @@
         }
 
 
-        public async Task<Result> Update(string id, string country, string city, string postalCode, string neighborhood, string streetAddress)
+        public async Task<Result> Update(string id, string country, string city, string cityImageUrl, string postalCode, string neighborhood, string streetAddress)
         {
             var address = await this.GetById(id);
 
@@ -58,6 +59,7 @@
 
             address.Country = country;
             address.City = city;
+            address.CityImageUrl = cityImageUrl;
             address.PostalCode = postalCode;
             address.Neighborhood = neighborhood;
             address.StreetAddress = streetAddress;

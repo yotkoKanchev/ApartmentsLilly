@@ -20,8 +20,9 @@
         public async Task<ActionResult> Create(CreateAddressRequestModel model)
         {
             var id = await this.addresses.Create(
-                model.City,
                 model.Country,
+                model.City,
+                model.CityImageUrl,
                 model.PostalCode,
                 model.Neighborhood,
                 model.StreetAddress);
@@ -37,7 +38,6 @@
         }
 
         [HttpGet]
-        [Route(nameof(All))]
         public async Task<IEnumerable<AddressDetailsServiceModel>> All()
         {
             return await this.addresses.GetAll();
@@ -52,6 +52,7 @@
                 id,
                 model.Country,
                 model.City,
+                model.CityImageUrl,
                 model.PostalCode,
                 model.Neighborhood,
                 model.StreetAddress);
