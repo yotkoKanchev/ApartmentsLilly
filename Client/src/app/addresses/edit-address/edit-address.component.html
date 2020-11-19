@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <form [formGroup]="addressForm">
+                <div class="form-group">
+                    <label>Country</label>
+                    <input type="text" class="form-control" formControlName="country">
+                </div>
+                <div *ngIf="(country.touched || country.dirty) && country.errors"
+                    class="alert alert-danger">
+                    <span *ngIf="country.errors.minlength">
+                        Country should be at least 2 symbols long!
+                    </span>
+                    <span *ngIf="country.errors.maxlength">
+                        Country should be maximum 30 symbols long!
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" formControlName="city">
+                </div>
+                <div *ngIf="(city.touched || city.dirty) && city.errors"
+                    class="alert alert-danger">
+                    <span *ngIf="city.errors.minlength">
+                        City should be at least 2 symbols long!
+                    </span>
+                    <span *ngIf="city.errors.maxlength">
+                        City should be maximum 30 symbols long!
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>City Image Url</label>
+                    <input type="text" class="form-control" formControlName="cityImageUrl">
+                </div>
+                <div *ngIf="(cityImageUrl.touched || cityImageUrl.dirty) && cityImageUrl.errors"
+                    class="alert alert-danger">
+                    <span *ngIf="cityImageUrl.errors.pattern">
+                        Plase, add valid url address!
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Postal Code</label>
+                    <input type="text" class="form-control" formControlName="postalCode">
+                </div>
+                <div *ngIf="(postalCode.touched || postalCode.dirty) && postalCode.errors"
+                    class="alert alert-danger">
+                    <span *ngIf="postalCode.errors.maxlength">
+                        Postal Code should be maximum 10 symbols long!
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Neighborhood</label>
+                    <input type="text" class="form-control" formControlName="neighborhood">
+                </div>
+                <div *ngIf="(neighborhood.touched || neighborhood.dirty) && neighborhood.errors"
+                    class="alert alert-danger">
+                    <span *ngIf="neighborhood.errors.maxlength">
+                        Neighborhood should be maximum 30 symbols long!
+                    </span>
+                </div>
+                
+                <div class="form-group">
+                    <label>Street Address</label>
+                    <input type="text" class="form-control" formControlName="streetAddress">
+                </div>
+                <div *ngIf="(streetAddress.touched || streetAddress.dirty) && streetAddress.errors"
+                    class="alert alert-danger">
+                    <span *ngIf="streetAddress.errors.minlength">
+                        Street Address should be at least 2 symbols long!
+                    </span>
+                    <span *ngIf="streetAddress.errors.maxlength">
+                        Street Address should be maximum 50 symbols long!
+                    </span>
+                </div>
+                <button class="btn btn-primary" (click)="editAddress()">Save</button>
+            </form>   
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
