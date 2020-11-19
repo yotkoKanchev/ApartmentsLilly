@@ -26,7 +26,7 @@
                 model.Neighborhood,
                 model.StreetAddress);
 
-            return Created(nameof(this.Create), id);
+            return Created(nameof(this.Create), new CreateAddressResponseModel { Id = id });
         }
 
         [HttpGet]

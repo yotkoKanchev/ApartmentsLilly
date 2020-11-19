@@ -94,7 +94,7 @@
                     "v1",
                     new OpenApiInfo
                     {
-                        Title = "My Catstagram API",
+                        Title = "Apartments Lilly API",
                         Version = "v1"
                     });
             });

@@ -12,7 +12,7 @@
                 .UseSwagger()
                 .UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "My Catstagram API");
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Apartments Lilly API");
                     options.RoutePrefix = string.Empty;
                 });
 
