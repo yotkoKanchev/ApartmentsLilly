@@ -123,6 +123,14 @@
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
+                .Entity<Address>()
+                .HasQueryFilter(r => !r.IsDeleted)
+                .HasMany(r => r.Apartments)
+                .WithOne(a => a.Address)
+                .HasForeignKey(a => a.AddressId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
                 .Entity<Booking>()
                 .HasQueryFilter(r => !r.IsDeleted)
                 .HasMany(r => r.Reviews)
