@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddressService } from '../address.service';
+import { AddressesService } from '../address.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ export class CreateAddressComponent {
   addressForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private addressService: AddressService,
+    private addressService: AddressesService,
     private toastrService: ToastrService,
     private router: Router) {
     this.addressForm = this.fb.group({

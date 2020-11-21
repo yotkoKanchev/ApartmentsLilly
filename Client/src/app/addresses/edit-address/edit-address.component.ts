@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AddressService } from '../address.service';
-import { AddressListingModel } from '../models/list-address.model';
+import { AddressesService } from '../address.service';
+import { AddressModel } from '../models/address.model';
 
 @Component({
   selector: 'app-edit-address',
@@ -12,11 +12,11 @@ import { AddressListingModel } from '../models/list-address.model';
 export class EditAddressComponent implements OnInit {
   addressForm: FormGroup;
   addressId: string;
-  address: AddressListingModel;
+  address: AddressModel;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private addressService: AddressService,
+    private addressService: AddressesService,
     private router: Router) {
     this.addressForm = this.fb.group({
       'id': [''],

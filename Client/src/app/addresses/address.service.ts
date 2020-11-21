@@ -3,12 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { CreateAddressModel } from './models/create-address.model';
-import { AddressListingModel } from './models/list-address.model';
+import { AddressModel } from './models/address.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AddressService {
+export class AddressesService {
   private addressPath = environment.apiUrl + 'addresses';
 
   constructor(private http: HttpClient) { }
@@ -18,11 +18,11 @@ export class AddressService {
   }
 
   getAddresses() {
-    return this.http.get<Array<AddressListingModel>>(this.addressPath)
+    return this.http.get<Array<AddressModel>>(this.addressPath)
   }
 
-  getAddress(id): Observable<AddressListingModel> {
-    return this.http.get<AddressListingModel>(this.addressPath + '/' + id)
+  getAddress(id): Observable<AddressModel> {
+    return this.http.get<AddressModel>(this.addressPath + '/' + id)
   }
 
   editAddress(data) {

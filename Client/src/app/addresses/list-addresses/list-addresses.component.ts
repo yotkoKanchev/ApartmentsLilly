@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AddressService } from '../address.service';
-import { AddressListingModel } from '../models/list-address.model';
+import { AddressesService } from '../address.service';
+import { AddressModel } from '../models/address.model';
 
 @Component({
   selector: 'app-list-addresses',
@@ -9,8 +9,8 @@ import { AddressListingModel } from '../models/list-address.model';
   styleUrls: ['./list-addresses.component.css']
 })
 export class ListAddressesComponent implements OnInit {
-  addresses: Array<AddressListingModel>;
-  constructor(private addressService: AddressService, private router: Router) { }
+  addresses: Array<AddressModel>;
+  constructor(private addressService: AddressesService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchAddresses();

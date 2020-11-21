@@ -8,15 +8,24 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthGuardService } from './guards/auth-guard.service';
+import { AuthGuardService } from './auth/guards/auth-guard.service';
 import { TokenInterceptorService } from './interceptors/token-interceptor.service';
 import { ErrorInterceptorService } from './interceptors/error-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CreateAddressComponent } from './addresses/create-address/create-address.component';
-import { AddressService } from './addresses/address.service';
+import { AddressesService } from './addresses/address.service';
 import { ListAddressesComponent } from './addresses/list-addresses/list-addresses.component';
 import { EditAddressComponent } from './addresses/edit-address/edit-address.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { StartComponent } from './start/start/start.component';
+import { CreateApartmentComponent } from './apartments/create-apartment/create-apartment.component';
+import { EditApartmentComponent } from './apartments/edit-apartment/edit-apartment.component';
+import { ListApartmentsComponent } from './apartments/list-apartments/list-apartments.component';
+import { ApartmentsService } from './apartments/apartments.service';
+import { DetailsApartmentComponent } from './apartments/details-apartment/details-apartment.component';
+import { DeleteApartmentComponent } from './apartments/delete-apartment/delete-apartment.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +35,14 @@ import { EditAddressComponent } from './addresses/edit-address/edit-address.comp
     CreateAddressComponent,
     ListAddressesComponent,
     EditAddressComponent,
+    HeaderComponent,
+    FooterComponent,
+    StartComponent,
+    CreateApartmentComponent,
+    EditApartmentComponent,
+    ListApartmentsComponent,
+    DetailsApartmentComponent,
+    DeleteApartmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +54,8 @@ import { EditAddressComponent } from './addresses/edit-address/edit-address.comp
   ],
   providers: [
     AuthService, 
-    AddressService,
+    AddressesService,
+    ApartmentsService,
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,
