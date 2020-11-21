@@ -1,5 +1,6 @@
 ﻿namespace ApartmentsLilly.Server.Features.Apartments
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,6 @@
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<ActionResult> Create(CreateApartmentRequestModel model)
         {
             var result = await this.apartments.Create(
@@ -37,6 +37,16 @@
             }
 
             return Created(nameof(this.Create), new CreateApartmentResponseModel { Id = result.IntValue });
+        }
+
+        [HttpGet]
+        [Route(nameof(All))]
+        [AllowAnonymous]
+        public async Task<IEnumerable<ApartmentListingServiceModel>> All()
+        {
+            var aps = await this.apartments.GetAll();
+
+            return aps;
         }
     }
 }

@@ -1,11 +1,15 @@
 ﻿namespace ApartmentsLilly.Server.Features.Apartments
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Infrastructure.Services;
+    using Models;
 
     public interface IApartmentsService
     {
-        public Task<Result> Create(string addressId, string name, string description, string entry, int? floor, string number, 
+        Task<Result> Create(string addressId, string name, string description, string entry, int? floor, string number, 
             double? size, double? basePrice, bool hasTerrace, int? maxOccupants, string mainImageUrl);
+        // TODO GetAll should accept cityName as parameter!!!
+        Task<IEnumerable<ApartmentListingServiceModel>> GetAll();
     }
 }

@@ -89,7 +89,7 @@
         {
             return await this.data
                   .Addresses
-                  .Select(a => a.To<AddressDetailsServiceModel>())
+                  .To<AddressDetailsServiceModel>()
                   .ToListAsync();
         }
 
