@@ -36,7 +36,9 @@
 
         public int MaxOccupants { get; set; }
 
-        public virtual Image MainImage { get; set; }
+        public string MainImageUrl { get; set; }
+        // TODO ad real images upload
+        //public virtual Image MainImage { get; set; }
 
         public string AddressId { get; set; }
 

@@ -16,5 +16,7 @@
         Task<Result> Delete(string id);
 
         Task<IEnumerable<AddressDetailsServiceModel>> GetAll();
+
+        Task<bool> Exists(string addressId);
     }
 }

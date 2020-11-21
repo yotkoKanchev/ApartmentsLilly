@@ -90,13 +90,13 @@
                 .HasForeignKey(a => a.AddressId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder
-                .Entity<Apartment>()
-                .HasQueryFilter(c => !c.IsDeleted)
-                .HasOne(a => a.MainImage)
-                .WithOne()
-                .HasForeignKey<Image>(p => p.ApartmentId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder
+            //    .Entity<Apartment>()
+            //    .HasQueryFilter(c => !c.IsDeleted)
+            //    .HasOne(a => a.MainImageUrl)
+            //    .WithOne()
+            //    .HasForeignKey<Image>(p => p.ApartmentId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .Entity<Apartment>()

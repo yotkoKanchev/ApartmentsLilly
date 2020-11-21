@@ -59,7 +59,7 @@
 
             if (result.Failure)
             {
-                return BadRequest();
+                return BadRequest(result.Error);
             }
 
             return Ok();
@@ -73,7 +73,7 @@
 
             if (result.Failure)
             {
-                return BadRequest();
+                return BadRequest(result.Error);
             }
 
             return Ok();
