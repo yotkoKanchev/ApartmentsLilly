@@ -1,6 +1,9 @@
 ﻿namespace ApartmentsLilly.Server.Features.Apartments.Models
 {
-    public class ApartmentDetailsServiceModel
+    using Data.Models;
+    using Mapping;
+
+    public class ApartmentDetailsServiceModel : IMapFrom<Apartment>
     {
         public int Id { get; set; }
 

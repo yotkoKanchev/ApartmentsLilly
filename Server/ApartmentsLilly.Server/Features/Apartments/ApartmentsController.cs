@@ -48,5 +48,14 @@
 
             return aps;
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ApartmentDetailsServiceModel> Details(int id)
+        {
+            var aps = await this.apartments.GetById(id);
+
+            return aps;
+        }
     }
 }

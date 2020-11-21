@@ -60,5 +60,14 @@
                 .To<ApartmentListingServiceModel>()
                 .ToListAsync();
         }
+
+        public async Task<ApartmentDetailsServiceModel> GetById(int id)
+        {
+            return await this.data
+                .Apartments
+                .Where(a => a.Id == id)
+                .To<ApartmentDetailsServiceModel>()
+                .FirstOrDefaultAsync();
+        }
     }
 }

@@ -11,5 +11,7 @@
             double? size, double? basePrice, bool hasTerrace, int? maxOccupants, string mainImageUrl);
         // TODO GetAll should accept cityName as parameter!!!
         Task<IEnumerable<ApartmentListingServiceModel>> GetAll();
+
+        Task<ApartmentDetailsServiceModel> GetById(int id);
     }
 }
