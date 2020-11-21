@@ -2,10 +2,11 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using ApartmentsLilly.Server.Infrastructure.Services;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Models;
+
+    using static Infrastructure.WebConstants;
 
     public class ApartmentsController : ApiController
     {
@@ -51,6 +52,7 @@
         }
 
         [HttpGet]
+        [Route(Id)]
         [AllowAnonymous]
         public async Task<ApartmentDetailsServiceModel> Details(int id)
         {
@@ -59,7 +61,34 @@
             return aps;
         }
 
+        [HttpPut]
+        [Route(Id)]
+        public async Task<ActionResult> Update(int id, UpdateApartmentRequestModel model)
+        {
+            var result = await this.apartments.Update(
+                id,
+                model.Name,
+                model.Description,
+                model.Entry,
+                model.Floor,
+                model.Number,
+                model.Size,
+                model.BasePrice,
+                model.HasTerrace,
+                model.MaxOccupants,
+                model.MainImageUrl,
+                model.AddressId);
+
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
+        }
+
         [HttpDelete]
+        [Route(Id)]
         [AllowAnonymous]
         public async Task<ActionResult> Delete(int id)
         {

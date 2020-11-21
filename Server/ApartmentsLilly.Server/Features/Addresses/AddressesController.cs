@@ -1,11 +1,11 @@
 ﻿namespace ApartmentsLilly.Server.Features.Addresses
 {
     using System.Threading.Tasks;
+    using System.Collections.Generic;
     using Models;
     using Microsoft.AspNetCore.Mvc;
 
     using static Infrastructure.WebConstants;
-    using System.Collections.Generic;
 
     public class AddressesController : ApiController
     {

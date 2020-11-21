@@ -86,6 +86,38 @@
             return true;
         }
 
+        public async Task<Result> Update(int id, string name, string description, string entry, int floor, string number, 
+            double size, double basePrice, bool hasTerrace, int maxOccupants, string mainImageUrl, string addressId)
+        {
+            var apartment = await this.GetApartment(id)
+                .FirstOrDefaultAsync();
+
+            if (apartment == null)
+            {
+                return $"Apartment with Id: {id} does not exists.";
+            }
+
+            apartment.Name = name;
+            apartment.DeletedBy = description;
+            apartment.Entry = entry;
+            apartment.Floor = floor;
+            apartment.Number = number;
+            apartment.Size = size;
+            apartment.BasePrice = basePrice;
+            apartment.HasTerrace = hasTerrace;
+            apartment.MaxOccupants = maxOccupants;
+            apartment.MainImageUrl = mainImageUrl;
+
+            if (await this.address.Exists(addressId) == true)
+            {
+                apartment.AddressId = addressId;
+            }
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
         private IQueryable<Apartment> GetApartment(int id)
         {
             return this.data

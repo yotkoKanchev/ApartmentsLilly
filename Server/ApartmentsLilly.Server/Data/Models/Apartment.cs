@@ -21,7 +21,7 @@
         [Required]
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
-
+        // TODO ADD all validations
         public string Entry { get; set; }
 
         public int Floor { get; set; }
