@@ -7,7 +7,7 @@
     using Data.Models;
     using Models;
     using Microsoft.EntityFrameworkCore;
-    using Mapping;
+    using Infrastructure.Mapping;
     using Infrastructure.Services;
 
     public class AddressService : IAddressService
@@ -89,6 +89,7 @@
         {
             return await this.data
                   .Addresses
+                  .OrderByDescending(x =>x.Apartments.Count)
                   .To<AddressDetailsServiceModel>()
                   .ToListAsync();
         }

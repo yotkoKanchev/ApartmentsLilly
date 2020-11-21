@@ -3,11 +3,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using ApartmentsLilly.Server.Features.Apartments.Models;
-    using ApartmentsLilly.Server.Mapping;
     using Data;
     using Data.Models;
     using Features.Addresses;
+    using Features.Apartments.Models;
+    using Infrastructure.Mapping;
     using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
 
@@ -57,17 +57,40 @@
         {
             return await this.data
                 .Apartments
+                .OrderByDescending(a => a.Name)
                 .To<ApartmentListingServiceModel>()
                 .ToListAsync();
         }
 
         public async Task<ApartmentDetailsServiceModel> GetById(int id)
         {
-            return await this.data
-                .Apartments
-                .Where(a => a.Id == id)
+            return await this.GetApartment(id)
                 .To<ApartmentDetailsServiceModel>()
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<Result> Delete(int id)
+        {
+            var apartment = await this.GetApartment(id)
+                .FirstOrDefaultAsync();
+
+            if (apartment == null)
+            {
+                return $"Apartment with Id: {id} does not exists.";
+            }
+
+            this.data.Apartments.Remove(apartment);
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
+        private IQueryable<Apartment> GetApartment(int id)
+        {
+            return this.data
+                .Apartments
+                .Where(a => a.Id == id);
         }
     }
 }

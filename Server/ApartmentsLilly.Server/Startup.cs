@@ -2,8 +2,8 @@ namespace ApartmentsLilly.Server
 {
     using System.Reflection;
     using Infrastructure.Extensions;
+    using Infrastructure.Mapping;
     using Features;
-    using Mapping;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;

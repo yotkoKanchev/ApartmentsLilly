@@ -1,8 +1,7 @@
 ﻿namespace ApartmentsLilly.Server.Features.Apartments.Models
 {
-    using AutoMapper;
     using Data.Models;
-    using Mapping;
+    using Infrastructure.Mapping;
 
     public class ApartmentListingServiceModel : IMapFrom<Apartment>
     {
@@ -23,12 +22,5 @@
         public string AddressNeighborhood { get; set; }
 
         public string AddressStreetAddress { get; set; }
-
-        //public void CreateMappings(IProfileExpression configuration)
-        //{
-        //    configuration.CreateMap<Apartment, ApartmentListingServiceModel>()
-        //        .ForMember(a => a.AddressNeighborhood, opt => opt.MapFrom(a => a.Address.Neighborhood))
-        //        .ForMember(a => a.AddressStreetAddress, opt => opt.MapFrom(a => a.Address.StreetAddress));
-        //}
     }
 }

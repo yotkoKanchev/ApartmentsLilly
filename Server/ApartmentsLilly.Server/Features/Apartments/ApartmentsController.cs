@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using ApartmentsLilly.Server.Infrastructure.Services;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Models;
@@ -56,6 +57,21 @@
             var aps = await this.apartments.GetById(id);
 
             return aps;
+        }
+
+        [HttpDelete]
+        [AllowAnonymous]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var result = await this.apartments
+                .Delete(id);
+
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
         }
     }
 }

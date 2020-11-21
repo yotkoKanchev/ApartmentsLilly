@@ -1,4 +1,4 @@
-﻿namespace ApartmentsLilly.Server.Mapping
+﻿namespace ApartmentsLilly.Server.Infrastructure.Mapping
 {
     using System;
     using System.Linq;

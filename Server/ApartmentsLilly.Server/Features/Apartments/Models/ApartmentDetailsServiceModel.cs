@@ -1,7 +1,7 @@
 ﻿namespace ApartmentsLilly.Server.Features.Apartments.Models
 {
     using Data.Models;
-    using Mapping;
+    using Infrastructure.Mapping;
 
     public class ApartmentDetailsServiceModel : IMapFrom<Apartment>
     {

@@ -1,7 +1,7 @@
 ﻿namespace ApartmentsLilly.Server.Features.Addresses.Models
 {
     using Data.Models;
-    using Mapping;
+    using Infrastructure.Mapping;
 
     public class AddressDetailsServiceModel : IMapFrom<Address>
     {

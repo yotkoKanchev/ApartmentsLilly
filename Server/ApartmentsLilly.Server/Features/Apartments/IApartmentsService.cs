@@ -13,5 +13,7 @@
         Task<IEnumerable<ApartmentListingServiceModel>> GetAll();
 
         Task<ApartmentDetailsServiceModel> GetById(int id);
+
+        Task<Result> Delete(int id);
     }
 }
