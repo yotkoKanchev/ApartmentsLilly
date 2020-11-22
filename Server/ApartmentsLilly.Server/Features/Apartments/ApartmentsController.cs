@@ -42,7 +42,7 @@
         }
 
         [HttpGet]
-        [Route(nameof(All))]
+        //[Route(nameof(All))]
         [AllowAnonymous]
         public async Task<IEnumerable<ApartmentListingServiceModel>> All()
         {

@@ -13,7 +13,7 @@ export class CreateApartmentComponent {
   apartmentForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private addressService: ApartmentsService,
+    private apartmentService: ApartmentsService,
     private toastrService: ToastrService,
     private router: Router) {
     this.apartmentForm = this.fb.group({
@@ -31,7 +31,12 @@ export class CreateApartmentComponent {
   }
 
   create(){
-
+    console.log(this.apartmentForm.value)
+    this.apartmentService.create(this.apartmentForm.value)
+      .subscribe(() => {
+        this.toastrService.success("Success");
+        this.router.navigate(["addresses"])
+      })
   }
 
 }
