@@ -80,7 +80,6 @@
             }
 
             this.data.Apartments.Remove(apartment);
-
             await this.data.SaveChangesAsync();
 
             return true;

@@ -46,9 +46,7 @@
         [AllowAnonymous]
         public async Task<IEnumerable<ApartmentListingServiceModel>> All()
         {
-            var aps = await this.apartments.GetAll();
-
-            return aps;
+            return await this.apartments.GetAll();
         }
 
         [HttpGet]
@@ -56,9 +54,7 @@
         [AllowAnonymous]
         public async Task<ApartmentDetailsServiceModel> Details(int id)
         {
-            var aps = await this.apartments.GetById(id);
-
-            return aps;
+            return await this.apartments.GetById(id);
         }
 
         [HttpPut]

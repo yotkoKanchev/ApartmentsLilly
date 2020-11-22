@@ -18,13 +18,9 @@
         // TODO add validations
         public string Id { get; set; }
 
-        [MaxLength(200)]
-        [Required]
-        public string Name { get; set; }
-
         public bool IsSleepable { get; set; }
 
-        public virtual RoomType RoomType { get; set; }
+        public RoomType RoomType { get; set; }
 
         [Required]
         public int ApartmentId { get; set; }
