@@ -98,7 +98,7 @@
             }
 
             apartment.Name = name;
-            apartment.DeletedBy = description;
+            apartment.Description = description;
             apartment.Entry = entry;
             apartment.Floor = floor;
             apartment.Number = number;
@@ -116,6 +116,13 @@
             await this.data.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<bool> Exists(int apartmentId)
+        {
+            return await this.data
+                .Apartments
+                .AnyAsync(a => a.Id == apartmentId);
         }
 
         private IQueryable<Apartment> GetApartment(int id)

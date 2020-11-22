@@ -104,7 +104,8 @@
         public async Task<bool> Exists(string addressId)
         {
             return await this.data
-                .Addresses.AnyAsync(a => a.Id == addressId);
+                .Addresses
+                .AnyAsync(a => a.Id == addressId);
         }
     }
 }

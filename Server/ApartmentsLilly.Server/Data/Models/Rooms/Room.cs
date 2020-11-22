@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using Base;
     using Beds;
 
@@ -11,22 +12,24 @@
         public Room()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.IsSleepable = this.Beds.Any();
         }
 
         // TODO add validations
         public string Id { get; set; }
 
-        [MaxLength(2000)]
+        [MaxLength(200)]
         [Required]
         public string Name { get; set; }
 
         public bool IsSleepable { get; set; }
 
+        public virtual RoomType RoomType { get; set; }
+
+        [Required]
         public int ApartmentId { get; set; }
 
         public virtual Apartment Apartment { get; set; }
-
-        public virtual RoomType RoomType { get; set; }
 
         public virtual ICollection<Amenity> Amenities { get; set; } = new HashSet<Amenity>();
 

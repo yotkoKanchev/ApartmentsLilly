@@ -24,17 +24,17 @@
         // TODO ADD all validations
         public string Entry { get; set; }
 
-        public int Floor { get; set; }
+        public int? Floor { get; set; }
 
         public string Number { get; set; }
 
-        public double Size { get; set; }
+        public double? Size { get; set; }
 
-        public double BasePrice { get; set; }
+        public double? BasePrice { get; set; }
 
         public bool HasTerrace { get; set; }
 
-        public int MaxOccupants { get; set; }
+        public int? MaxOccupants { get; set; }
 
         public string MainImageUrl { get; set; }
         // TODO ad real images upload
