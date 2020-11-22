@@ -1,6 +1,5 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4"></div>
         <div class="col-lg-4">
             <form [formGroup]="addressForm" (ngSubmit)="create()">
                 <div class="form-group">
@@ -23,9 +22,6 @@
                 </div>
                 <div *ngIf="(city.touched || city.dirty) && city.errors"
                     class="alert alert-danger">
-                    <!-- <span *ngIf="city.errors.required">
-                        City is required!
-                    </span> -->
                     <span *ngIf="city.errors.minlength">
                         City should be at least 2 symbols long!
                     </span>
@@ -84,6 +80,5 @@
                 <button type="submit" class="btn btn-primary" [disabled]="addressForm.invalid">Create</button>
             </form>
         </div>
-        <div class="col-lg-4"></div>
     </div>
 </div>
