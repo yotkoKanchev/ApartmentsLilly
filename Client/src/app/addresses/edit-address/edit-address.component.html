@@ -1,14 +1,12 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4"></div>
         <div class="col-lg-4">
             <form [formGroup]="addressForm">
                 <div class="form-group">
                     <label>Country</label>
                     <input type="text" class="form-control" formControlName="country">
                 </div>
-                <div *ngIf="(country.touched || country.dirty) && country.errors"
-                    class="alert alert-danger">
+                <div *ngIf="(country.touched || country.dirty) && country.errors" class="alert alert-danger">
                     <span *ngIf="country.errors.minlength">
                         Country should be at least 2 symbols long!
                     </span>
@@ -21,8 +19,7 @@
                     <label>City</label>
                     <input type="text" class="form-control" formControlName="city">
                 </div>
-                <div *ngIf="(city.touched || city.dirty) && city.errors"
-                    class="alert alert-danger">
+                <div *ngIf="(city.touched || city.dirty) && city.errors" class="alert alert-danger">
                     <span *ngIf="city.errors.minlength">
                         City should be at least 2 symbols long!
                     </span>
@@ -46,8 +43,7 @@
                     <label>Postal Code</label>
                     <input type="text" class="form-control" formControlName="postalCode">
                 </div>
-                <div *ngIf="(postalCode.touched || postalCode.dirty) && postalCode.errors"
-                    class="alert alert-danger">
+                <div *ngIf="(postalCode.touched || postalCode.dirty) && postalCode.errors" class="alert alert-danger">
                     <span *ngIf="postalCode.errors.maxlength">
                         Postal Code should be maximum 10 symbols long!
                     </span>
@@ -63,7 +59,7 @@
                         Neighborhood should be maximum 30 symbols long!
                     </span>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Street Address</label>
                     <input type="text" class="form-control" formControlName="streetAddress">
@@ -78,8 +74,7 @@
                     </span>
                 </div>
                 <button class="btn btn-primary" (click)="editAddress()">Save</button>
-            </form>   
+            </form>
         </div>
-        <div class="col-lg-4"></div>
     </div>
 </div>

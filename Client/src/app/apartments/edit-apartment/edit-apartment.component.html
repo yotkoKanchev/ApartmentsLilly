@@ -1,1 +1,63 @@
-<p>edit-apartment works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <form [formGroup]="apartmentForm">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="Name">
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" class="form-control" formControlName="Description">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Main Image Url</label>
+                    <input type="text" class="form-control" formControlName="MainImageUrl">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Entry</label>
+                    <input type="text" class="form-control" formControlName="Entry">
+                </div>
+
+                <div class="form-group">
+                    <label>Floor</label>
+                    <input type="text" class="form-control" formControlName="Floor">
+                </div>
+
+                <div class="form-group">
+                    <label>Number</label>
+                    <input type="text" class="form-control" formControlName="Number">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Size</label>
+                    <input type="text" class="form-control" formControlName="Size">
+                </div>
+
+                <div class="form-group">
+                    <label>Base Price</label>
+                    <input type="text" class="form-control" formControlName="BasePrice">
+                </div>
+
+                <div class="form-group">
+                    <label>Maximum Occupants</label>
+                    <input type="text" class="form-control" formControlName="MaxOccupants">
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="aa" formControlName="HasTerrace">
+                    <label for="aa">Has Terrace</label>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>

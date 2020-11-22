@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'addresses', component:  ListAddressesComponent, canActivate: [AuthGuardService]},
   { path: 'addresses/:id/edit', component:  EditAddressComponent, canActivate: [AuthGuardService]},
   { path: 'apartments/create', component:  CreateApartmentComponent, canActivate: [AuthGuardService]},
+  { path: 'apartments/:id/edit', component:  CreateApartmentComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({
