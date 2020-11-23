@@ -9,6 +9,7 @@ import { EditAddressComponent } from './addresses/edit-address/edit-address.comp
 import { StartComponent } from './start/start/start.component';
 import { CreateApartmentComponent } from './apartments/create-apartment/create-apartment.component';
 import { ListApartmentsComponent } from './apartments/list-apartments/list-apartments.component';
+import { EditApartmentComponent } from './apartments/edit-apartment/edit-apartment.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
   { path: 'addresses', component:  ListAddressesComponent, canActivate: [AuthGuardService]},
   { path: 'addresses/:id/edit', component:  EditAddressComponent, canActivate: [AuthGuardService]},
   { path: 'apartments/create', component:  CreateApartmentComponent, canActivate: [AuthGuardService]},
-  { path: 'apartments/:id/edit', component:  CreateApartmentComponent, canActivate: [AuthGuardService]},
+  { path: 'apartments/:id/edit', component:  EditApartmentComponent, canActivate: [AuthGuardService]},
   { path: 'apartments', component:  ListApartmentsComponent, canActivate: [AuthGuardService]},
 ];
 

@@ -24,7 +24,6 @@ export class ApartmentsService {
   }
 
   getApartment(id): Observable<ApartmentModel> {
-    console.log(id);
     return this.http.get<ApartmentModel>(this.apartmentPath + '/' + id)
   }
 

@@ -19,24 +19,23 @@ export class EditApartmentComponent implements OnInit {
     private apartmentsService: ApartmentsService,
     private router: Router) {
     this.apartmentForm = this.fb.group({
-      'Id': [''],
-      'Name': ['', [Validators.minLength(2), Validators.maxLength(30)]],
-      'Description': ['', [Validators.maxLength(1000)]],
-      'MainImageUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
-      'Entry': ['', Validators.maxLength(10)],
-      'Floor': ['', [Validators.min(-2), Validators.max(50)]],
-      'Number': ['', [Validators.minLength(1), Validators.maxLength(20)]],
-      'Size': ['', [Validators.min(0), Validators.max(1000)]],
-      'BasePrice': ['', [Validators.min(0), Validators.max(10000)]],
-      'MaxOccupants': ['', [Validators.min(0), Validators.max(1000)]],
-      'HasTerrace': ['',],
+      'id': [''],
+      'name': ['', [Validators.minLength(2), Validators.maxLength(30)]],
+      'description': ['', [Validators.maxLength(1000)]],
+      'mainImageUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
+      'entry': ['', Validators.maxLength(10)],
+      'floor': ['', [Validators.min(-2), Validators.max(50)]],
+      'number': ['', [Validators.minLength(1), Validators.maxLength(20)]],
+      'size': ['', [Validators.min(0), Validators.max(1000)]],
+      'basePrice': ['', [Validators.min(0), Validators.max(10000)]],
+      'maxOccupants': ['', [Validators.min(0), Validators.max(1000)]],
+      'hasTerrace': ['',],
     })
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.apartmentId = params['id'];
-      console.log(this.apartmentId)
       this.apartmentsService.getApartment(this.apartmentId).subscribe(res => {
         this.apartment = res;
         this.apartmentForm = this.fb.group({
@@ -62,4 +61,28 @@ export class EditApartmentComponent implements OnInit {
     })
   }
 
+  get name() {
+    return this.apartmentForm.get('name');
+  }
+
+  // get city() {
+  //   return this.addressForm.get('city');
+  // }
+
+
+  // get cityImageUrl() {
+  //   return this.addressForm.get('cityImageUrl');
+  // }
+
+  // get postalCode() {
+  //   return this.addressForm.get('postalCode');
+  // }
+
+  // get neighborhood() {
+  //   return this.addressForm.get('neighborhood');
+  // }
+
+  // get streetAddress() {
+  //   return this.addressForm.get('streetAddress');
+  // }
 }
