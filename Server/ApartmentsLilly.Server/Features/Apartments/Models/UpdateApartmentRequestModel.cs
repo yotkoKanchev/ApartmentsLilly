@@ -13,22 +13,32 @@
         [Required]
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
+        // TODO ADD all validations
 
+        [MaxLength(EntryMaxLength)]
         public string Entry { get; set; }
 
-        public int Floor { get; set; }
+        [Range(MinFloor, MaxFloor)]
+        public int? Floor { get; set; }
 
+        [MinLength(NumberMinLength)]
+        [MaxLength(NumberMaxLength)]
         public string Number { get; set; }
 
-        public double Size { get; set; }
+        [Range(ZeroValue, MaxSize)]
+        public double? Size { get; set; }
 
-        public double BasePrice { get; set; }
+        [Range(ZeroValue, MaxBasePrice)]
+        public double? BasePrice { get; set; }
 
         public bool HasTerrace { get; set; }
 
-        public int MaxOccupants { get; set; }
+        [Range(ZeroValue, MaximumOccupants)]
+        public int? MaxOccupants { get; set; }
 
+        [RegularExpression(UrlPattern)]
         public string MainImageUrl { get; set; }
+
 
         [Required]
         public string AddressId { get; set; }
