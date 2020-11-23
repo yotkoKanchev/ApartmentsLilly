@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CreateApartmentModel } from './models/create-apartment.model';
 import { ApartmentModel } from './models/apartment.model';
+import { ApartmentListingModel } from './models/apartment-listing.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +20,11 @@ export class ApartmentsService {
   }
 
   getApartments() {
-    return this.http.get<Array<ApartmentModel>>(this.apartmentPath)
+    return this.http.get<Array<ApartmentListingModel>>(this.apartmentPath)
   }
 
   getApartment(id): Observable<ApartmentModel> {
+    console.log(id);
     return this.http.get<ApartmentModel>(this.apartmentPath + '/' + id)
   }
 

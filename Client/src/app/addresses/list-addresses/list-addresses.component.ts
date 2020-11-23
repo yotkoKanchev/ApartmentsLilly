@@ -29,7 +29,6 @@ export class ListAddressesComponent implements OnInit {
   deleteAddress(id: string) {
     console.log(id);
     this.addressService.deleteAddress(id).subscribe(() => {
-      console.log('is here')
       this.fetchAddresses()
     })
   }

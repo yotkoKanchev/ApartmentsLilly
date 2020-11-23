@@ -36,6 +36,7 @@ export class EditApartmentComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.apartmentId = params['id'];
+      console.log(this.apartmentId)
       this.apartmentsService.getApartment(this.apartmentId).subscribe(res => {
         this.apartment = res;
         this.apartmentForm = this.fb.group({

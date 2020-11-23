@@ -28,5 +28,13 @@
         public string MainImageUrl { get; set; }
 
         public string AddressId { get; set; }
+
+        public string AddressCountry { get; set; }
+
+        public string AddressCity { get; set; }
+
+        public string AddressNeighborhood { get; set; }
+
+        public string AddressStreetAddress { get; set; }
     }
 }

@@ -1,1 +1,22 @@
-<p>list-apartments works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3" *ngFor="let apartment of apartments">
+            <div class="card" style="width: 18rem;">
+                <img [src]="apartment.mainImageUrl" class="card-img-top" alt="apartment: {{apartment.name}},{{apartment.addressCity}}">
+                <div class="card-body">
+                  <h3 class="card-title">{{apartment.name | uppercase}}</h3>
+                  <h4 class="card-title">{{apartment.addressCity}}, {{apartment.addressCountry}}</h4>
+                  <h4 class="card-title">
+                      <span *ngIf="apartment.addressNeighborhood">{{apartment.addressNeighborhood}}-</span>
+                      {{apartment.addressStreetAddress}}</h4>
+                  <br>
+                  <h5 *ngIf="apartment.size">{{apartment.size}}</h5>
+                  <h5 *ngIf="apartment.basePrice">{{apartment.basePrice}}</h5>
+                  <h5 *ngIf="apartment.maxOccupants">{{apartment.maxOccupants}}</h5>
+                  <button class="btn btn-warning" (click)="editApartment(apartment.id)"> Edit</button>
+                  <button class="btn btn-danger" (click)="deleteApartment(apartment.id)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

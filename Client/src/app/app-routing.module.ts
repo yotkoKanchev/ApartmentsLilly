@@ -8,6 +8,7 @@ import { ListAddressesComponent } from './addresses/list-addresses/list-addresse
 import { EditAddressComponent } from './addresses/edit-address/edit-address.component';
 import { StartComponent } from './start/start/start.component';
 import { CreateApartmentComponent } from './apartments/create-apartment/create-apartment.component';
+import { ListApartmentsComponent } from './apartments/list-apartments/list-apartments.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'addresses/:id/edit', component:  EditAddressComponent, canActivate: [AuthGuardService]},
   { path: 'apartments/create', component:  CreateApartmentComponent, canActivate: [AuthGuardService]},
   { path: 'apartments/:id/edit', component:  CreateApartmentComponent, canActivate: [AuthGuardService]},
+  { path: 'apartments', component:  ListApartmentsComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({
