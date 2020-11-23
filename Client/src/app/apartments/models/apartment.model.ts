@@ -10,4 +10,5 @@ export interface ApartmentModel{
     hasTerrace: boolean;
     maxOccupants?: number;
     mainImageUrl: string;
+    addressId: string;
 }

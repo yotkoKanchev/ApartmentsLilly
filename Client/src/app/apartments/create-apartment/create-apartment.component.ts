@@ -22,10 +22,10 @@ export class CreateApartmentComponent {
       'MainImageUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
       'Entry': ['', Validators.maxLength(10)],
       'Floor': ['', [Validators.min(-2), Validators.max(50)]],
-      'Number': ['', [Validators.minLength(1), Validators.maxLength(20)]],
+      'Number': ['', [Validators.minLength(1), Validators.maxLength(10)]],
       'Size': ['', [Validators.min(0), Validators.max(1000)]],
       'BasePrice': ['', [Validators.min(0), Validators.max(10000)]],
-      'MaxOccupants': ['', [Validators.min(0), Validators.max(1000)]],
+      'MaxOccupants': ['', [Validators.min(0), Validators.max(100)]],
       'HasTerrace': ['', ],
     })
   }
@@ -37,6 +37,43 @@ export class CreateApartmentComponent {
         this.toastrService.success("Success");
         this.router.navigate(["addresses"])
       })
+  }
+
+  get name() {
+    return this.apartmentForm.get('Name');
+  }
+
+  get description() {
+    return this.apartmentForm.get('Description');
+  }
+
+  get mainImageUrl() {
+    return this.apartmentForm.get('MainImageUrl');
+  }
+
+  get entry() {
+    return this.apartmentForm.get('Entry');
+  }
+
+  get floor() {
+    return this.apartmentForm.get('Floor');
+  }
+
+  get number() {
+    return this.apartmentForm.get('Number');
+  }
+
+  get size() {
+    return this.apartmentForm.get('Size');
+  }
+  get basePrice() {
+    return this.apartmentForm.get('BasePrice');
+  }
+  get maxOccupants() {
+    return this.apartmentForm.get('MaxOccupants');
+  }
+  get hasTerrace() {
+    return this.apartmentForm.get('HasTerrace');
   }
 
 }

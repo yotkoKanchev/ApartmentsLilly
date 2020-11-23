@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ApartmentsService } from '../apartments.service';
 import { ApartmentModel } from '../models/apartment.model';
 
@@ -17,7 +18,8 @@ export class EditApartmentComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private apartmentsService: ApartmentsService,
-    private router: Router) {
+    private router: Router,
+    private toastr: ToastrService) {
     this.apartmentForm = this.fb.group({
       'id': [''],
       'name': ['', [Validators.minLength(2), Validators.maxLength(30)]],
@@ -30,6 +32,7 @@ export class EditApartmentComponent implements OnInit {
       'basePrice': ['', [Validators.min(0), Validators.max(10000)]],
       'maxOccupants': ['', [Validators.min(0), Validators.max(1000)]],
       'hasTerrace': ['',],
+      'addressId': ['', Validators.required],
     })
   }
 
@@ -50,14 +53,16 @@ export class EditApartmentComponent implements OnInit {
           'basePrice': [this.apartment.basePrice],
           'maxOccupants': [this.apartment.maxOccupants],
           'hasTerrace': [this.apartment.hasTerrace],
+          'addressId': [this.apartment.addressId],
         })
       })
     })
   }
 
-  editAddress() {
+  editApartment() {
     this.apartmentsService.editApartment(this.apartmentForm.value).subscribe(() => {
-      this.router.navigate(["apartments"])
+      this.router.navigate(["apartments"]);
+      this.toastr.success("Apartment has been edited!", "Success")
     })
   }
 
@@ -65,24 +70,40 @@ export class EditApartmentComponent implements OnInit {
     return this.apartmentForm.get('name');
   }
 
-  // get city() {
-  //   return this.addressForm.get('city');
-  // }
+  get description() {
+    return this.apartmentForm.get('description');
+  }
 
 
-  // get cityImageUrl() {
-  //   return this.addressForm.get('cityImageUrl');
-  // }
+  get mainImageUrl() {
+    return this.apartmentForm.get('mainImageUrl');
+  }
 
-  // get postalCode() {
-  //   return this.addressForm.get('postalCode');
-  // }
+  get entry() {
+    return this.apartmentForm.get('entry');
+  }
 
-  // get neighborhood() {
-  //   return this.addressForm.get('neighborhood');
-  // }
+  get floor() {
+    return this.apartmentForm.get('floor');
+  }
 
-  // get streetAddress() {
-  //   return this.addressForm.get('streetAddress');
-  // }
+  get number() {
+    return this.apartmentForm.get('number');
+  }
+
+  get size() {
+    return this.apartmentForm.get('size');
+  }
+  get basePrice() {
+    return this.apartmentForm.get('basePrice');
+  }
+  get maxOccupants() {
+    return this.apartmentForm.get('maxOccupants');
+  }
+  get hasTerrace() {
+    return this.apartmentForm.get('hasTerrace');
+  }
+  get addressId() {
+    return this.apartmentForm.get('addressId');
+  }
 }

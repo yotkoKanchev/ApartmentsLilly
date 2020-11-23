@@ -6,55 +6,101 @@
                     <label>Name</label>
                     <input type="text" class="form-control" formControlName="Name">
                 </div>
+                <div *ngIf="(name.touched || name.dirty) && name.errors" class="alert alert-danger">
+                    <span *ngIf="name.errors.minlength">
+                        Name should be at least 2 symbols long!
+                    </span>
+                    <span *ngIf="name.errors.maxlength">
+                        Name should be maximum 30 symbols long!
+                    </span>
+                </div>
 
                 <div class="form-group">
                     <label>Description</label>
-                    <input type="text" class="form-control" formControlName="Description">
+                    <textarea type="text" class="form-control" formControlName="Description"></textarea>
                 </div>
-
+                <div *ngIf="(description.touched || description.dirty) && description.errors"
+                    class="alert alert-danger">
+                    <span *ngIf="name.errors.maxlength">
+                        Description should be maximum 1000 symbols long!
+                    </span>
+                </div>
 
                 <div class="form-group">
                     <label>Main Image Url</label>
                     <input type="text" class="form-control" formControlName="MainImageUrl">
                 </div>
-
+                <div *ngIf="(mainImageUrl.touched || mainImageUrl.dirty) && mainImageUrl.errors"
+                    class="alert alert-danger">
+                    <span *ngIf="mainImageUrl.errors.pattern">
+                        Plase, add valid url address!
+                    </span>
+                </div>
 
                 <div class="form-group">
                     <label>Entry</label>
                     <input type="text" class="form-control" formControlName="Entry">
+                </div>
+                <div *ngIf="(entry.touched || entry.dirty) && entry.errors" class="alert alert-danger">
+                    <span *ngIf="entry.errors.maxlength">
+                        Entry should be maximum 10 symbols long!
+                    </span>
                 </div>
 
                 <div class="form-group">
                     <label>Floor</label>
                     <input type="text" class="form-control" formControlName="Floor">
                 </div>
+                <div *ngIf="(floor.touched || floor.dirty) && floor.errors" class="alert alert-danger">
+                    <span *ngIf="floor.errors.min || floor.errors.max">
+                        Floor must be between -2 and 50!
+                    </span>
+                </div>
 
                 <div class="form-group">
                     <label>Number</label>
                     <input type="text" class="form-control" formControlName="Number">
                 </div>
-
+                <div *ngIf="(number.touched || number.dirty) && number.errors" class="alert alert-danger">
+                    <span *ngIf="number.errors.maxlength || number.errors.minlength">
+                        Number should be between 1 and 10 symbols long!
+                    </span>
+                </div>
 
                 <div class="form-group">
                     <label>Size</label>
                     <input type="text" class="form-control" formControlName="Size">
+                </div>
+                <div *ngIf="(size.touched || size.dirty) && size.errors" class="alert alert-danger">
+                    <span *ngIf="size.errors.maxlength || size.errors.minlength">
+                        Size should be between 0 and 1000 symbols long!
+                    </span>
                 </div>
 
                 <div class="form-group">
                     <label>Base Price</label>
                     <input type="text" class="form-control" formControlName="BasePrice">
                 </div>
+                <div *ngIf="(basePrice.touched || basePrice.dirty) && basePrice.errors" class="alert alert-danger">
+                    <span *ngIf="basePrice.errors.maxlength || basePrice.errors.minlength">
+                        Base price should be between 0 and 10000 symbols long!
+                    </span>
+                </div>
 
                 <div class="form-group">
                     <label>Maximum Occupants</label>
                     <input type="text" class="form-control" formControlName="MaxOccupants">
+                </div>
+                <div *ngIf="(maxOccupants.touched || maxOccupants.dirty) && maxOccupants.errors" class="alert alert-danger">
+                    <span *ngIf="maxOccupants.errors.maxlength || maxOccupants.errors.minlength">
+                        Maximum Occupants should be between 0 and 100 symbols long!
+                    </span>
                 </div>
 
                 <div class="form-group">
                     <input type="checkbox" id="aa" formControlName="HasTerrace">
                     <label for="aa">Has Terrace</label>
                 </div>
-
 
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
