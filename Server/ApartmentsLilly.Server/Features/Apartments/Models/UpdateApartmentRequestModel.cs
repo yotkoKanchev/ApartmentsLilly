@@ -19,7 +19,7 @@
         public string Entry { get; set; }
 
         [Range(MinFloor, MaxFloor)]
-        public int? Floor { get; set; }
+        public int Floor { get; set; }
 
         [MinLength(NumberMinLength)]
         [MaxLength(NumberMaxLength)]

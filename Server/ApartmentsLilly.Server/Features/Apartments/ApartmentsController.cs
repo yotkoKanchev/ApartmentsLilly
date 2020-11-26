@@ -68,10 +68,10 @@
                 model.Entry,
                 model.Floor,
                 model.Number,
-                model.Size,
-                model.BasePrice,
+                model.Size.Value,
+                model.BasePrice.Value,
                 model.HasTerrace,
-                model.MaxOccupants,
+                model.MaxOccupants.Value,
                 model.MainImageUrl,
                 model.AddressId);
 

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ApartmentsService } from '../apartments.service';
+import { ApartmentModel } from '../models/apartment.model';
 
 @Component({
   selector: 'app-details-apartment',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details-apartment.component.css']
 })
 export class DetailsApartmentComponent implements OnInit {
-
-  constructor() { }
+ apartment: ApartmentModel
+ id: number;
+  constructor(private apartmentsService: ApartmentsService,  private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.apartmentsService.getApartment(this.id).subscribe(res => {
+        this.apartment = res;
+      })
+    })
   }
 
 }

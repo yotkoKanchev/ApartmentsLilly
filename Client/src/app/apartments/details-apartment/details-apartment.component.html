@@ -1,1 +1,19 @@
-<p>details-apartment works!</p>
+<div *ngIf="apartment" class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card" style="width: 18rem;">
+                <h3 class="card-title">{{apartment.name}}</h3>
+                <img [src]="apartment.mainImageUrl" class="card-img-top" alt="Apartment {{apartment.name}}">
+                <div class="card-body">
+                  <h5 *ngIf="apartment.basePrice"></h5>
+                  <h5 *ngIf="apartment.maxOccupants">{{apartment.maxOccupants}}</h5>
+                  <h5 *ngIf="apartment.size">{{apartment.size}}sq.m</h5>
+                  <h5 >{{apartment.entry}}</h5>
+                  <h5 >{{apartment.floor}}</h5>
+                  <h5 >{{apartment.number}}</h5>
+                  <p>{{apartment.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
