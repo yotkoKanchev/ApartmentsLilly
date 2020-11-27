@@ -17,6 +17,11 @@ export class AuthService {
     return this.http.post(this.loginPath, data)
   }
 
+  logout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/apartments']);
+  }
+
   register(data): Observable<any> {
     this.router.navigate(['/login']);
     return this.http.post(this.registerPath, data);

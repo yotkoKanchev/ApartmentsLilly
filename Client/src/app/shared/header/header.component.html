@@ -22,7 +22,7 @@
                 <a class="nav-link" href="/login/">Login</a>
             </li>
             <li *ngIf="authService.isAuthenticated()" class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
+                <a class="nav-link" (click)="authService.logout()">Logout</a>
             </li>
             <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
