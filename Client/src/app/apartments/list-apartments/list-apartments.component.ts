@@ -20,6 +20,11 @@ export class ListApartmentsComponent implements OnInit {
     this.apartmentService.getApartments()
       .subscribe(apartments => {
         this.apartments = apartments;
+        for (let ap of this.apartments) {
+          if (ap.size === 0) {
+            ap.size = 0.01
+          }
+        }
       })
   }
 

@@ -101,7 +101,8 @@
                     <label>Maximum Occupants</label>
                     <input type="text" class="form-control" formControlName="maxOccupants">
                 </div>
-                <div *ngIf="(maxOccupants.touched || maxOccupants.dirty) && maxOccupants.errors" class="alert alert-danger">
+                <div *ngIf="(maxOccupants.touched || maxOccupants.dirty) && maxOccupants.errors"
+                    class="alert alert-danger">
                     <span *ngIf="maxOccupants.errors.maxlength || maxOccupants.errors.minlength">
                         Maximum Occupants should be between 0 and 100 symbols long!
                     </span>
@@ -113,6 +114,8 @@
                 </div>
 
                 <button type="submit" class="btn btn-warning" (click)="editApartment()">Edit</button>
+                <a class="btn btn-warning" routerLink="/apartments">Cancel</a>
+
             </form>
         </div>
     </div>
