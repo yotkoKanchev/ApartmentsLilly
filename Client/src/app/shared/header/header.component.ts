@@ -7,10 +7,10 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+ title:string = "Lilly's"
+ toggleNavbar = true;
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
-
 }

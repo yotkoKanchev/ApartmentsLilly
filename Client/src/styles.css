@@ -4,3 +4,11 @@ form {
     padding: 10% 15%;
     margin-top: 20%;
 }
+
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }

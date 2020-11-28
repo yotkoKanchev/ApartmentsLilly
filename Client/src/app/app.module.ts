@@ -50,7 +50,7 @@ import { DeleteApartmentComponent } from './apartments/delete-apartment/delete-a
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(), 
   ],
   providers: [
     AuthService, 
