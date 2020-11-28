@@ -1,1 +1,52 @@
-<p>start works!</p>
+<div class="jumbotron text-center">
+    <div class="cars1"></div>
+    <h2 class="title">Book an apartment in Plovdiv, Bulgaria</h2>
+    <div class="row text-center">
+        <div class="col-lg-10 offset-lg-1 col-md-12 text-center">
+            <div class="lead">
+                <form [formGroup]="searchApartmentForm" (ngSubmit)="onSubmit(searchApartmentForm)"
+                    class="form-group form-group-lg" novalidate>
+
+                    <br>
+                    <div class="input-group input-group-lg">
+                        <input type="date" formControlName="start_date" class="form-control col-lg-6 col-md-7 col-sm-12"
+                            placeholder="Start date">
+                        <input type="date" formControlName="end_date" class="form-control col-lg-6 col-md-7 col-sm-12"
+                            placeholder="End date">
+                    </div>
+                    <br>
+                    <div class="input-group input-group-lg">
+                        <select formControlName="adults" class="form-control col-lg-4 col-md-7 col-sm-12"
+                            placeholder="Adults">
+                            <option [ngValue]="null">Adults</option>
+                            <option [ngValue]=1>1</option>
+                            <option [ngValue]=2>2</option>
+                            <option [ngValue]=3>3</option>
+                        </select>
+                        <select formControlName="adults" class="form-control col-lg-4 col-md-7 col-sm-12"
+                            placeholder="Children">
+                            <option [ngValue]="null">Children</option>
+                            <option [ngValue]=1>1</option>
+                            <option [ngValue]=2>2</option>
+                            <option [ngValue]=3>3</option>
+                        </select>
+                        <select formControlName="adults" class="form-control col-lg-4 col-md-7 col-sm-12"
+                            placeholder="Infants">
+                            <option [ngValue]="null">Infants</option>
+                            <option [ngValue]=1>1</option>
+                            <option [ngValue]=2>2</option>
+                            <option [ngValue]=3>3</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button [disabled]="!searchApartmentForm.valid"
+                        class="btn btn-success form-control col-lg-5 col-md-5 col-sm-12">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
