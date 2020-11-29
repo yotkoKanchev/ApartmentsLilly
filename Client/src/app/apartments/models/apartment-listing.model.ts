@@ -5,6 +5,7 @@ export interface ApartmentListingModel{
     basePrice?: number;
     maxOccupants?: number;
     mainImageUrl: string;
+    description: string;
     addressId: string;
     addressCountry: string;
     addressCity: string;

@@ -1,6 +1,5 @@
 <div class="jumbotron text-center">
-    <div class="cars1"></div>
-    <h2 class="title">Book an apartment in Plovdiv, Bulgaria</h2>
+    <h2 *ngIf="!apartments" class="title">Book an apartment in Plovdiv, Bulgaria</h2>
     <div class="row text-center">
         <div class="col-lg-10 offset-lg-1 col-md-12 text-center">
             <div class="lead">
@@ -11,40 +10,62 @@
                     <div class="input-group input-group-lg">
                         <input type="date" formControlName="Start-date" class="form-control col-lg-6 col-md-7 col-sm-12"
                             placeholder="Start date" useValueAsDate>
-                            <input type="date" formControlName="End-date" class="form-control col-lg-6 col-md-7 col-sm-12"
+                        <input type="date" formControlName="End-date" class="form-control col-lg-6 col-md-7 col-sm-12"
                             placeholder="End date" useValueAsDate>
-                        </div>
-                        <label *ngIf="searchApartmentForm.errors">{{ searchApartmentForm.errors?.dates | json }}</label>
+                    </div>
+                    <label *ngIf="searchApartmentForm.errors">{{ searchApartmentForm.errors?.dates | json }}</label>
                     <br>
                     <div class="input-group input-group-lg">
-                        <select formControlName="Adults" class="form-control col-lg-4 col-md-7 col-sm-12"
-                            placeholder="Adults">
-                            <option [ngValue]="null">Adults</option>
-                            <option [ngValue]=1>1</option>
-                            <option [ngValue]=2>2</option>
-                            <option [ngValue]=3>3</option>
+                        <select formControlName="Adults" class="form-control col-lg-4 col-md-7 col-sm-12">
+                            <option value="" disabled>adults(13+)</option>
+                            <option *ngFor="let num of nums" [ngValue]="num">{{num}}</option>
                         </select>
-                        <select formControlName="Children" class="form-control col-lg-4 col-md-7 col-sm-12"
-                            placeholder="Children">
-                            <option [ngValue]="null">Children</option>
-                            <option [ngValue]=1>1</option>
-                            <option [ngValue]=2>2</option>
-                            <option [ngValue]=3>3</option>
+                        <select formControlName="Children" class="form-control col-lg-4 col-md-7 col-sm-12">
+                            <option value="" disabled>children(2-12)</option>
+                            <option *ngFor="let num of nums" [ngValue]="num">{{num}}</option>
                         </select>
-                        <select formControlName="Infants" class="form-control col-lg-4 col-md-7 col-sm-12"
-                            placeholder="Infants">
-                            <option [ngValue]="null">Infants</option>
-                            <option [ngValue]=1>1</option>
-                            <option [ngValue]=2>2</option>
-                            <option [ngValue]=3>3</option>
+                        <select formControlName="Infants" class="form-control col-lg-4 col-md-7 col-sm-12">
+                            <option value="" disabled>infants(0-2)</option>
+                            <option *ngFor="let num of nums" [ngValue]="num">{{num}}</option>
                         </select>
                     </div>
                     <br>
-                    <button [disabled]="!searchApartmentForm.valid"
-                        class="btn btn-success form-control col-lg-5 col-md-5 col-sm-12">Search</button>
+                    <!-- [disabled]="!searchApartmentForm.valid" -->
+                    <button class="btn btn-success form-control col-lg-5 col-md-5 col-sm-12">Search</button>
                 </form>
+                <br>
             </div>
         </div>
+    </div>
+
+    <div *ngIf="apartments">
+                <div *ngFor="let ap of apartments" class="card mb-3">
+            <h3 class="card-header">{{ap.name}}</h3>
+            <div class="card-body">
+                <h5 class="card-title">{{ap.addressCity}}, {{ap.addressCountry}}</h5>
+                <h6 class="card-subtitle text-muted">{{ap.addressNeighborhood}}</h6>
+                <h6 class="card-subtitle text-muted">{{ap.addressStreetAddress}}</h6>
+            </div>
+            <a routerLink="/apartments/{{ap.id}}">
+                <img [src]="ap.mainImageUrl" class="card-img-top" alt="apartment: {{ap.name}},{{ap.addressCity}}">
+            </a>
+            <div class="card-body">
+                <p class="card-text">{{ap.description}}.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li *ngIf="ap.mainImageUrl" class="list-group-item">{{ap.maxOccupants}} guests</li>
+                <li *ngIf="ap.size" class="list-group-item">{{ap.size}} sq.m</li>
+                <li *ngIf="ap.basePrice" class="list-group-item">{{ap.basePrice}} BGN/night</li>
+                <li *ngIf="ap.basePrice" class="list-group-item">1 bedroom - 2 beds - 2 baths</li>
+            </ul>
+            <div class="card-body">
+                <span>WiFi - </span>
+                <span>Washer - </span>
+                <span>Parking</span>
+            </div>
+        </div>
+        <br>
+        <app-map-display></app-map-display>
     </div>
     <br>
     <br>

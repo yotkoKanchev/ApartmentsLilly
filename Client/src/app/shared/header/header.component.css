@@ -1,0 +1,5 @@
+@media (min-width: 992px) {
+    .navbar-nav > li:last-child {
+        margin-left: 25rem;
+    }
+}

@@ -19,12 +19,9 @@ export class ListApartmentsComponent implements OnInit {
   fetchApartments() {
     this.apartmentService.getApartments()
       .subscribe(apartments => {
+        console.log(apartments)
         this.apartments = apartments;
-        for (let ap of this.apartments) {
-          if (ap.size === 0) {
-            ap.size = 0.01
-          }
-        }
+      //  console.log(this.apartments)
       })
   }
 

@@ -26,6 +26,7 @@ import { ListApartmentsComponent } from './apartments/list-apartments/list-apart
 import { ApartmentsService } from './apartments/apartments.service';
 import { DetailsApartmentComponent } from './apartments/details-apartment/details-apartment.component';
 import { DeleteApartmentComponent } from './apartments/delete-apartment/delete-apartment.component';
+import { MapDisplayComponent } from './osm/map-display/map-display.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { DeleteApartmentComponent } from './apartments/delete-apartment/delete-a
     ListApartmentsComponent,
     DetailsApartmentComponent,
     DeleteApartmentComponent,
+    MapDisplayComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,27 +11,30 @@ import { ApartmentListingModel } from 'src/app/apartments/models/apartment-listi
 export class StartComponent implements OnInit {
   searchApartmentForm: FormGroup
   apartments: Array<ApartmentListingModel>
-  minDate = new Date();
-  maxDate = new Date(this.minDate.getMonth() + 6)
+  nums: Array<number> = [0, 1, 2, 3];
+  map: any;
+  latitude: number = 42.136761;
+  longitude: number = 24.7578769;
   constructor(private apartmentsService: ApartmentsService, private fb: FormBuilder) {
     this.searchApartmentForm = this.fb.group({
       'Start-date': ['',],
       'End-date': ['',],
-      'Adults': ['', [Validators.min(1), Validators.max(3)]],
+      'Adults': ['', [Validators.min(1), Validators.max(3), Validators.required]],
       'Children': ['', [Validators.min(0), Validators.max(2)]],
-      'Infants': [',', [Validators.min(0), Validators.max(2)]]
+      'Infants': ['', [Validators.min(0), Validators.max(2)]]
     },
       { validator: [this.dateLessThan('Start-date', 'End-date'), this.datePassed('Start-date')] }
-     );
+    );
   }
 
   ngOnInit(): void {
+    
   }
 
   onSubmit() {
     this.apartmentsService.getApartments().subscribe(data => {
       this.apartments = data;
-    })
+    });
   }
 
   dateLessThan(from: string, to: string) {
@@ -48,8 +51,9 @@ export class StartComponent implements OnInit {
   }
   datePassed(date: string) {
     return (group: FormGroup): { [key: string]: any } => {
-      let t = group.controls[date];
-      if (new Date(t.value) < new Date()) {
+      const currentDate = new Date(group.controls[date].value);
+      const today = new Date();
+      if ( currentDate < today && currentDate.getDate < today.getDate) {
         return {
           dates: "Date can not be passed"
         };

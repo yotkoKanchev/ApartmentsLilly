@@ -6,35 +6,27 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home
-                    <span class="sr-only">(current)</span>
-                </a>
+        <ul class="navbar-nav mr-auto ">
+            <li class="nav-item">
+                <a class="nav-link" href="/">About </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/apartments/">Apartments</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/profile/">Profile</a>
-            </li>
             <li *ngIf="!authService.isAuthenticated()" class="nav-item">
                 <a class="nav-link" href="/login/">Login</a>
             </li>
-            <li *ngIf="authService.isAuthenticated()" class="nav-item">
-                <a class="nav-link" (click)="authService.logout()">Logout</a>
-            </li>
-            <!-- <li class="nav-item dropdown">
+            <li *ngIf="authService.isAuthenticated()" class="nav-item dropdown right-align">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                    aria-expanded="false">Dropdown</a>
+                    aria-expanded="false">{{name}}</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Login</a>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <a class="dropdown-item" href="/bookings/">Bookings</a>
+                    <a class="dropdown-item" href="/requests/">Requests</a>
+                    <a class="dropdown-item" href="/profile/">Profile</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
+                    <a class="dropdown-item" (click)="authService.logout()">Logout</a>
                 </div>
-            </li> -->
+            </li>
         </ul>
         <!-- <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
