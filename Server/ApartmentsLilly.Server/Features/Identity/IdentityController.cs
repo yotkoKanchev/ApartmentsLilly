@@ -68,7 +68,8 @@
 
             return new LoginResponseModel
             {
-                Token = token
+                Token = token,
+                Name = user.UserName,
             };
         }
     }

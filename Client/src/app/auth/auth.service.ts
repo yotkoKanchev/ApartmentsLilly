@@ -19,6 +19,7 @@ export class AuthService {
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('name');
     this.router.navigate(['/apartments']);
   }
 
@@ -31,8 +32,16 @@ export class AuthService {
     localStorage.setItem('token', token)
   }
 
+  saveName(name) {
+    localStorage.setItem('name', name)
+  }
+
   getToken() {
     return localStorage.getItem('token')
+  }
+
+  getName() {
+    return localStorage.getItem('name')
   }
 
   isAuthenticated() {
