@@ -123,6 +123,17 @@
                 .Apartments
                 .AnyAsync(a => a.Id == apartmentId);
         }
+      
+        public async Task<IEnumerable<ApartmentListingServiceModel>> GetAllAvailable(System.DateTime startDate, System.DateTime endDate)
+        {
+            return await this.data
+                .Apartments
+                .Where(a => !a.Bookings
+                    .Any(b => (b.StartDate >= startDate && b.EndDate <= startDate) && 
+                              (b.StartDate >= endDate && b.EndDate <= endDate)))
+                .To<ApartmentListingServiceModel>()
+                .ToListAsync();
+        }
 
         private IQueryable<Apartment> GetApartment(int id)
         {

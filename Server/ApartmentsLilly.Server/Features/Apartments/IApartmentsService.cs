@@ -1,5 +1,6 @@
 ﻿namespace ApartmentsLilly.Server.Features.Apartments
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Infrastructure.Services;
@@ -11,6 +12,8 @@
             double? size, double? basePrice, bool hasTerrace, int? maxOccupants, string mainImageUrl);
         // TODO GetAll should accept cityName as parameter!!!
         Task<IEnumerable<ApartmentListingServiceModel>> GetAll();
+
+        Task<IEnumerable<ApartmentListingServiceModel>> GetAllAvailable(DateTime startDate, DateTime endDate);
 
         Task<ApartmentDetailsServiceModel> GetById(int id);
 

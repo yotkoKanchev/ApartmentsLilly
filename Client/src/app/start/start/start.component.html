@@ -8,10 +8,21 @@
 
                     <br>
                     <div class="input-group input-group-lg">
-                        <input type="date" formControlName="Start-date" class="form-control col-lg-6 col-md-7 col-sm-12"
+                        <input type="date" formControlName="startDate" class="form-control col-lg-6 col-md-7 col-sm-12"
                             placeholder="Start date" useValueAsDate>
-                        <input type="date" formControlName="End-date" class="form-control col-lg-6 col-md-7 col-sm-12"
+                            
+                        <input type="date" formControlName="endDate" class="form-control col-lg-6 col-md-7 col-sm-12"
                             placeholder="End date" useValueAsDate>
+                    </div>
+                    <div *ngIf="startDate.errors" >
+                        <span *ngIf="startDate.errors.required">
+                            Start Date is required.
+                        </span>
+                    </div>
+                    <div *ngIf="endDate.errors" >
+                        <span *ngIf="endDate.errors.required">
+                            End Date is required.
+                        </span>
                     </div>
                     <label *ngIf="searchApartmentForm.errors">{{ searchApartmentForm.errors?.dates | json }}</label>
                     <br>
@@ -30,8 +41,8 @@
                         </select>
                     </div>
                     <br>
-                    <!-- [disabled]="!searchApartmentForm.valid" -->
-                    <button class="btn btn-success form-control col-lg-5 col-md-5 col-sm-12">Search</button>
+                    
+                    <button class="btn btn-success form-control col-lg-5 col-md-5 col-sm-12" [disabled]="!searchApartmentForm.valid">Search</button>
                 </form>
                 <br>
             </div>

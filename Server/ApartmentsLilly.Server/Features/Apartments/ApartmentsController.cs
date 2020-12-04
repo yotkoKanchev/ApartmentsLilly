@@ -1,5 +1,6 @@
 ﻿namespace ApartmentsLilly.Server.Features.Apartments
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
@@ -42,11 +43,20 @@
         }
 
         [HttpGet]
-        //[Route(nameof(All))]
+        [Route(nameof(All))]
         [AllowAnonymous]
         public async Task<IEnumerable<ApartmentListingServiceModel>> All()
         {
             return await this.apartments.GetAll();
+        }
+
+        [Route(nameof(Search))]
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IEnumerable<ApartmentListingServiceModel>> Search(DateTime startDate, DateTime endDate)
+        {
+            var aps = await this.apartments.GetAllAvailable(startDate, endDate);
+            return aps;
         }
 
         [HttpGet]
