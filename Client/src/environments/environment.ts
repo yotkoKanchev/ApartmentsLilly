@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // apiUrl: "https://catstagramserver.azurewebsites.net/"
-  apiUrl: "https://localhost:44384/"
+  apiUrl: "https://localhost:44384/",
+  googleMaps: 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBpSdArQPQXZI-vQYp3mI02Fh7B2Xju5ys&q=',
 };
 
 /*

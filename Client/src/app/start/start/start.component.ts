@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ApartmentsService } from 'src/app/apartments/apartments.service';
 import { ApartmentListingModel } from 'src/app/apartments/models/apartment-listing.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-start',
@@ -15,7 +17,9 @@ export class StartComponent implements OnInit {
   map: any;
   latitude: number = 42.136761;
   longitude: number = 24.7578769;
-  constructor(private apartmentsService: ApartmentsService, private fb: FormBuilder) {
+  fullAddress: string;
+  showMap: boolean = false;
+  constructor(private apartmentsService: ApartmentsService, private fb: FormBuilder, private sanitizer: DomSanitizer) {
     this.searchApartmentForm = this.fb.group({
       'Start-date': ['',],
       'End-date': ['',],
@@ -28,12 +32,20 @@ export class StartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
+  }
+  getMap() {
+    if (this.showMap) {
+      this.showMap = false
+    } else {
+      this.showMap = true;
+    };
   }
 
   onSubmit() {
     this.apartmentsService.getApartments().subscribe(data => {
       this.apartments = data;
+      this.fullAddress = this.sanitizer.bypassSecurityTrustResourceUrl(environment.googleMaps + '+' + this.apartments[0].addressCountry + '+' + this.apartments[0].addressCity + '+' + this.apartments[0].addressStreetAddress) as string;
     });
   }
 
@@ -53,7 +65,7 @@ export class StartComponent implements OnInit {
     return (group: FormGroup): { [key: string]: any } => {
       const currentDate = new Date(group.controls[date].value);
       const today = new Date();
-      if ( currentDate < today && currentDate.getDate < today.getDate) {
+      if (currentDate < today && currentDate.getDate < today.getDate) {
         return {
           dates: "Date can not be passed"
         };

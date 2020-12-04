@@ -39,7 +39,7 @@
     </div>
 
     <div *ngIf="apartments">
-                <div *ngFor="let ap of apartments" class="card mb-3">
+        <div *ngFor="let ap of apartments" class="card mb-3">
             <h3 class="card-header">{{ap.name}}</h3>
             <div class="card-body">
                 <h5 class="card-title">{{ap.addressCity}}, {{ap.addressCountry}}</h5>
@@ -57,15 +57,17 @@
                 <li *ngIf="ap.size" class="list-group-item">{{ap.size}} sq.m</li>
                 <li *ngIf="ap.basePrice" class="list-group-item">{{ap.basePrice}} BGN/night</li>
                 <li *ngIf="ap.basePrice" class="list-group-item">1 bedroom - 2 beds - 2 baths</li>
+                <li *ngIf="ap.basePrice" class="list-group-item">WiFi - Washer - Parking</li>
             </ul>
-            <div class="card-body">
-                <span>WiFi - </span>
-                <span>Washer - </span>
-                <span>Parking</span>
-            </div>
+            <a class="card-body col-pos" *ngIf="!showMap" (click)="getMap()">Show Map</a>
+            <a class="card-body col-neg" *ngIf="showMap" (click)="getMap()">Hide Map</a>
+            <iframe *ngIf="showMap" height="300" frameborder="0" style="border:0" [src]="fullAddress" allowfullscreen>
+            </iframe>
         </div>
         <br>
         <app-map-display></app-map-display>
+
+
     </div>
     <br>
     <br>
