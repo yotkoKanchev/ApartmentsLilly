@@ -1,0 +1,51 @@
+<div class="jumbotron text-center">
+    <h2 *ngIf="!apartments" class="title">Book an apartment in Plovdiv, Bulgaria</h2>
+    <div class="row text-center">
+        <div class="col-lg-10 offset-lg-1 col-md-12 text-center">
+            <div class="lead">
+                <form [formGroup]="searchApartmentForm" (ngSubmit)="onSubmit(searchApartmentForm)"
+                    class="form-group form-group-lg" novalidate>
+
+                    <br>
+                    <div class="input-group input-group-lg">
+                        <input type="date" formControlName="Start-date" class="form-control col-lg-6 col-md-7 col-sm-12"
+                            placeholder="Start date" useValueAsDate>
+                        <input type="date" formControlName="End-date" class="form-control col-lg-6 col-md-7 col-sm-12"
+                            placeholder="End date" useValueAsDate>
+                    </div>
+                    <label *ngIf="searchApartmentForm.errors">{{ searchApartmentForm.errors?.dates | json }}</label>
+                    <br>
+                    <div class="input-group input-group-lg">
+                        <select formControlName="Adults" class="form-control col-lg-4 col-md-7 col-sm-12">
+                            <option value="" disabled>adults(13+)</option>
+                            <option *ngFor="let num of nums" [ngValue]="num">{{num}}</option>
+                        </select>
+                        <select formControlName="Children" class="form-control col-lg-4 col-md-7 col-sm-12">
+                            <option value="" disabled>children(2-12)</option>
+                            <option *ngFor="let num of nums" [ngValue]="num">{{num}}</option>
+                        </select>
+                        <select formControlName="Infants" class="form-control col-lg-4 col-md-7 col-sm-12">
+                            <option value="" disabled>infants(0-2)</option>
+                            <option *ngFor="let num of nums" [ngValue]="num">{{num}}</option>
+                        </select>
+                    </div>
+                    <br>
+                    <!-- [disabled]="!searchApartmentForm.valid" -->
+                    <button class="btn btn-success form-control col-lg-5 col-md-5 col-sm-12">Search</button>
+                </form>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="apartments">
+        <div *ngFor="let ap of apartments">
+            <app-apartment [ap]="ap">
+            </app-apartment>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>

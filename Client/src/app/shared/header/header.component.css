@@ -1,0 +1,11 @@
+@media (min-width: 992px) {
+    .navbar-nav > li:last-child {
+        margin-left: 25rem;
+    }
+}
+
+#avatar{
+    width: 30px;
+    height: auto;
+    border-radius: 50%;
+}

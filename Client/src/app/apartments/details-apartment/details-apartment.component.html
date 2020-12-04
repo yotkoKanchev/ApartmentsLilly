@@ -1,0 +1,20 @@
+<div *ngIf="apartment" class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card" style="width: 18rem;">
+                <h3 class="card-title">{{apartment.name}}</h3>
+                <img [src]="apartment.mainImageUrl" class="card-img-top" alt="Apartment {{apartment.name}}">
+                <div class="card-body">
+                  <h5 *ngIf="apartment.basePrice">Base price: {{apartment.basePrice}}</h5>
+                  <h5 *ngIf="apartment.maxOccupants">Max occupants: {{apartment.maxOccupants}}</h5>
+                  <h5 *ngIf="apartment.size">SIze: {{apartment.size}}sq.m</h5>
+                  <h5>Entry: {{apartment.entry}}</h5>
+                  <h5>Fllor: {{apartment.floor}}</h5>
+                  <h5>Number: {{apartment.number}}</h5>
+                  <p>Description: {{apartment.description}}</p>
+                </div>
+            </div>
+            <a class="btn btn-warning" routerLink="/apartments">Back to list</a>
+        </div>
+    </div>
+</div>

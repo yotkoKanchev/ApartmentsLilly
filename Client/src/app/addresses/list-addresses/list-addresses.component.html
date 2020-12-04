@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3" *ngFor="let address of addresses">
+            <div class="card" style="width: 18rem;">
+                <img [src]="address.cityImageUrl" class="card-img-top" alt="{{address.city}}">
+                <div class="card-body">
+                  <h4 class="card-title">{{address.city}}, {{address.country}}</h4>
+                  <h5 *ngIf="address.postalCode">{{address.postalCode}}</h5>
+                  <h5 *ngIf="address.neighborhood">{{address.neighborhood}}</h5>
+                  <p>{{address.streetAddress}}</p>
+                  <button class="btn btn-warning" (click)="editAddress(address.id)"> Edit</button>
+                  <button class="btn btn-danger" (click)="deleteAddress(address.id)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
