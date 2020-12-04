@@ -350,4 +350,5 @@ MigrationBackup/
 .ionide/
 
 /src/environments/**
+Client/src/environments/
 environments.ts
