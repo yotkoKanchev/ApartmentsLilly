@@ -1,0 +1,26 @@
+<div  class="card mb-3">
+    <h3 class="card-header">{{ap.name}}</h3>
+    <div class="card-body">
+        <h5 class="card-title">{{ap.addressCity}}, {{ap.addressCountry}}</h5>
+        <h6 class="card-subtitle text-muted">{{ap.addressNeighborhood}}</h6>
+        <h6 class="card-subtitle text-muted">{{ap.addressStreetAddress}}</h6>
+    </div>
+    <a routerLink="/apartments/{{ap.id}}">
+        <img [src]="ap.mainImageUrl" class="card-img-top" alt="apartment: {{ap.name}},{{ap.addressCity}}">
+    </a>
+    <div class="card-body">
+        <p class="card-text">{{ap.description}}.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li *ngIf="ap.mainImageUrl" class="list-group-item">{{ap.maxOccupants}} guests</li>
+        <li *ngIf="ap.size" class="list-group-item">{{ap.size}} sq.m</li>
+        <li *ngIf="ap.basePrice" class="list-group-item">{{ap.basePrice}} BGN/night</li>
+        <li *ngIf="ap.basePrice" class="list-group-item">1 bedroom - 2 beds - 2 baths</li>
+        <li *ngIf="ap.basePrice" class="list-group-item">WiFi - Washer - Parking</li>
+    </ul>
+    <a class="card-body col-pos" *ngIf="!showMap" (click)="getMap()">Show Map</a>
+    <a class="card-body col-neg" *ngIf="showMap" (click)="getMap()">Hide Map</a>
+    <iframe *ngIf="showMap" height="300" frameborder="0" style="border:0" [src]="ap.fullAddress" allowfullscreen>
+    </iframe>
+</div>
+<br>
