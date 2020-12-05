@@ -14,4 +14,8 @@ export interface ApartmentListingModel{
     addressNeighborhood: string;
     addressStreetAddress: string;
     fullAddress:SafeResourceUrl;
+    bedroomCount:number;
+    bedCount:number;
+    bathroomCount:number;
+    amenities: Array<string>;
 }

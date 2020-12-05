@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ApartmentsService } from 'src/app/apartments/apartments.service';
-import { ApartmentListingModel } from 'src/app/apartments/models/apartment-listing.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,10 +13,6 @@ export class StartComponent implements OnInit {
   searchApartmentForm: FormGroup
   apartments: any
   nums: Array<number> = [0, 1, 2, 3];
-  // map: any;
-  // latitude: number = 42.136761;
-  // longitude: number = 24.7578769;
-  showMap: boolean = false;
   constructor(private apartmentsService: ApartmentsService, private fb: FormBuilder, private sanitizer: DomSanitizer) {
     this.searchApartmentForm = this.fb.group({
       'startDate': ['', Validators.required],
@@ -33,13 +28,6 @@ export class StartComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  getMap() {
-    if (this.showMap) {
-      this.showMap = false
-    } else {
-      this.showMap = true;
-    };
-  }
 
   onSubmit() {
     this.apartmentsService.getAvailableApartments(this.searchApartmentForm.value).subscribe(data => {
@@ -49,15 +37,6 @@ export class StartComponent implements OnInit {
           environment.googleMaps + "+" + apart.addressCountry + "+" + apart.addressCity + '+' + apart.addressStreetAddress);
         }
     });
-
-    //call server and fetch only available aps
-    // this.apartmentsService.getApartments().subscribe(data => {
-    //   this.apartments = data;
-    //   for (const apart of this.apartments) {
-    //     apart.fullAddress = this.sanitizer.bypassSecurityTrustResourceUrl(
-    //       environment.googleMaps + "+" + apart.addressCountry + "+" + apart.addressCity + '+' + apart.addressStreetAddress);
-    //   }
-    // });
   }
 
   dateLessThan(from: string, to: string) {
@@ -72,7 +51,7 @@ export class StartComponent implements OnInit {
       return {};
     }
   }
-  
+
   datePassed(date: string) {
     return (group: FormGroup): { [key: string]: any } => {
       const currentDate = new Date(group.controls[date].value);
