@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressesService } from '../address.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { ModalService } from '../../_modal';
 
 @Component({
   selector: 'app-create-address',
@@ -10,8 +11,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-address.component.css']
 })
 export class CreateAddressComponent {
+
   addressForm: FormGroup;
   constructor(
+    private modalService: ModalService,
     private fb: FormBuilder,
     private addressService: AddressesService,
     private toastrService: ToastrService,
@@ -33,6 +36,10 @@ export class CreateAddressComponent {
         this.router.navigate(["addresses"])
 
       })
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
   }
   
   get country() {

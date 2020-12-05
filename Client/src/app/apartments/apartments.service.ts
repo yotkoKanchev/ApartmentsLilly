@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { CreateApartmentModel } from './models/create-apartment.model';
 import { ApartmentModel } from './models/apartment.model';
 import { ApartmentListingModel } from './models/apartment-listing.model';
-import { SearchApartments } from './models/search-apartments.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class ApartmentsService {
 
   // todo work here
   create(data): Observable<CreateApartmentModel> {
-    data.addressId = "1cd54ca6-b3c5-4449-a7b6-4f57028617df";
+    console.log(data)
     return this.http.post<CreateApartmentModel>(this.apartmentPath, data)
   }
 
@@ -26,7 +25,6 @@ export class ApartmentsService {
     return this.http.get<Array<ApartmentListingModel>>(this.apartmentPath + `/search?startDate=${data.startDate}&endDate=${data.endDate}`);
   }
 
-  // +all
   getApartments() {
     return this.http.get<Array<ApartmentListingModel>>(this.apartmentPath + '/all')
   }

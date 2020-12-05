@@ -1,7 +1,19 @@
 <div class="container-fluid">
     <div class="row">
+        <jw-modal id="custom-modal-2">
+            <div>
+                <app-create-address></app-create-address>
+            </div>
+        </jw-modal>
         <div class="col-lg-4">
             <form [formGroup]="apartmentForm" (ngSubmit)="create()">
+                <label>Choose Address</label>
+                <select #addressSelct class="form-control" (change)='onOptionsSelected(addressSelct.value)'>
+                    <option value="">choose address</option>
+                    <option *ngFor="let ad of addresses" [ngValue]="ad.id">{{ad.country}}, {{ad.city}} -
+                        {{ad.streetAddress}}</option>
+                    <option value="addNew">add new address</option>
+                </select>
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" class="form-control" formControlName="Name">
@@ -91,7 +103,8 @@
                     <label>Maximum Occupants</label>
                     <input type="text" class="form-control" formControlName="MaxOccupants">
                 </div>
-                <div *ngIf="(maxOccupants.touched || maxOccupants.dirty) && maxOccupants.errors" class="alert alert-danger">
+                <div *ngIf="(maxOccupants.touched || maxOccupants.dirty) && maxOccupants.errors"
+                    class="alert alert-danger">
                     <span *ngIf="maxOccupants.errors.maxlength || maxOccupants.errors.minlength">
                         Maximum Occupants should be between 0 and 100 symbols long!
                     </span>
@@ -104,6 +117,9 @@
 
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
+            <br>
+            <br>
+
         </div>
     </div>
 </div>

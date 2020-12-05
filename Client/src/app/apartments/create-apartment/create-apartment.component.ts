@@ -1,22 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApartmentsService } from '../apartments.service';
 import { ToastrService } from 'ngx-toastr';
+import { AddressModel } from 'src/app/addresses/models/address.model';
+import { AddressesService } from 'src/app/addresses/address.service';
+import { ModalService } from '../../_modal';
 
 @Component({
   selector: 'app-create-apartment',
   templateUrl: './create-apartment.component.html',
   styleUrls: ['./create-apartment.component.css']
 })
-export class CreateApartmentComponent {
+export class CreateApartmentComponent implements OnInit {
   apartmentForm: FormGroup;
+  addresses: Array<AddressModel>
+  bodyText: string;
+
   constructor(
+    private modalService: ModalService,
     private fb: FormBuilder,
     private apartmentService: ApartmentsService,
     private toastrService: ToastrService,
-    private router: Router) {
+    private router: Router,
+    private addressesService: AddressesService) {
     this.apartmentForm = this.fb.group({
+      'AddressId': ['', Validators.required],
       'Name': ['', [Validators.minLength(2), Validators.maxLength(30)]],
       'Description': ['', [Validators.maxLength(1000)]],
       'MainImageUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
@@ -30,6 +39,13 @@ export class CreateApartmentComponent {
     })
   }
 
+  ngOnInit(): void {
+    this.bodyText = 'This text can be updated in modal 1';
+    this.addressesService.getAddresses().subscribe(data => {
+      this.addresses = data;
+    });
+  }
+
   create(){
     this.apartmentService.create(this.apartmentForm.value)
       .subscribe(() => {
@@ -37,6 +53,16 @@ export class CreateApartmentComponent {
         this.router.navigate(["addresses"])
       })
   }
+
+  onOptionsSelected(value:string){
+    if (value == "addNew") {
+      this.openModal('custom-modal-2');
+    }       
+}
+
+openModal(id: string) {
+  this.modalService.open(id);
+}
 
   get name() {
     return this.apartmentForm.get('Name');

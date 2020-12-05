@@ -27,6 +27,7 @@ import { ApartmentsService } from './apartments/apartments.service';
 import { DetailsApartmentComponent } from './apartments/details-apartment/details-apartment.component';
 import { DeleteApartmentComponent } from './apartments/delete-apartment/delete-apartment.component';
 import { ApartmentComponent } from './apartments/apartment/apartment.component';
+import { ModalModule } from './_modal';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ApartmentComponent } from './apartments/apartment/apartment.component';
     ApartmentComponent,
   ],
   imports: [
+    ModalModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
