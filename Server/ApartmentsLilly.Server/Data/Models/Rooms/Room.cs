@@ -1,24 +1,16 @@
 ﻿namespace ApartmentsLilly.Server.Data.Models.Rooms
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using Base;
     using Beds;
 
     public class Room : DeletableEntity
     {
-        public Room()
-        {
-            this.Id = Guid.NewGuid().ToString();
-            this.IsSleepable = this.Beds.Any();
-        }
-
         // TODO add validations
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public bool IsSleepable { get; set; }
+        public string Name { get; set; }
 
         public RoomType RoomType { get; set; }
 

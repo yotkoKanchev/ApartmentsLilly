@@ -4,7 +4,7 @@
 
     public class UpdateRoomRequestModel
     {
-        public bool IsSleepable { get; set; }
+        public string Name { get; set; }
 
         public RoomType RoomType { get; set; }
     }

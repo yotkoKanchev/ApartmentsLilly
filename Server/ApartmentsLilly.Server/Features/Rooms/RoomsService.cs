@@ -22,7 +22,7 @@
             this.apartments = apartments;
         }
 
-        public async Task<Result> Create(RoomType roomType, int apartmentId)
+        public async Task<Result> Create(string name, RoomType roomType, int apartmentId)
         {
             var isApartmentExists = await this.apartments.Exists(apartmentId);
 
@@ -31,8 +31,9 @@
                 return $"Apartment with Id: {apartmentId} does not exists.";
             }
 
-            var room = new Room
-            {
+            var room = new Room 
+            { 
+                Name = name,
                 RoomType = roomType,
                 ApartmentId = apartmentId,
             };
@@ -40,7 +41,7 @@
             this.data.Add(room);
             await this.data.SaveChangesAsync();
 
-            return (room.Id, true);
+            return (room.Id);
         }
 
         public async Task<IEnumerable<RoomListingServiceModel>> GetAllByApartmentId(int apartmentId)
@@ -53,14 +54,14 @@
                 .ToListAsync();
         }
 
-        public async Task<RoomDetailsServiceModel> GetById(string id)
+        public async Task<RoomDetailsServiceModel> GetById(int id)
         {
             return await this.ById(id)
                 .To<RoomDetailsServiceModel>()
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Result> Update(string id, bool isSleepable, RoomType roomType)
+        public async Task<Result> Update(int id, string name, RoomType roomType)
         {
             var room = await this.ById(id).FirstOrDefaultAsync();
 
@@ -69,15 +70,15 @@
                 return $"Room with Id: {id} does not exists.";
             }
 
-            room.IsSleepable = isSleepable;
             room.RoomType = roomType;
+            room.Name = name;
 
             await this.data.SaveChangesAsync();
 
             return true;
         }
 
-        public async Task<Result> Delete(string id)
+        public async Task<Result> Delete(int id)
         {
             var room = await this.ById(id).FirstOrDefaultAsync();
 
@@ -92,14 +93,14 @@
             return true;
         }
 
-        public async Task<bool> Exists(string id)
+        public async Task<bool> Exists(int id)
         {
             return await this.data
                 .Rooms
                 .AnyAsync(a => a.Id == id);
         }
 
-        private IQueryable<Room> ById(string id)
+        private IQueryable<Room> ById(int id)
         {
             return this.data
                 .Rooms

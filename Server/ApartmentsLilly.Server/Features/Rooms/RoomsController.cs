@@ -25,6 +25,7 @@
         public async Task<ActionResult> Create(CreateRoomRequestModel model)
         {
             var result = await this.rooms.Create(
+                model.Name,
                 model.RoomType,
                 model.ApartmentId);
 
@@ -47,7 +48,7 @@
         [HttpGet]
         [Route(Id)]
         [AllowAnonymous]
-        public async Task<RoomDetailsServiceModel> Details(string id)
+        public async Task<RoomDetailsServiceModel> Details(int id)
         {
             return await this.rooms.GetById(id);
         }
@@ -62,9 +63,9 @@
 
         [HttpPut]
         [Route(Id)]
-        public async Task<ActionResult> Update(string id, UpdateRoomRequestModel model)
+        public async Task<ActionResult> Update(int id, UpdateRoomRequestModel model)
         {
-            var result = await this.rooms.Update(id, model.IsSleepable, model.RoomType);
+            var result = await this.rooms.Update(id, model.Name, model.RoomType);
 
             if (result.Failure)
             {
@@ -77,7 +78,7 @@
         [HttpDelete]
         [Route(Id)]
         [AllowAnonymous]
-        public async Task<ActionResult> Delete(string id)
+        public async Task<ActionResult> Delete(int id)
         {
             var result = await this.rooms
                 .Delete(id);

@@ -8,16 +8,16 @@
 
     public interface IRoomsService
     {
-        Task<Result> Create(RoomType type, int apartmentId);
+        Task<Result> Create(string name, RoomType type, int apartmentId);
 
         Task<IEnumerable<RoomListingServiceModel>> GetAllByApartmentId(int apartmentId);
 
-        Task<RoomDetailsServiceModel> GetById(string id);
+        Task<RoomDetailsServiceModel> GetById(int id);
 
-        Task<Result> Update(string id, bool isSleepable, RoomType type);
-        
-        Task<Result> Delete(string id);
+        Task<Result> Update(int id, string name, RoomType type);
 
-        Task<bool> Exists(string id);
+        Task<Result> Delete(int id);
+
+        Task<bool> Exists(int id);
     }
 }

@@ -87,8 +87,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoomId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -131,7 +131,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                         .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("Entry")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int?>("Floor")
                         .HasColumnType("int");
@@ -160,7 +161,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<double?>("Size")
                         .HasColumnType("float");
@@ -180,9 +182,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.Property<int>("BedType")
                         .HasColumnType("int");
 
-                    b.Property<string>("RoomId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -279,8 +280,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RoomId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
@@ -438,8 +439,10 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Rooms.Room", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("ApartmentId")
                         .HasColumnType("int");
@@ -459,14 +462,14 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsSleepable")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoomType")
                         .HasColumnType("int");
@@ -696,7 +699,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.HasOne("ApartmentsLilly.Server.Data.Models.Rooms.Room", "Room")
                         .WithMany("Amenities")
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Apartment");
 
@@ -753,7 +757,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.HasOne("ApartmentsLilly.Server.Data.Models.Rooms.Room", "Room")
                         .WithMany("Images")
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("ApartmentsLilly.Server.Data.Models.User", "User")
                         .WithMany()

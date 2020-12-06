@@ -15,7 +15,7 @@
 
         public BedType BedType { get; set; }
 
-        public string RoomId { get; set; }
+        public int RoomId { get; set; }
         
         [Required]
         public virtual Room Room { get; set; }

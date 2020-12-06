@@ -5,6 +5,8 @@
 
     public class CreateRoomRequestModel
     {
+        public string Name { get; set; }
+
         public RoomType RoomType { get; set; }
 
         [Required]
