@@ -16,7 +16,7 @@
             public const int MaxSize = 1000;
             public const int MaxBasePrice = 10000;
             public const int MaximumOccupants = 100;
-            public const string UrlPattern = "@(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')";
+            public const string UrlPattern = "(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?";
         }
 
         public class User

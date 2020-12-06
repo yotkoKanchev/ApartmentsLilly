@@ -1,7 +1,10 @@
 ﻿namespace ApartmentsLilly.Server.Features.Rooms
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
+    using ApartmentsLilly.Server.Data.Models.Rooms;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Models;
@@ -47,6 +50,14 @@
         public async Task<RoomDetailsServiceModel> Details(string id)
         {
             return await this.rooms.GetById(id);
+        }
+
+        [HttpGet]
+        [Route(nameof(RoomTypes))]
+        [AllowAnonymous]
+        public List<string> RoomTypes()
+        {
+            return Enum.GetValues(typeof(RoomType)).Cast<RoomType>().Select(v => v.ToString()).ToList();
         }
 
         [HttpPut]
