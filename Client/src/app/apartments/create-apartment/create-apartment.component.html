@@ -8,7 +8,7 @@
         <div class="col-lg-4">
             <form [formGroup]="apartmentForm" (ngSubmit)="create()">
                 <label>Choose Address</label>
-                <select #addressSelct class="form-control" (change)='onOptionsSelected(addressSelct.value)'>
+                <select #addressSelect class="form-control" (change)='onOptionsSelected(addressSelect.value)' formControlName="AddressId">
                     <option value="">choose address</option>
                     <option *ngFor="let ad of addresses" [ngValue]="ad.id">{{ad.country}}, {{ad.city}} -
                         {{ad.streetAddress}}</option>

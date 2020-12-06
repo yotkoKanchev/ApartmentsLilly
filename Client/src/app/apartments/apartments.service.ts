@@ -16,7 +16,6 @@ export class ApartmentsService {
 
   // todo work here
   create(data): Observable<CreateApartmentModel> {
-    console.log(data)
     return this.http.post<CreateApartmentModel>(this.apartmentPath, data)
   }
 

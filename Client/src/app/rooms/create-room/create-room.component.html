@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="row">
+        <jw-modal id="custom-modal-2">
+            <div>
+                <app-create-address></app-create-address>
+            </div>
+        </jw-modal>
+        <div class="col-lg-4">
+            <form [formGroup]="roomForm" (ngSubmit)="create()">
+                <label>Choose Address</label>
+                <select class="form-control" formControlName="RoomType">
+                    <option value="">choose room type</option>
+                    <option *ngFor="let type of roomTypes" [ngValue]="type">{{type}}</option>
+                </select>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="Name">
+                </div>
+                <div *ngIf="(name.touched || name.dirty) && name.errors" class="alert alert-danger">
+                    <span *ngIf="name.errors.minlength">
+                        Name should be at least 2 symbols long!
+                    </span>
+                    <span *ngIf="name.errors.maxlength">
+                        Name should be maximum 30 symbols long!
+                    </span>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+            <br>
+            <br>
+
+        </div>
+    </div>
+</div>

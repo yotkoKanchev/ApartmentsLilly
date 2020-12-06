@@ -11,6 +11,7 @@ import { CreateApartmentComponent } from './apartments/create-apartment/create-a
 import { ListApartmentsComponent } from './apartments/list-apartments/list-apartments.component';
 import { EditApartmentComponent } from './apartments/edit-apartment/edit-apartment.component';
 import { DetailsApartmentComponent } from './apartments/details-apartment/details-apartment.component';
+import { CreateRoomComponent } from './rooms/create-room/create-room.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'apartments/:id/edit', component:  EditApartmentComponent, canActivate: [AuthGuardService]},
   { path: 'apartments/:id', component:  DetailsApartmentComponent, canActivate: [AuthGuardService]},
   { path: 'apartments', component:  ListApartmentsComponent, canActivate: [AuthGuardService]},
+  { path: 'rooms/create', component:  CreateRoomComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({
