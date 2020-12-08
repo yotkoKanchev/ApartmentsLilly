@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -29,12 +27,11 @@ import { DeleteApartmentComponent } from './apartments/delete-apartment/delete-a
 import { ApartmentComponent } from './apartments/apartment/apartment.component';
 import { ModalModule } from './_modal';
 import { CreateRoomComponent } from './rooms/create-room/create-room.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     CreateAddressComponent,
     ListAddressesComponent,
     EditAddressComponent,
@@ -50,6 +47,7 @@ import { CreateRoomComponent } from './rooms/create-room/create-room.component';
     CreateRoomComponent,
   ],
   imports: [
+    AuthModule,
     ModalModule,
     BrowserModule,
     AppRoutingModule,
