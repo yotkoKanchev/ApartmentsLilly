@@ -52,7 +52,7 @@
             var user = await this.userManager.FindByNameAsync(model.UserName);
             if (user == null)
             {
-                return Unauthorized();
+                return Unauthorized("Username or password are not valid.");
             }
 
             var passwordValid = await this.userManager.CheckPasswordAsync(user, model.Password);

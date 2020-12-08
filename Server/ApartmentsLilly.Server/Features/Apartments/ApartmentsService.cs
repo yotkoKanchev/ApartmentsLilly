@@ -128,9 +128,11 @@
         {
             return await this.data
                 .Apartments
+                .Where(a => a.Rooms.Any())
                 .Where(a => !a.Bookings
                     .Any(b => (b.StartDate >= startDate && b.EndDate <= startDate) && 
                               (b.StartDate >= endDate && b.EndDate <= endDate)))
+                .OrderBy(a => a.Name)
                 .To<ApartmentListingServiceModel>()
                 .ToListAsync();
         }

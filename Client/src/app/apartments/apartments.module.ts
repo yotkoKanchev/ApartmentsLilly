@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { ModalModule } from './../_modal';
 import { RoomsModule } from '../rooms/rooms.module';
+import { ApartmentComponent } from './apartment/apartment.component';
 
 
 @NgModule({
@@ -21,6 +22,9 @@ import { RoomsModule } from '../rooms/rooms.module';
   ],
   providers:[
     ApartmentsService
+  ],
+  exports:[
+    ApartmentComponent
   ]
 })
 export class ApartmentsModule { }
