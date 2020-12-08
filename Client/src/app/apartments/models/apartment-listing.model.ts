@@ -2,6 +2,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 
 export interface ApartmentListingModel{
     id: number;
+    isCompleated: boolean;
     name: string;
     size?: number;
     basePrice?: number;

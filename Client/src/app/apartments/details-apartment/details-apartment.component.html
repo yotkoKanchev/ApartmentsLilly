@@ -14,7 +14,13 @@
                   <p>Description: {{apartment.description}}</p>
                 </div>
             </div>
-            <a class="btn btn-warning" routerLink="/apartments">Back to list</a>
+            <jw-modal id="add-room-modal" >
+                <div>
+                    <app-create-room [apartmentId]="id"></app-create-room>
+                </div>
+            </jw-modal>
+            <button class="btn btn-primary mr-3" (click)="createRoom()">Add Room</button>
+            <a class="btn btn-primary" routerLink="/apartments">Back to list</a>
         </div>
     </div>
 </div>

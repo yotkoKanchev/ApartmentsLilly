@@ -10,6 +10,8 @@
     {
         public int Id { get; set; }
 
+        public bool IsCompleated { get; set; }
+
         public string Name { get; set; }
 
         public double? Size { get; set; }
@@ -46,7 +48,8 @@
                 .ForMember(a => a.BedroomCount, opt => opt.MapFrom(a => a.Rooms.Where(r => r.RoomType == RoomType.Bedroom).Count()))
                 .ForMember(a => a.BathroomCount, opt => opt.MapFrom(a => a.Rooms.Where(r => r.RoomType == RoomType.Bathroom).Count()))
                 .ForMember(a => a.BedCount, opt => opt.MapFrom(a => a.Rooms.Where(r => r.RoomType == RoomType.Bedroom).Select(r=>r.Beds).Count()))
-                .ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities.Select(a => a.Name).ToArray()));
+                .ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities.Select(a => a.Name).ToArray()))
+                .ForMember(a => a.IsCompleated, opt => opt.MapFrom(a => a.Rooms.Any()));
         }
     }
 }

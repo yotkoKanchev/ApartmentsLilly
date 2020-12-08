@@ -10,6 +10,7 @@
     using Infrastructure.Mapping;
     using Models;
     using Microsoft.EntityFrameworkCore;
+    using System;
 
     public class RoomsService : IRoomsService
     {
@@ -22,7 +23,7 @@
             this.apartments = apartments;
         }
 
-        public async Task<Result> Create(string name, RoomType roomType, int apartmentId)
+        public async Task<Result> Create(string name, string roomType, int apartmentId)
         {
             var isApartmentExists = await this.apartments.Exists(apartmentId);
 
@@ -34,7 +35,7 @@
             var room = new Room 
             { 
                 Name = name,
-                RoomType = roomType,
+                RoomType = (RoomType)Enum.Parse(typeof(RoomType),roomType),
                 ApartmentId = apartmentId,
             };
 

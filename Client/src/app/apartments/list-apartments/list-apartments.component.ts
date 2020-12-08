@@ -16,11 +16,11 @@ export class ListApartmentsComponent implements OnInit {
   ngOnInit(): void {
     this.fetchApartments();
   }
-
+  
   fetchApartments() {
     this.apartmentService.getApartments()
-      .subscribe(apartments => {
-        this.apartments = apartments;
+    .subscribe(apartments => {
+      this.apartments = apartments;
       })
   }
 

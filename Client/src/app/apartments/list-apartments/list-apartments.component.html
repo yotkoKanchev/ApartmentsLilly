@@ -6,7 +6,8 @@
                     <img [src]="apartment.mainImageUrl" class="card-img-top"
                         alt="apartment: {{apartment.name}},{{apartment.addressCity}}">
                 </a>
-                <div class="card-body">
+                <div class="card-body" [ngClass]="{'bg-warning': !apartment.isCompleated}">
+                    <!-- <h3 *ngIf="!apartment.isCompleated" class="text-danger">Not Compleated</h3> -->
                     <h3 class="card-title">{{apartment.name | uppercase}}</h3>
                     <h4 class="card-title">{{apartment.addressCity}}, {{apartment.addressCountry}}</h4>
                     <h4 class="card-title">
@@ -16,8 +17,8 @@
                     <h5 *ngIf="apartment.size">{{apartment.size}}</h5>
                     <h5 *ngIf="apartment.basePrice">{{apartment.basePrice}}</h5>
                     <h5 *ngIf="apartment.maxOccupants">{{apartment.maxOccupants}}</h5>
-                    <button class="btn btn-warning mr-2" (click)="editApartment(apartment.id)"> Edit</button>
-                    <button class="btn btn-danger" (click)="deleteApartment(apartment.id)">Delete</button>
+                    <button class="btn btn-primary mr-2" (click)="editApartment(apartment.id)"> Edit</button>
+                    <button class="btn btn-primary" (click)="deleteApartment(apartment.id)">Delete</button>
                 </div>
             </div>
         </div>

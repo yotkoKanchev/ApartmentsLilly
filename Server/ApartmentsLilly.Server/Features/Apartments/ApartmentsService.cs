@@ -57,7 +57,7 @@
         {
             return await this.data
                 .Apartments
-                .OrderByDescending(a => a.Name)
+                .OrderBy(a => a.Name)
                 .To<ApartmentListingServiceModel>()
                 .ToListAsync();
         }

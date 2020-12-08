@@ -16,7 +16,9 @@ export class RoomsService {
     return this.http.get<Array<string>>(this.apartmentPath + '/' + 'roomTypes');
   }
 
-  create(data): Observable<CreateRoomModel>{
+  create(data, apartmentId): Observable<CreateRoomModel>{
+    data.ApartmentId = apartmentId;
+    console.log(data);
     return this.http.post<CreateRoomModel>(this.apartmentPath, data)
   }
 }

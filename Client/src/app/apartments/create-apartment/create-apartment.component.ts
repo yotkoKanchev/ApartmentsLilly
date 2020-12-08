@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { AddressModel } from 'src/app/addresses/models/address.model';
 import { AddressesService } from 'src/app/addresses/address.service';
 import { ModalService } from '../../_modal';
-import { data } from 'jquery';
 
 @Component({
   selector: 'app-create-apartment',
@@ -56,8 +55,8 @@ export class CreateApartmentComponent implements OnInit {
   }
 
   onOptionsSelected(value: string) {
-    if (value == "addNew") {
-      this.openModal('custom-modal-2');
+    if (value == "addAddress") {
+      this.openModal('add-address-modal');
     }
   }
 

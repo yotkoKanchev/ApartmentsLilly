@@ -8,7 +8,7 @@
 
     public interface IRoomsService
     {
-        Task<Result> Create(string name, RoomType type, int apartmentId);
+        Task<Result> Create(string name, string type, int apartmentId);
 
         Task<IEnumerable<RoomListingServiceModel>> GetAllByApartmentId(int apartmentId);
 

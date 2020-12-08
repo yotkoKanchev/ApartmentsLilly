@@ -1,6 +1,6 @@
 <div class="container-fluid offset-md-1">
     <div class="row">
-        <jw-modal id="custom-modal-2" >
+        <jw-modal id="add-address-modal" >
             <div>
                 <app-create-address></app-create-address>
             </div>
@@ -13,7 +13,7 @@
                     <option value="">choose address</option>
                     <option *ngFor="let ad of addresses" [ngValue]="ad.id">{{ad.country}}, {{ad.city}} -
                         {{ad.streetAddress}}</option>
-                    <option value="addNew">add new address</option>
+                    <option value="addAddress">add new address</option>
                 </select>
                 <div *ngIf="(addressId.pristine && addressId.invalid) || (addressId.touched && addressId.invalid)" class="alert alert-danger" >
                     <div *ngIf="addressId.errors.required">Address is required.</div>
