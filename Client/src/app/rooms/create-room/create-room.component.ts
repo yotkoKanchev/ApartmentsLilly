@@ -4,6 +4,7 @@ import { RoomsService } from '../rooms.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ModalService } from '../../_modal';
+import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-create-room',

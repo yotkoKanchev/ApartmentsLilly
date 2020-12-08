@@ -11,55 +11,35 @@ import { TokenInterceptorService } from './interceptors/token-interceptor.servic
 import { ErrorInterceptorService } from './interceptors/error-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { CreateAddressComponent } from './addresses/create-address/create-address.component';
-import { AddressesService } from './addresses/address.service';
-import { ListAddressesComponent } from './addresses/list-addresses/list-addresses.component';
-import { EditAddressComponent } from './addresses/edit-address/edit-address.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { StartComponent } from './start/start/start.component';
-import { CreateApartmentComponent } from './apartments/create-apartment/create-apartment.component';
-import { EditApartmentComponent } from './apartments/edit-apartment/edit-apartment.component';
-import { ListApartmentsComponent } from './apartments/list-apartments/list-apartments.component';
-import { ApartmentsService } from './apartments/apartments.service';
-import { DetailsApartmentComponent } from './apartments/details-apartment/details-apartment.component';
-import { DeleteApartmentComponent } from './apartments/delete-apartment/delete-apartment.component';
-import { ApartmentComponent } from './apartments/apartment/apartment.component';
-import { ModalModule } from './_modal';
-import { CreateRoomComponent } from './rooms/create-room/create-room.component';
+import { StartComponent } from './start/start.component';
 import { AuthModule } from './auth/auth.module';
+import { ApartmentsModule } from './apartments/apartments.module';
+import { RoomsModule } from './rooms/rooms.module';
+import { AddressesModule } from './addresses/addresses.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateAddressComponent,
-    ListAddressesComponent,
-    EditAddressComponent,
     HeaderComponent,
     FooterComponent,
     StartComponent,
-    CreateApartmentComponent,
-    EditApartmentComponent,
-    ListApartmentsComponent,
-    DetailsApartmentComponent,
-    DeleteApartmentComponent,
-    ApartmentComponent,
-    CreateRoomComponent,
   ],
   imports: [
     AuthModule,
-    ModalModule,
+    ApartmentsModule,
+    AddressesModule,
+    RoomsModule,
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(), 
+    ToastrModule.forRoot(),
   ],
   providers: [
-    AuthService, 
-    AddressesService,
-    ApartmentsService,
+    AuthService,
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,
