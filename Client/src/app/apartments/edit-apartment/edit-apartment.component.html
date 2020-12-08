@@ -27,7 +27,7 @@
 
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea type="text" class="form-control" formControlName="description"></textarea>
+                    <textarea type="text" rows=4 class="form-control" formControlName="description"></textarea>
                 </div>
                 <div *ngIf="(description.touched || description.dirty) && description.errors"
                     class="alert alert-danger">
@@ -113,8 +113,8 @@
                     <label for="aa">Has Terrace</label>
                 </div>
 
-                <button type="submit" class="btn btn-warning" (click)="editApartment()">Edit</button>
-                <a class="btn btn-warning" routerLink="/apartments">Cancel</a>
+                <button type="submit" class="btn btn-primary mr-2" (click)="editApartment()">Edit</button>
+                <a class="btn btn-primary" routerLink="/apartments">Cancel</a>
 
             </form>
         </div>

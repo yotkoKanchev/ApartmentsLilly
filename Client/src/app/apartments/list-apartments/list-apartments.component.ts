@@ -20,7 +20,6 @@ export class ListApartmentsComponent implements OnInit {
   fetchApartments() {
     this.apartmentService.getApartments()
       .subscribe(apartments => {
-        console.log(apartments)
         this.apartments = apartments;
       })
   }

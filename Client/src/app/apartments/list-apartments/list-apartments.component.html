@@ -16,7 +16,7 @@
                     <h5 *ngIf="apartment.size">{{apartment.size}}</h5>
                     <h5 *ngIf="apartment.basePrice">{{apartment.basePrice}}</h5>
                     <h5 *ngIf="apartment.maxOccupants">{{apartment.maxOccupants}}</h5>
-                    <button class="btn btn-warning" (click)="editApartment(apartment.id)"> Edit</button>
+                    <button class="btn btn-warning mr-2" (click)="editApartment(apartment.id)"> Edit</button>
                     <button class="btn btn-danger" (click)="deleteApartment(apartment.id)">Delete</button>
                 </div>
             </div>

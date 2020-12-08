@@ -1,15 +1,15 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid"> -->
     <div class="row">
         <jw-modal id="custom-modal-2">
             <div>
                 <app-create-address></app-create-address>
             </div>
         </jw-modal>
-        <div class="col-lg-4">
+        <div class="col-lg-4 offset-md-4">
             <form [formGroup]="roomForm" (ngSubmit)="create()">
                 <label>Choose Address</label>
                 <select class="form-control" formControlName="RoomType">
-                    <option value="">choose room type</option>
+                    <option disabled value="">choose room type</option>
                     <option *ngFor="let type of roomTypes" [ngValue]="type">{{type}}</option>
                 </select>
                 <div class="form-group">
@@ -28,7 +28,7 @@
             </form>
             <br>
             <br>
-
+            
         </div>
     </div>
-</div>
+<!-- </div> -->

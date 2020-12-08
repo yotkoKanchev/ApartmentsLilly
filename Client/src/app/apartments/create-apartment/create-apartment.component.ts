@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AddressModel } from 'src/app/addresses/models/address.model';
 import { AddressesService } from 'src/app/addresses/address.service';
 import { ModalService } from '../../_modal';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-create-apartment',
@@ -26,16 +27,16 @@ export class CreateApartmentComponent implements OnInit {
     private addressesService: AddressesService) {
     this.apartmentForm = this.fb.group({
       'AddressId': ['', Validators.required],
-      'Name': ['', [Validators.minLength(2), Validators.maxLength(30)]],
+      'Name': ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
       'Description': ['', [Validators.maxLength(1000)]],
       'MainImageUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
       'Entry': ['', Validators.maxLength(10)],
-      'Floor': ['', [Validators.min(-2), Validators.max(50)]],
+      'Floor': ['', [Validators.min(-2), Validators.max(50), Validators.pattern('[0-9]')]],
       'Number': ['', [Validators.minLength(1), Validators.maxLength(10)]],
       'Size': ['', [Validators.min(0), Validators.max(1000)]],
       'BasePrice': ['', [Validators.min(0), Validators.max(10000)]],
-      'MaxOccupants': ['', [Validators.min(0), Validators.max(100)]],
-      'HasTerrace': ['', ],
+      'MaxOccupants': ['', [Validators.required, Validators.min(1), Validators.max(100)]],
+      'HasTerrace': ['',],
     })
   }
 
@@ -46,23 +47,23 @@ export class CreateApartmentComponent implements OnInit {
     });
   }
 
-  create(){
+  create() {
     this.apartmentService.create(this.apartmentForm.value)
-      .subscribe(() => {
+      .subscribe(data => {
         this.toastrService.success("Success");
-        this.router.navigate(["addresses"])
-      })
+        this.router.navigate([`apartments/${data['id']}`])
+      });
   }
 
-  onOptionsSelected(value:string){
+  onOptionsSelected(value: string) {
     if (value == "addNew") {
       this.openModal('custom-modal-2');
-    }       
-}
+    }
+  }
 
-openModal(id: string) {
-  this.modalService.open(id);
-}
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
 
   get name() {
     return this.apartmentForm.get('Name');
@@ -99,6 +100,10 @@ openModal(id: string) {
   }
   get hasTerrace() {
     return this.apartmentForm.get('HasTerrace');
+  }
+
+  get addressId() {
+    return this.apartmentForm.get("AddressId");
   }
 
 }
