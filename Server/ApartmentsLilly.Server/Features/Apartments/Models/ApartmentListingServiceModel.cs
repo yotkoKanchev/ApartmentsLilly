@@ -1,9 +1,11 @@
 ﻿namespace ApartmentsLilly.Server.Features.Apartments.Models
 {
     using ApartmentsLilly.Server.Data.Models.Rooms;
+    using ApartmentsLilly.Server.Features.Rooms.Models;
     using AutoMapper;
     using Data.Models;
     using Infrastructure.Mapping;
+    using System.Collections.Generic;
     using System.Linq;
 
     public class ApartmentListingServiceModel : IMapFrom<Apartment>, IHaveCustomMappings

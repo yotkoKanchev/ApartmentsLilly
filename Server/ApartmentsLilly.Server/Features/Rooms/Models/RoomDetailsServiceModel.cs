@@ -5,12 +5,12 @@
 
     public class RoomDetailsServiceModel : IMapFrom<Room>
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public bool IsSleepable { get; set; }
+        public string Name { get; set; }
 
-        public RoomType RoomType { get; set; }
+        public string RoomType { get; set; }
 
-        public int ApartmentId { get; set; }
+        //public ICollection<AmenityListingServiceModel> Amenities { get; set; }
     }
 }
