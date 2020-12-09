@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoomsService } from '../rooms.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { ModalService } from '../../_modal';
-import { Location } from '@angular/common';
+import { ModalService } from 'src/app/_modal';
 
 @Component({
   selector: 'app-create-room',
@@ -21,7 +20,6 @@ export class CreateRoomComponent implements OnInit {
     private roomsService: RoomsService,
     private toastrService: ToastrService,
     private router: Router,
-    private _location: Location,
   ) { 
     this.roomForm = this.fb.group({
       'ApartmentId':[''],
@@ -39,13 +37,13 @@ export class CreateRoomComponent implements OnInit {
   create(){
     this.roomsService.create(this.roomForm.value, this.apartmentId)
       .subscribe(() => {
-        this.toastrService.success("Success");
+        this.toastrService.success("Room added", "Success");
       })
+    location.reload();
   }
 
   closeModal(id: string) {
     this.modalService.close(id);
-    location.reload();
   }
 
   get name() {

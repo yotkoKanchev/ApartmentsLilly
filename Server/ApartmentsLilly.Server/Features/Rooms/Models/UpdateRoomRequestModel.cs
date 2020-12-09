@@ -6,6 +6,6 @@
     {
         public string Name { get; set; }
 
-        public RoomType RoomType { get; set; }
+        public string RoomType { get; set; }
     }
 }

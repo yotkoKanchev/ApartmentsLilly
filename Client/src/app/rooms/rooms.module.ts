@@ -5,7 +5,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import { roomComponents } from '.';
 import { RoomsService } from './rooms.service';
 import { CreateRoomComponent } from './create-room/create-room.component';
-import { ModalModule, ModalService } from 'src/app/_modal';
+import { ModalModule } from 'src/app/_modal';
+import { EditRoomComponent } from './edit-room/edit-room.component';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,10 @@ import { ModalModule, ModalService } from 'src/app/_modal';
   ],
   providers: [
     RoomsService,
-    ModalService,
   ],
   exports: [
-    CreateRoomComponent
+    CreateRoomComponent,
+    EditRoomComponent,  
   ]
 })
 export class RoomsModule { }

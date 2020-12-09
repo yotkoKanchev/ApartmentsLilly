@@ -1,5 +1,4 @@
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { DetailsRoomModel } from 'src/app/rooms/models/details-room';
 
 export interface ApartmentListingModel{
     id: number;
