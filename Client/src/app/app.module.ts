@@ -18,6 +18,7 @@ import { AuthModule } from './auth/auth.module';
 import { ApartmentsModule } from './apartments/apartments.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { AddressesModule } from './addresses/addresses.module';
+import { ModalModule } from './_modal';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AddressesModule } from './addresses/addresses.module';
   ],
   imports: [
     AuthModule,
+    // ModalModule,
     ApartmentsModule,
     AddressesModule,
     RoomsModule,

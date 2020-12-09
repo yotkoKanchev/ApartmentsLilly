@@ -25,7 +25,8 @@ export class ListApartmentsComponent implements OnInit {
   }
 
   editApartment(id: number) {
-    this.router.navigate(["apartments", id, "edit"]);
+    console.log(`EDIT APARTMENT: ${id}`)
+    this.router.navigate(["apartments","edit", id]);
   }
 
   deleteApartment(id: string) {

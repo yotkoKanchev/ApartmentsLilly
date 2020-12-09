@@ -1,7 +1,7 @@
-<!-- <div class="container-fluid"> -->
+<div class="container-fluid">
     <div class="row">
         <div class="col-lg-4 offset-md-4">
-            <form [formGroup]="roomForm" (ngSubmit)="create()">
+            <form [formGroup]="roomForm" (ngSubmit)="create('add-room-modal')">
                 <label>Choose Room Type</label>
                 <select class="form-control mb-3" formControlName="RoomType">
                     <option disabled value="">choose room type</option>
@@ -20,10 +20,11 @@
                     </span>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
+                <input type="button" class="btn btn-primary ml-3" (click)="closeModal('add-room-modal');" value="Close">
             </form>
             <br>
             <br>
             
         </div>
     </div>
-<!-- </div> -->
+</div>

@@ -1,3 +1,5 @@
+import { DetailsRoomModel } from 'src/app/rooms/models/details-room';
+
 export interface ApartmentModel{
     id: number;
     name: string;
@@ -11,4 +13,5 @@ export interface ApartmentModel{
     maxOccupants?: number;
     mainImageUrl: string;
     addressId: string;
+    rooms: Array<DetailsRoomModel>
 }

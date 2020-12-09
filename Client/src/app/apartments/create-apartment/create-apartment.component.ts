@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApartmentsService } from '../apartments.service';
 import { ToastrService } from 'ngx-toastr';
 import { AddressModel } from 'src/app/addresses/models/address.model';
-import { AddressesService } from 'src/app/addresses/address.service';
+import { AddressesService } from 'src/app/addresses/addresses.service';
 import { ModalService } from '../../_modal';
 
 @Component({

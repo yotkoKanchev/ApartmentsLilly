@@ -7,6 +7,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { ModalModule } from './../_modal';
 import { RoomsModule } from '../rooms/rooms.module';
 import { ApartmentComponent } from './apartment/apartment.component';
+import { AddressesModule } from '../addresses/addresses.module';
 
 
 @NgModule({
@@ -19,9 +20,10 @@ import { ApartmentComponent } from './apartment/apartment.component';
     AppRoutingModule,
     ModalModule,
     RoomsModule,
+    AddressesModule,
   ],
   providers:[
-    ApartmentsService
+    ApartmentsService,
   ],
   exports:[
     ApartmentComponent

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ApartmentsService } from 'src/app/apartments/apartments.service';
 import { environment } from 'src/environments/environment';
+import { ApartmentListingModel } from '../apartments/models/apartment-listing.model';
 
 @Component({
   selector: 'app-start',
@@ -11,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class StartComponent implements OnInit {
   searchApartmentForm: FormGroup
-  apartments: any
+  apartments: Array<ApartmentListingModel>
   nums: Array<number> = [0, 1, 2, 3];
   constructor(private apartmentsService: ApartmentsService, private fb: FormBuilder, private sanitizer: DomSanitizer) {
     this.searchApartmentForm = this.fb.group({

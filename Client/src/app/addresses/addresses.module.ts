@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { ModalModule } from './../_modal';
 import { addressComponents } from '.';
-import { AddressesService } from './address.service';
+import { AddressesService } from './addresses.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateAddressComponent } from './create-address/create-address.component';
@@ -17,12 +17,12 @@ import { CreateAddressComponent } from './create-address/create-address.componen
     CommonModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    ModalModule,
     BrowserModule,
     BrowserAnimationsModule,
+    ModalModule,
   ],
   providers:[
-    AddressesService
+    AddressesService,
   ],
   exports: [
     CreateAddressComponent

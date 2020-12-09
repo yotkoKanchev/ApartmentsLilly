@@ -8,7 +8,7 @@ import { EditApartmentComponent } from './edit-apartment/edit-apartment.componen
 const apartmentsRoutes: Routes = [
     { path: 'create', component: CreateApartmentComponent },
     { path: '', component: ListApartmentsComponent },
-    { path: 'details/:id', component: DetailsApartmentComponent },
+    { path: ':id', component: DetailsApartmentComponent },
     { path: 'edit/:id', component: EditApartmentComponent },
 ]
 

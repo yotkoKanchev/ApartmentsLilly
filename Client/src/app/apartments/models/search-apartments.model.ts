@@ -1,4 +1,4 @@
-export interface SearchApartments{
+export interface SearchApartmentsModel{
     startDate: Date;
     endDate: Date;
     adults: number,

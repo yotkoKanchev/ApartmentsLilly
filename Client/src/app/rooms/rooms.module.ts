@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
-import { ModalModule } from '../_modal';
 import { roomComponents } from '.';
 import { RoomsService } from './rooms.service';
 import { CreateRoomComponent } from './create-room/create-room.component';
+import { ModalModule, ModalService } from 'src/app/_modal';
 
 @NgModule({
   declarations: [
-    ...roomComponents
+    ...roomComponents,
   ],
   imports: [
     CommonModule,
@@ -17,10 +17,11 @@ import { CreateRoomComponent } from './create-room/create-room.component';
     AppRoutingModule,
     ModalModule,
   ],
-  providers:[
-    RoomsService
+  providers: [
+    RoomsService,
+    ModalService,
   ],
-  exports:[
+  exports: [
     CreateRoomComponent
   ]
 })

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AddressesService } from '../address.service';
+import { AddressesService } from '../addresses.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { ModalService } from '../../_modal';
+import { ModalService } from 'src/app/_modal';
 
 @Component({
   selector: 'app-create-address',

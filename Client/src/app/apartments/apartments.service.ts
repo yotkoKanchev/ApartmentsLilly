@@ -20,7 +20,7 @@ export class ApartmentsService {
   }
 
   // todo work here
-  getAvailableApartments(data){
+  getAvailableApartments(data) {
     return this.http.get<Array<ApartmentListingModel>>(this.apartmentPath + `/search?startDate=${data.startDate}&endDate=${data.endDate}`);
   }
 

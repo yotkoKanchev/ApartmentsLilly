@@ -6,7 +6,7 @@ import { CreateAddressModel } from './models/create-address.model';
 import { AddressModel } from './models/address.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AddressesService {
   private addressPath = environment.apiUrl + 'addresses';

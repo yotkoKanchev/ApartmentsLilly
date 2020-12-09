@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApartmentsService } from '../apartments.service';
 import { ApartmentModel } from '../models/apartment.model';
 import { ModalService } from '../../_modal';
+import { apartmentComponents } from '..';
 
 @Component({
   selector: 'app-details-apartment',
@@ -19,6 +20,7 @@ export class DetailsApartmentComponent implements OnInit {
       this.id = params['id'];
       this.apartmentsService.getApartment(this.id).subscribe(res => {
         this.apartment = res;
+        console.log(this.apartment)
       })
     })
   }
@@ -27,6 +29,12 @@ export class DetailsApartmentComponent implements OnInit {
     this.openModal('add-room-modal');
   }
 
+  editRoom(id: number){
+
+  }
+  deleteRoom(id: number){
+
+  }
   openModal(id: string) {
     this.modalService.open(id);
   }

@@ -1,26 +1,35 @@
 <div *ngIf="apartment" class="container-fluid">
     <div class="row">
-        <div class="col-lg-3">
-            <div class="card" style="width: 18rem;">
+        <div class="col-lg-5">
+            <div class="card" style="width: 28rem;">
                 <h3 class="card-title">{{apartment.name}}</h3>
                 <img [src]="apartment.mainImageUrl" class="card-img-top" alt="Apartment {{apartment.name}}">
                 <div class="card-body">
-                  <h5 *ngIf="apartment.basePrice">Base price: {{apartment.basePrice}}</h5>
-                  <h5 *ngIf="apartment.maxOccupants">Max occupants: {{apartment.maxOccupants}}</h5>
-                  <h5 *ngIf="apartment.size">SIze: {{apartment.size}}sq.m</h5>
-                  <h5>Entry: {{apartment.entry}}</h5>
-                  <h5>Fllor: {{apartment.floor}}</h5>
-                  <h5>Number: {{apartment.number}}</h5>
-                  <p>Description: {{apartment.description}}</p>
+                    <h5 *ngIf="apartment.basePrice">Base price: {{apartment.basePrice}}</h5>
+                    <h5 *ngIf="apartment.maxOccupants">Max occupants: {{apartment.maxOccupants}}</h5>
+                    <h5 *ngIf="apartment.size">SIze: {{apartment.size}}sq.m</h5>
+                    <h5>Entry: {{apartment.entry}}</h5>
+                    <h5>Fllor: {{apartment.floor}}</h5>
+                    <h5>Number: {{apartment.number}}</h5>
+                    <p>Description: {{apartment.description}}</p>
+                    <div class="border mb-2" *ngFor="let room of apartment.rooms">
+                        <p>{{room.name}}</p>
+                        <p>{{room.roomType}}</p>
+                        <input type="button" class="btn btn-primary" (click)="editRoom(room.id)" value="Edit Room">
+                        <input type="button" class="btn btn-primary" (click)="deleteRoom(room.id)" value="Delete Room">
+                    </div>
                 </div>
             </div>
-            <jw-modal id="add-room-modal" >
+            <jw-modal id="add-room-modal">
                 <div>
                     <app-create-room [apartmentId]="id"></app-create-room>
                 </div>
             </jw-modal>
-            <button class="btn btn-primary mr-3" (click)="createRoom()">Add Room</button>
-            <a class="btn btn-primary" routerLink="/apartments">Back to list</a>
+            <div class="mt-2">
+                <input type="button" class="btn btn-primary mr-2" (click)="createRoom()" value="Add Room">
+                <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}" value="Edit">
+                <input type="button" class="btn btn-primary" routerLink="/apartments" value="Back to list">
+            </div>
         </div>
     </div>
 </div>
