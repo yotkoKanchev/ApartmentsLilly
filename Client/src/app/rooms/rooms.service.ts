@@ -9,7 +9,7 @@ import { RoomModel } from './models/room.model';
   providedIn: 'root'
 })
 export class RoomsService {
-  private roomsPath = environment.apiUrl + 'rooms';
+  private roomsPath = environment.apiUrl + 'Rooms';
 
   constructor(private http: HttpClient) { }
 
@@ -31,8 +31,6 @@ export class RoomsService {
   }
 
   deleteRoom(id: number) {
-    console.log(`From Rooms Server - ${id} `)
-    console.log(this.roomsPath + '/' + id)
     return this.http.delete(this.roomsPath + '/' + id);
   }
 }
