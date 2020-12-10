@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Mappings;
     using Base;
     using Bookings;
     using Reviews;
@@ -58,10 +59,11 @@
 
         public virtual ICollection<Room> Rooms { get; set; } = new HashSet<Room>();
 
-        public virtual ICollection<Amenity> Amenities { get; set; } = new HashSet<Amenity>();
-
         public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
 
         public virtual ICollection<Booking> Bookings { get; set; } = new HashSet<Booking>();
+
+        public virtual ICollection<ApartmentAmenity> Amenities { get; set; } = new HashSet<ApartmentAmenity>();
+
     }
 }

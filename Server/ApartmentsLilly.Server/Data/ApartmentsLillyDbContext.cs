@@ -5,15 +5,16 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Infrastructure.Services;
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore;
     using Models;
     using Models.Base;
     using Models.Beds;
     using Models.Bookings;
+    using Models.Mappings;
     using Models.Requests;
     using Models.Reviews;
     using Models.Rooms;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
 
     public class ApartmentsLillyDbContext : IdentityDbContext<User>
     {
@@ -40,10 +41,15 @@
         public DbSet<Amenity> Amenities { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
-        
+
         public DbSet<Request> Requests { get; set; }
 
         public DbSet<Booking> Bookings { get; set; }
+
+        public DbSet<ApartmentAmenity> ApartmentAmenities { get; set; }
+
+        public DbSet<RoomAmenity> RoomAmenities { get; set; }
+
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
@@ -98,13 +104,6 @@
             //    .HasForeignKey<Image>(p => p.ApartmentId)
             //    .OnDelete(DeleteBehavior.Restrict);
 
-            builder
-                .Entity<Apartment>()
-                .HasQueryFilter(r => !r.IsDeleted)
-                .HasMany(r => r.Amenities)
-                .WithOne(a => a.Apartment)
-                .HasForeignKey(a => a.ApartmentId)
-                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .Entity<Apartment>()
@@ -181,27 +180,19 @@
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .Entity<Room>()
-                .HasQueryFilter(r => !r.IsDeleted)
-                .HasMany(r => r.Amenities)
-                .WithOne(a => a.Room)
-                .HasForeignKey(a => a.RoomId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            //builder
-            //    .Entity<Cat>()
-            //    .HasQueryFilter(c => !c.IsDeleted)
-            //    .HasOne(c => c.User)
-            //    .WithMany(u => u.Cats)
-            //    .HasForeignKey(c => c.UserId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            builder
                 .Entity<User>()
                 .HasOne(u => u.Profile)
                 .WithOne()
                 .HasForeignKey<Profile>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<RoomAmenity>()
+                .HasKey(ra => new { ra.AmenityId, ra.RoomId });
+
+            builder
+                .Entity<ApartmentAmenity>()
+                .HasKey(aa => new { aa.AmenityId, aa.ApartmentId });
 
             base.OnModelCreating(builder);
         }

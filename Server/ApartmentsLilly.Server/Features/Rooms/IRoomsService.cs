@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Data.Models.Rooms;
     using Infrastructure.Services;
     using Models;
 
@@ -14,7 +13,7 @@
 
         Task<RoomDetailsServiceModel> GetById(int id);
 
-        Task<Result> Update(int id, string name, RoomType type);
+        Task<Result> Update(int id, string name, string type);
 
         Task<Result> Delete(int id);
 

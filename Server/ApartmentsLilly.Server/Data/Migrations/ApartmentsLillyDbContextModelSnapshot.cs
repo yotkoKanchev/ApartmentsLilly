@@ -78,23 +78,36 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Amenity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<int?>("ApartmentId")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ApartmentId");
-
-                    b.HasIndex("RoomId");
 
                     b.ToTable("Amenities");
                 });
@@ -176,8 +189,10 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Beds.Bed", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("BedType")
                         .HasColumnType("int");
@@ -194,8 +209,10 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Bookings.Booking", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("AdultsCount")
                         .HasColumnType("int");
@@ -300,6 +317,78 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Mappings.ApartmentAmenity", b =>
+                {
+                    b.Property<int>("AmenityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ApartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("AmenityId", "ApartmentId");
+
+                    b.HasIndex("ApartmentId");
+
+                    b.ToTable("ApartmentAmenities");
+                });
+
+            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Mappings.RoomAmenity", b =>
+                {
+                    b.Property<int>("AmenityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("AmenityId", "RoomId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("RoomAmenities");
+                });
+
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Profile", b =>
                 {
                     b.Property<string>("UserId")
@@ -333,8 +422,10 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Requests.Request", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("AdultsCount")
                         .HasColumnType("int");
@@ -387,14 +478,16 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Reviews.Review", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("ApartmentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("BookingId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -689,24 +782,6 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Amenity", b =>
-                {
-                    b.HasOne("ApartmentsLilly.Server.Data.Models.Apartment", "Apartment")
-                        .WithMany("Amenities")
-                        .HasForeignKey("ApartmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("ApartmentsLilly.Server.Data.Models.Rooms.Room", "Room")
-                        .WithMany("Amenities")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Apartment");
-
-                    b.Navigation("Room");
-                });
-
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Apartment", b =>
                 {
                     b.HasOne("ApartmentsLilly.Server.Data.Models.Address", "Address")
@@ -771,6 +846,44 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Mappings.ApartmentAmenity", b =>
+                {
+                    b.HasOne("ApartmentsLilly.Server.Data.Models.Amenity", "Amenity")
+                        .WithMany("Apartments")
+                        .HasForeignKey("AmenityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ApartmentsLilly.Server.Data.Models.Apartment", "Apartment")
+                        .WithMany("Amenities")
+                        .HasForeignKey("ApartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Amenity");
+
+                    b.Navigation("Apartment");
+                });
+
+            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Mappings.RoomAmenity", b =>
+                {
+                    b.HasOne("ApartmentsLilly.Server.Data.Models.Amenity", "Amenity")
+                        .WithMany("Rooms")
+                        .HasForeignKey("AmenityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ApartmentsLilly.Server.Data.Models.Rooms.Room", "Room")
+                        .WithMany("Amenities")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Amenity");
+
+                    b.Navigation("Room");
+                });
+
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Profile", b =>
                 {
                     b.HasOne("ApartmentsLilly.Server.Data.Models.Image", "MainImage")
@@ -813,7 +926,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.HasOne("ApartmentsLilly.Server.Data.Models.Bookings.Booking", "Booking")
                         .WithMany("Reviews")
                         .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("ApartmentsLilly.Server.Data.Models.User", "User")
                         .WithMany("Reviews")
@@ -892,6 +1006,13 @@ namespace ApartmentsLilly.Server.Data.Migrations
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Address", b =>
                 {
                     b.Navigation("Apartments");
+                });
+
+            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Amenity", b =>
+                {
+                    b.Navigation("Apartments");
+
+                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Apartment", b =>

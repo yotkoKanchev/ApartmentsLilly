@@ -13,6 +13,7 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
+        // TODO change ID to int
         public string Id { get; set; }
 
         [Required]

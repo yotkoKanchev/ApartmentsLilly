@@ -62,7 +62,7 @@
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Result> Update(int id, string name, RoomType roomType)
+        public async Task<Result> Update(int id, string name, string roomType)
         {
             var room = await this.ById(id).FirstOrDefaultAsync();
 
@@ -71,7 +71,7 @@
                 return $"Room with Id: {id} does not exists.";
             }
 
-            room.RoomType = roomType;
+            room.RoomType = (RoomType)Enum.Parse(typeof(RoomType), roomType);
             room.Name = name;
 
             await this.data.SaveChangesAsync();

@@ -7,11 +7,7 @@
 
     public class Booking : DeletableEntity
     {
-        public Booking()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public DateTime StartDate { get; set; }
 
