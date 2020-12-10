@@ -1,10 +1,10 @@
 ﻿namespace ApartmentsLilly.Server.Features.Amenities.Models
 {
-    public class CreateAmenityRequestModel
+    public class DeleteAmenityRequestModel
     {
         public string Type { get; set; }
 
-        public string Name { get; set; }
+        public int AmenityId { get; set; }
 
         public int Id { get; set; }
     }

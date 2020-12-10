@@ -24,6 +24,8 @@
 
         Task<Result> CreateApartmentAmenity(int apartmentId, int amenityId);
 
+        Task<Result> DeleteApartmentAmenity(int id, int amenityId);
+        
         Task<bool> Exists(int apartmentId);
     }
 }

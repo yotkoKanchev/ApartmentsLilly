@@ -7,6 +7,9 @@
     using Rooms;
     using Microsoft.AspNetCore.Mvc;
 
+    using static Infrastructure.WebConstants;
+    using System.Collections.Generic;
+
     public class AmenitiesController : ApiController
     {
         private readonly IAmenitiesService amenities;
@@ -30,24 +33,77 @@
             switch (model.Type)
             {
                 case "Apartment":
-                    result = await this.apartments.CreateApartmentAmenity(model.ApartmentId.Value, amenityId);
+                    result = await this.apartments.CreateApartmentAmenity(model.Id, amenityId);
 
                     if (result.Failure)
                     {
-                        return this.BadRequest(result.StringValue);
+                        return this.BadRequest(result.Error);
                     }
                     break;
                 case "Room":
-                    result = await this.rooms.CreateRoomAmenity(model.RoomId.Value, amenityId);
+                    result = await this.rooms.CreateRoomAmenity(model.Id, amenityId);
 
                     if (result.Failure)
                     {
-                        return this.BadRequest(result.StringValue);
+                        return this.BadRequest(result.Error);
                     }
                     break;
             }
         
             return Created(nameof(this.Create), new CreateAmenityResponseModel { Id = amenityId });
+        }
+
+        [HttpGet]
+        [Route(nameof(AllByApartment))]
+        public async Task<IEnumerable<AmenitiesListingServiceModel>> AllByApartment(int apartmentId)
+        {
+            return await this.amenities.GetAllByApartmentId(apartmentId);
+        }
+
+        [HttpGet]
+        [Route(nameof(AllByApartment))]
+        public async Task<IEnumerable<AmenitiesListingServiceModel>> AllByRoom(int roomId)
+        {
+            return await this.amenities.GetAllByRoomId(roomId);
+        }
+
+        [HttpPut]
+        [Route(Id)]
+        public async Task<ActionResult> Update(int id, UpdateAmenityRequestModel model)
+        {
+            Result result = await this.amenities.Update(id, model.Name);
+
+            if (result.Failure)
+            {
+                return this.BadRequest(result.Error);
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete(DeleteAmenityRequestModel model)
+        {
+            Result result;
+
+            switch (model.Type)
+            {
+                case "Apartment":
+                    result = await this.apartments.DeleteApartmentAmenity(model.Id, model.AmenityId);
+                    break;
+                case "Room":
+                    result = await this.rooms.DeleteRoomAmenity(model.Id, model.AmenityId);
+                    break;
+            }
+
+            result = await this.amenities.Delete(model.AmenityId);
+
+            if (result.Failure)
+            {
+                return this.BadRequest(result.Error);
+            }
+
+            return Ok();
         }
     }
 }

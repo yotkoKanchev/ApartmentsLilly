@@ -18,5 +18,7 @@
         Task<Result> Delete(int id);
 
         Task<Result> CreateRoomAmenity(int roomId, int amenityId);
+
+        Task<Result> DeleteRoomAmenity(int id, int amenityId);
     }
 }

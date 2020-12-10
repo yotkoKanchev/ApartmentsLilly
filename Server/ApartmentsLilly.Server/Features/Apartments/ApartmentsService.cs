@@ -157,11 +157,33 @@
             return true;
         }
 
+        public async Task<Result> DeleteApartmentAmenity(int id, int amenityId)
+        {
+            if (await this.Exists(id) == false)
+            {
+                return $"Apartment with Id: {id} does not exists.";
+            }
+
+            var apartmentAmenity = await this.data
+                .ApartmentAmenities
+                .FirstOrDefaultAsync(aa => aa.ApartmentId == id && aa.AmenityId == amenityId);
+
+            if (apartmentAmenity == null)
+            {
+                return $"Amenity with Id: {amenityId} does not exists.";
+            }
+
+            this.data.ApartmentAmenities.Remove(apartmentAmenity);
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
         private IQueryable<Apartment> GetApartment(int id)
         {
             return this.data
                 .Apartments
                 .Where(a => a.Id == id);
         }
-    }
+            }
 }
