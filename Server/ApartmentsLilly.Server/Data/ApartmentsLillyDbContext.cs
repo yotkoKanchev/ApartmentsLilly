@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Infrastructure.Services;
     using Models;
+    using Models.Amenities;
     using Models.Base;
     using Models.Beds;
     using Models.Bookings;

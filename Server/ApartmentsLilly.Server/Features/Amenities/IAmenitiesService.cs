@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ApartmentsLilly.Server.Features.Amenities
+﻿namespace ApartmentsLilly.Server.Features.Amenities
 {
-    public class IAmenitiesService
+    using System.Threading.Tasks;
+
+    public interface IAmenitiesService
     {
+        Task<int> Create(string name);
     }
 }

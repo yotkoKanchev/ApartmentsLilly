@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Data;
     using Data.Models;
+    using Data.Models.Mappings;
     using Features.Addresses;
     using Features.Apartments.Models;
     using Infrastructure.Mapping;
@@ -85,7 +86,7 @@
             return true;
         }
 
-        public async Task<Result> Update(int id, string name, string description, string entry, int floor, string number, 
+        public async Task<Result> Update(int id, string name, string description, string entry, int floor, string number,
             double size, double basePrice, bool hasTerrace, int maxOccupants, string mainImageUrl, string addressId)
         {
             var apartment = await this.GetApartment(id)
@@ -123,18 +124,37 @@
                 .Apartments
                 .AnyAsync(a => a.Id == apartmentId);
         }
-      
+
         public async Task<IEnumerable<ApartmentListingServiceModel>> GetAllAvailable(System.DateTime startDate, System.DateTime endDate)
         {
             return await this.data
                 .Apartments
                 .Where(a => a.Rooms.Any())
                 .Where(a => !a.Bookings
-                    .Any(b => (b.StartDate >= startDate && b.EndDate <= startDate) && 
+                    .Any(b => (b.StartDate >= startDate && b.EndDate <= startDate) &&
                               (b.StartDate >= endDate && b.EndDate <= endDate)))
                 .OrderBy(a => a.Name)
                 .To<ApartmentListingServiceModel>()
                 .ToListAsync();
+        }
+
+        public async Task<Result> CreateApartmentAmenity(int apartmentId, int amenityId)
+        {
+            if (await this.Exists(apartmentId) == false)
+            {
+                return $"Apartment with Id: {apartmentId} does not exists.";
+            }
+
+            var apartmentAmenity = new ApartmentAmenity
+            {
+                ApartmentId = apartmentId,
+                AmenityId = amenityId,
+            };
+
+            this.data.ApartmentAmenities.Add(apartmentAmenity);
+            await this.data.SaveChangesAsync();
+
+            return true;
         }
 
         private IQueryable<Apartment> GetApartment(int id)

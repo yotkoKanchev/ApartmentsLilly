@@ -1,4 +1,4 @@
-﻿namespace ApartmentsLilly.Server.Data.Models
+﻿namespace ApartmentsLilly.Server.Data.Models.Amenities
 {
     using System.Collections.Generic;
     using Base;

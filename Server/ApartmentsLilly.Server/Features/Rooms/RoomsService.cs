@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Data;
+    using Data.Models.Mappings;
     using Data.Models.Rooms;
     using Features.Apartments;
     using Infrastructure.Services;
@@ -32,10 +33,10 @@
                 return $"Apartment with Id: {apartmentId} does not exists.";
             }
 
-            var room = new Room 
-            { 
+            var room = new Room
+            {
                 Name = name,
-                RoomType = (RoomType)Enum.Parse(typeof(RoomType),roomType),
+                RoomType = (RoomType)Enum.Parse(typeof(RoomType), roomType),
                 ApartmentId = apartmentId,
             };
 
@@ -94,7 +95,26 @@
             return true;
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task<Result> CreateRoomAmenity(int roomId, int amenityId)
+        {
+            if (await this.Exists(roomId) == false)
+            {
+                return $"Room with Id: {roomId} does not exists.";
+            }
+
+            var roomAmenity = new RoomAmenity
+            {
+                RoomId = roomId,
+                AmenityId = amenityId,
+            };
+
+            this.data.RoomAmenities.Add(roomAmenity);
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
+        private async Task<bool> Exists(int id)
         {
             return await this.data
                 .Rooms

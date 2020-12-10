@@ -11,7 +11,7 @@
 
     public class ApartmentsController : ApiController
     {
-        private IApartmentsService apartments;
+        private IApartmentsService apartments;  
 
         public ApartmentsController(IApartmentsService apartments)
         {

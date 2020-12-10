@@ -22,6 +22,8 @@
         Task<Result> Update(int id, string name, string description, string entry, int floor, string number, 
             double size, double basePrice, bool hasTerrace, int maxOccupants, string mainImageUrl, string addressId);
 
+        Task<Result> CreateApartmentAmenity(int apartmentId, int amenityId);
+
         Task<bool> Exists(int apartmentId);
     }
 }

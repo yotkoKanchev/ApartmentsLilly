@@ -17,6 +17,6 @@
 
         Task<Result> Delete(int id);
 
-        Task<bool> Exists(int id);
+        Task<Result> CreateRoomAmenity(int roomId, int amenityId);
     }
 }

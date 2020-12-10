@@ -2,6 +2,7 @@
 {
     using System.Text;
     using ApartmentsLilly.Server.Features.Addresses;
+    using ApartmentsLilly.Server.Features.Amenities;
     using ApartmentsLilly.Server.Features.Apartments;
     using ApartmentsLilly.Server.Features.Rooms;
     using Data;
@@ -88,8 +89,9 @@
                 .AddTransient<IProfileService, ProfileService>()
                 .AddTransient<ISearchService, SearchService>()
                 .AddTransient<IAddressService, AddressService>()
+                .AddTransient<IApartmentsService, ApartmentsService>()
                 .AddTransient<IRoomsService, RoomsService>()
-                .AddTransient<IApartmentsService, ApartmentsService>();
+                .AddTransient<IAmenitiesService, AmenitiesService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
             => services.AddSwaggerGen(c =>

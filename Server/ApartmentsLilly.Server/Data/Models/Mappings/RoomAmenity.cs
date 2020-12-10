@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Base;
+    using Models.Amenities;
     using Rooms;
 
     public class RoomAmenity: DeletableEntity
