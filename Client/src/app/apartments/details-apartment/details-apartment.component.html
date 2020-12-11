@@ -27,6 +27,7 @@
             </div>            
             <div class="mt-2">
                 <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-room-modal')" value="Add Room">
+                <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-amenity-modal')" value="Add Amenity">
                 <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}" value="Edit">
                 <input type="button" class="btn btn-primary" routerLink="/apartments" value="Back to list">
             </div>
@@ -37,5 +38,11 @@
 <jw-modal id="add-room-modal">
     <div>
         <app-create-room [apartmentId]="id"></app-create-room>
+    </div>
+</jw-modal>
+
+<jw-modal id="add-amenity-modal">
+    <div>
+        <app-create-amenity [parentId]="id" [idType]='"Apartment"'></app-create-amenity>
     </div>
 </jw-modal>

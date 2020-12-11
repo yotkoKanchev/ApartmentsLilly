@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 offset-md-4">
+            <form [formGroup]="amenityForm" (ngSubmit)="create()">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="Name">
+                </div>
+                <div *ngIf="(name.pristine || name.invalid) && name.errors" class="alert alert-danger">
+                    <span *ngIf="name.errors.minlength || name.errors.maxlength || name.errors.required">
+                        Name should be between 1 and 30 symbols long!
+                    </span>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+                <input type="button" class="btn btn-primary ml-3" (click)="closeModal('add-amenity-modal');" value="Close">
+            </form>
+            <br>
+            <br>
+            
+        </div>
+    </div>
+</div>

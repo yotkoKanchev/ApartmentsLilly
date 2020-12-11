@@ -18,7 +18,7 @@ import { AuthModule } from './auth/auth.module';
 import { ApartmentsModule } from './apartments/apartments.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { AddressesModule } from './addresses/addresses.module';
-import { ModalModule } from './_modal';
+import { AmenitiesModule } from './amenities/amenities.module';
 
 @NgModule({
   declarations: [
@@ -29,10 +29,10 @@ import { ModalModule } from './_modal';
   ],
   imports: [
     AuthModule,
-    // ModalModule,
     ApartmentsModule,
     AddressesModule,
     RoomsModule,
+    AmenitiesModule,
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,

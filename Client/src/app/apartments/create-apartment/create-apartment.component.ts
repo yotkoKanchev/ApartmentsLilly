@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApartmentsService } from '../apartments.service';
-import { ToastrService } from 'ngx-toastr';
 import { AddressModel } from 'src/app/addresses/models/address.model';
 import { AddressesService } from 'src/app/addresses/addresses.service';
+import { ToastrService } from 'ngx-toastr';
 import { ModalService } from '../../_modal';
 
 @Component({
@@ -15,7 +15,6 @@ import { ModalService } from '../../_modal';
 export class CreateApartmentComponent implements OnInit {
   apartmentForm: FormGroup;
   addresses: Array<AddressModel>
-  bodyText: string;
 
   constructor(
     private modalService: ModalService,
@@ -40,7 +39,6 @@ export class CreateApartmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bodyText = 'This text can be updated in modal 1';
     this.addressesService.getAddresses().subscribe(data => {
       this.addresses = data;
     });

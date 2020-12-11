@@ -8,6 +8,7 @@ import { ModalModule } from './../_modal';
 import { RoomsModule } from '../rooms/rooms.module';
 import { ApartmentComponent } from './apartment/apartment.component';
 import { AddressesModule } from '../addresses/addresses.module';
+import { AmenitiesModule } from '../amenities/amenities.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { AddressesModule } from '../addresses/addresses.module';
     ModalModule,
     RoomsModule,
     AddressesModule,
+    AmenitiesModule,
   ],
   providers:[
     ApartmentsService,
