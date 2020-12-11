@@ -189,10 +189,12 @@
 
             builder
                 .Entity<RoomAmenity>()
+                .HasQueryFilter(b => !b.IsDeleted)
                 .HasKey(ra => new { ra.AmenityId, ra.RoomId });
 
             builder
                 .Entity<ApartmentAmenity>()
+                .HasQueryFilter(b => !b.IsDeleted)
                 .HasKey(aa => new { aa.AmenityId, aa.ApartmentId });
 
             base.OnModelCreating(builder);

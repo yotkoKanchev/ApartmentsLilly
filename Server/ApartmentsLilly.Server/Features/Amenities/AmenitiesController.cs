@@ -1,15 +1,17 @@
 ﻿namespace ApartmentsLilly.Server.Features.Amenities
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Apartments;
     using Infrastructure.Services;
     using Models;
     using Rooms;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using static Infrastructure.WebConstants;
-    using System.Collections.Generic;
 
+    [AllowAnonymous]
     public class AmenitiesController : ApiController
     {
         private readonly IAmenitiesService amenities;
@@ -61,7 +63,7 @@
         }
 
         [HttpGet]
-        [Route(nameof(AllByApartment))]
+        [Route(nameof(AllByRoom))]
         public async Task<IEnumerable<AmenitiesListingServiceModel>> AllByRoom(int roomId)
         {
             return await this.amenities.GetAllByRoomId(roomId);
@@ -90,9 +92,17 @@
             {
                 case "Apartment":
                     result = await this.apartments.DeleteApartmentAmenity(model.Id, model.AmenityId);
+                    if (result.Failure)
+                    {
+                        return this.BadRequest(result.Error);
+                    }
                     break;
                 case "Room":
                     result = await this.rooms.DeleteRoomAmenity(model.Id, model.AmenityId);
+                    if (result.Failure)
+                    {
+                        return this.BadRequest(result.Error);
+                    }
                     break;
             }
 

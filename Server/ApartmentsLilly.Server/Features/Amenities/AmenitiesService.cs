@@ -60,6 +60,7 @@
             return true;
         }
 
+        // TODO this doesnt work!!!
         public async Task<IEnumerable<AmenitiesListingServiceModel>> GetAllByApartmentId(int apartmentId)
         {
             return await this.data
@@ -70,6 +71,7 @@
                 .ToListAsync();
         }
 
+        // TODO this doesnt work!!!
         public async Task<IEnumerable<AmenitiesListingServiceModel>> GetAllByRoomId(int roomId)
         {
             return await this.data
@@ -116,6 +118,7 @@
                 !await this.data.ApartmentAmenities.AnyAsync(aa => aa.AmenityId == id))
             {
                 this.data.Amenities.Remove(amenity);
+                await this.data.SaveChangesAsync();
             }
 
             return true;
