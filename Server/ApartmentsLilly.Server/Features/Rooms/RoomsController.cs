@@ -10,6 +10,8 @@
     using Models;
 
     using static Infrastructure.WebConstants;
+    using static Infrastructure.Extensions.EnumExtensions;
+    using ApartmentsLilly.Server.Infrastructure.Extensions;
 
     public class RoomsController : ApiController
     {
@@ -56,9 +58,11 @@
         [HttpGet]
         [Route(nameof(RoomTypes))]
         [AllowAnonymous]
-        public List<string> RoomTypes()
+        public ActionResult RoomTypes()
         {
-            return Enum.GetValues(typeof(RoomType)).Cast<RoomType>().Select(v => v.ToString()).ToList();
+            var types =  EnumExtensions.GetValues<RoomType>();
+
+            return Ok(types);
         }
 
         [HttpPut]

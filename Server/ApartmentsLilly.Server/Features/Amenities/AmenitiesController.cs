@@ -10,6 +10,9 @@
     using Microsoft.AspNetCore.Mvc;
 
     using static Infrastructure.WebConstants;
+    using System;
+    using ApartmentsLilly.Server.Data.Models.Amenities;
+    using System.Linq;
 
     [AllowAnonymous]
     public class AmenitiesController : ApiController
@@ -79,6 +82,14 @@
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route(nameof(ImportanceTypes))]
+        [AllowAnonymous]
+        public List<string> ImportanceTypes()
+        {
+            return Enum.GetValues(typeof(AmenityImportance)).Cast<AmenityImportance>().Select(v => v.ToString()).ToList();
         }
     }
 }

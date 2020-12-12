@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Data;
-    using Data.Models.Mappings;
     using Data.Models.Rooms;
     using Features.Apartments;
     using Infrastructure.Services;
@@ -24,7 +23,7 @@
             this.apartments = apartments;
         }
 
-        public async Task<Result> Create(string name, string roomType, int apartmentId)
+        public async Task<Result> Create(string name, int roomType, int apartmentId)
         {
             var isApartmentExists = await this.apartments.Exists(apartmentId);
 
@@ -36,7 +35,7 @@
             var room = new Room
             {
                 Name = name,
-                RoomType = (RoomType)Enum.Parse(typeof(RoomType), roomType),
+                RoomType = (RoomType)roomType,
                 ApartmentId = apartmentId,
             };
 

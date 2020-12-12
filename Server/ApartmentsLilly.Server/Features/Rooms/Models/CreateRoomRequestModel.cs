@@ -7,7 +7,7 @@
     {
         public string Name { get; set; }
 
-        public string RoomType { get; set; }
+        public int RoomType { get; set; }
 
         [Required]
         public int ApartmentId { get; set; }
