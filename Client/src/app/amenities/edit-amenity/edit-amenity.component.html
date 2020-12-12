@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 offset-md-4">
+            <form [formGroup]="amenityForm">
+                <label>Choose Room Type</label>
+                <select class="form-control mb-3" formControlName="importance">
+                    <option disabled value="">choose importance level</option>
+                    <option *ngFor="let importance of importanceTypes" [ngValue]="importance.value">{{importance.name}}</option>
+                </select>
+                <div *ngIf="(importance.pristine && importance.invalid) || (importance.touched && importance.invalid)" class="alert alert-danger" >
+                    <div *ngIf="importance.errors.required">Importance is required.</div>
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                </div>
+                <div *ngIf="(importance.pristine || importance.invalid) && importance.errors" class="alert alert-danger">
+                    <span *ngIf="importance.errors.minlength || importance.errors.maxlength || importance.errors.required">
+                        Name should be between 1 and 30 symbols long!
+                    </span>
+                </div>
+                <button type="submit" class="btn btn-primary mr-2" (click)="editAmenity()">Update</button>
+                <input type="button" class="btn btn-primary" (click)="closeModal('edit-amenity-modal');" value="Close">
+            </form>
+            <br>
+            <br>
+            
+        </div>
+    </div>
+</div>

@@ -14,8 +14,9 @@ import { ModalService } from 'src/app/_modal';
 export class EditRoomComponent implements OnInit {
   roomForm: FormGroup
   @Input() roomId: number;
-  roomTypes: Array<string>;
+  roomTypes: any;
   room: RoomModel;
+  
   constructor(
     private fb: FormBuilder,
     private roomsService: RoomsService,

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { CreateAmenityModel } from './models/create-amenity.model';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { AmenityModel } from './models/amenity.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,17 @@ export class AmenitiesService {
     console.log(this.amenitiesPath)
     console.log(data)
     return this.http.post<CreateAmenityModel>(this.amenitiesPath, data)
+  }
+
+  getAmenity(id: number){
+    return this.http.get<AmenityModel>(this.amenitiesPath + '/' + id)
+  }
+
+  edit(data, id: number) {
+    return this.http.put(this.amenitiesPath + '/' + id, data)
+  }
+
+  deleteAmenity(id: number){
+    return this.http.delete(this.amenitiesPath + '/' + id);
   }
 }

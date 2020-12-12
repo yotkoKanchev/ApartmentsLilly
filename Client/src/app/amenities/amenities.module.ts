@@ -3,18 +3,18 @@ import { CommonModule } from '@angular/common';
 import { AmenitiesService } from './amenities.service';
 import { amenitiesComponents} from '.';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from '../app-routing.module';
 import { ModalModule } from 'src/app/_modal';
 import { CreateAmenityComponent } from './create-amenity/create-amenity.component';
+import { EditAmenityComponent } from './edit-amenity/edit-amenity.component';
 
 @NgModule({
   declarations: [
     ...amenitiesComponents,
+    EditAmenityComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    AppRoutingModule,
     ModalModule,
   ],
   providers:[
@@ -22,6 +22,7 @@ import { CreateAmenityComponent } from './create-amenity/create-amenity.componen
   ],
   exports:[
     CreateAmenityComponent,
+    EditAmenityComponent,
   ]
 })
 export class AmenitiesModule { }

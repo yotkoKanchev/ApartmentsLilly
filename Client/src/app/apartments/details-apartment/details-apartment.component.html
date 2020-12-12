@@ -23,6 +23,17 @@
                             </div>
                         </jw-modal>
                     </div>
+                    <div class="border mb-2" *ngFor="let amenity of apartment.amenities">
+                        <p>{{amenity.name}}</p>
+                        <p>{{amenity.importance}}</p>
+                        <input type="button" class="btn btn-primary" (click)="openModal('edit-amenity-modal')" value="Edit Amenity">
+                        <button type="button" class="btn btn-primary" (click)="deleteAmenity(amenity.id)">Delete Amenity</button>
+                        <jw-modal id="edit-amenity-modal">
+                            <div>
+                                <app-edit-amenity [amenityId]="amenity.id"></app-edit-amenity>
+                            </div>
+                        </jw-modal>
+                    </div>
                 </div>
             </div>            
             <div class="mt-2">
