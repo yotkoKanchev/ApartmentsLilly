@@ -12,38 +12,47 @@ import { ModalService } from '../../_modal';
 })
 export class CreateAmenityComponent implements OnInit {
   amenityForm: FormGroup;
-  @Input()
-  idType:string;
-  @Input()
-  parentId:number;
+  @Input() 
+  apartmentId: number;
+  importanceTypes: any;
 
   constructor(
     private modalService: ModalService,
     private fb: FormBuilder,
     private amenitiesService: AmenitiesService,
     private toastrService: ToastrService,
-    private router: Router,) {
+    private router: Router,
+  ) {
     this.amenityForm = this.fb.group({
       'Name': ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+      'Importance': ['', Validators.required],
     })
   }
 
   ngOnInit(): void {
+    this.amenitiesService.getImportanceTypes().subscribe(data => {
+      this.importanceTypes = data;
+    })
   }
 
-  create(){
-    this.amenitiesService.create(this.amenityForm.value, this.idType, this.parentId)
+  create() {
+    console.log(this.amenityForm.value)
+    this.amenitiesService.create(this.amenityForm.value, this.apartmentId)
       .subscribe(() => {
         this.toastrService.success("Amenity added", "Success");
       })
     // location.reload();
   }
 
-  closeModal(id:string){
+  closeModal(id: string) {
     this.modalService.close(id);
   }
 
   get name() {
     return this.amenityForm.get('Name');
+  }
+
+  get importance() {
+    return this.amenityForm.get('Importance');
   }
 }

@@ -4,6 +4,7 @@ import { RoomsService } from '../rooms.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ModalService } from 'src/app/_modal';
+import { KeyValue } from '@angular/common';
 
 @Component({
   selector: 'app-create-room',
@@ -12,8 +13,10 @@ import { ModalService } from 'src/app/_modal';
 })
 export class CreateRoomComponent implements OnInit {
   roomForm: FormGroup;
-  roomTypes: Array<string>;
-  @Input() apartmentId: string;
+  roomTypes: any;
+  @Input() 
+  apartmentId: number;
+
   constructor(
     private modalService: ModalService,
     private fb: FormBuilder,

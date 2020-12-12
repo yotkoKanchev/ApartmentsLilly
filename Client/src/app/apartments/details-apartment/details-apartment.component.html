@@ -37,12 +37,12 @@
 
 <jw-modal id="add-room-modal">
     <div>
-        <app-create-room [apartmentId]="id"></app-create-room>
+        <app-create-room [apartmentId]=id></app-create-room>
     </div>
 </jw-modal>
 
 <jw-modal id="add-amenity-modal">
     <div>
-        <app-create-amenity [parentId]="id" [idType]='"Apartment"'></app-create-amenity>
+        <app-create-amenity [apartmentId]=id></app-create-amenity>
     </div>
 </jw-modal>

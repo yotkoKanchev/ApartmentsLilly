@@ -1,5 +1,5 @@
 export interface CreateAmenityModel {
-    type: string;
+    type: number;
     name: string;
-    id: number;
+    apartmentId: number;
 }

@@ -11,12 +11,22 @@
                         Name should be between 1 and 30 symbols long!
                     </span>
                 </div>
+                <label>Choose Importance Level</label>
+                <select class="form-control mb-3" formControlName="Importance">
+                    <option disabled value="">choose importance</option>
+                    <option *ngFor="let type of importanceTypes" [ngValue]="type.value">{{type.name}}</option>
+                </select>
+                <div *ngIf="(importance.pristine && importance.invalid) || (importance.touched && importance.invalid)"
+                    class="alert alert-danger">
+                    <div *ngIf="importance.errors.required">Importance level is required.</div>
+                </div>
                 <button type="submit" class="btn btn-primary">Create</button>
-                <input type="button" class="btn btn-primary ml-3" (click)="closeModal('add-amenity-modal');" value="Close">
+                <input type="button" class="btn btn-primary ml-3" (click)="closeModal('add-amenity-modal');"
+                    value="Close">
             </form>
             <br>
             <br>
-            
+
         </div>
     </div>
 </div>

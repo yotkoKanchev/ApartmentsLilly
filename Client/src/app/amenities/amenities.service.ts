@@ -11,9 +11,14 @@ export class AmenitiesService {
   amenitiesPath: string = environment.apiUrl + 'Amenities';
   constructor(private http: HttpClient) { }
 
-  create(data, type:string, parentId:number): Observable<CreateAmenityModel>{
-    data.id = parentId;
-    data.type = type;
+  getImportanceTypes(): Observable<any> {
+    return this.http.get<any>(this.amenitiesPath + '/' + 'ImportanceTypes');
+  }
+
+  create(data, apartmentId): Observable<CreateAmenityModel> {
+    data.apartmentId = apartmentId;
+    console.log(this.amenitiesPath)
+    console.log(data)
     return this.http.post<CreateAmenityModel>(this.amenitiesPath, data)
   }
 }

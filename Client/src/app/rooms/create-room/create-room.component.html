@@ -5,7 +5,7 @@
                 <label>Choose Room Type</label>
                 <select class="form-control mb-3" formControlName="RoomType">
                     <option disabled value="">choose room type</option>
-                    <option *ngFor="let type of roomTypes" [ngValue]="type">{{type}}</option>
+                    <option *ngFor="let type of roomTypes" [ngValue]="type.value">{{type.name}}</option>
                 </select>
                 <div *ngIf="(roomType.pristine && roomType.invalid) || (roomType.touched && roomType.invalid)" class="alert alert-danger" >
                     <div *ngIf="roomType.errors.required">Room Type is required.</div>

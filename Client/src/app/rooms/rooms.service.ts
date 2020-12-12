@@ -13,8 +13,8 @@ export class RoomsService {
 
   constructor(private http: HttpClient) { }
 
-  getRoomTypes(): Observable<Array<string>> {
-    return this.http.get<Array<string>>(this.roomsPath + '/' + 'roomTypes');
+  getRoomTypes(): Observable<any> {
+    return this.http.get<any>(this.roomsPath + '/' + 'roomTypes');
   }
 
   create(data, apartmentId): Observable<CreateRoomModel> {
