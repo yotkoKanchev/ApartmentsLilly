@@ -7,7 +7,7 @@
 
     public interface IAmenitiesService
     {
-        Task<int> Create(string name, string importance);
+        Task<int> Create(string name, int importance);
 
         Task<Result> Update(int id, string name);
 

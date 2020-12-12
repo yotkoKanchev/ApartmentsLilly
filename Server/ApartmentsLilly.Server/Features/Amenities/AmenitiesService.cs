@@ -23,7 +23,7 @@
             this.apartments = apartments;
         }
 
-        public async Task<int> Create(string name, string importance)
+        public async Task<int> Create(string name, int importance)
         {
             int id;
 
@@ -32,7 +32,7 @@
                 var amenity = new Amenity
                 {
                     Name = name,
-                    Importance = (AmenityImportance)Enum.Parse(typeof(AmenityImportance), importance),
+                    Importance = (AmenityImportance)importance
                 };
 
                 this.data.Amenities.Add(amenity);

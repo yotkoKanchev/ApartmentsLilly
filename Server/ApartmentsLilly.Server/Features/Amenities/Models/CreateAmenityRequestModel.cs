@@ -4,7 +4,7 @@
     {
         public string Name { get; set; }
 
-        public string Importance { get; set; }
+        public int Importance { get; set; }
 
         public int ApartmentId { get; set; }
     }
