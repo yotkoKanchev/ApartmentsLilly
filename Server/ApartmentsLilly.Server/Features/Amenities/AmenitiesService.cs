@@ -1,13 +1,11 @@
 ﻿namespace ApartmentsLilly.Server.Features.Amenities
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Amenities.Models;
     using Data;
     using Data.Models.Amenities;
-    using Features.Apartments;
     using Infrastructure.Mapping;
     using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
@@ -15,12 +13,10 @@
     public class AmenitiesService : IAmenitiesService
     {
         private readonly ApartmentsLillyDbContext data;
-        private readonly IApartmentsService apartments;
 
-        public AmenitiesService(ApartmentsLillyDbContext data, IApartmentsService apartments)
+        public AmenitiesService(ApartmentsLillyDbContext data)
         {
             this.data = data;
-            this.apartments = apartments;
         }
 
         public async Task<int> Create(string name, int importance)
@@ -114,6 +110,20 @@
             }
 
             return true;
+        }
+
+        public async Task<AmenityDetailsServiceModel> GetById(int id)
+        {
+            return await this.ById(id)
+                .To<AmenityDetailsServiceModel>()
+                .FirstOrDefaultAsync();
+        }
+
+        private IQueryable<Amenity> ById(int id)
+        {
+            return this.data
+                .Amenities
+                .Where(r => r.Id == id);
         }
     }
 }

@@ -5,8 +5,8 @@
     using Infrastructure.Mapping;
     using System.Collections.Generic;
     using AutoMapper;
-    using ApartmentsLilly.Server.Data.Models.Rooms;
     using System.Linq;
+    using ApartmentsLilly.Server.Features.Amenities.Models;
 
     public class ApartmentDetailsServiceModel : IMapFrom<Apartment>, IHaveCustomMappings
     {
@@ -44,10 +44,13 @@
 
         public ICollection<RoomDetailsServiceModel> Rooms { get; set; }
 
+        public ICollection<AmenityDetailsServiceModel> Amenities { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Apartment, ApartmentDetailsServiceModel>()
-                .ForMember(a => a.Rooms, opt => opt.MapFrom(a => a.Rooms.OrderBy(r=>r.Name)));
+                .ForMember(a => a.Rooms, opt => opt.MapFrom(a => a.Rooms.OrderBy(r => r.Name)))
+                .ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities.Select(b=>b.Amenity).OrderByDescending(b=>b.Importance)));
         }
     }
 }

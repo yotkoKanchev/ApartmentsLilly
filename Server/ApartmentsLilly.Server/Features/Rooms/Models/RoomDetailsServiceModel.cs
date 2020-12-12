@@ -10,7 +10,5 @@
         public string Name { get; set; }
 
         public string RoomType { get; set; }
-
-        //public ICollection<AmenityListingServiceModel> Amenities { get; set; }
     }
 }

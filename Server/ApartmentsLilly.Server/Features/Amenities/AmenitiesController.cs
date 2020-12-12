@@ -49,6 +49,14 @@
             return await this.amenities.GetAllByApartmentId(apartmentId);
         }
 
+        [HttpGet]
+        [Route(Id)]
+        [AllowAnonymous]
+        public async Task<AmenityDetailsServiceModel> Details(int id)
+        {
+            return await this.amenities.GetById(id);
+        }
+
         [HttpPut]
         [Route(Id)]
         public async Task<ActionResult> Update(int id, UpdateAmenityRequestModel model)
