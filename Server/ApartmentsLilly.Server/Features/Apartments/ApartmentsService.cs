@@ -157,16 +157,16 @@
             return true;
         }
 
-        public async Task<Result> DeleteApartmentAmenity(int id, int amenityId)
+        public async Task<Result> DeleteApartmentAmenity(int apartmentId, int amenityId)
         {
-            if (await this.Exists(id) == false)
+            if (await this.Exists(apartmentId) == false)
             {
-                return $"Apartment with Id: {id} does not exists.";
+                return $"Apartment with Id: {apartmentId} does not exists.";
             }
 
             var apartmentAmenity = await this.data
                 .ApartmentAmenities
-                .FirstOrDefaultAsync(aa => aa.ApartmentId == id && aa.AmenityId == amenityId);
+                .FirstOrDefaultAsync(aa => aa.ApartmentId == apartmentId && aa.AmenityId == amenityId);
 
             if (apartmentAmenity == null)
             {

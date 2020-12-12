@@ -1,5 +1,6 @@
 ﻿namespace ApartmentsLilly.Server.Features.Amenities
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -22,7 +23,7 @@
             this.apartments = apartments;
         }
 
-        public async Task<int> Create(string name)
+        public async Task<int> Create(string name, string importance)
         {
             int id;
 
@@ -31,6 +32,7 @@
                 var amenity = new Amenity
                 {
                     Name = name,
+                    Importance = (AmenityImportance)Enum.Parse(typeof(AmenityImportance), importance),
                 };
 
                 this.data.Amenities.Add(amenity);
@@ -60,24 +62,15 @@
             return true;
         }
 
-        // TODO this doesnt work!!!
         public async Task<IEnumerable<AmenitiesListingServiceModel>> GetAllByApartmentId(int apartmentId)
         {
             return await this.data
                 .Apartments
                 .Where(a => a.Id == apartmentId)
-                .Select(a => a.Amenities)
-                .To<AmenitiesListingServiceModel>()
-                .ToListAsync();
-        }
-
-        // TODO this doesnt work!!!
-        public async Task<IEnumerable<AmenitiesListingServiceModel>> GetAllByRoomId(int roomId)
-        {
-            return await this.data
-                .Rooms
-                .Where(a => a.Id == roomId)
-                .Select(a => a.Amenities)
+                .SelectMany(a => a.Amenities
+                    .Select(aa => aa.Amenity)
+                 )
+                .OrderByDescending(a => a.Importance)
                 .To<AmenitiesListingServiceModel>()
                 .ToListAsync();
         }
@@ -114,8 +107,7 @@
                 return $"Amenity with Id {id} does not exists";
             }
 
-            if (!await this.data.RoomAmenities.AnyAsync(ra => ra.AmenityId == id) && 
-                !await this.data.ApartmentAmenities.AnyAsync(aa => aa.AmenityId == id))
+            if (!await this.data.ApartmentAmenities.AnyAsync(aa => aa.AmenityId == id))
             {
                 this.data.Amenities.Remove(amenity);
                 await this.data.SaveChangesAsync();

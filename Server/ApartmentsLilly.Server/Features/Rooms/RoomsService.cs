@@ -95,47 +95,6 @@
             return true;
         }
 
-        public async Task<Result> CreateRoomAmenity(int roomId, int amenityId)
-        {
-            if (await this.Exists(roomId) == false)
-            {
-                return $"Room with Id: {roomId} does not exists.";
-            }
-
-            var roomAmenity = new RoomAmenity
-            {
-                RoomId = roomId,
-                AmenityId = amenityId,
-            };
-
-            this.data.RoomAmenities.Add(roomAmenity);
-            await this.data.SaveChangesAsync();
-
-            return true;
-        }
-
-        public async Task<Result> DeleteRoomAmenity(int id, int amenityId)
-        {
-            if (await this.Exists(id) == false)
-            {
-                return $"Room with Id: {id} does not exists.";
-            }
-
-            var roomAmenity = await this.data
-                .RoomAmenities
-                .FirstOrDefaultAsync(aa => aa.RoomId == id && aa.AmenityId == amenityId);
-
-            if (roomAmenity == null)
-            {
-                return $"Amenity with Id: {amenityId} does not exists.";
-            }
-
-            this.data.RoomAmenities.Remove(roomAmenity);
-            await this.data.SaveChangesAsync();
-
-            return true;
-        }
-
         private async Task<bool> Exists(int id)
         {
             return await this.data

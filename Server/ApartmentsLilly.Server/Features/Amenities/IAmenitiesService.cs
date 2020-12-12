@@ -7,14 +7,12 @@
 
     public interface IAmenitiesService
     {
-        Task<int> Create(string name);
+        Task<int> Create(string name, string importance);
 
         Task<Result> Update(int id, string name);
 
         Task<IEnumerable<AmenitiesListingServiceModel>> GetAllByApartmentId(int apartmentId);
 
-        Task<IEnumerable<AmenitiesListingServiceModel>> GetAllByRoomId(int roomId);
-        
-        Task<Result> Delete(int amenityId);
+        Task<Result> Delete(int id);
     }
 }

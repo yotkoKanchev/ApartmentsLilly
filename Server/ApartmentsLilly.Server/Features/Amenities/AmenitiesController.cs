@@ -28,30 +28,15 @@
         [HttpPost]
         public async Task<ActionResult> Create(CreateAmenityRequestModel model)
         {
-            var amenityId = await this.amenities.Create(model.Name);
+            var amenityId = await this.amenities.Create(model.Name, model.Importance);
 
-            Result result;
+            var result = await this.apartments.CreateApartmentAmenity(model.ApartmentId, amenityId);
 
-            switch (model.Type)
+            if (result.Failure)
             {
-                case "Apartment":
-                    result = await this.apartments.CreateApartmentAmenity(model.Id, amenityId);
-
-                    if (result.Failure)
-                    {
-                        return this.BadRequest(result.Error);
-                    }
-                    break;
-                case "Room":
-                    result = await this.rooms.CreateRoomAmenity(model.Id, amenityId);
-
-                    if (result.Failure)
-                    {
-                        return this.BadRequest(result.Error);
-                    }
-                    break;
+                return this.BadRequest(result.Error);
             }
-        
+
             return Created(nameof(this.Create), new CreateAmenityResponseModel { Id = amenityId });
         }
 
@@ -60,13 +45,6 @@
         public async Task<IEnumerable<AmenitiesListingServiceModel>> AllByApartment(int apartmentId)
         {
             return await this.amenities.GetAllByApartmentId(apartmentId);
-        }
-
-        [HttpGet]
-        [Route(nameof(AllByRoom))]
-        public async Task<IEnumerable<AmenitiesListingServiceModel>> AllByRoom(int roomId)
-        {
-            return await this.amenities.GetAllByRoomId(roomId);
         }
 
         [HttpPut]
@@ -86,27 +64,14 @@
         [HttpDelete]
         public async Task<ActionResult> Delete(DeleteAmenityRequestModel model)
         {
-            Result result;
+            var result = await this.apartments.DeleteApartmentAmenity(model.ApartmentId, model.Id);
 
-            switch (model.Type)
+            if (result.Failure)
             {
-                case "Apartment":
-                    result = await this.apartments.DeleteApartmentAmenity(model.Id, model.AmenityId);
-                    if (result.Failure)
-                    {
-                        return this.BadRequest(result.Error);
-                    }
-                    break;
-                case "Room":
-                    result = await this.rooms.DeleteRoomAmenity(model.Id, model.AmenityId);
-                    if (result.Failure)
-                    {
-                        return this.BadRequest(result.Error);
-                    }
-                    break;
+                return this.BadRequest(result.Error);
             }
 
-            result = await this.amenities.Delete(model.AmenityId);
+            result = await this.amenities.Delete(model.Id);
 
             if (result.Failure)
             {
