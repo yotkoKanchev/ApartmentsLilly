@@ -29,17 +29,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label>City Image Url</label>
-                    <input type="text" class="form-control" formControlName="CityImageUrl">
-                </div>
-                <div *ngIf="(cityImageUrl.touched || cityImageUrl.dirty) && cityImageUrl.errors"
-                    class="alert alert-danger">
-                    <span *ngIf="cityImageUrl.errors.pattern">
-                        Plase, add valid url address!
-                    </span>
-                </div>
-
-                <div class="form-group">
                     <label>Postal Code</label>
                     <input type="text" class="form-control" formControlName="PostalCode">
                 </div>

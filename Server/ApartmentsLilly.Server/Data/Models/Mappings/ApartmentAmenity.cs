@@ -4,7 +4,7 @@
     using Base;
     using Models.Amenities;
 
-    public class ApartmentAmenity : DeletableEntity
+    public class ApartmentAmenity : Entity
     {
         public int ApartmentId { get; set; }
 
@@ -15,5 +15,7 @@
 
         [Required]
         public virtual Amenity Amenity { get; set; }
+
+        public AmenityImportance Importance { get; set; }
     }
 }

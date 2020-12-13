@@ -1,9 +1,10 @@
 ﻿namespace ApartmentsLilly.Server.Data.Models.Beds
 {
     using System.ComponentModel.DataAnnotations;
+    using Base;
     using Rooms;
 
-    public class Bed
+    public class Bed: Entity
     {
         public int Id { get; set; }
 

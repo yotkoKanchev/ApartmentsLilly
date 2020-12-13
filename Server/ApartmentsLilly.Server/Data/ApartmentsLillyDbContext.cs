@@ -121,7 +121,6 @@
 
             builder
                 .Entity<Address>()
-                .HasQueryFilter(r => !r.IsDeleted)
                 .HasMany(r => r.Apartments)
                 .WithOne(a => a.Address)
                 .HasForeignKey(a => a.AddressId)
@@ -163,7 +162,6 @@
 
             builder
                 .Entity<Room>()
-                .HasQueryFilter(r => !r.IsDeleted)
                 .HasOne(r => r.Apartment)
                 .WithMany(a => a.Rooms)
                 .HasForeignKey(r => r.ApartmentId)
@@ -171,7 +169,6 @@
 
             builder
                 .Entity<Room>()
-                .HasQueryFilter(r => !r.IsDeleted)
                 .HasMany(r => r.Beds)
                 .WithOne(a => a.Room)
                 .HasForeignKey(a => a.RoomId)
@@ -186,7 +183,6 @@
 
             builder
                 .Entity<ApartmentAmenity>()
-                .HasQueryFilter(b => !b.IsDeleted)
                 .HasKey(aa => new { aa.AmenityId, aa.ApartmentId });
 
             base.OnModelCreating(builder);

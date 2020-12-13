@@ -4,9 +4,8 @@
     using System.ComponentModel.DataAnnotations;
     using Base;
     using Beds;
-    using Mappings;
 
-    public class Room : DeletableEntity
+    public class Room : Entity
     {
         // TODO add validations
         public int Id { get; set; }

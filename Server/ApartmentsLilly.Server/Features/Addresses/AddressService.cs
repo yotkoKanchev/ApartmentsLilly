@@ -19,13 +19,12 @@
             this.data = data;
         }
 
-        public async Task<string> Create(string country, string city, string cityImageUrl, string postalCode, string neighborhood, string streetAddress)
+        public async Task<int> Create(string country, string city, string postalCode, string neighborhood, string streetAddress)
         {
             var address = new Address
             {
                 Country = country,
                 City = city,
-                CityImageUrl = cityImageUrl,
                 PostalCode = postalCode,
                 Neighborhood = neighborhood,
                 StreetAddress = streetAddress,
@@ -38,7 +37,7 @@
             return address.Id;
         }
 
-        public async Task<AddressDetailsServiceModel> Details(string id)
+        public async Task<AddressDetailsServiceModel> Details(int id)
         {
             return await this.data
                 .Addresses
@@ -48,7 +47,7 @@
         }
 
 
-        public async Task<Result> Update(string id, string country, string city, string cityImageUrl, string postalCode, string neighborhood, string streetAddress)
+        public async Task<Result> Update(int id, string country, string city, string postalCode, string neighborhood, string streetAddress)
         {
             var address = await this.GetById(id);
 
@@ -59,7 +58,6 @@
 
             address.Country = country;
             address.City = city;
-            address.CityImageUrl = cityImageUrl;
             address.PostalCode = postalCode;
             address.Neighborhood = neighborhood;
             address.StreetAddress = streetAddress;
@@ -69,7 +67,7 @@
             return true;
         }
 
-        public async Task<Result> Delete(string id)
+        public async Task<Result> Delete(int id)
         {
             var address = await this.GetById(id);
 
@@ -78,34 +76,39 @@
                 return $"Address with Id: {id} does not exists.";
             }
 
-            this.data.Addresses.Remove(address);
+            if (await this.data.Addresses.Where(a => a.Id == id).Select(a => a.Apartments).CountAsync() == 1)
+            {
+                this.data.Addresses.Remove(address);
 
-            await this.data.SaveChangesAsync();
+                await this.data.SaveChangesAsync();
 
-            return true;
+                return true;
+            }
+
+            return "There are other apartments located on this address";
         }
 
         public async Task<IEnumerable<AddressDetailsServiceModel>> GetAll()
         {
             return await this.data
                   .Addresses
-                  .OrderByDescending(x =>x.Apartments.Count)
+                  .OrderByDescending(x => x.Apartments.Count)
                   .To<AddressDetailsServiceModel>()
                   .ToListAsync();
         }
 
-        private async Task<Address> GetById(string id)
+        private async Task<Address> GetById(int id)
         {
             return await this.data
                 .Addresses
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public async Task<bool> Exists(string addressId)
+        public async Task<bool> Exists(int id)
         {
             return await this.data
                 .Addresses
-                .AnyAsync(a => a.Id == addressId);
+                .AnyAsync(a => a.Id == id);
         }
     }
 }

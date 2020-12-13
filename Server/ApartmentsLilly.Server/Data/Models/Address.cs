@@ -6,15 +6,9 @@
     using Base;
 
     using static Data.Validation.Address;
-    public class Address : DeletableEntity
+    public class Address : Entity
     {
-        public Address()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-
-        // TODO change ID to int
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MinLength(MinLength)]
@@ -25,8 +19,6 @@
         [MinLength(MinLength)]
         [MaxLength(MaxLength)]
         public string City { get; set; }
-
-        public string CityImageUrl { get; set; }
 
         [MaxLength(MaxPostalCodeLength)]
         public string PostalCode { get; set; }

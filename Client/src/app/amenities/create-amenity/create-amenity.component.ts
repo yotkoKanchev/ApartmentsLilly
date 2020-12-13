@@ -36,11 +36,12 @@ export class CreateAmenityComponent implements OnInit {
   }
 
   create() {
+    console.log(this.amenityForm.value, this.apartmentId)
     this.amenitiesService.create(this.amenityForm.value, this.apartmentId)
       .subscribe(() => {
         this.toastrService.success("Amenity added", "Success");
       })
-    // location.reload();
+    location.reload();
   }
 
   closeModal(id: string) {

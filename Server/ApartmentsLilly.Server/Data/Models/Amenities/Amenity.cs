@@ -4,14 +4,12 @@
     using Base;
     using Mappings;
 
-    public class Amenity : DeletableEntity
+    public class Amenity : Entity
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public AmenityImportance Importance {get;set;}
-
-    public virtual ICollection<ApartmentAmenity> Apartments { get; set; }
-}
+        public virtual ICollection<ApartmentAmenity> Apartments { get; set; }
+    }
 }

@@ -1,8 +1,7 @@
 export interface AddressModel {
-    id: string;
+    id: number;
     country: string;
     city: string;
-    cityImageUrl?: string;
     postalCode?: string;
     neighborhood?: string;
     streetAddress: string;

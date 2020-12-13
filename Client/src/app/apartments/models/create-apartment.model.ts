@@ -1,5 +1,5 @@
 export interface CreateApartmentModel {
-    addressId: string;
+    addressId: number;
     name: string;
     description: string;
     entry: string;

@@ -22,17 +22,16 @@
             var id = await this.addresses.Create(
                 model.Country,
                 model.City,
-                model.CityImageUrl,
                 model.PostalCode,
                 model.Neighborhood,
                 model.StreetAddress);
 
-            return Created(nameof(this.Create), new CreateAddressResponseModel { Id = id });
+            return Created(nameof(this.Create), id);
         }
 
         [HttpGet]
         [Route(Id)]
-        public async Task<AddressDetailsServiceModel> Details(string id)
+        public async Task<AddressDetailsServiceModel> Details(int id)
         {
             return await this.addresses.Details(id);
         }
@@ -46,13 +45,12 @@
 
         [HttpPut]
         [Route(Id)]
-        public async Task<ActionResult> Update(string id, UpdateAddressRequestModel model)
+        public async Task<ActionResult> Update(int id, UpdateAddressRequestModel model)
         {
             var result = await this.addresses.Update(
                 id,
                 model.Country,
                 model.City,
-                model.CityImageUrl,
                 model.PostalCode,
                 model.Neighborhood,
                 model.StreetAddress);
@@ -67,7 +65,7 @@
 
         [HttpDelete]
         [Route(Id)]
-        public async Task<ActionResult> Delete(string id)
+        public async Task<ActionResult> Delete(int id)
         {
             var result = await this.addresses.Delete(id);
 

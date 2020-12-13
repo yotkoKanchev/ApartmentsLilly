@@ -30,23 +30,16 @@
         [HttpPost]
         public async Task<ActionResult> Create(CreateAmenityRequestModel model)
         {
-            var amenityId = await this.amenities.Create(model.Name, model.Importance);
+            var id = await this.amenities.Create(model.Name);
 
-            var result = await this.apartments.CreateApartmentAmenity(model.ApartmentId, amenityId);
+            var result = await this.apartments.CreateApartmentAmenity(model.ApartmentId, id, model.Importance);
 
             if (result.Failure)
             {
                 return this.BadRequest(result.Error);
             }
 
-            return Created(nameof(this.Create), new CreateAmenityResponseModel { Id = amenityId });
-        }
-
-        [HttpGet]
-        [Route(nameof(AllByApartment))]
-        public async Task<IEnumerable<AmenitiesListingServiceModel>> AllByApartment(int apartmentId)
-        {
-            return await this.amenities.GetAllByApartmentId(apartmentId);
+            return Created(nameof(this.Create), id);
         }
 
         [HttpGet]

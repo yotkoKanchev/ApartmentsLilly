@@ -94,13 +94,6 @@
             return true;
         }
 
-        private async Task<bool> Exists(int id)
-        {
-            return await this.data
-                .Rooms
-                .AnyAsync(a => a.Id == id);
-        }
-
         private IQueryable<Room> ById(int id)
         {
             return this.data

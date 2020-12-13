@@ -22,7 +22,6 @@ export class EditAddressComponent implements OnInit {
       'id': [''],
       'country': ['', [Validators.minLength(2), Validators.maxLength(30)]],
       'city': ['', [Validators.minLength(2), Validators.maxLength(30)]],
-      'cityImageUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
       'postalCode': ['', Validators.maxLength(10)],
       'neighborhood': ['', Validators.maxLength(30)],
       'streetAddress': ['', [Validators.minLength(2), Validators.maxLength(30)]],
@@ -38,7 +37,6 @@ export class EditAddressComponent implements OnInit {
           'id': [this.address.id],
           'country': [this.address.country],
           'city': [this.address.city],
-          'cityImageUrl': [this.address.cityImageUrl],
           'postalCode': [this.address.postalCode],
           'neighborhood': [this.address.neighborhood],
           'streetAddress': [this.address.streetAddress],
@@ -59,11 +57,6 @@ export class EditAddressComponent implements OnInit {
 
   get city() {
     return this.addressForm.get('city');
-  }
-
-
-  get cityImageUrl() {
-    return this.addressForm.get('cityImageUrl');
   }
 
   get postalCode() {

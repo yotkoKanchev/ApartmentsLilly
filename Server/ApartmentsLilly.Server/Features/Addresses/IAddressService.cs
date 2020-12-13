@@ -7,16 +7,16 @@
 
     public interface IAddressService
     {
-        Task<string> Create(string country, string city, string cityImageUrl, string postalCode, string neighborhood, string streetAddress);
+        Task<int> Create(string country, string city, string postalCode, string neighborhood, string streetAddress);
 
-        Task<AddressDetailsServiceModel> Details(string id);
+        Task<AddressDetailsServiceModel> Details(int id);
 
-        Task<Result> Update(string id, string country, string city, string cityImageUrl, string postalCode, string neighborhood, string streetAddress);
+        Task<Result> Update(int id, string country, string city, string postalCode, string neighborhood, string streetAddress);
 
-        Task<Result> Delete(string id);
+        Task<Result> Delete(int id);
 
         Task<IEnumerable<AddressDetailsServiceModel>> GetAll();
 
-        Task<bool> Exists(string addressId);
+        Task<bool> Exists(int id);
     }
 }

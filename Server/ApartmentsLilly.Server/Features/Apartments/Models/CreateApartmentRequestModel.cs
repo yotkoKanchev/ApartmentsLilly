@@ -6,8 +6,7 @@
 
     public class CreateApartmentRequestModel
     {
-        [Required]
-        public string AddressId { get; set; }
+        public int AddressId { get; set; }
 
         [Required]
         [MaxLength(MaxNameLength)]

@@ -39,8 +39,6 @@
         [RegularExpression(UrlPattern)]
         public string MainImageUrl { get; set; }
 
-
-        [Required]
-        public string AddressId { get; set; }
+        public int AddressId { get; set; }
     }
 }

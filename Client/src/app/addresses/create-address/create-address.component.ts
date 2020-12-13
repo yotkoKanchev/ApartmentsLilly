@@ -22,7 +22,6 @@ export class CreateAddressComponent {
     this.addressForm = this.fb.group({
       'Country': ['', [Validators.minLength(2), Validators.maxLength(30)]],
       'City': ['', [Validators.minLength(2), Validators.maxLength(30)]],
-      'CityImageUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
       'PostalCode': ['', Validators.maxLength(10)],
       'Neighborhood': ['', Validators.maxLength(30)],
       'StreetAddress': ['', [Validators.minLength(2), Validators.maxLength(30)]],
@@ -33,8 +32,7 @@ export class CreateAddressComponent {
     this.addressService.create(this.addressForm.value)
       .subscribe(() => {
         this.toastrService.success("Success");
-        this.router.navigate(["addresses"])
-
+        location.reload();
       })
   }
 
@@ -48,10 +46,6 @@ export class CreateAddressComponent {
 
   get city() {
     return this.addressForm.get('City');
-  }
-
-  get cityImageUrl() {
-    return this.addressForm.get('CityImageUrl');
   }
 
   get postalCode() {

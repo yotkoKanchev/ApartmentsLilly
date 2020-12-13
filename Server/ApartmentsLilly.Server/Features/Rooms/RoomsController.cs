@@ -1,8 +1,6 @@
 ﻿namespace ApartmentsLilly.Server.Features.Rooms
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using Data.Models.Rooms;
     using Microsoft.AspNetCore.Authorization;
@@ -10,7 +8,6 @@
     using Models;
 
     using static Infrastructure.WebConstants;
-    using static Infrastructure.Extensions.EnumExtensions;
     using ApartmentsLilly.Server.Infrastructure.Extensions;
 
     public class RoomsController : ApiController

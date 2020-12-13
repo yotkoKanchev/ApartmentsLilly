@@ -15,8 +15,6 @@
         [MaxLength(MaxLength)]
         public string City { get; set; }
 
-        public string CityImageUrl { get; set; }
-
         [MaxLength(MaxPostalCodeLength)]
         public string PostalCode { get; set; }
 

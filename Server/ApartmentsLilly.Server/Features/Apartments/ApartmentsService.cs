@@ -5,8 +5,10 @@
     using System.Threading.Tasks;
     using Data;
     using Data.Models;
+    using Data.Models.Amenities;
     using Data.Models.Mappings;
     using Features.Addresses;
+    using Features.Amenities;
     using Features.Apartments.Models;
     using Infrastructure.Mapping;
     using Infrastructure.Services;
@@ -16,14 +18,16 @@
     {
         private readonly ApartmentsLillyDbContext data;
         private readonly IAddressService address;
+        private readonly IAmenitiesService amenities;
 
-        public ApartmentsService(ApartmentsLillyDbContext data, IAddressService address)
+        public ApartmentsService(ApartmentsLillyDbContext data, IAddressService address, IAmenitiesService amenities)
         {
             this.data = data;
             this.address = address;
+            this.amenities = amenities;
         }
 
-        public async Task<Result> Create(string addressId, string name, string description, string entry, int? floor, string number, double? size,
+        public async Task<Result> Create(int addressId, string name, string description, string entry, int? floor, string number, double? size,
             double? basePrice, bool hasTerrace, int? maxOccupants, string mainImageUrl)
         {
             var isAddressExists = await this.address.Exists(addressId);
@@ -80,6 +84,31 @@
                 return $"Apartment with Id: {id} does not exists.";
             }
 
+            var rooms = await this.data.Rooms.Where(r => r.ApartmentId == id).ToListAsync();
+
+            foreach (var room in rooms)
+            {
+                this.data.Rooms.Remove(room);
+            }
+
+            var apartmentAmenities = await this.data.ApartmentAmenities.Where(aa => aa.ApartmentId == id).ToListAsync();
+
+            var amenityIds = new List<int>();
+            foreach (var apartmentAmenity in apartmentAmenities)
+            {
+                amenityIds.Add(apartmentAmenity.AmenityId);
+                this.data.ApartmentAmenities.Remove(apartmentAmenity);
+            }
+
+            await this.data.SaveChangesAsync();
+
+            foreach (var amenityId in amenityIds)
+            {
+                await this.amenities.Delete(amenityId);
+            }
+
+            await this.address.Delete(apartment.AddressId);
+
             this.data.Apartments.Remove(apartment);
             await this.data.SaveChangesAsync();
 
@@ -87,7 +116,7 @@
         }
 
         public async Task<Result> Update(int id, string name, string description, string entry, int floor, string number,
-            double size, double basePrice, bool hasTerrace, int maxOccupants, string mainImageUrl, string addressId)
+            double size, double basePrice, bool hasTerrace, int maxOccupants, string mainImageUrl, int addressId)
         {
             var apartment = await this.GetApartment(id)
                 .FirstOrDefaultAsync();
@@ -138,21 +167,27 @@
                 .ToListAsync();
         }
 
-        public async Task<Result> CreateApartmentAmenity(int apartmentId, int amenityId)
+        public async Task<Result> CreateApartmentAmenity(int apartmentId, int amenityId, int importance)
         {
             if (await this.Exists(apartmentId) == false)
             {
                 return $"Apartment with Id: {apartmentId} does not exists.";
             }
 
-            var apartmentAmenity = new ApartmentAmenity
-            {
-                ApartmentId = apartmentId,
-                AmenityId = amenityId,
-            };
+            var apartmentAmenity = await this.data.ApartmentAmenities.FirstOrDefaultAsync(aa => aa.ApartmentId == apartmentId && aa.AmenityId == amenityId);
 
-            this.data.ApartmentAmenities.Add(apartmentAmenity);
-            await this.data.SaveChangesAsync();
+            if (apartmentAmenity == null)
+            {
+                apartmentAmenity = new ApartmentAmenity
+                {
+                    ApartmentId = apartmentId,
+                    AmenityId = amenityId,
+                    Importance = (AmenityImportance)importance,
+                };
+
+                this.data.ApartmentAmenities.Add(apartmentAmenity);
+                await this.data.SaveChangesAsync();
+            }
 
             return true;
         }
@@ -185,5 +220,5 @@
                 .Apartments
                 .Where(a => a.Id == id);
         }
-            }
+    }
 }

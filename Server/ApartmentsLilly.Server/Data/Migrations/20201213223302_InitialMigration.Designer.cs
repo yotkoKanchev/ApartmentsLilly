@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApartmentsLilly.Server.Data.Migrations
 {
     [DbContext(typeof(ApartmentsLillyDbContext))]
-    [Migration("20201210214441_Initial")]
-    partial class Initial
+    [Migration("20201213223302_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,16 +23,15 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Address", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("CityImageUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .IsRequired()
@@ -44,15 +43,6 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -78,7 +68,7 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Amenity", b =>
+            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Amenities.Amenity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,15 +80,6 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -121,9 +102,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("AddressId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
                     b.Property<double?>("BasePrice")
                         .HasColumnType("float");
@@ -198,6 +178,18 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
                     b.Property<int>("BedType")
                         .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
@@ -333,14 +325,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                    b.Property<int>("Importance")
+                        .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -353,42 +339,6 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.HasIndex("ApartmentId");
 
                     b.ToTable("ApartmentAmenities");
-                });
-
-            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Mappings.RoomAmenity", b =>
-                {
-                    b.Property<int>("AmenityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("AmenityId", "RoomId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("RoomAmenities");
                 });
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Profile", b =>
@@ -547,15 +497,6 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -850,7 +791,7 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Mappings.ApartmentAmenity", b =>
                 {
-                    b.HasOne("ApartmentsLilly.Server.Data.Models.Amenity", "Amenity")
+                    b.HasOne("ApartmentsLilly.Server.Data.Models.Amenities.Amenity", "Amenity")
                         .WithMany("Apartments")
                         .HasForeignKey("AmenityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -865,25 +806,6 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.Navigation("Amenity");
 
                     b.Navigation("Apartment");
-                });
-
-            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Mappings.RoomAmenity", b =>
-                {
-                    b.HasOne("ApartmentsLilly.Server.Data.Models.Amenity", "Amenity")
-                        .WithMany("Rooms")
-                        .HasForeignKey("AmenityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ApartmentsLilly.Server.Data.Models.Rooms.Room", "Room")
-                        .WithMany("Amenities")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Amenity");
-
-                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Profile", b =>
@@ -1010,11 +932,9 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.Navigation("Apartments");
                 });
 
-            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Amenity", b =>
+            modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Amenities.Amenity", b =>
                 {
                     b.Navigation("Apartments");
-
-                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Apartment", b =>
@@ -1037,8 +957,6 @@ namespace ApartmentsLilly.Server.Data.Migrations
 
             modelBuilder.Entity("ApartmentsLilly.Server.Data.Models.Rooms.Room", b =>
                 {
-                    b.Navigation("Amenities");
-
                     b.Navigation("Beds");
 
                     b.Navigation("Images");
