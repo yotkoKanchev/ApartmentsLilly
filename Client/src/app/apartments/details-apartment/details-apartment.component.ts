@@ -34,7 +34,7 @@ export class DetailsApartmentComponent implements OnInit {
   }
 
   deleteAmenity(id: number) {
-    this.amenitiesService.deleteAmenity(id).subscribe(() =>
+    this.amenitiesService.deleteAmenity(id, this.id).subscribe(() =>
       this.fetchApartment(this.id))
   }
 

@@ -72,16 +72,16 @@
         }
 
         [HttpDelete]
-        public async Task<ActionResult> Delete(DeleteAmenityRequestModel model)
+        public async Task<ActionResult> Delete(int id, int apartmentId)
         {
-            var result = await this.apartments.DeleteApartmentAmenity(model.ApartmentId, model.Id);
+            var result = await this.apartments.DeleteApartmentAmenity(apartmentId, id);
 
             if (result.Failure)
             {
                 return this.BadRequest(result.Error);
             }
 
-            result = await this.amenities.Delete(model.Id);
+            result = await this.amenities.Delete(id);
 
             if (result.Failure)
             {

@@ -36,7 +36,6 @@ export class CreateAmenityComponent implements OnInit {
   }
 
   create() {
-    console.log(this.amenityForm.value)
     this.amenitiesService.create(this.amenityForm.value, this.apartmentId)
       .subscribe(() => {
         this.toastrService.success("Amenity added", "Success");

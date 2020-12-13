@@ -18,12 +18,10 @@ export class AmenitiesService {
 
   create(data, apartmentId): Observable<CreateAmenityModel> {
     data.apartmentId = apartmentId;
-    console.log(this.amenitiesPath)
-    console.log(data)
     return this.http.post<CreateAmenityModel>(this.amenitiesPath, data)
   }
 
-  getAmenity(id: number){
+  getAmenity(id: number) {
     return this.http.get<AmenityModel>(this.amenitiesPath + '/' + id)
   }
 
@@ -31,7 +29,7 @@ export class AmenitiesService {
     return this.http.put(this.amenitiesPath + '/' + id, data)
   }
 
-  deleteAmenity(id: number){
-    return this.http.delete(this.amenitiesPath + '/' + id);
+  deleteAmenity(id: number, apartmentId: number) {
+    return this.http.delete(this.amenitiesPath + `?id=${id}&apartmentId=${apartmentId}` );
   }
 }
