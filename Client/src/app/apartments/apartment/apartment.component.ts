@@ -12,12 +12,6 @@ export class ApartmentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // this.ap.amenities.push("WiFi")
-    // this.ap.amenities.push("AC")
-    // this.ap.amenities.push("Washer")
-    // for (let i = 0; i < this.ap.amenities.length-1; i++) {
-    //   this.ap.amenities[i]+=' - ';
-    // }
   }
 
   getMap() {

@@ -26,6 +26,7 @@
             var result = await this.rooms.Create(
                 model.Name,
                 model.RoomType,
+                model.isSleepable,
                 model.ApartmentId);
 
             if (result.Failure)
@@ -66,7 +67,7 @@
         [Route(Id)]
         public async Task<ActionResult> Update(int id, UpdateRoomRequestModel model)
         {
-            var result = await this.rooms.Update(id, model.Name, model.RoomType);
+            var result = await this.rooms.Update(id, model.Name, model.RoomType, model.IsSleepable);
 
             if (result.Failure)
             {

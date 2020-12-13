@@ -23,7 +23,7 @@
             this.apartments = apartments;
         }
 
-        public async Task<Result> Create(string name, int roomType, int apartmentId)
+        public async Task<Result> Create(string name, int roomType, bool isSleepable, int apartmentId)
         {
             var isApartmentExists = await this.apartments.Exists(apartmentId);
 
@@ -36,6 +36,7 @@
             {
                 Name = name,
                 RoomType = (RoomType)roomType,
+                IsSleepable = isSleepable,
                 ApartmentId = apartmentId,
             };
 
@@ -62,7 +63,7 @@
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Result> Update(int id, string name, string roomType)
+        public async Task<Result> Update(int id, string name, string roomType, bool isSleepable)
         {
             var room = await this.ById(id).FirstOrDefaultAsync();
 
@@ -73,6 +74,7 @@
 
             room.RoomType = (RoomType)Enum.Parse(typeof(RoomType), roomType);
             room.Name = name;
+            room.IsSleepable = isSleepable;
 
             await this.data.SaveChangesAsync();
 

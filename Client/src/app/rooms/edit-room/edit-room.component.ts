@@ -27,6 +27,7 @@ export class EditRoomComponent implements OnInit {
       'id': [''],
       'name': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
       'roomType': ['', Validators.required],
+      'isSleepable': ['']
     })
   }
 
@@ -62,6 +63,10 @@ export class EditRoomComponent implements OnInit {
 
   get roomType() {
     return this.roomForm.get('roomType');
+  }
+
+  get isSleepable() {
+    return this.roomForm.get('isSleepable');
   }
 
 }

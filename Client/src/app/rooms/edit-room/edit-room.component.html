@@ -19,6 +19,10 @@
                         Name should be between 1 and 30 symbols long!
                     </span>
                 </div>
+                <div class="form-group">
+                    <input type="checkbox" id="sleepable" formControlName="isSleepable">
+                    <label for="sleepable">Is Sleepable</label>
+                </div>
                 <button type="submit" class="btn btn-primary mr-2" (click)="editRoom()">Update</button>
                 <input type="button" class="btn btn-primary" (click)="closeModal('edit-room-modal');" value="Close">
             </form>

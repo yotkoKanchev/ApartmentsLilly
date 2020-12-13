@@ -69,9 +69,19 @@
 
         public async Task<ApartmentDetailsServiceModel> GetById(int id)
         {
-            return await this.GetApartment(id)
+            var result = await this.GetApartment(id)
                 .To<ApartmentDetailsServiceModel>()
                 .FirstOrDefaultAsync();
+
+            foreach (var amenity in result.Amenities)
+            {
+                amenity.Importance = await this.data.ApartmentAmenities
+                    .Where(aa => aa.AmenityId == amenity.Id)
+                    .Select(aa => aa.Importance.ToString())
+                    .FirstAsync();
+            }
+
+            return result;
         }
 
         public async Task<Result> Delete(int id)

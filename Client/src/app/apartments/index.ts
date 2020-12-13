@@ -2,7 +2,6 @@ import { ApartmentComponent } from './apartment/apartment.component';
 import { CreateApartmentComponent } from './create-apartment/create-apartment.component';
 import { DetailsApartmentComponent } from './details-apartment/details-apartment.component';
 import { EditApartmentComponent } from './edit-apartment/edit-apartment.component';
-import { DeleteApartmentComponent } from './delete-apartment/delete-apartment.component';
 import { ListApartmentsComponent } from './list-apartments/list-apartments.component';
 
 export const apartmentComponents = [
@@ -10,6 +9,5 @@ export const apartmentComponents = [
     CreateApartmentComponent,
     DetailsApartmentComponent,
     EditApartmentComponent,
-    DeleteApartmentComponent,
     ListApartmentsComponent,
 ]

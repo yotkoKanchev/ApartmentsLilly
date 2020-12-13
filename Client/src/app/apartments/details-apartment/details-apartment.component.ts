@@ -41,6 +41,7 @@ export class DetailsApartmentComponent implements OnInit {
   fetchApartment(id: number) {
     this.apartmentsService.getApartment(this.id).subscribe(res => {
       this.apartment = res;
+      console.log(res)
     })
   }
 

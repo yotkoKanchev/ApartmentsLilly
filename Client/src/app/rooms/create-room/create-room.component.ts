@@ -2,9 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoomsService } from '../rooms.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 import { ModalService } from 'src/app/_modal';
-import { KeyValue } from '@angular/common';
 
 @Component({
   selector: 'app-create-room',
@@ -22,12 +20,12 @@ export class CreateRoomComponent implements OnInit {
     private fb: FormBuilder,
     private roomsService: RoomsService,
     private toastrService: ToastrService,
-    private router: Router,
   ) { 
     this.roomForm = this.fb.group({
       'ApartmentId':[''],
       'Name': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
       'RoomType': ['',Validators.required],
+      'IsSleepable': [''],
     })
   }
 
@@ -55,5 +53,9 @@ export class CreateRoomComponent implements OnInit {
 
   get roomType() {
     return this.roomForm.get('RoomType');
+  }
+
+  get isSleepable() {
+    return this.roomForm.get('IsSleepable');
   }
 }

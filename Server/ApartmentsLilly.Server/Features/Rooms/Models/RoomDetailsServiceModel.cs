@@ -10,5 +10,7 @@
         public string Name { get; set; }
 
         public string RoomType { get; set; }
+
+        public bool IsSleepable { get; set; }
     }
 }

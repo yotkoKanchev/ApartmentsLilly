@@ -14,6 +14,8 @@
 
         public RoomType RoomType { get; set; }
 
+        public bool IsSleepable { get; set; }
+
         [Required]
         public int ApartmentId { get; set; }
 

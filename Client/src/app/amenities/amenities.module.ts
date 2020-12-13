@@ -10,7 +10,6 @@ import { EditAmenityComponent } from './edit-amenity/edit-amenity.component';
 @NgModule({
   declarations: [
     ...amenitiesComponents,
-    EditAmenityComponent,
   ],
   imports: [
     CommonModule,

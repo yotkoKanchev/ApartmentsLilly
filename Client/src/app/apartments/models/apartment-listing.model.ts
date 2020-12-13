@@ -1,4 +1,5 @@
 import { SafeResourceUrl } from '@angular/platform-browser';
+import { AmenityModel } from 'src/app/amenities/models/amenity.model';
 
 export interface ApartmentListingModel{
     id: number;
@@ -18,5 +19,5 @@ export interface ApartmentListingModel{
     bedroomCount:number;
     bedCount:number;
     bathroomCount:number;
-    amenities: Array<string>;
+    amenities: Array<AmenityModel>;
 }

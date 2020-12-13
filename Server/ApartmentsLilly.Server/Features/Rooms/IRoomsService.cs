@@ -7,13 +7,13 @@
 
     public interface IRoomsService
     {
-        Task<Result> Create(string name, int type, int apartmentId);
+        Task<Result> Create(string name, int type, bool isSleepable, int apartmentId);
 
         Task<IEnumerable<RoomListingServiceModel>> GetAllByApartmentId(int apartmentId);
 
         Task<RoomDetailsServiceModel> GetById(int id);
 
-        Task<Result> Update(int id, string name, string type);
+        Task<Result> Update(int id, string name, string type, bool isSleepable);
 
         Task<Result> Delete(int id);
     }

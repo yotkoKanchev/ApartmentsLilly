@@ -64,7 +64,9 @@
         [AllowAnonymous]
         public async Task<ApartmentDetailsServiceModel> Details(int id)
         {
-            return await this.apartments.GetById(id);
+            var result = await this.apartments.GetById(id);
+            
+            return result;
         }
 
         [HttpPut]

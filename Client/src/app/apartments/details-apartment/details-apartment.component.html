@@ -15,6 +15,7 @@
                     <div class="border mb-2" *ngFor="let room of apartment.rooms">
                         <p>{{room.name}}</p>
                         <p>{{room.roomType}}</p>
+                        <input *ngIf="room.isSleepable" type="button" class="btn btn-primary" (click)="openModal('add-bed-modal')" value="Add Bed">
                         <input type="button" class="btn btn-primary" (click)="openModal('edit-room-modal')" value="Edit Room">
                         <button type="button" class="btn btn-primary" (click)="deleteRoom(room.id)">Delete Room</button>
                         <jw-modal id="edit-room-modal">
