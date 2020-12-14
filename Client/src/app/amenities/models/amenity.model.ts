@@ -1,5 +1,5 @@
 export interface AmenityModel {
-    id:number;
+    id: number;
     name: string;
-    importance: string;
+    importance: any;
 }

@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-lg-4 offset-md-4">
             <form [formGroup]="amenityForm">
+                <p>Name: {{name.value}} - Importance: {{importance.value.name}}</p>
                 <label>Choose Room Type</label>
                 <select class="form-control mb-3" formControlName="importance">
-                    <option disabled value="">choose importance level</option>
                     <option *ngFor="let importance of importanceTypes" [ngValue]="importance.value">{{importance.name}}</option>
                 </select>
                 <div *ngIf="(importance.pristine && importance.invalid) || (importance.touched && importance.invalid)" class="alert alert-danger" >

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoomsService } from '../rooms.service';
 import { ToastrService } from 'ngx-toastr';
 import { ModalService } from 'src/app/_modal';
+import { Router } from '@angular/router';
+import { ApartmentsService } from 'src/app/apartments/apartments.service';
 
 @Component({
   selector: 'app-create-room',
@@ -12,7 +14,7 @@ import { ModalService } from 'src/app/_modal';
 export class CreateRoomComponent implements OnInit {
   roomForm: FormGroup;
   roomTypes: any;
-  @Input() 
+  @Input()
   apartmentId: number;
 
   constructor(
@@ -20,12 +22,14 @@ export class CreateRoomComponent implements OnInit {
     private fb: FormBuilder,
     private roomsService: RoomsService,
     private toastrService: ToastrService,
-  ) { 
+    private apartmentsService: ApartmentsService,
+    private router: Router,
+  ) {
     this.roomForm = this.fb.group({
-      'ApartmentId':[''],
+      'ApartmentId': [],
       'Name': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
-      'RoomType': ['',Validators.required],
-      'IsSleepable': [''],
+      'RoomType': ['', Validators.required],
+      'IsSleepable': [false],
     })
   }
 
@@ -35,12 +39,15 @@ export class CreateRoomComponent implements OnInit {
     })
   }
 
-  create(){
+  create(id: string) {
     this.roomsService.create(this.roomForm.value, this.apartmentId)
       .subscribe(() => {
         this.toastrService.success("Room added", "Success");
+        this.closeModal(id);
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
       })
-    location.reload();
   }
 
   closeModal(id: string) {

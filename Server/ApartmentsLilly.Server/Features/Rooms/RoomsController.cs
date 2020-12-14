@@ -26,7 +26,7 @@
             var result = await this.rooms.Create(
                 model.Name,
                 model.RoomType,
-                model.isSleepable,
+                model.IsSleepable,
                 model.ApartmentId);
 
             if (result.Failure)
@@ -34,11 +34,11 @@
                 return BadRequest(result.Error);
             }
 
-            return Created(nameof(this.Create), new CreateRoomResponseModel { Id = result.StringValue });
+            return Created(nameof(this.Create), new CreateRoomResponseModel { Id = result.IntValue });
         }
 
         [HttpGet]
-        [Route(nameof(All))]
+        [Route("All/{apartmentId}")]
         [AllowAnonymous]
         public async Task<IEnumerable<RoomListingServiceModel>> All(int apartmentId)
         {
@@ -67,7 +67,7 @@
         [Route(Id)]
         public async Task<ActionResult> Update(int id, UpdateRoomRequestModel model)
         {
-            var result = await this.rooms.Update(id, model.Name, model.RoomType, model.IsSleepable);
+            var result = await this.rooms.Update(id, model.Name, model.RoomType.Value, model.IsSleepable);
 
             if (result.Failure)
             {

@@ -1,5 +1,11 @@
-<div *ngIf="apartment" class="container-fluid">
-    <div class="row">
+<div *ngIf='apartment' class="container-fluid">
+    <div class="mt-2">
+        <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}" value="Edit">
+        <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
+        <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-room-modal')" value="Add Room">
+        <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-amenity-modal')" value="Add Amenity">
+    </div>
+    <div class="row d-flex justify-content-center">
         <div class="col-lg-5">
             <div class="card" style="width: 28rem;">
                 <h3 class="card-title">{{apartment.name}}</h3>
@@ -12,49 +18,56 @@
                     <h5>Fllor: {{apartment.floor}}</h5>
                     <h5>Number: {{apartment.number}}</h5>
                     <p>Description: {{apartment.description}}</p>
-                    <div class="border mb-2" *ngFor="let room of apartment.rooms">
-                        <p>{{room.name}}</p>
-                        <p>{{room.roomType}}</p>
-                        <input *ngIf="room.isSleepable" type="button" class="btn btn-primary" (click)="openModal('add-bed-modal')" value="Add Bed">
-                        <input type="button" class="btn btn-primary" (click)="openModal('edit-room-modal')" value="Edit Room">
-                        <button type="button" class="btn btn-primary" (click)="deleteRoom(room.id)">Delete Room</button>
-                        <jw-modal id="edit-room-modal">
-                            <div>
-                                <app-edit-room [roomId]="room.id"></app-edit-room>
-                            </div>
-                        </jw-modal>
-                    </div>
-                    <div class="border mb-2" *ngFor="let amenity of apartment.amenities">
-                        <p>{{amenity.name}}</p>
-                        <p>{{amenity.importance}}</p>
-                        <input type="button" class="btn btn-primary" (click)="openModal('edit-amenity-modal')" value="Edit Amenity">
-                        <button type="button" class="btn btn-primary" (click)="deleteAmenity(amenity.id)">Delete Amenity</button>
-                        <jw-modal id="edit-amenity-modal">
-                            <div>
-                                <app-edit-amenity [amenityId]="amenity.id"></app-edit-amenity>
-                            </div>
-                        </jw-modal>
-                    </div>
+
                 </div>
-            </div>            
-            <div class="mt-2">
-                <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-room-modal')" value="Add Room">
-                <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-amenity-modal')" value="Add Amenity">
-                <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}" value="Edit">
-                <input type="button" class="btn btn-primary" routerLink="/apartments" value="Back to list">
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <p *ngIf="apartment.rooms"><strong>Rooms: </strong></p>
+            <div class="border mb-2" *ngFor="let room of apartment.rooms">
+                <p>Name: {{room.name}}</p>
+                <p>Type: {{room.roomType}}</p>
+                <input id="btn" type="button" class="btn btn-sm btn-primary mr-2" (click)="openModal('edit-room-modal')"
+                    value="Edit Room">
+                <button type="button" class="btn btn-sm btn-primary mr-2" (click)="deleteRoom(room.id)">Delete
+                    Room</button>
+                <input *ngIf="room.isSleepable" type="button" class="btn btn-sm btn-primary"
+                    (click)="openModal('add-bed-modal')" value="Add Bed">
+                <jw-modal id="edit-room-modal">
+                    <div>
+                        <app-edit-room [roomId]="room.id" [modalId]="'edit-room-modal'"></app-edit-room>
+                    </div>
+                </jw-modal>
+            </div>
+
+            <p *ngIf="apartment.amenities"><strong>Amenities: </strong></p>
+            <div class="border mb-2" *ngFor="let amenity of apartment.amenities">
+                <p>Name: {{amenity.name}}</p>
+                <p>Importance: {{amenity.importance.name}}</p>
+                <input type="button" class="btn btn-sm btn-primary mr-2" (click)="openModal('edit-amenity-modal')"
+                    value="Edit Amenity">
+                <button type="button" class="btn btn-sm btn-primary" (click)="deleteAmenity(amenity.id)">Delete
+                    Amenity</button>
+                <jw-modal id="edit-amenity-modal">
+                    <div>
+                        <app-edit-amenity [apartmentId]='id' [amenityId]="amenity.id" [modalId]="'edit-amenity-modal'">
+                        </app-edit-amenity>
+                    </div>
+                </jw-modal>
             </div>
         </div>
     </div>
+
 </div>
 
 <jw-modal id="add-room-modal">
     <div>
-        <app-create-room [apartmentId]=id></app-create-room>
+        <app-create-room [apartmentId]='id'></app-create-room>
     </div>
 </jw-modal>
 
 <jw-modal id="add-amenity-modal">
     <div>
-        <app-create-amenity [apartmentId]=id></app-create-amenity>
+        <app-create-amenity [apartmentId]='id'></app-create-amenity>
     </div>
 </jw-modal>

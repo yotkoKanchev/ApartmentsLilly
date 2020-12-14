@@ -28,7 +28,7 @@ export class ApartmentsService {
     return this.http.get<Array<ApartmentListingModel>>(this.apartmentPath + '/all')
   }
 
-  getApartment(id: number): Observable<ApartmentModel> {
+  getApartment(id: number): Observable<ApartmentModel> {  
     return this.http.get<ApartmentModel>(this.apartmentPath + '/' + id)
   }
 

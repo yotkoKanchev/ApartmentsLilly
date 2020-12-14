@@ -9,12 +9,12 @@
     {
         Task<int> Create(string name);
 
-        Task<Result> Update(int id, string name);
+        Task<Result> Update(int id, string name, int? importance);
 
         //Task<IEnumerable<AmenitiesListingServiceModel>> GetAllByApartmentId(int apartmentId);
 
         Task<Result> Delete(int id);
 
-        Task<AmenityDetailsServiceModel> GetById(int id);
+        Task<AmenityDetailsServiceModel> GetById(int id, int apartmentId);
     }
 }

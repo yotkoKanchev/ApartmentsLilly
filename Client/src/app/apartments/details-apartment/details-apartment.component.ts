@@ -14,6 +14,7 @@ import { AmenitiesService } from 'src/app/amenities/amenities.service';
 export class DetailsApartmentComponent implements OnInit {
   apartment: ApartmentModel
   id: number;
+
   constructor(
     private apartmentsService: ApartmentsService,
     private roomsService: RoomsService,
@@ -39,9 +40,8 @@ export class DetailsApartmentComponent implements OnInit {
   }
 
   fetchApartment(id: number) {
-    this.apartmentsService.getApartment(this.id).subscribe(res => {
+    this.apartmentsService.getApartment(id).subscribe(res => {
       this.apartment = res;
-      console.log(res)
     })
   }
 

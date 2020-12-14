@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -27,10 +27,16 @@ export class RoomsService {
   }
 
   edit(data, id: number) {
+    console.log(data)
+    console.log(id)
     return this.http.put(this.roomsPath + '/' + id, data)
   }
 
   deleteRoom(id: number) {
     return this.http.delete(this.roomsPath + '/' + id);
+  }
+
+  getRooms(id: number): Observable<RoomModel[]> {
+    return this.http.get<RoomModel[]>(this.roomsPath + `/All/${id}`)
   }
 }

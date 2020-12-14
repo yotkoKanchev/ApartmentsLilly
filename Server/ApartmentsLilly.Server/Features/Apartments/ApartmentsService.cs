@@ -77,7 +77,7 @@
             {
                 amenity.Importance = await this.data.ApartmentAmenities
                     .Where(aa => aa.AmenityId == amenity.Id)
-                    .Select(aa => aa.Importance.ToString())
+                    .Select(aa => new { name = aa.Importance.ToString(), value = (int)aa.Importance })
                     .FirstAsync();
             }
 

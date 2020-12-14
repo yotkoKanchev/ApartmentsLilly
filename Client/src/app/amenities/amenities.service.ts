@@ -16,13 +16,14 @@ export class AmenitiesService {
     return this.http.get<any>(this.amenitiesPath + '/' + 'ImportanceTypes');
   }
 
-  create(data, apartmentId): Observable<CreateAmenityModel> {
+  // TODO add createAmenity model here
+  create(data, apartmentId: number): Observable<CreateAmenityModel> {
     data.apartmentId = apartmentId;
     return this.http.post<CreateAmenityModel>(this.amenitiesPath, data)
   }
 
-  getAmenity(id: number) {
-    return this.http.get<AmenityModel>(this.amenitiesPath + '/' + id)
+  getAmenity(id: number, apartmentId: number) {
+    return this.http.get<AmenityModel>(this.amenitiesPath + `?id=${id}&apartmentId=${apartmentId}`)
   }
 
   edit(data, id: number) {

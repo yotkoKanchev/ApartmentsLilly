@@ -2,12 +2,14 @@
     <div class="row">
         <div class="col-lg-4 offset-md-4">
             <form [formGroup]="roomForm">
+                <p>Name: {{name.value}} - Type: {{roomType.value}} - Is Sleepable: {{isSleepable.value}}</p>
                 <label>Choose Room Type</label>
                 <select class="form-control mb-3" formControlName="roomType">
                     <option disabled value="">choose room type</option>
                     <option *ngFor="let type of roomTypes" [ngValue]="type.value">{{type.name}}</option>
                 </select>
-                <div *ngIf="(roomType.pristine && roomType.invalid) || (roomType.touched && roomType.invalid)" class="alert alert-danger" >
+                <div *ngIf="(roomType.pristine && roomType.invalid) || (roomType.touched && roomType.invalid)"
+                    class="alert alert-danger">
                     <div *ngIf="roomType.errors.required">Room Type is required.</div>
                 </div>
                 <div class="form-group">
@@ -20,7 +22,7 @@
                     </span>
                 </div>
                 <div class="form-group">
-                    <input type="checkbox" id="sleepable" formControlName="isSleepable">
+                    <input class="mr-2" type="radio" formControlName="isSleepable">
                     <label for="sleepable">Is Sleepable</label>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" (click)="editRoom()">Update</button>
@@ -28,7 +30,7 @@
             </form>
             <br>
             <br>
-            
+
         </div>
     </div>
 </div>

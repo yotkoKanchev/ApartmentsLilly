@@ -8,7 +8,7 @@
 
         public int RoomType { get; set; }
 
-        public bool isSleepable { get; set; }
+        public bool IsSleepable { get; set; }
 
         [Required]
         public int ApartmentId { get; set; }

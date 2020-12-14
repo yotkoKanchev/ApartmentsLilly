@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AmenitiesService } from '../amenities.service';
 import { ModalService } from 'src/app/_modal';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 import { AmenityModel } from '../models/amenity.model';
 
 @Component({
@@ -13,6 +12,9 @@ import { AmenityModel } from '../models/amenity.model';
 })
 export class EditAmenityComponent implements OnInit {
   @Input() amenityId: number;
+  @Input() modalId: string;
+  @Input() apartmentId: number;
+
   amenityForm: FormGroup;
   importanceTypes: any;
   amenity: AmenityModel;
@@ -22,21 +24,24 @@ export class EditAmenityComponent implements OnInit {
     private amenitiesService: AmenitiesService,
     private modalService: ModalService,
     private toastr: ToastrService,
-    private router: Router
   ) {
     this.amenityForm = this.fb.group({
       'id': [''],
       'name': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
       'importance': ['', Validators.required],
     })
-   }
+  }
 
   ngOnInit(): void {
     this.amenitiesService.getImportanceTypes().subscribe(data => {
       this.importanceTypes = data;
     });
+    
+    this.fetchAmenity();
+  }
 
-    this.amenitiesService.getAmenity(this.amenityId).subscribe(res => {
+  fetchAmenity(){
+    this.amenitiesService.getAmenity(this.amenityId, this.apartmentId).subscribe(res => {
       this.amenity = res;
       this.amenityForm = this.fb.group({
         'name': [this.amenity.name],
@@ -49,8 +54,11 @@ export class EditAmenityComponent implements OnInit {
     this.amenitiesService.edit(this.amenityForm.value, this.amenityId)
       .subscribe(() => {
         this.toastr.success("Amenity has been edited!", "Success")
+        this.closeModal(this.modalId)
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
       });
-    location.reload();
   }
 
   closeModal(id: string) {
@@ -61,7 +69,7 @@ export class EditAmenityComponent implements OnInit {
     return this.amenityForm.get('name');
   }
 
-  get importance(){
+  get importance() {
     return this.amenityForm.get('importance');
   }
 }

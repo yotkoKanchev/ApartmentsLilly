@@ -10,7 +10,6 @@
     using Infrastructure.Mapping;
     using Models;
     using Microsoft.EntityFrameworkCore;
-    using System;
 
     public class RoomsService : IRoomsService
     {
@@ -63,7 +62,7 @@
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Result> Update(int id, string name, string roomType, bool isSleepable)
+        public async Task<Result> Update(int id, string name, int? roomType, bool isSleepable)
         {
             var room = await this.ById(id).FirstOrDefaultAsync();
 
@@ -72,7 +71,11 @@
                 return $"Room with Id: {id} does not exists.";
             }
 
-            room.RoomType = (RoomType)Enum.Parse(typeof(RoomType), roomType);
+            if (roomType != null)
+            {
+                room.RoomType = (RoomType)roomType;
+            }
+
             room.Name = name;
             room.IsSleepable = isSleepable;
 

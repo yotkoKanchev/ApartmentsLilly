@@ -13,7 +13,7 @@
 
         Task<RoomDetailsServiceModel> GetById(int id);
 
-        Task<Result> Update(int id, string name, string type, bool isSleepable);
+        Task<Result> Update(int id, string name, int? type, bool isSleepable);
 
         Task<Result> Delete(int id);
     }

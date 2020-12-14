@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AmenitiesService } from '../amenities.service';
 import { ToastrService } from 'ngx-toastr';
 import { ModalService } from '../../_modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-amenity',
@@ -11,7 +12,7 @@ import { ModalService } from '../../_modal';
 })
 export class CreateAmenityComponent implements OnInit {
   amenityForm: FormGroup;
-  @Input() 
+  @Input()
   apartmentId: number;
   importanceTypes: any;
 
@@ -33,12 +34,15 @@ export class CreateAmenityComponent implements OnInit {
     })
   }
 
-  create() {
+  create(id: string) {
     this.amenitiesService.create(this.amenityForm.value, this.apartmentId)
       .subscribe(() => {
         this.toastrService.success("Amenity added", "Success");
+        this.closeModal(id);
+        setTimeout(() => {
+        location.reload();
+        }, 3000);
       })
-    location.reload();
   }
 
   closeModal(id: string) {

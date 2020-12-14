@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using ApartmentsLilly.Server.Features.Amenities;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Models;
@@ -11,11 +12,13 @@
 
     public class ApartmentsController : ApiController
     {
-        private IApartmentsService apartments;  
+        private IApartmentsService apartments;
+        private readonly IAmenitiesService amenities;
 
-        public ApartmentsController(IApartmentsService apartments)
+        public ApartmentsController(IApartmentsService apartments, IAmenitiesService amenities)
         {
             this.apartments = apartments;
+            this.amenities = amenities;
         }
 
         [HttpPost]
@@ -65,7 +68,12 @@
         public async Task<ApartmentDetailsServiceModel> Details(int id)
         {
             var result = await this.apartments.GetById(id);
-            
+
+            //foreach (var amenity in result.Amenities)
+            //{
+            //    amenity.Importance = amenity.Importance
+            //}
+
             return result;
         }
 

@@ -43,18 +43,19 @@
         }
 
         [HttpGet]
-        [Route(Id)]
         [AllowAnonymous]
-        public async Task<AmenityDetailsServiceModel> Details(int id)
+        public async Task<AmenityDetailsServiceModel> Details(int id, int apartmentId)
         {
-            return await this.amenities.GetById(id);
+            return await this.amenities.GetById(id, apartmentId);
         }
 
         [HttpPut]
         [Route(Id)]
+        [AllowAnonymous]
+
         public async Task<ActionResult> Update(int id, UpdateAmenityRequestModel model)
         {
-            Result result = await this.amenities.Update(id, model.Name);
+            Result result = await this.amenities.Update(id, model.Name, model.Importance);
 
             if (result.Failure)
             {

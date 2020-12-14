@@ -1,13 +1,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-4 offset-md-4">
-            <form [formGroup]="roomForm" (ngSubmit)="create()">
+            <form [formGroup]="roomForm" (ngSubmit)="create('add-room-modal')">
                 <label>Choose Room Type</label>
                 <select class="form-control mb-3" formControlName="RoomType">
                     <option disabled value="">choose room type</option>
                     <option *ngFor="let type of roomTypes" [ngValue]="type.value">{{type.name}}</option>
                 </select>
-                <div *ngIf="(roomType.pristine && roomType.invalid) || (roomType.touched && roomType.invalid)" class="alert alert-danger" >
+                <div *ngIf="(roomType.pristine && roomType.invalid) || (roomType.touched && roomType.invalid)"
+                    class="alert alert-danger">
                     <div *ngIf="roomType.errors.required">Room Type is required.</div>
                 </div>
                 <div class="form-group">
@@ -20,7 +21,7 @@
                     </span>
                 </div>
                 <div class="form-group">
-                    <input type="checkbox" id="sleepable" formControlName="IsSleepable">
+                    <input class="mr-2" type="radio" [value]="true" id="sleepable" formControlName="IsSleepable">
                     <label for="sleepable">Is Sleepable</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
@@ -28,7 +29,7 @@
             </form>
             <br>
             <br>
-            
+
         </div>
     </div>
 </div>

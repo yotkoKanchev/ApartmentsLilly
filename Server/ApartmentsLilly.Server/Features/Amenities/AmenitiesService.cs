@@ -36,7 +36,7 @@
             return amenity.Id;
         }
 
-        public async Task<Result> Update(int id, string name)
+        public async Task<Result> Update(int id, string name, int? importance)
         {
             var amenity = await this.ById(id).FirstOrDefaultAsync();
 
@@ -46,6 +46,14 @@
             }
 
             amenity.Name = name;
+
+            if (importance != null)
+            {
+                var apartmentAmenity = await this.data.ApartmentAmenities
+                    .FirstOrDefaultAsync(aa => aa.AmenityId == id);
+                apartmentAmenity.Importance = (AmenityImportance)importance;
+            }
+
             await this.data.SaveChangesAsync();
 
             return true;
@@ -72,11 +80,18 @@
             return "There are other apartments using this amenity";
         }
 
-        public async Task<AmenityDetailsServiceModel> GetById(int id)
+        public async Task<AmenityDetailsServiceModel> GetById(int id, int apartmentId)
         {
-            return await this.ById(id)
+            var result = await this.ById(id)
                 .To<AmenityDetailsServiceModel>()
                 .FirstOrDefaultAsync();
+
+            result.Importance = await this.data.ApartmentAmenities
+                .Where(aa => aa.AmenityId == id && aa.ApartmentId == apartmentId)
+                .Select(a => new { name = a.Importance.ToString(), value = (int)a.Importance })
+                .FirstAsync();
+
+            return result;
         }
 
         private IQueryable<Amenity> ById(int id)
