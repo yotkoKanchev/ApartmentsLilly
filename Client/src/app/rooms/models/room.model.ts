@@ -1,6 +1,7 @@
 export interface RoomModel {
     id:number;
+    apartmentId: number;
     name: string;
-    roomType: number;
+    roomType: any;
     isSleepable: boolean;
 }

@@ -27,8 +27,6 @@ export class RoomsService {
   }
 
   edit(data, id: number) {
-    console.log(data)
-    console.log(id)
     return this.http.put(this.roomsPath + '/' + id, data)
   }
 

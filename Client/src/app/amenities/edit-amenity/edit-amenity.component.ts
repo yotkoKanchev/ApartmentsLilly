@@ -4,6 +4,7 @@ import { AmenitiesService } from '../amenities.service';
 import { ModalService } from 'src/app/_modal';
 import { ToastrService } from 'ngx-toastr';
 import { AmenityModel } from '../models/amenity.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-amenity',
@@ -11,19 +12,19 @@ import { AmenityModel } from '../models/amenity.model';
   styleUrls: ['./edit-amenity.component.css']
 })
 export class EditAmenityComponent implements OnInit {
-  @Input() amenityId: number;
-  @Input() modalId: string;
-  @Input() apartmentId: number;
-
   amenityForm: FormGroup;
   importanceTypes: any;
   amenity: AmenityModel;
+  id: number;
+  apartmentId: number;
 
   constructor(
     private fb: FormBuilder,
     private amenitiesService: AmenitiesService,
     private modalService: ModalService,
     private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private router: Router, 
   ) {
     this.amenityForm = this.fb.group({
       'id': [''],
@@ -33,31 +34,30 @@ export class EditAmenityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.apartmentId = params['apartmentId'];
+    });
+
+    this.amenitiesService.getAmenity(this.id, this.apartmentId).subscribe(res => {
+      this.amenity = res;
+      this.amenityForm = this.fb.group({
+        'id': [this.amenity.id],
+        'name': [this.amenity.name],
+        'importance': [this.amenity.importance.value],
+      });
+    });
+
     this.amenitiesService.getImportanceTypes().subscribe(data => {
       this.importanceTypes = data;
     });
-    
-    this.fetchAmenity();
-  }
-
-  fetchAmenity(){
-    this.amenitiesService.getAmenity(this.amenityId, this.apartmentId).subscribe(res => {
-      this.amenity = res;
-      this.amenityForm = this.fb.group({
-        'name': [this.amenity.name],
-        'importance': [this.amenity.importance],
-      })
-    })
   }
 
   editAmenity() {
-    this.amenitiesService.edit(this.amenityForm.value, this.amenityId)
+    this.amenitiesService.edit(this.amenityForm.value, this.id)
       .subscribe(() => {
         this.toastr.success("Amenity has been edited!", "Success")
-        this.closeModal(this.modalId)
-        setTimeout(() => {
-          location.reload();
-        }, 3000);
+        this.router.navigate([`apartments/${this.apartmentId}`]);
       });
   }
 

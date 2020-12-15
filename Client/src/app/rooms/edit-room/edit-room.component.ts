@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoomsService } from '../rooms.service';
 import { ToastrService } from 'ngx-toastr';
 import { RoomModel } from '../models/room.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from 'src/app/_modal';
 
 @Component({
@@ -12,15 +13,18 @@ import { ModalService } from 'src/app/_modal';
 })
 export class EditRoomComponent implements OnInit {
   roomForm: FormGroup
-  @Input() roomId: number;
-  @Input() modalId: string;
   roomTypes: any;
   room: RoomModel;
+  id: number;
+  apartmentId: number;
+  roomIsSleepable: boolean;
 
   constructor(
     private fb: FormBuilder,
+    private modal: ModalService,
     private roomsService: RoomsService,
-    private modalService: ModalService,
+    private route: ActivatedRoute,
+    private router: Router, 
     private toastr: ToastrService,) {
     this.roomForm = this.fb.group({
       'id': [''],
@@ -31,34 +35,33 @@ export class EditRoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.roomsService.getRoomTypes().subscribe(data => {
-      this.roomTypes = data;
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
     });
 
-    this.roomsService.getRoom(this.roomId).subscribe(res => {
+    this.roomsService.getRoom(this.id).subscribe(res => {
       this.room = res;
+      this.roomIsSleepable = res.isSleepable;
+      this.apartmentId = this.room.apartmentId;
       this.roomForm = this.fb.group({
         'id': [this.room.id],
         'name': [this.room.name],
-        'roomType': [this.room.roomType],
+        'roomType': [this.room.roomType.value],
         'isSleepable': [this.room.isSleepable]
-      })
-    })
+      });
+    });
+
+    this.roomsService.getRoomTypes().subscribe(data => {
+      this.roomTypes = data;
+    });
   }
 
   editRoom() {
-    this.roomsService.edit(this.roomForm.value, this.roomId)
+    this.roomsService.edit(this.roomForm.value, this.id)
       .subscribe(() => {
-        this.toastr.success("Room has been edited!", "Success")
-        this.closeModal(this.modalId);
-        setTimeout(() => {
-          location.reload();
-        }, 3000);
+        this.toastr.success("Room has been updated!", "Success");
+        this.router.navigate([`apartments/${this.apartmentId}`]);
       });
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
   }
 
   get name() {

@@ -9,7 +9,7 @@ const apartmentsRoutes: Routes = [
     { path: 'create', component: CreateApartmentComponent },
     { path: '', component: ListApartmentsComponent },
     { path: ':id', component: DetailsApartmentComponent },
-    { path: 'edit/:id', component: EditApartmentComponent },
+    { path: 'edit/:id/:apartmentId', component: EditApartmentComponent },
 ]
 
 @NgModule({

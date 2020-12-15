@@ -6,6 +6,7 @@ import { RoomsService } from './rooms.service';
 import { CreateRoomComponent } from './create-room/create-room.component';
 import { ModalModule } from 'src/app/_modal';
 import { EditRoomComponent } from './edit-room/edit-room.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { EditRoomComponent } from './edit-room/edit-room.component';
     CommonModule,
     ReactiveFormsModule,
     ModalModule,
+    RouterModule,
   ],
   providers: [
     RoomsService,

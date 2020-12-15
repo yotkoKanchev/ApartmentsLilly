@@ -10,7 +10,6 @@ import { ApartmentComponent } from './apartment/apartment.component';
 import { AddressesModule } from '../addresses/addresses.module';
 import { AmenitiesModule } from '../amenities/amenities.module';
 
-
 @NgModule({
   declarations: [
     ...apartmentComponents,

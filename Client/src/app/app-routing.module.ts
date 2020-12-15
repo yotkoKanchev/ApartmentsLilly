@@ -7,6 +7,8 @@ import { StartComponent } from './start/start.component';
 import { ApartmentsRoutingModule } from './apartments/apartments-routing.module';
 import { RoomsRoutingModule } from './rooms/rooms-routing.module';
 import { AddressesRoutingModule } from './addresses/addresses-routing.module';
+import { EditRoomComponent } from './rooms/edit-room/edit-room.component';
+import { EditAmenityComponent } from './amenities/edit-amenity/edit-amenity.component';
 
 
 const routes: Routes = [
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: 'apartments', loadChildren: () => ApartmentsRoutingModule, canActivate: [AuthGuardService] },
   { path: 'addresses', loadChildren: () => AddressesRoutingModule, canActivate: [AuthGuardService] },
   { path: 'rooms', loadChildren: () => RoomsRoutingModule, canActivate: [AuthGuardService] },
+  { path: 'rooms/edit/:id', component: EditRoomComponent },
+  { path: 'amenities/edit/:id/:apartmentId', component: EditAmenityComponent }
 
 ];
 

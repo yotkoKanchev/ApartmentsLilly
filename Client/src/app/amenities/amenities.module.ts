@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'src/app/_modal';
 import { CreateAmenityComponent } from './create-amenity/create-amenity.component';
 import { EditAmenityComponent } from './edit-amenity/edit-amenity.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { EditAmenityComponent } from './edit-amenity/edit-amenity.component';
     CommonModule,
     ReactiveFormsModule,
     ModalModule,
+    RouterModule,
   ],
   providers:[
     AmenitiesService,

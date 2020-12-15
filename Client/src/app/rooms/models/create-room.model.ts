@@ -1,5 +1,5 @@
 export interface CreateRoomModel {
     name: string;
-    roomType: string;
+    roomType: number;
     isSleepable: boolean;
 }

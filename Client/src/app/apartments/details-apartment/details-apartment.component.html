@@ -26,34 +26,24 @@
             <p *ngIf="apartment.rooms"><strong>Rooms: </strong></p>
             <div class="border mb-2" *ngFor="let room of apartment.rooms">
                 <p>Name: {{room.name}}</p>
-                <p>Type: {{room.roomType}}</p>
-                <input id="btn" type="button" class="btn btn-sm btn-primary mr-2" (click)="openModal('edit-room-modal')"
+                <p>Type: {{room.roomType.name}}</p>
+                <input id="btn" type="button" class="btn btn-sm btn-primary mr-2" routerLink="/rooms/edit/{{room.id}}"
                     value="Edit Room">
                 <button type="button" class="btn btn-sm btn-primary mr-2" (click)="deleteRoom(room.id)">Delete
                     Room</button>
                 <input *ngIf="room.isSleepable" type="button" class="btn btn-sm btn-primary"
                     (click)="openModal('add-bed-modal')" value="Add Bed">
-                <jw-modal id="edit-room-modal">
-                    <div>
-                        <app-edit-room [roomId]="room.id" [modalId]="'edit-room-modal'"></app-edit-room>
-                    </div>
-                </jw-modal>
             </div>
 
             <p *ngIf="apartment.amenities"><strong>Amenities: </strong></p>
             <div class="border mb-2" *ngFor="let amenity of apartment.amenities">
                 <p>Name: {{amenity.name}}</p>
                 <p>Importance: {{amenity.importance.name}}</p>
-                <input type="button" class="btn btn-sm btn-primary mr-2" (click)="openModal('edit-amenity-modal')"
+                <input type="button" class="btn btn-sm btn-primary mr-2" [routerLink]="['/amenities/edit', amenity.id,  id]"
                     value="Edit Amenity">
                 <button type="button" class="btn btn-sm btn-primary" (click)="deleteAmenity(amenity.id)">Delete
                     Amenity</button>
-                <jw-modal id="edit-amenity-modal">
-                    <div>
-                        <app-edit-amenity [apartmentId]='id' [amenityId]="amenity.id" [modalId]="'edit-amenity-modal'">
-                        </app-edit-amenity>
-                    </div>
-                </jw-modal>
+           
             </div>
         </div>
     </div>
@@ -71,3 +61,16 @@
         <app-create-amenity [apartmentId]='id'></app-create-amenity>
     </div>
 </jw-modal>
+
+<!-- <jw-modal id="edit-room-modal">
+    <div>
+        <app-edit-room [modalId]="'edit-room-modal'"></app-edit-room>
+    </div>
+</jw-modal> -->
+<!-- 
+<jw-modal id="edit-amenity-modal">
+    <div>
+        <app-edit-amenity [apartmentId]='id' [amenityId]="amenity.id" [modalId]="'edit-amenity-modal'">
+        </app-edit-amenity>
+    </div>
+</jw-modal> -->
