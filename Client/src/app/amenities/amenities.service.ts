@@ -26,11 +26,13 @@ export class AmenitiesService {
     return this.http.get<AmenityModel>(this.amenitiesPath + `?id=${id}&apartmentId=${apartmentId}`)
   }
 
-  edit(data, id: number) {
-    return this.http.put(this.amenitiesPath + '/' + id, data)
+  edit(data, apartmentId: number, amenityId: number) {
+    data.apartmentId = apartmentId;
+    data.amenityId = amenityId;
+    return this.http.put(this.amenitiesPath, data)
   }
 
-  deleteAmenity(id: number, apartmentId: number) {
-    return this.http.delete(this.amenitiesPath + `?id=${id}&apartmentId=${apartmentId}` );
+  deleteAmenity(amenityId: number, apartmentId: number) {
+    return this.http.delete(this.amenitiesPath + `?apartmentId=${apartmentId}&amenityId=${amenityId}`);
   }
 }

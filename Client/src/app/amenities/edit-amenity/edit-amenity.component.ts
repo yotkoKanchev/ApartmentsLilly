@@ -15,7 +15,7 @@ export class EditAmenityComponent implements OnInit {
   amenityForm: FormGroup;
   importanceTypes: any;
   amenity: AmenityModel;
-  id: number;
+  amenityId: number;
   apartmentId: number;
 
   constructor(
@@ -27,7 +27,6 @@ export class EditAmenityComponent implements OnInit {
     private router: Router, 
   ) {
     this.amenityForm = this.fb.group({
-      'id': [''],
       'name': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
       'importance': ['', Validators.required],
     })
@@ -35,14 +34,13 @@ export class EditAmenityComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.id = params['id'];
+      this.amenityId = params['id'];
       this.apartmentId = params['apartmentId'];
     });
 
-    this.amenitiesService.getAmenity(this.id, this.apartmentId).subscribe(res => {
+    this.amenitiesService.getAmenity(this.amenityId, this.apartmentId).subscribe(res => {
       this.amenity = res;
       this.amenityForm = this.fb.group({
-        'id': [this.amenity.id],
         'name': [this.amenity.name],
         'importance': [this.amenity.importance.value],
       });
@@ -54,7 +52,7 @@ export class EditAmenityComponent implements OnInit {
   }
 
   editAmenity() {
-    this.amenitiesService.edit(this.amenityForm.value, this.id)
+    this.amenitiesService.edit(this.amenityForm.value, this.apartmentId, this.amenityId)
       .subscribe(() => {
         this.toastr.success("Amenity has been edited!", "Success")
         this.router.navigate([`apartments/${this.apartmentId}`]);

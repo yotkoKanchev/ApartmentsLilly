@@ -1,4 +1,5 @@
 <div class="container-fluid jumbotron">
+    <button class="btn btn-primary mb-3" routerLink='create'>Create</button>
     <div class="row">
         <div class="col-lg-3" *ngFor="let apartment of apartments">
             <div class="card" style="width: 18rem;">
@@ -7,7 +8,6 @@
                         alt="apartment: {{apartment.name}},{{apartment.addressCity}}">
                 </a>
                 <div class="card-body" [ngClass]="{'bg-warning': !apartment.isCompleated}">
-                    <!-- <h3 *ngIf="!apartment.isCompleated" class="text-danger">Not Compleated</h3> -->
                     <h3 class="card-title">{{apartment.name | uppercase}}</h3>
                     <h4 class="card-title">{{apartment.addressCity}}, {{apartment.addressCountry}}</h4>
                     <h4 class="card-title">

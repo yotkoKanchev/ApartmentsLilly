@@ -14,13 +14,13 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(data): Observable<any> {
-    return this.http.post(this.loginPath, data)
+    this.router.navigate(['/']);
+    return this.http.post(this.loginPath, data);
   }
 
   logout(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    this.router.navigate(['/apartments']);
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
 
   register(data): Observable<any> {
@@ -28,25 +28,25 @@ export class AuthService {
     return this.http.post(this.registerPath, data);
   }
 
-  saveToken(token) {
-    localStorage.setItem('token', token)
+  saveToken(token: string) {
+    localStorage.setItem('token', token);
   }
 
-  saveName(name) {
-    localStorage.setItem('name', name)
+  saveName(name: string) {
+    localStorage.setItem('name', name);
   }
 
   getToken() {
-    return localStorage.getItem('token')
+    return localStorage.getItem('token');
   }
 
   getName() {
-    return localStorage.getItem('name')
+    return localStorage.getItem('name');
   }
 
   isAuthenticated() {
       if (this.getToken()) {
-        return true
+        return true;
       }
       return false;
   }

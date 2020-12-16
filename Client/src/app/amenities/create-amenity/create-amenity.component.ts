@@ -41,7 +41,7 @@ export class CreateAmenityComponent implements OnInit {
         this.closeModal(id);
         setTimeout(() => {
         location.reload();
-        }, 3000);
+        }, 2000);
       })
   }
 

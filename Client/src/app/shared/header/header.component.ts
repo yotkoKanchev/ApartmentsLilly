@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -12,9 +12,14 @@ export class HeaderComponent implements OnInit {
   avatar: string = 'assets/images/noAvatar.png';
   toggleNavbar = true;
   constructor(private authService: AuthService) { 
+  }
+  
+  ngOnInit(): void {
     this.name = this.authService.getName();
   }
 
-  ngOnInit(): void {
+  logout(){
+    this.authService.logout();
   }
+
 }

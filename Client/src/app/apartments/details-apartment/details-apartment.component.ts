@@ -5,6 +5,7 @@ import { ApartmentModel } from '../models/apartment.model';
 import { ModalService } from '../../_modal';
 import { RoomsService } from 'src/app/rooms/rooms.service';
 import { AmenitiesService } from 'src/app/amenities/amenities.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-details-apartment',
@@ -20,6 +21,7 @@ export class DetailsApartmentComponent implements OnInit {
     private roomsService: RoomsService,
     private amenitiesService: AmenitiesService,
     private route: ActivatedRoute,
+    private toastr: ToastrService,
     private modalService: ModalService) { }
 
   ngOnInit(): void {
@@ -31,12 +33,18 @@ export class DetailsApartmentComponent implements OnInit {
 
   deleteRoom(id: number) {
     this.roomsService.deleteRoom(id).subscribe(() =>
-      this.fetchApartment(this.id));
+      {
+        this.toastr.success("Room has been deleted!", "Success");
+        this.fetchApartment(this.id);
+      });
   }
 
-  deleteAmenity(id: number) {
-    this.amenitiesService.deleteAmenity(id, this.id).subscribe(() =>
-      this.fetchApartment(this.id))
+  deleteAmenity(amenityId: number) {
+    this.amenitiesService.deleteAmenity(amenityId, this.id).subscribe(() =>
+     {
+      this.toastr.success("Amenity has been deleted!", "Success");
+      this.fetchApartment(this.id);
+     });
   }
 
   fetchApartment(id: number) {
