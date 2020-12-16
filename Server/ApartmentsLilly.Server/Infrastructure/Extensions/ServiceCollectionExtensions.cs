@@ -92,8 +92,8 @@
                 .AddTransient<ISearchService, SearchService>()
                 .AddTransient<IAddressService, AddressService>()
                 .AddTransient<IApartmentsService, ApartmentsService>()
-                .AddTransient<IRoomsService, RoomsService>()
-                .AddTransient<IAmenitiesService, AmenitiesService>();
+                .AddTransient<IAmenitiesService, AmenitiesService>()
+                .AddTransient<IRoomsService, RoomsService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
             => services.AddSwaggerGen(c =>

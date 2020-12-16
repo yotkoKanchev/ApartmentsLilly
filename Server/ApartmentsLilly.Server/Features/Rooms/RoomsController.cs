@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Data.Models.Rooms;
+    using Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Models;
 
     using static Infrastructure.WebConstants;
     using ApartmentsLilly.Server.Infrastructure.Extensions;

@@ -5,6 +5,7 @@
     using Amenities.Models;
     using Data;
     using Data.Models.Amenities;
+    using Data.Models.Mappings;
     using Infrastructure.Mapping;
     using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
@@ -18,40 +19,57 @@
             this.data = data;
         }
 
-        public async Task<int> Create(string name)
+        public async Task<Result> Create(int apartmentId, string name, int importance)
         {
-            var nameToLower = name.ToLower();
-            var amenity = await this.data.Amenities.FirstOrDefaultAsync(a => a.Name == nameToLower);
-
-            if (amenity == null)
+            if (await data.Apartments.AnyAsync(a => a.Id == apartmentId) == false)
             {
-                amenity = new Amenity
+                return $"Apartment with Id: {apartmentId} does not exists.";
+            }
+
+            var nameToLower = name.ToLower();
+            var amenity = await GetAmenity(nameToLower);
+            var amenityId = amenity != null ? amenity.Id : await this.CreateAmenity(nameToLower);
+
+            if (await this.Exists(apartmentId, amenityId) == false)
+            {
+                var apartmentAmenity = new ApartmentAmenity
                 {
-                    Name = nameToLower,
+                    ApartmentId = apartmentId,
+                    AmenityId = amenityId,
+                    Importance = (AmenityImportance)importance,
                 };
 
-                this.data.Amenities.Add(amenity);
+                this.data.ApartmentAmenities.Add(apartmentAmenity);
                 await this.data.SaveChangesAsync();
-            }
 
-            return amenity.Id;
+                return true;
+            }
+            else
+            {
+                return "This apartment has this amenity already.";
+            }
         }
 
-        public async Task<Result> Update(int id, string name, int? importance)
+        public async Task<Result> Update(int apartmentId, int amenityId, string name, int importance)
         {
-            var amenity = await this.ById(id).FirstOrDefaultAsync();
+            var apartmentAmenity = await this.ById(apartmentId, amenityId).FirstOrDefaultAsync();
 
-            if (amenity == null)
+            if (apartmentAmenity == null)
             {
-                return $"Amenity with {id} does not exists.";
+                return $"Amenity with ID: {amenityId} does not below to apartment with ID: {apartmentId}.";
             }
 
-            amenity.Name = name.ToLower();
+            var newName = name.ToLower();
+            var amenity = await GetAmenity(newName);
+            var newAmenityId = amenity != null ? amenity.Id : await this.CreateAmenity(newName);
 
-            if (importance != null)
+            if (newAmenityId != amenityId)
             {
-                var apartmentAmenity = await this.data.ApartmentAmenities
-                    .FirstOrDefaultAsync(aa => aa.AmenityId == id);
+                await this.Delete(apartmentId, amenityId);
+                await this.Create(apartmentId, newName, importance);
+            }
+            else
+            {
                 apartmentAmenity.Importance = (AmenityImportance)importance;
             }
 
@@ -60,46 +78,71 @@
             return true;
         }
 
-        public async Task<Result> Delete(int id)
+        public async Task<Result> Delete(int apartmentId, int amenityId)
+        {
+            var apartmentAmenity = await this.ById(apartmentId, amenityId).FirstOrDefaultAsync();
+
+            if (apartmentAmenity == null)
+            {
+                return $"Amenity with ID: {amenityId} does not below to apartment with ID: {apartmentId}.";
+            }
+
+            this.data.ApartmentAmenities.Remove(apartmentAmenity);
+            await data.SaveChangesAsync();
+            await this.DeleteAmenity(amenityId);
+
+            return true;
+        }
+
+        public async Task<AmenityDetailsServiceModel> GetById(int apartmentId, int amenityId)
+        {
+            return await this.ById(apartmentId, amenityId)
+                .To<AmenityDetailsServiceModel>()
+                .FirstOrDefaultAsync();
+        }
+
+        private IQueryable<ApartmentAmenity> ById(int apartmentId, int amenityId)
+        {
+            return this.data
+                .ApartmentAmenities
+                .Where(aa => aa.ApartmentId == apartmentId && aa.AmenityId == amenityId);
+        }
+
+        private async Task<bool> Exists(int apartmentId, int amenityId)
+        {
+            return await this.data.ApartmentAmenities
+                .AnyAsync(aa => aa.ApartmentId == apartmentId && aa.AmenityId == amenityId);
+        }
+
+        private async Task DeleteAmenity(int amenityId)
         {
             var amenity = await this.data
                 .Amenities
-                .FirstOrDefaultAsync(a => a.Id == id);
+                .FirstOrDefaultAsync(a => a.Id == amenityId);
 
-            if (amenity == null)
-            {
-                return $"Amenity with Id {id} does not exists";
-            }
-
-            if (!await this.data.ApartmentAmenities.AnyAsync(aa => aa.AmenityId == id))
+            if (!await this.data.ApartmentAmenities.AnyAsync(aa => aa.AmenityId == amenityId))
             {
                 this.data.Amenities.Remove(amenity);
-                await this.data.SaveChangesAsync();
-                return true;
+                await data.SaveChangesAsync();
             }
-
-            return "There are other apartments using this amenity";
         }
 
-        public async Task<AmenityDetailsServiceModel> GetById(int id, int apartmentId)
+        private async Task<int> CreateAmenity(string nameToLower)
         {
-            var result = await this.ById(id)
-                .To<AmenityDetailsServiceModel>()
-                .FirstOrDefaultAsync();
+            var amenity = new Amenity
+            {
+                Name = nameToLower,
+            };
 
-            result.Importance = await this.data.ApartmentAmenities
-                .Where(aa => aa.AmenityId == id && aa.ApartmentId == apartmentId)
-                .Select(a => new { name = a.Importance.ToString(), value = (int)a.Importance })
-                .FirstAsync();
+            this.data.Amenities.Add(amenity);
+            await this.data.SaveChangesAsync();
 
-            return result;
+            return amenity.Id;
         }
 
-        private IQueryable<Amenity> ById(int id)
+        private async Task<Amenity> GetAmenity(string nameToLower)
         {
-            return this.data
-                .Amenities
-                .Where(r => r.Id == id);
+            return await this.data.Amenities.FirstOrDefaultAsync(a => a.Name == nameToLower);
         }
     }
 }

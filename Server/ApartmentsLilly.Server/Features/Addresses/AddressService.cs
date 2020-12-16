@@ -76,7 +76,7 @@
                 return $"Address with Id: {id} does not exists.";
             }
 
-            if (await this.data.Addresses.Where(a => a.Id == id).Select(a => a.Apartments).CountAsync() == 1)
+            if (!await this.data.Addresses.AnyAsync(a => a.Id == id && a.Apartments.Any()))
             {
                 this.data.Addresses.Remove(address);
 

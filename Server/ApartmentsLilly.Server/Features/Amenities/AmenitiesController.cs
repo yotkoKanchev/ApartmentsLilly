@@ -1,61 +1,49 @@
 ﻿namespace ApartmentsLilly.Server.Features.Amenities
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Apartments;
+    using Data.Models.Amenities;
+    using Infrastructure.Extensions;
     using Infrastructure.Services;
     using Models;
-    using Rooms;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
-    using static Infrastructure.WebConstants;
-    using ApartmentsLilly.Server.Data.Models.Amenities;
-    using ApartmentsLilly.Server.Infrastructure.Extensions;
 
     [AllowAnonymous]
     public class AmenitiesController : ApiController
     {
         private readonly IAmenitiesService amenities;
-        private readonly IApartmentsService apartments;
-        private readonly IRoomsService rooms;
 
-        public AmenitiesController(IAmenitiesService amenities, IApartmentsService apartments, IRoomsService rooms)
+        public AmenitiesController(IAmenitiesService amenities)
         {
             this.amenities = amenities;
-            this.apartments = apartments;
-            this.rooms = rooms;
         }
 
         [HttpPost]
         public async Task<ActionResult> Create(CreateAmenityRequestModel model)
         {
-            var id = await this.amenities.Create(model.Name);
-
-            var result = await this.apartments.CreateApartmentAmenity(model.ApartmentId, id, model.Importance);
+            var result = await this.amenities.Create(model.ApartmentId, model.Name, model.Importance);
 
             if (result.Failure)
             {
                 return this.BadRequest(result.Error);
             }
 
-            return Created(nameof(this.Create), id);
+            return Created(nameof(this.Create), result.Succeeded);
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<AmenityDetailsServiceModel> Details(int id, int apartmentId)
+        public async Task<AmenityDetailsServiceModel> Details(int apartmentId, int id)
         {
-            return await this.amenities.GetById(id, apartmentId);
+            return await this.amenities.GetById(apartmentId, id);
         }
 
         [HttpPut]
-        [Route(Id)]
         [AllowAnonymous]
 
-        public async Task<ActionResult> Update(int id, UpdateAmenityRequestModel model)
+        public async Task<ActionResult> Update(UpdateAmenityRequestModel model)
         {
-            Result result = await this.amenities.Update(id, model.Name, model.Importance);
+            Result result = await this.amenities.Update(model.ApartmentId, model.AmenityId, model.Name, model.Importance);
 
             if (result.Failure)
             {
@@ -66,16 +54,9 @@
         }
 
         [HttpDelete]
-        public async Task<ActionResult> Delete(int id, int apartmentId)
+        public async Task<ActionResult> Delete(int apartmentId, int amenityId)
         {
-            var result = await this.apartments.DeleteApartmentAmenity(apartmentId, id);
-
-            if (result.Failure)
-            {
-                return this.BadRequest(result.Error);
-            }
-
-            result = await this.amenities.Delete(id);
+            var result = await this.amenities.Delete(apartmentId, amenityId);
 
             if (result.Failure)
             {

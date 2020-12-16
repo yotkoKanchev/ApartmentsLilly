@@ -54,8 +54,8 @@
                 .ForMember(a => a.Rooms, opt => opt.MapFrom(a => a.Rooms
                                                                     .OrderBy(r => r.Name)))
                 .ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities
-                                                                        .OrderByDescending(b => b.Importance)
-                                                                        .Select(b => b.Amenity)));
+                                                                        .OrderByDescending(b => b.Importance)));
+                                                                        //.Select(b => b.Amenity)));
         }
     }
 }

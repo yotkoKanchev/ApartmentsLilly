@@ -3,22 +3,19 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using ApartmentsLilly.Server.Features.Amenities;
+    using Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Models;
 
     using static Infrastructure.WebConstants;
 
     public class ApartmentsController : ApiController
     {
-        private IApartmentsService apartments;
-        private readonly IAmenitiesService amenities;
+        private readonly IApartmentsService apartments;
 
-        public ApartmentsController(IApartmentsService apartments, IAmenitiesService amenities)
+        public ApartmentsController(IApartmentsService apartments)
         {
             this.apartments = apartments;
-            this.amenities = amenities;
         }
 
         [HttpPost]
@@ -58,8 +55,7 @@
         [AllowAnonymous]
         public async Task<IEnumerable<ApartmentListingServiceModel>> Search(DateTime startDate, DateTime endDate)
         {
-            var aps = await this.apartments.GetAllAvailable(startDate, endDate);
-            return aps;
+            return await this.apartments.GetAllAvailable(startDate, endDate);
         }
 
         [HttpGet]
@@ -67,14 +63,7 @@
         [AllowAnonymous]
         public async Task<ApartmentDetailsServiceModel> Details(int id)
         {
-            var result = await this.apartments.GetById(id);
-
-            //foreach (var amenity in result.Amenities)
-            //{
-            //    amenity.Importance = amenity.Importance
-            //}
-
-            return result;
+            return await this.apartments.GetById(id);
         }
 
         [HttpPut]
@@ -108,8 +97,7 @@
         [AllowAnonymous]
         public async Task<ActionResult> Delete(int id)
         {
-            var result = await this.apartments
-                .Delete(id);
+            var result = await this.apartments.Delete(id);
 
             if (result.Failure)
             {

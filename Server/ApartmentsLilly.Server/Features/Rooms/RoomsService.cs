@@ -11,6 +11,8 @@
     using Models;
     using Microsoft.EntityFrameworkCore;
 
+    using static Infrastructure.Extensions.EnumExtensions;
+
     public class RoomsService : IRoomsService
     {
         private readonly ApartmentsLillyDbContext data;
@@ -63,7 +65,7 @@
 
             result.RoomType = await this.data.Rooms
                 .Where(aa => aa.Id == id)
-                .Select(a => new { name = a.RoomType.ToString(), value = (int)a.RoomType })
+                .Select(a => new EnumValue{ Name = a.RoomType.ToString(), Value = (int)a.RoomType })
                 .FirstAsync();
 
             return result;
