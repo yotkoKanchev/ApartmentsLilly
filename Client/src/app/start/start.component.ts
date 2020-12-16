@@ -35,7 +35,7 @@ export class StartComponent implements OnInit {
       this.apartments = data;
       for (const apart of this.apartments) {
         apart.fullAddress = this.sanitizer.bypassSecurityTrustResourceUrl(
-          environment.googleMaps + "+" + apart.addressCountry + "+" + apart.addressCity + '+' + apart.addressStreetAddress);
+          environment.googleMaps + apart.addressStreetAddress + '+' + apart.addressCity  + '+' + apart.addressCountry );
         }
     });
   }

@@ -1,4 +1,4 @@
-<div *ngIf='apartment' class="container-fluid">
+<div *ngIf='apartment' class="container-fluid jumbotron">
     <div class="mt-2">
         <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}" value="Edit">
         <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
@@ -7,7 +7,7 @@
     </div>
     <div class="row d-flex justify-content-center">
         <div class="col-lg-5">
-            <div class="card" style="width: 28rem;">
+            <div class="card" style="width: 26rem;">
                 <h3 class="card-title">{{apartment.name}}</h3>
                 <img [src]="apartment.mainImageUrl" class="card-img-top" alt="Apartment {{apartment.name}}">
                 <div class="card-body">

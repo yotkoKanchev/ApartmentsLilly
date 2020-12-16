@@ -22,7 +22,7 @@
     </ul>
     <a class="card-body col-pos" *ngIf="!showMap" (click)="getMap()">Show Map</a>
     <a class="card-body col-neg" *ngIf="showMap" (click)="getMap()">Hide Map</a>
-    <iframe *ngIf="showMap" height="400" frameborder="0" style="border:0" [src]="ap.fullAddress" allowfullscreen>
+    <iframe SameSite=none *ngIf="showMap" height="400" frameborder="0" style="border:0" [src]="ap.fullAddress" allowfullscreen>
     </iframe>
 </div>
 <br>
