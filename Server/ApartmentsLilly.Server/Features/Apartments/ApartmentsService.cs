@@ -40,7 +40,7 @@
             var apartment = new Apartment
             {
                 AddressId = addressId,
-                Name = name,
+                Name = name.ToLower(),
                 Description = description,
                 Entry = entry,
                 Floor = floor.Value,
@@ -78,6 +78,14 @@
                 amenity.Importance = await this.data.ApartmentAmenities
                     .Where(aa => aa.AmenityId == amenity.Id)
                     .Select(aa => new { name = aa.Importance.ToString(), value = (int)aa.Importance })
+                    .FirstAsync();
+            }
+
+            foreach (var room in result.Rooms)
+            {
+                room.RoomType = await this.data.Rooms
+                    .Where(aa => aa.Id == room.Id)
+                    .Select(a => new { name = a.RoomType.ToString(), value = (int)a.RoomType })
                     .FirstAsync();
             }
 
@@ -136,7 +144,7 @@
                 return $"Apartment with Id: {id} does not exists.";
             }
 
-            apartment.Name = name;
+            apartment.Name = name.ToLower();
             apartment.Description = description;
             apartment.Entry = entry;
             apartment.Floor = floor;

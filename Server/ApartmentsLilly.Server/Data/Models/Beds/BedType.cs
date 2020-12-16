@@ -4,7 +4,7 @@
     {
         Single = 1,
         Double = 2,
-        Quin = 3,
+        Queen = 3,
         King = 4,
         Sofa = 5,
         Couch = 6,

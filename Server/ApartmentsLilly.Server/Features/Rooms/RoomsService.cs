@@ -33,7 +33,7 @@
 
             var room = new Room
             {
-                Name = name,
+                Name = name.ToLower(),
                 RoomType = (RoomType)roomType,
                 IsSleepable = isSleepable,
                 ApartmentId = apartmentId,
@@ -57,9 +57,16 @@
 
         public async Task<RoomDetailsServiceModel> GetById(int id)
         {
-            return await this.ById(id)
+            var result = await this.ById(id)
                 .To<RoomDetailsServiceModel>()
                 .FirstOrDefaultAsync();
+
+            result.RoomType = await this.data.Rooms
+                .Where(aa => aa.Id == id)
+                .Select(a => new { name = a.RoomType.ToString(), value = (int)a.RoomType })
+                .FirstAsync();
+
+            return result;
         }
 
         public async Task<Result> Update(int id, string name, int? roomType, bool isSleepable)
@@ -76,7 +83,7 @@
                 room.RoomType = (RoomType)roomType;
             }
 
-            room.Name = name;
+            room.Name = name.ToLower();
             room.IsSleepable = isSleepable;
 
             await this.data.SaveChangesAsync();

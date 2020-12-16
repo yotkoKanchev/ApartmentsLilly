@@ -1,12 +1,11 @@
 ﻿namespace ApartmentsLilly.Server.Features.Apartments.Models
 {
-    using ApartmentsLilly.Server.Data.Models.Rooms;
-    using ApartmentsLilly.Server.Features.Rooms.Models;
-    using AutoMapper;
-    using Data.Models;
-    using Infrastructure.Mapping;
-    using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
+    using Data.Models;
+    using Data.Models.Rooms;
+    using Infrastructure.Mapping;
+    using AutoMapper;
 
     public class ApartmentListingServiceModel : IMapFrom<Apartment>, IHaveCustomMappings
     {
@@ -45,10 +44,10 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Apartment, ApartmentListingServiceModel>()
+                .ForMember(a => a.Name, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Name)))
                 .ForMember(a => a.BedroomCount, opt => opt.MapFrom(a => a.Rooms.Where(r => r.RoomType == RoomType.Bedroom).Count()))
                 .ForMember(a => a.BathroomCount, opt => opt.MapFrom(a => a.Rooms.Where(r => r.RoomType == RoomType.Bathroom).Count()))
                 .ForMember(a => a.BedCount, opt => opt.MapFrom(a => a.Rooms.SelectMany(r => r.Beds).Count()))
-                //.ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities.Select(a => a.Name).ToArray()))
                 .ForMember(a => a.IsCompleated, opt => opt.MapFrom(a => a.Rooms.Any()));
         }
     }

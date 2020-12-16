@@ -12,6 +12,8 @@
     using Features.Search;
     using Filters;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -110,5 +112,13 @@
                 .AddControllers(options => options
                     .Filters
                     .Add<ModelOrNotFoundActionFilter>());
+
+        public static IServiceCollection ConfigureCookiePolicyOptions(this IServiceCollection services)
+            => services.Configure<CookiePolicyOptions>(
+                options =>
+                {
+                    options.CheckConsentNeeded = context => false;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                });
     }
 }

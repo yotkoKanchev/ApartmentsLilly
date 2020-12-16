@@ -20,13 +20,14 @@
 
         public async Task<int> Create(string name)
         {
-            var amenity = await this.data.Amenities.FirstOrDefaultAsync(a => a.Name == name);
+            var nameToLower = name.ToLower();
+            var amenity = await this.data.Amenities.FirstOrDefaultAsync(a => a.Name == nameToLower);
 
             if (amenity == null)
             {
                 amenity = new Amenity
                 {
-                    Name = name,
+                    Name = nameToLower,
                 };
 
                 this.data.Amenities.Add(amenity);
@@ -45,7 +46,7 @@
                 return $"Amenity with {id} does not exists.";
             }
 
-            amenity.Name = name;
+            amenity.Name = name.ToLower();
 
             if (importance != null)
             {
