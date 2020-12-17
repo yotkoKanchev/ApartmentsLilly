@@ -15,7 +15,8 @@ export class ApartmentsService {
   constructor(private http: HttpClient) { }
 
   // todo work here
-  create(data): Observable<CreateApartmentModel> {
+  create(data, addressId:number): Observable<CreateApartmentModel> {
+    data.addressId = addressId;
     return this.http.post<CreateApartmentModel>(this.apartmentPath, data)
   }
 

@@ -31,6 +31,10 @@ export class DetailsApartmentComponent implements OnInit {
     })
   }
 
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
+
   deleteRoom(id: number) {
     this.roomsService.deleteRoom(id).subscribe(() =>
       {

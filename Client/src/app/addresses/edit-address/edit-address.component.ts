@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddressesService } from '../addresses.service';
 import { AddressModel } from '../models/address.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-address',
@@ -12,14 +13,15 @@ import { AddressModel } from '../models/address.model';
 export class EditAddressComponent implements OnInit {
   addressForm: FormGroup;
   addressId: string;
+  apartmentId: number;
   address: AddressModel;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private addressService: AddressesService,
+    private toastr: ToastrService,
     private router: Router) {
     this.addressForm = this.fb.group({
-      'id': [''],
       'country': ['', [Validators.minLength(2), Validators.maxLength(30)]],
       'city': ['', [Validators.minLength(2), Validators.maxLength(30)]],
       'postalCode': ['', Validators.maxLength(10)],
@@ -31,10 +33,10 @@ export class EditAddressComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.addressId = params['id'];
+      this.apartmentId = params['apartmentId']
       this.addressService.getAddress(this.addressId).subscribe(res => {
         this.address = res;
         this.addressForm = this.fb.group({
-          'id': [this.address.id],
           'country': [this.address.country],
           'city': [this.address.city],
           'postalCode': [this.address.postalCode],
@@ -46,8 +48,9 @@ export class EditAddressComponent implements OnInit {
   }
 
   editAddress() {
-    this.addressService.editAddress(this.addressForm.value).subscribe(() => {
-      this.router.navigate(["addresses"])
+    this.addressService.editAddress(this.addressForm.value, this.addressId).subscribe(() => {
+      this.toastr.success("Address has been edited!", "Success")
+      this.router.navigate([`apartments/${this.apartmentId}`])
     })
   }
 

@@ -10,7 +10,6 @@ import { AddressModel } from './models/address.model';
 })
 export class AddressesService {
   private addressPath = environment.apiUrl + 'addresses';
-
   constructor(private http: HttpClient) { }
 
   create(data): Observable<CreateAddressModel> {
@@ -21,15 +20,11 @@ export class AddressesService {
     return this.http.get<Array<AddressModel>>(this.addressPath)
   }
 
-  getAddress(id): Observable<AddressModel> {
+  getAddress(id: string): Observable<AddressModel> {
     return this.http.get<AddressModel>(this.addressPath + '/' + id)
   }
 
-  editAddress(data) {
-    return this.http.put(this.addressPath + '/' + data.id, data)
-  }
-
-  deleteAddress(id: string) {
-    return this.http.delete(this.addressPath + '/' + id)
+  editAddress(data, id: string) {
+    return this.http.put(this.addressPath + '/' + id, data)
   }
 }

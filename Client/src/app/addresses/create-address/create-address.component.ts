@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressesService } from '../addresses.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 import { ModalService } from 'src/app/_modal';
 
 @Component({
@@ -17,8 +16,7 @@ export class CreateAddressComponent {
     private modalService: ModalService,
     private fb: FormBuilder,
     private addressService: AddressesService,
-    private toastrService: ToastrService, 
-    private router: Router) {
+    private toastrService: ToastrService, ) {
     this.addressForm = this.fb.group({
       'Country': ['', [Validators.minLength(2), Validators.maxLength(30)]],
       'City': ['', [Validators.minLength(2), Validators.maxLength(30)]],

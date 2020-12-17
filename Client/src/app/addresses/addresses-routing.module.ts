@@ -5,7 +5,7 @@ import { EditAddressComponent } from './edit-address/edit-address.component';
 
 const addressesRoutes: Routes = [
     { path: 'create', component: CreateAddressComponent },
-    { path: 'edit/:id', component: EditAddressComponent },
+    { path: 'edit/:id/:apartmentId', component: EditAddressComponent },
 ]
 
 @NgModule({

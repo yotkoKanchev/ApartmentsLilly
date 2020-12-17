@@ -20,10 +20,10 @@ export class EditAmenityComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private amenitiesService: AmenitiesService,
     private modalService: ModalService,
     private toastr: ToastrService,
-    private route: ActivatedRoute,
     private router: Router, 
   ) {
     this.amenityForm = this.fb.group({

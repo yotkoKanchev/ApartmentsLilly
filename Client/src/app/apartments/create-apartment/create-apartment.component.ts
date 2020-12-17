@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApartmentsService } from '../apartments.service';
-import { AddressModel } from 'src/app/addresses/models/address.model';
-import { AddressesService } from 'src/app/addresses/addresses.service';
 import { ToastrService } from 'ngx-toastr';
 import { ModalService } from '../../_modal';
 
@@ -14,7 +12,7 @@ import { ModalService } from '../../_modal';
 })
 export class CreateApartmentComponent implements OnInit {
   apartmentForm: FormGroup;
-  addresses: Array<AddressModel>
+  addressId: number;
 
   constructor(
     private modalService: ModalService,
@@ -22,9 +20,8 @@ export class CreateApartmentComponent implements OnInit {
     private apartmentService: ApartmentsService,
     private toastrService: ToastrService,
     private router: Router,
-    private addressesService: AddressesService) {
+  ) {
     this.apartmentForm = this.fb.group({
-      'AddressId': ['', Validators.required],
       'Name': ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
       'Description': ['', [Validators.maxLength(1000)]],
       'MainImageUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
@@ -34,28 +31,24 @@ export class CreateApartmentComponent implements OnInit {
       'Size': ['', [Validators.min(0), Validators.max(1000)]],
       'BasePrice': ['', [Validators.min(0), Validators.max(10000)]],
       'MaxOccupants': ['', [Validators.required, Validators.min(1), Validators.max(100)]],
-      'HasTerrace': ['',],
     })
   }
 
   ngOnInit(): void {
-    this.addressesService.getAddresses().subscribe(data => {
-      this.addresses = data;
-    });
+  }
+
+  getAddressId(data: number) {
+    this.addressId = data;
   }
 
   create() {
-    this.apartmentService.create(this.apartmentForm.value)
+    console.log(this.addressId)
+    this.apartmentService.create(this.apartmentForm.value, this.addressId)
       .subscribe(data => {
+        console.log(data)
         this.toastrService.success("Success");
         this.router.navigate([`apartments/${data['id']}`])
       });
-  }
-
-  onOptionsSelected(value: string) {
-    if (value == "addAddress") {
-      this.openModal('add-address-modal');
-    }
   }
 
   openModal(id: string) {
@@ -89,18 +82,12 @@ export class CreateApartmentComponent implements OnInit {
   get size() {
     return this.apartmentForm.get('Size');
   }
+
   get basePrice() {
     return this.apartmentForm.get('BasePrice');
   }
+
   get maxOccupants() {
     return this.apartmentForm.get('MaxOccupants');
   }
-  get hasTerrace() {
-    return this.apartmentForm.get('HasTerrace');
-  }
-
-  get addressId() {
-    return this.apartmentForm.get("AddressId");
-  }
-
 }

@@ -1,5 +1,5 @@
 <div *ngIf='apartment' class="container-fluid jumbotron">
-    <div class="mt-2">
+    <div class="mt-1 mb-2">
         <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}" value="Edit">
         <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
         <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-room-modal')" value="Add Room">
@@ -18,11 +18,19 @@
                     <h5>Fllor: {{apartment.floor}}</h5>
                     <h5>Number: {{apartment.number}}</h5>
                     <p>Description: {{apartment.description}}</p>
-
                 </div>
             </div>
         </div>
         <div class="col-lg-5">
+            <p><strong>Address:</strong></p>
+            <div class="form-group border mb-2">
+                <p>{{apartment.address.city}}, {{apartment.address.country}}</p>
+                <p *ngIf="apartment.address.postalCode && apartment.address.neighborhood">
+                    {{apartment.address.postalCode}}, кв. {{apartment.address.neighborhood}}</p>
+                <p>ул. {{apartment.address.streetAddress}}</p>
+                <input id="btn" type="button" class="btn btn-sm btn-primary"
+                    [routerLink]="['/addresses/edit', apartment.address.id, id]" value="Edit Address">
+            </div>
             <p *ngIf="apartment.rooms"><strong>Rooms: </strong></p>
             <div class="border mb-2" *ngFor="let room of apartment.rooms">
                 <p>Name: {{room.name}}</p>
@@ -39,11 +47,10 @@
             <div class="border mb-2" *ngFor="let amenity of apartment.amenities">
                 <p>Name: {{amenity.name}}</p>
                 <p>Importance: {{amenity.importance.name}}</p>
-                <input type="button" class="btn btn-sm btn-primary mr-2" [routerLink]="['/amenities/edit', amenity.id,  id]"
-                    value="Edit Amenity">
+                <input type="button" class="btn btn-sm btn-primary mr-2"
+                    [routerLink]="['/amenities/edit', amenity.id,  id]" value="Edit Amenity">
                 <button type="button" class="btn btn-sm btn-primary" (click)="deleteAmenity(amenity.id)">Delete
                     Amenity</button>
-           
             </div>
         </div>
     </div>
@@ -61,6 +68,14 @@
         <app-create-amenity [apartmentId]='id'></app-create-amenity>
     </div>
 </jw-modal>
+
+<div>
+    <jw-modal id="show-addressInfo-modal">
+        <div>
+            <button>Edit</button>
+        </div>
+    </jw-modal>
+</div>
 
 <!-- <jw-modal id="edit-room-modal">
     <div>

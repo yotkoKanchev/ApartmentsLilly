@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 offset-md-4">
             <form [formGroup]="addressForm">
                 <div class="form-group">
                     <label>Country</label>
@@ -62,7 +62,8 @@
                         Street Address should be maximum 50 symbols long!
                     </span>
                 </div>
-                <button class="btn btn-primary" (click)="editAddress()">Save</button>
+                <button class="btn btn-primary mr-2" (click)="editAddress()">Update</button>
+                <input type="button" class="btn btn-primary" routerLink="/apartments/{{apartmentId}}" value="Close">
             </form>
         </div>
     </div>

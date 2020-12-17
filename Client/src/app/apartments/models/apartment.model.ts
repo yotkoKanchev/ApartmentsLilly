@@ -1,3 +1,4 @@
+import { AddressModel } from 'src/app/addresses/models/address.model';
 import { AmenityModel } from 'src/app/amenities/models/amenity.model';
 import { RoomModel } from 'src/app/rooms/models/room.model';
 
@@ -13,7 +14,7 @@ export interface ApartmentModel{
     hasTerrace: boolean;
     maxOccupants?: number;
     mainImageUrl: string;
-    addressId: string;
+    address: AddressModel;
     rooms: Array<RoomModel>,
     amenities: Array<AmenityModel>,
 }

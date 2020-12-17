@@ -27,7 +27,7 @@ import { AmenitiesModule } from '../amenities/amenities.module';
     ApartmentsService,
   ],
   exports:[
-    ApartmentComponent
+    ApartmentComponent,
   ]
 })
 export class ApartmentsModule { }

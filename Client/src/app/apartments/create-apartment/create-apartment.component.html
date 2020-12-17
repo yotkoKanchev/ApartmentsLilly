@@ -1,24 +1,10 @@
 <div class="container-fluid offset-md-1">
     <div class="row">
-        <jw-modal id="add-address-modal" >
-            <div>
-                <app-create-address></app-create-address>
-            </div>
-        </jw-modal>
         <div class="col-lg-5">
             <form [formGroup]="apartmentForm" (ngSubmit)="create()">
-                <div class="form-group">
-                <label>Choose Address</label>
-                <select #addressSelect class="form-control mb-3" (change)='onOptionsSelected(addressSelect.value)' formControlName="AddressId">
-                    <option value="">choose address</option>
-                    <option *ngFor="let ad of addresses" [ngValue]="ad.id">{{ad.country}}, {{ad.city}} -
-                        {{ad.streetAddress}}</option>
-                    <option value="addAddress">add new address</option>
-                </select>
-                <div *ngIf="(addressId.pristine && addressId.invalid) || (addressId.touched && addressId.invalid)" class="alert alert-danger" >
-                    <div *ngIf="addressId.errors.required">Address is required.</div>
-                </div>
-            </div>
+
+                <app-choose-address (onAddressIdSelected)="getAddressId($event)"></app-choose-address>
+
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" class="form-control" formControlName="Name">
@@ -89,7 +75,7 @@
                     <input type="text" class="form-control" formControlName="Size">
                 </div>
                 <div *ngIf="(size.touched || size.dirty) && size.errors" class="alert alert-danger">
-                    <span *ngIf="size.errors.maxlength || size.errors.minlength">
+                    <span *ngIf="size.errors.min || size.errors.min">
                         Size should be between 0 and 1000 symbols long!
                     </span>
                 </div>
@@ -99,7 +85,7 @@
                     <input type="text" class="form-control" formControlName="BasePrice">
                 </div>
                 <div *ngIf="(basePrice.touched || basePrice.dirty) && basePrice.errors" class="alert alert-danger">
-                    <span *ngIf="basePrice.errors.maxlength || basePrice.errors.minlength">
+                    <span *ngIf="basePrice.errors.min || basePrice.errors.max">
                         Base price should be between 0 and 10000 symbols long!
                     </span>
                 </div>
@@ -110,17 +96,13 @@
                 </div>
                 <div *ngIf="(maxOccupants.touched || maxOccupants.dirty) && maxOccupants.errors"
                     class="alert alert-danger">
-                    <span *ngIf="maxOccupants.errors.minlength || maxOccupants.errors.maxlength || maxOccupants.errors.required">
+                    <span
+                        *ngIf="maxOccupants.errors.min || maxOccupants.errors.max || maxOccupants.errors.required">
                         Maximum Occupants should be between 1 and 100 symbols long!
                     </span>
                 </div>
-
-                <div class="form-group">
-                    <input type="checkbox" id="aa" formControlName="HasTerrace">
-                    <label for="aa">Has Terrace</label>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary mr-2">Create</button>
+                <input type="submit" class="btn btn-primary" routerLink="/apartments" value="Cancel">
             </form>
             <br>
             <br>

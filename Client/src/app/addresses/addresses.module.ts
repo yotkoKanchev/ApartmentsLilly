@@ -7,7 +7,8 @@ import { addressComponents } from '.';
 import { AddressesService } from './addresses.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CreateAddressComponent } from './create-address/create-address.component';
+import { RouterModule } from '@angular/router';
+import { ChooseAddressComponent } from './choose-address/choose-address.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CreateAddressComponent } from './create-address/create-address.componen
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -25,7 +27,7 @@ import { CreateAddressComponent } from './create-address/create-address.componen
     AddressesService,
   ],
   exports: [
-    CreateAddressComponent
+    ChooseAddressComponent,
   ]
 
 })
