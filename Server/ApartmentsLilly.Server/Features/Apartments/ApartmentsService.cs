@@ -26,7 +26,7 @@
         }
 
         public async Task<Result> Create(int addressId, string name, string description, string entry, int? floor, string number, double? size,
-            double? basePrice, bool hasTerrace, int? maxOccupants, string mainImageUrl)
+            double? basePrice, int? maxOccupants, string mainImageUrl)
         {
             var isAddressExists = await this.addresses.Exists(addressId);
 
@@ -45,7 +45,6 @@
                 Number = number,
                 Size = size.Value,
                 BasePrice = basePrice.Value,
-                HasTerrace = hasTerrace,
                 MaxOccupants = maxOccupants.Value,
                 MainImageUrl = mainImageUrl,
             };
@@ -109,7 +108,7 @@
         }
 
         public async Task<Result> Update(int id, string name, string description, string entry, int floor, string number,
-            double size, double basePrice, bool hasTerrace, int maxOccupants, string mainImageUrl, int addressId)
+            double size, double basePrice, int maxOccupants, string mainImageUrl, int addressId)
         {
             var apartment = await this.GetApartment(id)
                 .FirstOrDefaultAsync();
@@ -126,7 +125,6 @@
             apartment.Number = number;
             apartment.Size = size;
             apartment.BasePrice = basePrice;
-            apartment.HasTerrace = hasTerrace;
             apartment.MaxOccupants = maxOccupants;
             apartment.MainImageUrl = mainImageUrl;
 

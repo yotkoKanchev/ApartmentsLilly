@@ -30,7 +30,6 @@
                 model.Number,
                 model.Size.Value,
                 model.BasePrice.Value,
-                model.HasTerrace,
                 model.MaxOccupants.Value,
                 model.MainImageUrl);
 
@@ -79,7 +78,6 @@
                 model.Number,
                 model.Size.Value,
                 model.BasePrice.Value,
-                model.HasTerrace,
                 model.MaxOccupants.Value,
                 model.MainImageUrl,
                 model.AddressId);

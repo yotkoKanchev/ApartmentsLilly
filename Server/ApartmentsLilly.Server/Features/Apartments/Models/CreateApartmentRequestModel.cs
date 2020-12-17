@@ -34,8 +34,6 @@
         [Range(ZeroValue, MaxBasePrice)]
         public double? BasePrice { get; set; }
 
-        public bool HasTerrace { get; set; }
-
         [Range(ZeroValue, MaximumOccupants)]
         public int? MaxOccupants { get; set; }
 

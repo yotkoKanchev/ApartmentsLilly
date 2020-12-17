@@ -9,7 +9,7 @@
     public interface IApartmentsService
     {
         Task<Result> Create(int addressId, string name, string description, string entry, int? floor, string number,
-            double? size, double? basePrice, bool hasTerrace, int? maxOccupants, string mainImageUrl);
+            double? size, double? basePrice, int? maxOccupants, string mainImageUrl);
         // TODO GetAll should accept cityName as parameter!!!
         Task<IEnumerable<ApartmentListingServiceModel>> GetAll();
 
@@ -20,7 +20,7 @@
         Task<Result> Delete(int id);
 
         Task<Result> Update(int id, string name, string description, string entry, int floor, string number,
-            double size, double basePrice, bool hasTerrace, int maxOccupants, string mainImageUrl, int addressId);
+            double size, double basePrice, int maxOccupants, string mainImageUrl, int addressId);
 
         Task<bool> Exists(int apartmentId);
     }

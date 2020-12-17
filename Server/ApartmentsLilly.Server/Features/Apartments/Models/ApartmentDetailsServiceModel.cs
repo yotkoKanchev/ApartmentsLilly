@@ -8,6 +8,7 @@
     using Rooms.Models;
     using Infrastructure.Mapping;
     using AutoMapper;
+    using ApartmentsLilly.Server.Features.Addresses.Models;
 
     public class ApartmentDetailsServiceModel : IMapFrom<Apartment>, IHaveCustomMappings
     {
@@ -33,15 +34,7 @@
 
         public string MainImageUrl { get; set; }
 
-        public string AddressId { get; set; }
-
-        public string AddressCountry { get; set; }
-
-        public string AddressCity { get; set; }
-
-        public string AddressNeighborhood { get; set; }
-
-        public string AddressStreetAddress { get; set; }
+        public AddressDetailsServiceModel Address { get; set; }
 
         public ICollection<RoomDetailsServiceModel> Rooms { get; set; }
 

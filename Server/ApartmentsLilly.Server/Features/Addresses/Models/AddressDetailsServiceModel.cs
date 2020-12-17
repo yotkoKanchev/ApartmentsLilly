@@ -13,8 +13,6 @@
 
         public string PostalCode { get; set; }
 
-        public string CityImageUrl { get; set; }
-
         public string Neighborhood { get; set; }
 
         public string StreetAddress { get; set; }
