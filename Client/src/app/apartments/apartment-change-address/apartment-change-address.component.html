@@ -1,0 +1,11 @@
+<div class="container-fluid offset-md-1">
+    <div class="row">
+        <div class="col-lg-5">
+            <app-choose-address (onAddressIdSelected)="getAddressId($event)"></app-choose-address>
+            <button type="submit" class="btn btn-primary mr-2" (click)="changeAddress()">Change</button>
+            <input type="submit" class="btn btn-primary" routerLink="/apartments/{{apartmentId}}" value="Cancel">
+            <br>
+            <br>
+        </div>
+    </div>
+</div>

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CreateApartmentModel } from './models/create-apartment.model';
 import { ApartmentModel } from './models/apartment.model';
 import { ApartmentListingModel } from './models/apartment-listing.model';
+import { addressComponents } from '../addresses';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ApartmentsService {
   constructor(private http: HttpClient) { }
 
   // todo work here
-  create(data, addressId:number): Observable<CreateApartmentModel> {
+  create(data, addressId: number): Observable<CreateApartmentModel> {
     data.addressId = addressId;
     return this.http.post<CreateApartmentModel>(this.apartmentPath, data)
   }
@@ -29,7 +30,7 @@ export class ApartmentsService {
     return this.http.get<Array<ApartmentListingModel>>(this.apartmentPath + '/all')
   }
 
-  getApartment(id: number): Observable<ApartmentModel> {  
+  getApartment(id: number): Observable<ApartmentModel> {
     return this.http.get<ApartmentModel>(this.apartmentPath + '/' + id)
   }
 
@@ -39,5 +40,9 @@ export class ApartmentsService {
 
   deleteApartment(id: string) {
     return this.http.delete(this.apartmentPath + '/' + id)
+  }
+
+  changeAddress(id: number, addressId: number) {
+    return this.http.put(this.apartmentPath, { id: id, addressId: addressId })
   }
 }

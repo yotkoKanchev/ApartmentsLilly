@@ -37,18 +37,17 @@ export class CreateApartmentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getAddressId(data: number) {
-    this.addressId = data;
-  }
-
   create() {
-    console.log(this.addressId)
     this.apartmentService.create(this.apartmentForm.value, this.addressId)
       .subscribe(data => {
         console.log(data)
         this.toastrService.success("Success");
         this.router.navigate([`apartments/${data['id']}`])
       });
+  }
+
+  getAddressId(data: number) {
+    this.addressId = data;
   }
 
   openModal(id: string) {

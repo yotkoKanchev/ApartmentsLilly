@@ -17,7 +17,7 @@
         <div class="alert alert-danger" *ngIf="password.touched && password.errors?.required">
           This field is required!
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
         <hr>
         <div class="col-lg-12">
           No account?

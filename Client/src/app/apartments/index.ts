@@ -1,3 +1,4 @@
+import { ApartmentChangeAddressComponent } from './apartment-change-address/apartment-change-address.component';
 import { ApartmentComponent } from './apartment/apartment.component';
 import { CreateApartmentComponent } from './create-apartment/create-apartment.component';
 import { DetailsApartmentComponent } from './details-apartment/details-apartment.component';
@@ -10,4 +11,5 @@ export const apartmentComponents = [
     DetailsApartmentComponent,
     EditApartmentComponent,
     ListApartmentsComponent,
+    ApartmentChangeAddressComponent,
 ]

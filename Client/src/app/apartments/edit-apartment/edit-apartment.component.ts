@@ -31,7 +31,7 @@ export class EditApartmentComponent implements OnInit {
       'size': ['', [Validators.min(0), Validators.max(1000)]],
       'basePrice': ['', [Validators.min(0), Validators.max(10000)]],
       'maxOccupants': ['', [Validators.min(0), Validators.max(1000)]],
-      'addressId': ['', Validators.required],
+      'hasTerrace': ['',],
     })
   }
 
@@ -51,7 +51,7 @@ export class EditApartmentComponent implements OnInit {
           'size': [this.apartment.size],
           'basePrice': [this.apartment.basePrice],
           'maxOccupants': [this.apartment.maxOccupants],
-          'addressId': [this.apartment.address.id],
+          'hasTerrace': [this.apartment.hasTerrace],
         })
       })
     })
@@ -92,16 +92,16 @@ export class EditApartmentComponent implements OnInit {
   get size() {
     return this.apartmentForm.get('size');
   }
-  
+
   get basePrice() {
     return this.apartmentForm.get('basePrice');
   }
-
+  
   get maxOccupants() {
     return this.apartmentForm.get('maxOccupants');
   }
 
-  get addressId() {
-    return this.apartmentForm.get('addressId');
+  get hasTerrace() {
+    return this.apartmentForm.get('hasTerrace');
   }
 }

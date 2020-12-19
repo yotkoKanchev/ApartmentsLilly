@@ -4,6 +4,7 @@
         <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
         <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-room-modal')" value="Add Room">
         <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-amenity-modal')" value="Add Amenity">
+        <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/{{apartment.id}}/changeAddress" value="Change Address">
     </div>
     <div class="row d-flex justify-content-center">
         <div class="col-lg-5">
@@ -69,23 +70,9 @@
     </div>
 </jw-modal>
 
-<div>
-    <jw-modal id="show-addressInfo-modal">
-        <div>
-            <button>Edit</button>
-        </div>
-    </jw-modal>
-</div>
+<jw-modal id="choose-address-modal">
+    <div>
+        <app-choose-address></app-choose-address>
+    </div>
+</jw-modal>
 
-<!-- <jw-modal id="edit-room-modal">
-    <div>
-        <app-edit-room [modalId]="'edit-room-modal'"></app-edit-room>
-    </div>
-</jw-modal> -->
-<!-- 
-<jw-modal id="edit-amenity-modal">
-    <div>
-        <app-edit-amenity [apartmentId]='id' [amenityId]="amenity.id" [modalId]="'edit-amenity-modal'">
-        </app-edit-amenity>
-    </div>
-</jw-modal> -->
