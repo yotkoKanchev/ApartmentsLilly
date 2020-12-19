@@ -2,11 +2,8 @@
 {
     using Data;
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
-    using System;
-
     public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseSwaggerUI(this IApplicationBuilder app)
@@ -25,15 +22,6 @@
             var dbContext = services.ServiceProvider.GetService<ApartmentsLillyDbContext>();
 
             dbContext.Database.Migrate();
-        }
-
-        public static void SeedData(this IApplicationBuilder app)
-        {
-            using var serviceScope = app.ApplicationServices.CreateScope();
-            var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApartmentsLillyDbContext>();
-            var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-            roleManager.CreateAsync(new IdentityRole("Admin"));
         }
     }
 }

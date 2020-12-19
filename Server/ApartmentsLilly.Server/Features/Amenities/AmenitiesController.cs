@@ -5,10 +5,8 @@
     using Infrastructure.Extensions;
     using Infrastructure.Services;
     using Models;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [AllowAnonymous]
     public class AmenitiesController : ApiController
     {
         private readonly IAmenitiesService amenities;
@@ -32,15 +30,12 @@
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<AmenityDetailsServiceModel> Details(int apartmentId, int id)
         {
             return await this.amenities.GetById(apartmentId, id);
         }
 
         [HttpPut]
-        [AllowAnonymous]
-
         public async Task<ActionResult> Update(UpdateAmenityRequestModel model)
         {
             Result result = await this.amenities.Update(model.ApartmentId, model.AmenityId, model.Name, model.Importance);
@@ -68,7 +63,6 @@
 
         [HttpGet]
         [Route(nameof(ImportanceTypes))]
-        [AllowAnonymous]
         public ActionResult ImportanceTypes()
         {
             var types = EnumExtensions.GetValues<AmenityImportance>();

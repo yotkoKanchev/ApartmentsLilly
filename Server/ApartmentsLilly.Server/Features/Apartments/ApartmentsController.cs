@@ -3,18 +3,22 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Data.Models;
     using Models;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     using static Infrastructure.WebConstants;
 
     public class ApartmentsController : ApiController
     {
+        private readonly UserManager<User> userManager;
         private readonly IApartmentsService apartments;
 
-        public ApartmentsController(IApartmentsService apartments)
+        public ApartmentsController(UserManager<User> userManager, IApartmentsService apartments)
         {
+            this.userManager = userManager;
             this.apartments = apartments;
         }
 
@@ -43,9 +47,8 @@
 
         [HttpGet]
         [Route(nameof(All))]
-        [AllowAnonymous]
         public async Task<IEnumerable<ApartmentListingServiceModel>> All()
-        {
+        { 
             return await this.apartments.GetAll();
         }
 
@@ -59,7 +62,6 @@
 
         [HttpGet]
         [Route(Id)]
-        [AllowAnonymous]
         public async Task<ApartmentDetailsServiceModel> Details(int id)
         {
             return await this.apartments.GetById(id);
@@ -67,7 +69,6 @@
 
         [HttpPut]
         [Route(Id)]
-
         public async Task<ActionResult> Update(int id, UpdateApartmentRequestModel model)
         {
             var result = await this.apartments.Update(
@@ -91,8 +92,8 @@
             return Ok();
         }
 
-        [HttpPut]
-        public async Task<ActionResult> Update(UpdateApartmentAddressRequestModel model)
+        [HttpPut(nameof(ChangeAddress))]
+        public async Task<ActionResult> ChangeAddress([FromBody]UpdateApartmentAddressRequestModel model)
         {
             var result = await this.apartments.ChangeAddress(model.Id, model.AddressId);
 
@@ -106,7 +107,6 @@
 
         [HttpDelete]
         [Route(Id)]
-        [AllowAnonymous]
         public async Task<ActionResult> Delete(int id)
         {
             var result = await this.apartments.Delete(id);

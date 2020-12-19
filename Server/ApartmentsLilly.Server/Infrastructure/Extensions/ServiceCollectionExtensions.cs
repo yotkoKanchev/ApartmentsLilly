@@ -1,16 +1,17 @@
 ﻿namespace ApartmentsLilly.Server.Infrastructure.Extensions
 {
     using System.Text;
-    using ApartmentsLilly.Server.Features.Addresses;
-    using ApartmentsLilly.Server.Features.Amenities;
-    using ApartmentsLilly.Server.Features.Apartments;
-    using ApartmentsLilly.Server.Features.Rooms;
     using Data;
     using Data.Models;
+    using Features.Addresses;
+    using Features.Amenities;
+    using Features.Apartments;
     using Features.Identity;
     using Features.Profiles;
+    using Features.Rooms;
     using Features.Search;
     using Filters;
+    using Services;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
@@ -20,7 +21,6 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
-    using Services;
 
     public static class ServiceCollectionExtensions
     {
@@ -51,6 +51,7 @@
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApartmentsLillyDbContext>();
 
             return services;

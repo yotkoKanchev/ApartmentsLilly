@@ -3,12 +3,11 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Data.Models.Rooms;
+    using Infrastructure.Extensions;
     using Models;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using static Infrastructure.WebConstants;
-    using ApartmentsLilly.Server.Infrastructure.Extensions;
 
     public class RoomsController : ApiController
     {
@@ -20,7 +19,6 @@
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<ActionResult> Create(CreateRoomRequestModel model)
         {
             var result = await this.rooms.Create(
@@ -39,7 +37,6 @@
 
         [HttpGet]
         [Route("All/{apartmentId}")]
-        [AllowAnonymous]
         public async Task<IEnumerable<RoomListingServiceModel>> All(int apartmentId)
         {
             return await this.rooms.GetAllByApartmentId(apartmentId);
@@ -47,20 +44,9 @@
 
         [HttpGet]
         [Route(Id)]
-        [AllowAnonymous]
         public async Task<RoomDetailsServiceModel> Details(int id)
         {
             return await this.rooms.GetById(id);
-        }
-
-        [HttpGet]
-        [Route(nameof(RoomTypes))]
-        [AllowAnonymous]
-        public ActionResult RoomTypes()
-        {
-            var types =  EnumExtensions.GetValues<RoomType>();
-
-            return Ok(types);
         }
 
         [HttpPut]
@@ -79,7 +65,6 @@
 
         [HttpDelete]
         [Route(Id)]
-        [AllowAnonymous]
         public async Task<ActionResult> Delete(int id)
         {
             var result = await this.rooms
@@ -91,6 +76,15 @@
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route(nameof(RoomTypes))]
+        public ActionResult RoomTypes()
+        {
+            var types = EnumExtensions.GetValues<RoomType>();
+
+            return Ok(types);
         }
     }
 }

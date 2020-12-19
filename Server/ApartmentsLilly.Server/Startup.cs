@@ -32,7 +32,7 @@ namespace ApartmentsLilly.Server
                 .ConfigureCookiePolicyOptions()
                 .AddApiControllers();
         }
-             
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -42,8 +42,6 @@ namespace ApartmentsLilly.Server
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.SeedData();
 
             app
                 .UseSwaggerUI()
