@@ -11,14 +11,14 @@ export class HeaderComponent implements OnInit {
   title: string = "Lilly's"
   avatar: string = 'assets/images/noAvatar.png';
   toggleNavbar = true;
-  constructor(private authService: AuthService) { 
+  constructor(private authService: AuthService) {
   }
-  
+
   ngOnInit(): void {
     this.name = this.authService.getName();
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
   }
 

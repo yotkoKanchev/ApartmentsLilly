@@ -9,6 +9,7 @@ import { AuthService } from '../auth/auth.service';
 export class TokenInterceptorService implements  HttpInterceptor{
 
   constructor(public authService: AuthService) {}
+  
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
     request = request.clone({
@@ -18,5 +19,4 @@ export class TokenInterceptorService implements  HttpInterceptor{
     });
     return next.handle(request);
   }
-
 }

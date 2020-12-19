@@ -26,11 +26,14 @@ export class ErrorInterceptorService implements HttpInterceptor {
               .map(e => err.error.errors[e])
               .join('\n');
             break;
+          case 403:
+            message = "Unauthorized access."
+            break;
           default:
             message = "Unexpected error"
             break;
         }
-        
+
         this.toastrService.error(message)
         return throwError(err)
       })

@@ -1,5 +1,5 @@
 <div class="container-fluid jumbotron">
-    <button class="btn btn-primary mb-3" routerLink='create'>Create</button>
+    <button *ngIf="authService.isAdmin()" class="btn btn-primary mb-3" routerLink='create'>Create</button>
     <div class="row">
         <div class="col-lg-3" *ngFor="let apartment of apartments">
             <div class="card" style="width: 18rem;">

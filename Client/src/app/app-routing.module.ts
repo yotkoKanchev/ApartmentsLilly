@@ -8,16 +8,17 @@ import { ApartmentsRoutingModule } from './apartments/apartments-routing.module'
 import { RoomsRoutingModule } from './rooms/rooms-routing.module';
 import { AddressesRoutingModule } from './addresses/addresses-routing.module';
 import { AmenitiesRoutingModule } from './amenities/amenities-routing.module';
+import { AdminGuardService } from './auth/guards/admin-guard.service';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: StartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'apartments', loadChildren: () => ApartmentsRoutingModule, canActivate: [AuthGuardService] },
-  { path: 'addresses', loadChildren: () => AddressesRoutingModule, canActivate: [AuthGuardService] },
-  { path: 'rooms', loadChildren: () => RoomsRoutingModule, canActivate: [AuthGuardService] },
-  { path: 'amenities', loadChildren: () => AmenitiesRoutingModule, canActivate: [AuthGuardService] },
+  { path: 'apartments', loadChildren: () => ApartmentsRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
+  { path: 'addresses', loadChildren: () => AddressesRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
+  { path: 'rooms', loadChildren: () => RoomsRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
+  { path: 'amenities', loadChildren: () => AmenitiesRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
 ];
 
 @NgModule({

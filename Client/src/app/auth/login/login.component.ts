@@ -22,8 +22,9 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.loginForm.value).subscribe(data => {
-      this.authService.saveToken(data['token']);
-      this.authService.saveName(data['name']);
+      // this.authService.saveToken(data['token']);
+      // this.authService.saveName(data['name']);
+      // this.authService.setIsAdmin(data['isAdmin']);
       this.router.navigate(['/'])
     })
   }
@@ -36,4 +37,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password')
   }
 
+  get isAdmin(){
+    return this.loginForm.get('isAdmin')
+  }
 }

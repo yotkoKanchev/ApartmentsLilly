@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ApartmentsService } from '../apartments.service';
 import { ApartmentListingModel } from '../models/apartment-listing.model';
 
@@ -11,7 +12,7 @@ import { ApartmentListingModel } from '../models/apartment-listing.model';
 export class ListApartmentsComponent implements OnInit {
   apartments: Array<ApartmentListingModel>
   
-  constructor(private apartmentService: ApartmentsService, private router: Router) { }
+  constructor(private apartmentService: ApartmentsService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.fetchApartments();
