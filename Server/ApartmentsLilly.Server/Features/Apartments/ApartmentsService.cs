@@ -158,6 +158,27 @@
                 .ToListAsync();
         }
 
+        public async Task<Result> ChangeAddress(int apartmentId, int addressId)
+        {
+            var apartment = await this.GetApartment(apartmentId)
+                .FirstOrDefaultAsync();
+
+            if (apartment == null)
+            {
+                return $"Apartment with Id: {apartmentId} does not exists.";
+            }
+
+            if (!await this.addresses.Exists(addressId))
+            {
+                return $"Address with Id: {addressId} does not exists.";
+            }
+
+            apartment.AddressId = addressId;
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
         private IQueryable<Apartment> GetApartment(int id)
         {
             return this.data

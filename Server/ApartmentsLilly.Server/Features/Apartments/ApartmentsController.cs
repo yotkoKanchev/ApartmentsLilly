@@ -67,6 +67,7 @@
 
         [HttpPut]
         [Route(Id)]
+
         public async Task<ActionResult> Update(int id, UpdateApartmentRequestModel model)
         {
             var result = await this.apartments.Update(
@@ -81,6 +82,19 @@
                 model.MaxOccupants.Value,
                 model.MainImageUrl,
                 model.AddressId);
+
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Update(UpdateApartmentAddressRequestModel model)
+        {
+            var result = await this.apartments.ChangeAddress(model.Id, model.AddressId);
 
             if (result.Failure)
             {

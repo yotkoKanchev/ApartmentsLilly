@@ -2,11 +2,12 @@
 {
     using System.Threading.Tasks;
     using Data.Models;
+    using Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Options;
-    using Models;
 
     public class IdentityController : ApiController
     {
@@ -36,9 +37,18 @@
             };
 
             var result = await this.userManager.CreateAsync(user, model.Password);
+
             if (!result.Succeeded)
             {
                 return BadRequest(result.Errors);
+            }
+            else
+            {
+                var admins = await this.userManager.GetUsersInRoleAsync("Admin");
+                if (admins.Count == 0 && await this.userManager.Users.CountAsync() == 1)
+                {
+                    await this.userManager.AddToRoleAsync(user, "Admin");
+                }
             }
 
             return Ok();

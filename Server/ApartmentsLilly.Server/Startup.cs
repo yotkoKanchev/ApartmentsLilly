@@ -18,10 +18,10 @@ namespace ApartmentsLilly.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAntiforgery(options =>
-            {
-                options.HeaderName = "X-CSRF-TOKEN";
-            });
+            //services.AddAntiforgery(options =>
+            //{
+            //    options.HeaderName = "X-CSRF-TOKEN";
+            //});
 
             services
                 .AddDatabase(this.Configuration)
@@ -42,6 +42,8 @@ namespace ApartmentsLilly.Server
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.SeedData();
 
             app
                 .UseSwaggerUI()

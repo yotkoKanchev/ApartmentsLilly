@@ -23,5 +23,7 @@
             double size, double basePrice, int maxOccupants, string mainImageUrl, int addressId);
 
         Task<bool> Exists(int apartmentId);
+
+        Task<Result> ChangeAddress(int apartmentId, int addressId);
     }
 }
