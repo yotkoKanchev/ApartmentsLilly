@@ -55,8 +55,6 @@
 
             if (await data.Users.CountAsync() == 1)
             {
-                await this.roleManager.CreateAsync(new IdentityRole(AdminRole));
-                await this.roleManager.CreateAsync(new IdentityRole(UserRole));
                 await this.userManager.AddToRoleAsync(user, AdminRole);
             }
             else

@@ -45,6 +45,7 @@ namespace ApartmentsLilly.Server
 
             app
                 .UseSwaggerUI()
+                .SeedData()
                 .UseCookiePolicy()
                 .UseRouting()
                 .UseCors(options => options

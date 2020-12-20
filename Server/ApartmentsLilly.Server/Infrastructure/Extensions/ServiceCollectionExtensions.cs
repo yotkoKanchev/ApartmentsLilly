@@ -6,6 +6,7 @@
     using Features.Addresses;
     using Features.Amenities;
     using Features.Apartments;
+    using Features.Beds;
     using Features.Identity;
     using Features.Profiles;
     using Features.Rooms;
@@ -94,7 +95,8 @@
                 .AddTransient<IAddressService, AddressService>()
                 .AddTransient<IApartmentsService, ApartmentsService>()
                 .AddTransient<IAmenitiesService, AmenitiesService>()
-                .AddTransient<IRoomsService, RoomsService>();
+                .AddTransient<IRoomsService, RoomsService>()
+                .AddTransient<IBedsService, BedsService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
             => services.AddSwaggerGen(c =>

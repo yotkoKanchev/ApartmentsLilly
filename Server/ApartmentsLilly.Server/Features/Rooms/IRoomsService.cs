@@ -16,5 +16,7 @@
         Task<Result> Update(int id, string name, int? type, bool isSleepable);
 
         Task<Result> Delete(int id);
+
+        Task<bool> Exists(int id);
     }
 }

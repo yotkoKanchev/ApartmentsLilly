@@ -11,8 +11,6 @@
     using Models;
     using Microsoft.EntityFrameworkCore;
 
-    using static Infrastructure.Extensions.EnumExtensions;
-
     public class RoomsService : IRoomsService
     {
         private readonly ApartmentsLillyDbContext data;
@@ -26,9 +24,7 @@
 
         public async Task<Result> Create(string name, int roomType, bool isSleepable, int apartmentId)
         {
-            var isApartmentExists = await this.apartments.Exists(apartmentId);
-
-            if (isApartmentExists == false)
+            if (!await this.apartments.Exists(apartmentId))
             {
                 return $"Apartment with Id: {apartmentId} does not exists.";
             }
@@ -59,16 +55,9 @@
 
         public async Task<RoomDetailsServiceModel> GetById(int id)
         {
-            var result = await this.ById(id)
+            return await this.ById(id)
                 .To<RoomDetailsServiceModel>()
                 .FirstOrDefaultAsync();
-
-            result.RoomType = await this.data.Rooms
-                .Where(aa => aa.Id == id)
-                .Select(a => new EnumValue{ Name = a.RoomType.ToString(), Value = (int)a.RoomType })
-                .FirstAsync();
-
-            return result;
         }
 
         public async Task<Result> Update(int id, string name, int? roomType, bool isSleepable)
@@ -106,6 +95,12 @@
             await this.data.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<bool> Exists(int id)
+        {
+            return await this.data.Rooms
+                .AnyAsync(r => r.Id == id);
         }
 
         private IQueryable<Room> ById(int id)
