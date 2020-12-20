@@ -2,7 +2,6 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-    using Amenities.Models;
     using Data;
     using Data.Models.Amenities;
     using Data.Models.Mappings;
@@ -94,10 +93,10 @@
             return true;
         }
 
-        public async Task<AmenityDetailsServiceModel> GetById(int apartmentId, int amenityId)
+        public async Task<T> GetById<T>(int apartmentId, int amenityId)
         {
             return await this.ById(apartmentId, amenityId)
-                .To<AmenityDetailsServiceModel>()
+                .To<T>()
                 .FirstOrDefaultAsync();
         }
 

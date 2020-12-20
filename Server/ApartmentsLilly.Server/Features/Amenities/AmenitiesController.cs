@@ -32,7 +32,7 @@
         [HttpGet]
         public async Task<AmenityDetailsServiceModel> Details(int apartmentId, int id)
         {
-            return await this.amenities.GetById(apartmentId, id);
+            return await this.amenities.GetById<AmenityDetailsServiceModel>(apartmentId, id);
         }
 
         [HttpPut]

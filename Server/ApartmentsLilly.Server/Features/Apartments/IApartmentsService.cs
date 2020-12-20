@@ -4,18 +4,17 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Infrastructure.Services;
-    using Models;
 
     public interface IApartmentsService
     {
         Task<Result> Create(int addressId, string name, string description, string entry, int? floor, string number,
             double? size, double? basePrice, int? maxOccupants, string mainImageUrl);
         // TODO GetAll should accept cityName as parameter!!!
-        Task<IEnumerable<ApartmentListingServiceModel>> GetAll();
+        Task<IEnumerable<T>> GetAll<T>();
 
-        Task<IEnumerable<ApartmentListingServiceModel>> GetAllAvailable(DateTime startDate, DateTime endDate);
+        Task<IEnumerable<T>> GetAllAvailable<T>(DateTime startDate, DateTime endDate);
 
-        Task<ApartmentDetailsServiceModel> GetById(int id);
+        Task<T> GetById<T>(int id);
 
         Task<Result> Delete(int id);
 

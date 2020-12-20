@@ -37,12 +37,12 @@
             return address.Id;
         }
 
-        public async Task<AddressDetailsServiceModel> Details(int id)
+        public async Task<T> GetById<T>(int id)
         {
             return await this.data
                 .Addresses
                 .Where(a => a.Id == id)
-                .To<AddressDetailsServiceModel>()
+                .To<T>()
                 .FirstOrDefaultAsync();
         }
 
@@ -88,12 +88,12 @@
             return "There are other apartments located on this address";
         }
 
-        public async Task<IEnumerable<AddressDetailsServiceModel>> GetAll()
+        public async Task<IEnumerable<T>> GetAll<T>()
         {
             return await this.data
                   .Addresses
                   .OrderByDescending(x => x.Apartments.Count)
-                  .To<AddressDetailsServiceModel>()
+                  .To<T>()
                   .ToListAsync();
         }
 

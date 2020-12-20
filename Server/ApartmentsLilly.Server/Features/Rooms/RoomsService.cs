@@ -8,7 +8,6 @@
     using Features.Apartments;
     using Infrastructure.Services;
     using Infrastructure.Mapping;
-    using Models;
     using Microsoft.EntityFrameworkCore;
 
     public class RoomsService : IRoomsService
@@ -43,20 +42,20 @@
             return (room.Id);
         }
 
-        public async Task<IEnumerable<RoomListingServiceModel>> GetAllByApartmentId(int apartmentId)
+        public async Task<IEnumerable<T>> GetAllByApartmentId<T>(int apartmentId)
         {
             return await this.data
                 .Rooms
                 .Where(r => r.ApartmentId == apartmentId)
                 .OrderByDescending(a => a.Beds.Count)
-                .To<RoomListingServiceModel>()
+                .To<T>()
                 .ToListAsync();
         }
 
-        public async Task<RoomDetailsServiceModel> GetById(int id)
+        public async Task<T> GetById<T>(int id)
         {
             return await this.ById(id)
-                .To<RoomDetailsServiceModel>()
+                .To<T>()
                 .FirstOrDefaultAsync();
         }
 

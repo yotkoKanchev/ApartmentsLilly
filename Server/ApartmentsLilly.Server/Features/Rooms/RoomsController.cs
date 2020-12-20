@@ -39,14 +39,14 @@
         [Route("All/{apartmentId}")]
         public async Task<IEnumerable<RoomListingServiceModel>> All(int apartmentId)
         {
-            return await this.rooms.GetAllByApartmentId(apartmentId);
+            return await this.rooms.GetAllByApartmentId<RoomListingServiceModel>(apartmentId);
         }
 
         [HttpGet]
         [Route(Id)]
         public async Task<RoomDetailsServiceModel> Details(int id)
         {
-            return await this.rooms.GetById(id);
+            return await this.rooms.GetById<RoomDetailsServiceModel>(id);
         }
 
         [HttpPut]

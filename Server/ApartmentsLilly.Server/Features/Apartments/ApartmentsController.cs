@@ -49,7 +49,7 @@
         [Route(nameof(All))]
         public async Task<IEnumerable<ApartmentListingServiceModel>> All()
         { 
-            return await this.apartments.GetAll();
+            return await this.apartments.GetAll<ApartmentListingServiceModel>();
         }
 
         [Route(nameof(Search))]
@@ -57,14 +57,14 @@
         [AllowAnonymous]
         public async Task<IEnumerable<ApartmentListingServiceModel>> Search(DateTime startDate, DateTime endDate)
         {
-            return await this.apartments.GetAllAvailable(startDate, endDate);
+            return await this.apartments.GetAllAvailable<ApartmentListingServiceModel>(startDate, endDate);
         }
 
         [HttpGet]
         [Route(Id)]
         public async Task<ApartmentDetailsServiceModel> Details(int id)
         {
-            return await this.apartments.GetById(id);
+            return await this.apartments.GetById<ApartmentDetailsServiceModel>(id);
         }
 
         [HttpPut]

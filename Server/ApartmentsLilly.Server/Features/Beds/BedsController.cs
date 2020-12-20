@@ -1,11 +1,11 @@
 ﻿namespace ApartmentsLilly.Server.Features.Beds
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Models;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     using static Infrastructure.WebConstants;
-    using System.Collections.Generic;
 
     public class BedsController : ApiController
     {

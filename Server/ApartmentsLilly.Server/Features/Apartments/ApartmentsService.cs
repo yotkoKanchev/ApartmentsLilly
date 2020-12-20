@@ -7,7 +7,6 @@
     using Data.Models;
     using Features.Addresses;
     using Features.Amenities;
-    using Features.Apartments.Models;
     using Infrastructure.Mapping;
     using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
@@ -55,19 +54,19 @@
             return apartment.Id;
         }
 
-        public async Task<IEnumerable<ApartmentListingServiceModel>> GetAll()
+        public async Task<IEnumerable<T>> GetAll<T>()
         {
             return await this.data
                 .Apartments
                 .OrderBy(a => a.Name)
-                .To<ApartmentListingServiceModel>()
+                .To<T>()
                 .ToListAsync();
         }
 
-        public async Task<ApartmentDetailsServiceModel> GetById(int id)
+        public async Task<T> GetById<T>(int id)
         {
             return await this.GetApartment(id)
-                .To<ApartmentDetailsServiceModel>()
+                .To<T>()
                 .FirstOrDefaultAsync();
         }
 
@@ -145,7 +144,7 @@
                 .AnyAsync(a => a.Id == apartmentId);
         }
 
-        public async Task<IEnumerable<ApartmentListingServiceModel>> GetAllAvailable(System.DateTime startDate, System.DateTime endDate)
+        public async Task<IEnumerable<T>> GetAllAvailable<T>(System.DateTime startDate, System.DateTime endDate)
         {
             return await this.data
                 .Apartments
@@ -154,7 +153,7 @@
                     .Any(b => (b.StartDate >= startDate && b.EndDate <= startDate) &&
                               (b.StartDate >= endDate && b.EndDate <= endDate)))
                 .OrderBy(a => a.Name)
-                .To<ApartmentListingServiceModel>()
+                .To<T>()
                 .ToListAsync();
         }
 

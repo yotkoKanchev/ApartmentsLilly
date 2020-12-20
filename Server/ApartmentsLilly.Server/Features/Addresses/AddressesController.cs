@@ -33,13 +33,13 @@
         [Route(Id)]
         public async Task<AddressDetailsServiceModel> Details(int id)
         {
-            return await this.addresses.Details(id);
+            return await this.addresses.GetById<AddressDetailsServiceModel>(id);
         }
 
         [HttpGet]
         public async Task<IEnumerable<AddressDetailsServiceModel>> All()
         {
-            return await this.addresses.GetAll();
+            return await this.addresses.GetAll<AddressDetailsServiceModel>();
         }
 
 

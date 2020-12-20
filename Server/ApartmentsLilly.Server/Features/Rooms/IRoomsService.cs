@@ -3,15 +3,14 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Infrastructure.Services;
-    using Models;
 
     public interface IRoomsService
     {
         Task<Result> Create(string name, int type, bool isSleepable, int apartmentId);
 
-        Task<IEnumerable<RoomListingServiceModel>> GetAllByApartmentId(int apartmentId);
+        Task<IEnumerable<T>> GetAllByApartmentId<T>(int apartmentId);
 
-        Task<RoomDetailsServiceModel> GetById(int id);
+        Task<T> GetById<T>(int id);
 
         Task<Result> Update(int id, string name, int? type, bool isSleepable);
 
