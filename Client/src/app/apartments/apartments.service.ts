@@ -43,6 +43,6 @@ export class ApartmentsService {
   }
 
   changeAddress(id: number, addressId: number) {
-    return this.http.put(this.apartmentPath, { id: id, addressId: addressId })
+    return this.http.put(this.apartmentPath + "/changeAddress", { id: id, addressId: addressId })
   }
 }

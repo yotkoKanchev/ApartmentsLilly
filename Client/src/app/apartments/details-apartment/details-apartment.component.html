@@ -1,13 +1,12 @@
 <div *ngIf='apartment' class="container-fluid jumbotron">
-    <div class="mt-1 mb-2">
-        <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}" value="Edit">
-        <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
-        <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-room-modal')" value="Add Room">
-        <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-amenity-modal')" value="Add Amenity">
-        <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/{{apartment.id}}/changeAddress" value="Change Address">
-    </div>
+
     <div class="row d-flex justify-content-center">
         <div class="col-lg-5">
+            <div class="mb-3">
+                <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}"
+                    value="Edit">
+                <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
+            </div>
             <div class="card" style="width: 26rem;">
                 <h3 class="card-title">{{apartment.name}}</h3>
                 <img [src]="apartment.mainImageUrl" class="card-img-top" alt="Apartment {{apartment.name}}">
@@ -23,35 +22,55 @@
             </div>
         </div>
         <div class="col-lg-5">
-            <p><strong>Address:</strong></p>
-            <div class="form-group border mb-2">
-                <p>{{apartment.address.city}}, {{apartment.address.country}}</p>
-                <p *ngIf="apartment.address.postalCode && apartment.address.neighborhood">
-                    {{apartment.address.postalCode}}, кв. {{apartment.address.neighborhood}}</p>
-                <p>ул. {{apartment.address.streetAddress}}</p>
-                <input id="btn" type="button" class="btn btn-sm btn-primary"
-                    [routerLink]="['/addresses/edit', apartment.address.id, id]" value="Edit Address">
+            <div class="mb-3">
+                <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-room-modal')"
+                    value="Add Room">
+                <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-amenity-modal')"
+                    value="Add Amenity">
             </div>
-            <p *ngIf="apartment.rooms"><strong>Rooms: </strong></p>
-            <div class="border mb-2" *ngFor="let room of apartment.rooms">
-                <p>Name: {{room.name}}</p>
-                <p>Type: {{room.roomType.name}}</p>
-                <input id="btn" type="button" class="btn btn-sm btn-primary mr-2" routerLink="/rooms/edit/{{room.id}}"
-                    value="Edit Room">
-                <button type="button" class="btn btn-sm btn-primary mr-2" (click)="deleteRoom(room.id)">Delete
-                    Room</button>
-                <input *ngIf="room.isSleepable" type="button" class="btn btn-sm btn-primary"
-                    (click)="openModal('add-bed-modal')" value="Add Bed">
+            <div class="mb-3 form-group"><strong>Address:</strong>
+                <div class="border border-success p-2 mb-2">
+                    <p>{{apartment.address.city}}, {{apartment.address.country}}</p>
+                    <p *ngIf="apartment.address.postalCode && apartment.address.neighborhood">
+                        {{apartment.address.postalCode}}, кв. {{apartment.address.neighborhood}}</p>
+                    <p>ул. {{apartment.address.streetAddress}}</p>
+                    <input type="button" class="btn btn-sm btn-primary mr-2"
+                        routerLink="/apartments/{{apartment.id}}/changeAddress" value="Change Address">
+                    <input id="btn" type="button" class="btn btn-sm btn-primary"
+                        [routerLink]="['/addresses/edit', apartment.address.id, id]" value="Edit Address">
+                </div>
             </div>
-
-            <p *ngIf="apartment.amenities"><strong>Amenities: </strong></p>
-            <div class="border mb-2" *ngFor="let amenity of apartment.amenities">
-                <p>Name: {{amenity.name}}</p>
-                <p>Importance: {{amenity.importance.name}}</p>
-                <input type="button" class="btn btn-sm btn-primary mr-2"
-                    [routerLink]="['/amenities/edit', amenity.id,  id]" value="Edit Amenity">
-                <button type="button" class="btn btn-sm btn-primary" (click)="deleteAmenity(amenity.id)">Delete
-                    Amenity</button>
+            <div class="form-group" *ngIf="apartment.rooms"><strong>Rooms: </strong>
+                <div class="border border-success mb-2 p-2" *ngFor="let room of apartment.rooms">
+                    <p class="mr-2"><strong>{{room.roomType.name}}: </strong>{{room.name}}</p>
+                    <div class="mb-2">
+                        <input id="btn" type="button" class="btn btn-sm btn-primary mr-2"
+                            routerLink="/rooms/edit/{{room.id}}" value="Edit Room">
+                        <button type="button" class="btn btn-sm btn-primary mr-2" (click)="deleteRoom(room.id)">Delete
+                            Room</button>
+                        <input *ngIf="room.isSleepable" type="button" class="btn btn-sm btn-primary"
+                            (click)="openModal('add-bed-modal')" value="Add Bed">
+                    </div>
+                    <div *ngIf="room.beds.length > 0">
+                        <div class="mr-2 form-group"><strong>Beds: </strong>
+                            <div style="display: inline-block;" *ngFor="let bed of room.beds">
+                                <a class="mr-1" (click)="deleteBed()">{{bed.bedType.name}}, </a>
+                            </div>
+                            <p style="color:red">/click to remove/</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="apartment.amenities"><strong>Amenities: </strong>
+                <div class="border border-success p-2 mb-2" *ngFor="let amenity of apartment.amenities">
+                    <p><strong>Name: </strong>{{amenity.name}}, <strong>Importance: </strong>{{amenity.importance.name}}
+                    </p>
+                    <p></p>
+                    <input type="button" class="btn btn-sm btn-primary mr-2"
+                        [routerLink]="['/amenities/edit', amenity.id,  id]" value="Edit Amenity">
+                    <button type="button" class="btn btn-sm btn-primary" (click)="deleteAmenity(amenity.id)">Delete
+                        Amenity</button>
+                </div>
             </div>
         </div>
     </div>
@@ -75,4 +94,3 @@
         <app-choose-address></app-choose-address>
     </div>
 </jw-modal>
-

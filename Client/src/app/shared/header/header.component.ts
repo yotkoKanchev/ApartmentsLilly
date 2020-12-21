@@ -7,7 +7,6 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  name: string;
   title: string = "Lilly's"
   avatar: string = 'assets/images/noAvatar.png';
   toggleNavbar = true;
@@ -15,11 +14,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.name = this.authService.getName();
   }
 
   logout() {
-    this.authService.logout();
+      this.authService.logout();
   }
 
 }

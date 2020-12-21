@@ -60,4 +60,8 @@ export class DetailsApartmentComponent implements OnInit {
   openModal(id: string) {
     this.modalService.open(id);
   }
+
+  deleteBed(){
+    console.log("yes")
+  }
 }

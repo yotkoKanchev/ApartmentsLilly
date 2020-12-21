@@ -11,10 +11,10 @@ export class TokenInterceptorService implements  HttpInterceptor{
   constructor(public authService: AuthService) {}
   
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
+    let token = this.authService.getToken();
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${this.authService.getToken()}`
+        Authorization: `Bearer ${token}`
       }
     });
     return next.handle(request);

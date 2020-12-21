@@ -19,7 +19,7 @@ export class AuthService {
     return this.http.post<LoginModel>(this.loginPath, data)
       .pipe(map(user => {
         if (user.isAdmin) {
-          localStorage.setItem('admin', JSON.stringify(user));
+          localStorage.setItem('user', JSON.stringify(user));
         } else {
           localStorage.setItem('name', user['name']);
           localStorage.setItem('token', user['token']);
@@ -38,34 +38,25 @@ export class AuthService {
     return this.http.post(this.registerPath, data);
   }
 
-  getAdmin() {
-    return JSON.parse(localStorage.getItem('admin'));
+  getUser() {
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   getToken() {
-    let admin = this.getAdmin();
-    if (admin) {
-      return admin.token;
-    }
-
-    return localStorage.getItem('token');
+    let user = this.getUser();
+    return user ? user.token : localStorage.getItem('token');
   }
 
   getName() {
-    let admin = this.getAdmin();
-
-    if (admin) {
-      return admin.name;
-    }
-
-    return localStorage.getItem('name');
+    let user = this.getUser();
+    return user ? user.name : localStorage.getItem('name');
   }
 
   isAuthenticated() {
-    return localStorage.getItem('admin') || localStorage.getItem('token');
+    return localStorage.getItem('user') || localStorage.getItem('token');
   }
 
   isAdmin() {
-    return this.getAdmin();
+    return this.getUser();
   }
 }

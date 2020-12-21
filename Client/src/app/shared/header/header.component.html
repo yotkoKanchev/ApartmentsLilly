@@ -18,7 +18,7 @@
             </li>
             <li *ngIf="authService.isAuthenticated()" class="nav-item dropdown right-align">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                    aria-expanded="false"><span class="mr-2"><img id="avatar" src="{{avatar}}"></span>{{name}}</a>
+                    aria-expanded="false"><span class="mr-2"><img id="avatar" src="{{avatar}}"></span>{{authService.getName()}}</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="/bookings/">Bookings</a>
                     <a class="dropdown-item" href="/requests/">Requests</a>
