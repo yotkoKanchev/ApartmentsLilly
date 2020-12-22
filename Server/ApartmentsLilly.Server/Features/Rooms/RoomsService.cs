@@ -6,6 +6,7 @@
     using Data;
     using Data.Models.Rooms;
     using Features.Apartments;
+    using Features.Beds;
     using Infrastructure.Services;
     using Infrastructure.Mapping;
     using Microsoft.EntityFrameworkCore;
@@ -89,6 +90,15 @@
             if (room == null)
             {
                 return $"Room with Id: {id} does not exists.";
+            }
+
+            if (room.IsSleepable)
+            {
+                var beds = await this.ById(id)
+                    .SelectMany(r => r.Beds)
+                    .ToListAsync();
+
+                this.data.Beds.RemoveRange(beds);
             }
 
             this.data.Rooms.Remove(room);

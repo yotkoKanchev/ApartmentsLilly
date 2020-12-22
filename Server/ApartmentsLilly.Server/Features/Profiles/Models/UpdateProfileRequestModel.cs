@@ -1,7 +1,6 @@
 ﻿namespace ApartmentsLilly.Server.Features.Profiles.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using Data.Models;
 
     using static Data.Validation.User;
 
@@ -18,15 +17,11 @@
         [MaxLength(MaxNameLength)]
         public string LastName { get; set; }
 
-        public string MainPhotoUrl { get; set; }
+        [Url]
+        public string AvatarUrl { get; set; }
 
-        public string WebSite { get; set; }
-
-        //[MaxLength(MaxBiographyLength)]
-        public string Biography { get; set; }
-
-        public Gender Gender { get; set; }
-
-        public bool IsPrivate { get; set; }
+        [MaxLength(20)]
+        [MinLength(4)]
+        public string PhoneNumber { get; set; }
     }
 }

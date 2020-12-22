@@ -4,9 +4,10 @@
     using System.Threading.Tasks;
     using Data;
     using Data.Models;
+    using Infrastructure.Mapping;
     using Infrastructure.Services;
-    using Microsoft.EntityFrameworkCore;
     using Models;
+    using Microsoft.EntityFrameworkCore;
 
     public class ProfileService : IProfileService
     {
@@ -18,24 +19,17 @@
             => await this.data
                 .Users
                 .Where(u => u.Id == userId)
-                .Select(u => new ProfileServiceModel
-                {
-                    FirstName = u.Profile.FirstName,
-                    LastName = u.Profile.LastName,
-                    MainImage = u.Profile.MainImage.Url,
-                })
+                .To<ProfileServiceModel>()
                 .FirstOrDefaultAsync();
 
         public async Task<Result> Update(
             string userId,
             string email,
+            string userName,
             string firstName,
             string lastName,
-            string name,
-            string mainPhotoUrl,
-            string webSite,
-            string biography,
-            Gender gender)
+            string avatarUrl,
+            string phoneNumber)
         {
             var user = await this.data
                 .Users
@@ -53,12 +47,14 @@
             }
 
             var result = await this.ChangeEmail(user, userId, email);
+
             if (result.Failure)
             {
                 return result;
             }
 
-            result = await this.ChangeUserName(user, userId, email);
+            result = await this.ChangeUserName(user, userId, userName);
+
             if (result.Failure)
             {
                 return result;
@@ -68,8 +64,8 @@
                 user.Profile,
                 firstName,
                 lastName,
-                mainPhotoUrl, 
-                gender);
+                avatarUrl,
+                phoneNumber);
 
             await this.data.SaveChangesAsync();
 
@@ -105,10 +101,14 @@
 
                 if (userNameExists)
                 {
-                    return "The provided user name is already taken.";
+                    return "Provided username is already taken.";
                 }
 
                 user.UserName = userName;
+            }
+            else
+            {
+                return "Provided username is not valid.";
             }
 
             return true;
@@ -118,8 +118,8 @@
             Profile profile,
             string firsName,
             string lastName,
-            string mainPhotoUrl,
-            Gender gender)
+            string avatarUrl,
+            string phoneNumber)
         {
             if (profile.FirstName != firsName)
             {
@@ -132,9 +132,14 @@
             }
             // add change image logic
 
-            if (profile.Gender != gender)
+            if (profile.AvatarUrl != avatarUrl)
             {
-                profile.Gender = gender;
+                profile.AvatarUrl = avatarUrl;
+            }
+
+            if (profile.PhoneNumber != phoneNumber)
+            {
+                profile.PhoneNumber = phoneNumber;
             }
         }
     }

@@ -18,10 +18,15 @@
         [MaxLength(MaxNameLength)]
         public string LastName { get; set; }
 
-        public string ImageId { get; set; }
+        //public string AvatarId { get; set; }
 
-        public Image MainImage { get; set; }
+        //public Image AvatarImage { get; set; }
 
-        public Gender Gender { get; set; }
+        [Url]
+        public string AvatarUrl { get; set; }
+
+        [MaxLength(20)]
+        [MinLength(4)]
+        public string PhoneNumber { get; set; }
     }
 }

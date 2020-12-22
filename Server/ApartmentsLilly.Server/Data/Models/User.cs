@@ -19,7 +19,6 @@
 
         public string ModifiedBy { get; set; }
 
-        //public IEnumerable<Cat> Cats { get; } = new HashSet<Cat>();
         public virtual IEnumerable<Review> Reviews { get; } = new HashSet<Review>();
 
         public virtual IEnumerable<Request> Requests { get; } = new HashSet<Request>();

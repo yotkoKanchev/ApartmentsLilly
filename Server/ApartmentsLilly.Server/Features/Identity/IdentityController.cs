@@ -40,6 +40,11 @@
         [Route(nameof(Register))]
         public async Task<ActionResult> Register(RegisterRequestModel model)
         {
+            if (model.Password != model.ConfirmPassword)
+            {
+                return BadRequest("Passwords do not match.");
+            }
+
             var user = new User
             {
                 Email = model.Email,
