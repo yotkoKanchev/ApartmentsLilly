@@ -8,8 +8,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    using static Infrastructure.WebConstants;
-
     public class ProfilesController : ApiController
     {
         private readonly IProfileService profiles;
@@ -28,13 +26,8 @@
 
         [HttpGet]
         public async Task<ProfileServiceModel> Mine()
-            => await this.profiles.ByUser(this.currentUser.GetId());
-
-        [HttpGet]
-        [Route(Id)]
-        public async Task<ProfileServiceModel> Details(string id)
         {
-            return await this.profiles.ByUser(id);
+            return await this.profiles.ByUser(this.currentUser.GetId());
         }
 
         [HttpPut]

@@ -6,7 +6,6 @@
     using static Infrastructure.WebConstants;
 
     [Authorize]
-    [Authorize(Roles = AdminRole)]
     [ApiController]
     [Route("[controller]")]
     public abstract class ApiController : ControllerBase

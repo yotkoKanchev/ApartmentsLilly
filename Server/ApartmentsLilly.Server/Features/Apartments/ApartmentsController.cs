@@ -11,6 +11,7 @@
 
     using static Infrastructure.WebConstants;
 
+    [Authorize(Roles = AdminRole)]
     public class ApartmentsController : ApiController
     {
         private readonly UserManager<User> userManager;

@@ -3,10 +3,12 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using static Infrastructure.WebConstants;
 
+    [Authorize(Roles = AdminRole)]
     public class AddressesController : ApiController
     {
         private readonly IAddressService addresses;

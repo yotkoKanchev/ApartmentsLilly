@@ -5,8 +5,12 @@
     using Infrastructure.Extensions;
     using Infrastructure.Services;
     using Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static Infrastructure.WebConstants;
+
+    [Authorize(Roles = AdminRole)]
     public class AmenitiesController : ApiController
     {
         private readonly IAmenitiesService amenities;

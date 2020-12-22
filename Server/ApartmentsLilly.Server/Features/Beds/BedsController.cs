@@ -4,10 +4,12 @@
     using Data.Models.Beds;
     using Infrastructure.Extensions;
     using Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using static Infrastructure.WebConstants;
 
+    [Authorize(Roles = AdminRole)]
     public class BedsController : ApiController
     {
         private readonly IBedsService beds;
