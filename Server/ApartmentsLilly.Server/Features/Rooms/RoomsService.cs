@@ -36,7 +36,7 @@
                 ApartmentId = apartmentId,
             };
 
-            this.data.Add(room);
+            await this.data.AddAsync(room);
             await this.data.SaveChangesAsync();
 
             return (room.Id);
@@ -48,6 +48,7 @@
                 .Rooms
                 .Where(r => r.ApartmentId == apartmentId)
                 .OrderByDescending(a => a.Beds.Count)
+                .ThenBy(a => a.RoomType.ToString())
                 .To<T>()
                 .ToListAsync();
         }

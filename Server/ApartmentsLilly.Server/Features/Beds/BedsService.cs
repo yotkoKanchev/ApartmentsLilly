@@ -1,12 +1,10 @@
 ﻿namespace ApartmentsLilly.Server.Features.Beds
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Data;
     using Data.Models.Beds;
     using Features.Rooms;
-    using Infrastructure.Mapping;
     using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
 
@@ -34,17 +32,10 @@
                 BedType = bedType,
             };
 
-            this.data.Beds.Add(bed);
+            await this.data.AddAsync(bed);
             await this.data.SaveChangesAsync();
 
             return true;
-        }
-
-        public Task<T> GetById<T>(int id)
-        {
-            return this.ById(id)
-                .To<T>()
-                .FirstOrDefaultAsync();
         }
 
         public async Task<Result> Delete(int id)
@@ -60,14 +51,6 @@
             await data.SaveChangesAsync();
 
             return true;
-        }
-
-        public async Task<IEnumerable<T>> GetByApartmentId<T>(int apartmentId)
-        {
-            return await this.data.Beds
-                .Where(b => b.Room.ApartmentId == apartmentId)
-                .To<T>()
-                .ToListAsync();
         }
 
         public async Task<Result> Update(int id, BedType bedType)

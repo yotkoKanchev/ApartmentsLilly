@@ -1,9 +1,11 @@
 ﻿namespace ApartmentsLilly.Server.Features.Rooms.Models
 {
+    using System.Collections.Generic;
     using System.Globalization;
-    using AutoMapper;
     using Data.Models.Rooms;
+    using Features.Beds.Models;
     using Infrastructure.Mapping;
+    using AutoMapper;
 
     using static Infrastructure.Extensions.EnumExtensions;
 
@@ -18,6 +20,8 @@
         public EnumValue RoomType { get; set; }
 
         public bool IsSleepable { get; set; }
+
+        public IEnumerable<BedDetailsServiceModel> Beds { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

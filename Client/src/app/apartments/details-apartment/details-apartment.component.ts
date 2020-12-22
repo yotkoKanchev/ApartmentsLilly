@@ -6,6 +6,7 @@ import { ModalService } from '../../_modal';
 import { RoomsService } from 'src/app/rooms/rooms.service';
 import { AmenitiesService } from 'src/app/amenities/amenities.service';
 import { ToastrService } from 'ngx-toastr';
+import { BedsService } from 'src/app/beds/beds.service';
 
 @Component({
   selector: 'app-details-apartment',
@@ -15,11 +16,13 @@ import { ToastrService } from 'ngx-toastr';
 export class DetailsApartmentComponent implements OnInit {
   apartment: ApartmentModel
   id: number;
+  childId: number;
 
   constructor(
     private apartmentsService: ApartmentsService,
     private roomsService: RoomsService,
     private amenitiesService: AmenitiesService,
+    private bedsService: BedsService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private modalService: ModalService) { }
@@ -36,19 +39,17 @@ export class DetailsApartmentComponent implements OnInit {
   }
 
   deleteRoom(id: number) {
-    this.roomsService.deleteRoom(id).subscribe(() =>
-      {
-        this.toastr.success("Room has been deleted!", "Success");
-        this.fetchApartment(this.id);
-      });
+    this.roomsService.deleteRoom(id).subscribe(() => {
+      this.toastr.success("Room has been deleted!", "Success");
+      this.fetchApartment(this.id);
+    });
   }
 
   deleteAmenity(amenityId: number) {
-    this.amenitiesService.deleteAmenity(amenityId, this.id).subscribe(() =>
-     {
+    this.amenitiesService.deleteAmenity(amenityId, this.id).subscribe(() => {
       this.toastr.success("Amenity has been deleted!", "Success");
       this.fetchApartment(this.id);
-     });
+    });
   }
 
   fetchApartment(id: number) {
@@ -57,11 +58,15 @@ export class DetailsApartmentComponent implements OnInit {
     })
   }
 
-  openModal(id: string) {
+  openModal(id: string, childId?: number) {
+    this.childId = childId;
     this.modalService.open(id);
   }
 
-  deleteBed(){
-    console.log("yes")
+  deleteBed(bedId: number) {
+    this.bedsService.deleteBed(bedId).subscribe(() => {
+      this.toastr.success("Bed has been deleted!", "Success");
+      this.fetchApartment(this.id);
+    });
   }
 }

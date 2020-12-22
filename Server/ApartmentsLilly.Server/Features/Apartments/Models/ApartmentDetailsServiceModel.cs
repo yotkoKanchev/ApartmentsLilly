@@ -2,13 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Globalization;
-    using System.Linq;
     using Amenities.Models;
     using Data.Models;
-    using Rooms.Models;
+    using Features.Addresses.Models;
     using Infrastructure.Mapping;
+    using Rooms.Models;
     using AutoMapper;
-    using ApartmentsLilly.Server.Features.Addresses.Models;
 
     public class ApartmentDetailsServiceModel : IMapFrom<Apartment>, IHaveCustomMappings
     {
@@ -43,12 +42,7 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Apartment, ApartmentDetailsServiceModel>()
-                .ForMember(a => a.Name, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Name)))
-                .ForMember(a => a.Rooms, opt => opt.MapFrom(a => a.Rooms
-                                                                    .OrderBy(r => r.Name)))
-                .ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities
-                                                                        .OrderByDescending(b => b.Importance)));
-                                                                        //.Select(b => b.Amenity)));
+                .ForMember(a => a.Name, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Name)));
         }
     }
 }

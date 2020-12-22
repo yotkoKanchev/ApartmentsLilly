@@ -9,6 +9,7 @@ import { RoomsModule } from '../rooms/rooms.module';
 import { ApartmentComponent } from './apartment/apartment.component';
 import { AddressesModule } from '../addresses/addresses.module';
 import { AmenitiesModule } from '../amenities/amenities.module';
+import { BedsModule } from '../beds/beds.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AmenitiesModule } from '../amenities/amenities.module';
     RoomsModule,
     AddressesModule,
     AmenitiesModule,
+    BedsModule,
   ],
   providers:[
     ApartmentsService,

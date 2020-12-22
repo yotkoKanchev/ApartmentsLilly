@@ -1,7 +1,8 @@
 ﻿namespace ApartmentsLilly.Server.Features.Beds
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Data.Models.Beds;
+    using Infrastructure.Extensions;
     using Models;
     using Microsoft.AspNetCore.Mvc;
 
@@ -29,33 +30,6 @@
             return Created(nameof(this.Create), result.Succeeded);
         }
 
-        [HttpGet]
-        [Route(Id)]
-        public async Task<BedDetailsServiceModel> Details(int id)
-        {
-            return await this.beds.GetById<BedDetailsServiceModel>(id);
-        }
-
-        [HttpGet]
-        [Route(nameof(All))]
-        public async Task<IEnumerable<BedDetailsServiceModel>> All(int apartmentId)
-        {
-            return await this.beds.GetByApartmentId<BedDetailsServiceModel>(apartmentId);
-        }
-
-        [HttpPut]
-        public async Task<ActionResult> Update(UpdateBedRequestModel model)
-        {
-            var result = await this.beds.Update(model.Id, model.BedType);
-
-            if (result.Failure)
-            {
-                this.BadRequest(result.Error);
-            }
-
-            return Ok();
-        }
-
         [HttpDelete]
         [Route(Id)]
         public async Task<ActionResult> Delete(int id)
@@ -68,6 +42,13 @@
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route(nameof(BedTypes))]
+        public ActionResult BedTypes()
+        {
+            return Ok(EnumExtensions.GetValues<BedType>());
         }
     }
 }

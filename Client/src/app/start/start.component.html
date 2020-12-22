@@ -9,16 +9,16 @@
                     <div class="input-group input-group-lg">
                         <input type="date" formControlName="startDate" class="form-control col-lg-6 col-md-7 col-sm-12"
                             placeholder="Start date" useValueAsDate>
-                            
+
                         <input type="date" formControlName="endDate" class="form-control col-lg-6 col-md-7 col-sm-12"
                             placeholder="End date" useValueAsDate>
                     </div>
-                    <div *ngIf="startDate.errors" >
+                    <div *ngIf="startDate.errors">
                         <span *ngIf="startDate.errors.required">
                             Start Date is required.
                         </span>
                     </div>
-                    <div *ngIf="endDate.errors" >
+                    <div *ngIf="endDate.errors">
                         <span *ngIf="endDate.errors.required">
                             End Date is required.
                         </span>
@@ -40,8 +40,8 @@
                         </select>
                     </div>
                     <br>
-                    
-                    <button class="btn btn-success form-control col-lg-5 col-md-5 col-sm-12" [disabled]="!searchApartmentForm.valid">Search</button>
+                    <button class="btn btn-success form-control col-lg-5 col-md-5 col-sm-12"
+                        [disabled]="!searchApartmentForm.valid">Search</button>
                 </form>
                 <br>
             </div>
@@ -50,8 +50,7 @@
 
     <div *ngIf="apartments">
         <div *ngFor="let ap of apartments">
-            <app-apartment [ap]="ap">
-            </app-apartment>
+            <app-apartment [ap]="ap"> </app-apartment>
         </div>
     </div>
     <br>

@@ -48,7 +48,7 @@
                 MainImageUrl = mainImageUrl,
             };
 
-            this.data.Add(apartment);
+            await this.data.AddAsync(apartment);
             await this.data.SaveChangesAsync();
 
             return apartment.Id;

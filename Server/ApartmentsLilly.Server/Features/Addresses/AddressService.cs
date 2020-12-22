@@ -30,8 +30,7 @@
                 StreetAddress = streetAddress,
             };
 
-            this.data.Add(address);
-
+            await this.data.AddAsync(address);
             await this.data.SaveChangesAsync();
 
             return address.Id;
@@ -45,7 +44,6 @@
                 .To<T>()
                 .FirstOrDefaultAsync();
         }
-
 
         public async Task<Result> Update(int id, string country, string city, string postalCode, string neighborhood, string streetAddress)
         {

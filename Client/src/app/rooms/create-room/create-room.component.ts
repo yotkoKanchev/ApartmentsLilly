@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoomsService } from '../rooms.service';
 import { ToastrService } from 'ngx-toastr';
 import { ModalService } from 'src/app/_modal';
-import { Router } from '@angular/router';
-import { ApartmentsService } from 'src/app/apartments/apartments.service';
 
 @Component({
   selector: 'app-create-room',
@@ -22,8 +20,6 @@ export class CreateRoomComponent implements OnInit {
     private fb: FormBuilder,
     private roomsService: RoomsService,
     private toastrService: ToastrService,
-    private apartmentsService: ApartmentsService,
-    private router: Router,
   ) {
     this.roomForm = this.fb.group({
       'ApartmentId': [],

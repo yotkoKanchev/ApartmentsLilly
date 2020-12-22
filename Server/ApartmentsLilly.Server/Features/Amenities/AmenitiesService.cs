@@ -133,7 +133,7 @@
                 Name = nameToLower,
             };
 
-            this.data.Amenities.Add(amenity);
+            await this.data.AddAsync(amenity);
             await this.data.SaveChangesAsync();
 
             return amenity.Id;

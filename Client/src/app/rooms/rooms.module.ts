@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
   declarations: [
     ...roomComponents,
   ],
-  imports: [
+  imports: [  
     CommonModule,
     ReactiveFormsModule,
     ModalModule,

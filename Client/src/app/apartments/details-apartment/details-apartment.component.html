@@ -1,10 +1,10 @@
-<div *ngIf='apartment' class="container-fluid jumbotron">
+<div *ngIf='apartment' class="jumbotron">
 
     <div class="row d-flex justify-content-center">
-        <div class="col-lg-5">
-            <div class="mb-3">
+        <div class="col-lg-5 mb-2">
+            <div class="mb-2">
                 <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}"
-                    value="Edit">
+                    value="Edit Info">
                 <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
             </div>
             <div class="card" style="width: 26rem;">
@@ -49,14 +49,14 @@
                         <button type="button" class="btn btn-sm btn-primary mr-2" (click)="deleteRoom(room.id)">Delete
                             Room</button>
                         <input *ngIf="room.isSleepable" type="button" class="btn btn-sm btn-primary"
-                            (click)="openModal('add-bed-modal')" value="Add Bed">
+                            (click)="openModal('add-bed-modal', room.id)" value="Add Bed">
                     </div>
                     <div *ngIf="room.beds.length > 0">
                         <div class="mr-2 form-group"><strong>Beds: </strong>
-                            <div style="display: inline-block;" *ngFor="let bed of room.beds">
-                                <a class="mr-1" (click)="deleteBed()">{{bed.bedType.name}}, </a>
+                            <div style="display: inline-block;" *ngFor="let bed of room.beds; let i= index">
+                                <a id="color-red" (click)="deleteBed(bed.id)">{{bed.bedType.name}}</a>
+                                <span class="mr-1" *ngIf="i < room.beds.length-1">,</span>
                             </div>
-                            <p style="color:red">/click to remove/</p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
 </div>
 
@@ -86,6 +85,12 @@
 <jw-modal id="add-amenity-modal">
     <div>
         <app-create-amenity [apartmentId]='id'></app-create-amenity>
+    </div>
+</jw-modal>
+
+<jw-modal id="add-bed-modal">
+    <div>
+        <app-create-bed [roomId]='childId'></app-create-bed>
     </div>
 </jw-modal>
 

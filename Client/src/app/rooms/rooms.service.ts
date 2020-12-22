@@ -1,20 +1,20 @@
-import { HttpClient , HttpParams} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { CreateRoomModel } from './models/create-room.model';
 import { RoomModel } from './models/room.model';
+import { EnumerationModel } from '../shared/models/enumeration.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomsService {
   private roomsPath = environment.apiUrl + 'Rooms';
-
   constructor(private http: HttpClient) { }
 
-  getRoomTypes(): Observable<any> {
-    return this.http.get<any>(this.roomsPath + '/' + 'roomTypes');
+  getRoomTypes(): Observable<EnumerationModel> {
+    return this.http.get<EnumerationModel>(this.roomsPath + '/' + 'roomTypes');
   }
 
   create(data, apartmentId): Observable<CreateRoomModel> {

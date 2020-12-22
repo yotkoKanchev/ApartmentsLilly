@@ -15,10 +15,6 @@ export class ApartmentComponent implements OnInit {
   }
 
   getMap() {
-    if (this.showMap) {
-      this.showMap = false
-    } else {
-      this.showMap = true;
-    };
+    this.showMap = !this.showMap;
   }
 }

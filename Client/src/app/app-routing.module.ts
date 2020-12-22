@@ -10,7 +10,6 @@ import { AddressesRoutingModule } from './addresses/addresses-routing.module';
 import { AmenitiesRoutingModule } from './amenities/amenities-routing.module';
 import { AdminGuardService } from './auth/guards/admin-guard.service';
 
-
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: StartComponent },
   { path: 'login', component: LoginComponent },

@@ -29,6 +29,7 @@ namespace ApartmentsLilly.Server
                 .AddJwtAuthentication(services.GetApplicationSettings(this.Configuration))
                 .AddApplicationServices()
                 .AddSwagger()
+                .AddCors()
                 .ConfigureCookiePolicyOptions()
                 .AddApiControllers();
         }
