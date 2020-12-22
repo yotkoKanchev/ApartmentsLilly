@@ -1,0 +1,18 @@
+<div *ngIf='profile' class="jumbotron">
+    <div class="offset-3 col-lg-6 mb-2">
+        <div class="card" style="max-width: 26rem;">
+            <img [src]="profile.avatarUrl" class="card-img-top"
+                alt="Person: {{profile.firstName}} {{profile.lastName}}">
+            <h3 class="p-2 card-title">Username: {{profile.userName}}</h3>
+            <div class="card-body">
+                <h5>First Name: {{profile.firstName}}</h5>
+                <h5>Last Name: {{profile.lastName}}</h5>
+                <h5>Phone Number: {{profile.phoneNumber}}</h5>
+            </div>
+        </div>
+        <div class="mb-2">
+            <input type="button" class="btn btn-primary mr-2" routerLink="/prfiles/edit/" value="Edit">
+            <input type="button" class="btn btn-primary mr-2" routerLink="/" value="Home">
+        </div>
+    </div>
+</div>
