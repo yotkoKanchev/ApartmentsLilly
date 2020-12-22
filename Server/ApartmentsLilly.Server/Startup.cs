@@ -31,6 +31,7 @@ namespace ApartmentsLilly.Server
                 .AddSwagger()
                 .AddCors()
                 .ConfigureCookiePolicyOptions()
+                .ConfigureDataProtectionTokenLifeSpan()
                 .AddApiControllers();
         }
 

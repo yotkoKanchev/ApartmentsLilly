@@ -142,5 +142,5 @@
                 profile.PhoneNumber = phoneNumber;
             }
         }
-    }
+            }
 }

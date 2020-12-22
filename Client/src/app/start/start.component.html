@@ -7,10 +7,10 @@
                     class="form-group form-group-lg" novalidate>
                     <br>
                     <div class="input-group input-group-lg">
-                        <input type="date" formControlName="startDate" class="form-control col-lg-6 col-md-7 col-sm-12"
+                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" formControlName="startDate" class="form-control col-lg-6 col-md-7 col-sm-12"
                             placeholder="Start date" useValueAsDate>
 
-                        <input type="date" formControlName="endDate" class="form-control col-lg-6 col-md-7 col-sm-12"
+                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" formControlName="endDate" class="form-control col-lg-6 col-md-7 col-sm-12"
                             placeholder="End date" useValueAsDate>
                     </div>
                     <div *ngIf="startDate.errors">

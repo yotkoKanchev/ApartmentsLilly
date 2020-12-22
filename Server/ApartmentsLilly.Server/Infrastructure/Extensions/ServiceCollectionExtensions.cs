@@ -1,5 +1,6 @@
 ﻿namespace ApartmentsLilly.Server.Infrastructure.Extensions
 {
+    using System;
     using System.Text;
     using Data;
     using Data.Models;
@@ -34,9 +35,7 @@
             return applicationSettingsConfiguration.Get<AppSettings>();
         }
 
-        public static IServiceCollection AddDatabase(
-            this IServiceCollection services,
-            IConfiguration configuration)
+        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
             => services
                 .AddDbContext<ApartmentsLillyDbContext>(options => options
                     .UseSqlServer(configuration.GetDefaultConnectionString()));
@@ -123,5 +122,9 @@
                     options.CheckConsentNeeded = context => false;
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
+
+        public static IServiceCollection ConfigureDataProtectionTokenLifeSpan(this IServiceCollection services)
+            => services.Configure<DataProtectionTokenProviderOptions>(
+                options => options.TokenLifespan = TimeSpan.FromMinutes(10));
     }
 }

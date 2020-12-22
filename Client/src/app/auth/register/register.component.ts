@@ -11,17 +11,26 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.registerForm = this.fb.group({
-      'username': ['', Validators.required],
-      'email': ['', Validators.required],
-      'password': ['', Validators.required]
-    })
-   }
+      'username': ['', [Validators.required, Validators.minLength(2)]],
+      'email': ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      'password': ['', [Validators.required, Validators.minLength(6)]],
+      'confirmPassword': ['',],
+    },
+      { validator: [this.checkPasswords] }
+    );
+  }
 
   ngOnInit() {
   }
 
   register() {
     this.authService.register(this.registerForm.value).subscribe();
+  }
+
+  checkPasswords(group: FormGroup) {
+    return group.get('password').value === group.get('confirmPassword').value
+      ? null
+      : { notSame: "Passwords do not match." }
   }
 
   get username() {
@@ -36,4 +45,7 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('password')
   }
 
+  get confirmPassword() {
+    return this.registerForm.get('confirmPassword')
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { ModalService } from 'src/app/_modal';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { 
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private modalService: ModalService) { 
     this.loginForm = this.fb.group({
       'username': ['', Validators.required],
       'password': ['', Validators.required]
@@ -24,6 +25,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe(() => {
       this.router.navigate(['/']);
     })
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
   }
 
   get username() {

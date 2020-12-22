@@ -29,7 +29,7 @@ export class CreateAddressComponent {
   create() {
     this.addressService.create(this.addressForm.value)
       .subscribe(() => {
-        this.toastrService.success("Success");
+        this.toastrService.success("Success", "Address has been created.");
         location.reload();
       })
   }

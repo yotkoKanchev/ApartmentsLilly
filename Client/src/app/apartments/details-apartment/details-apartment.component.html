@@ -7,9 +7,9 @@
                     value="Edit Info">
                 <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
             </div>
-            <div class="card" style="width: 26rem;">
-                <h3 class="card-title">{{apartment.name}}</h3>
+            <div class="card" style="max-width: 26rem;">
                 <img [src]="apartment.mainImageUrl" class="card-img-top" alt="Apartment {{apartment.name}}">
+                <h3 class="p-2 card-title">{{apartment.name}}</h3>
                 <div class="card-body">
                     <h5 *ngIf="apartment.basePrice">Base price: {{apartment.basePrice}}</h5>
                     <h5 *ngIf="apartment.maxOccupants">Max occupants: {{apartment.maxOccupants}}</h5>
@@ -29,9 +29,9 @@
                     value="Add Amenity">
             </div>
             <div class="mb-3 form-group"><strong>Address:</strong>
-                <div class="border border-success p-2 mb-2">
-                    <p>{{apartment.address.city}}, {{apartment.address.country}}</p>
-                    <p *ngIf="apartment.address.postalCode && apartment.address.neighborhood">
+                <div class="border rounded border-success p-2">
+                    <p class="mb-1">{{apartment.address.city}}, {{apartment.address.country}}</p>
+                    <p class="mb-1" *ngIf="apartment.address.postalCode && apartment.address.neighborhood">
                         {{apartment.address.postalCode}}, кв. {{apartment.address.neighborhood}}</p>
                     <p>ул. {{apartment.address.streetAddress}}</p>
                     <input type="button" class="btn btn-sm btn-primary mr-2"
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="form-group" *ngIf="apartment.rooms"><strong>Rooms: </strong>
-                <div class="border border-success mb-2 p-2" *ngFor="let room of apartment.rooms">
+                <div class="border rounded border-success mb-2 p-2" *ngFor="let room of apartment.rooms">
                     <p class="mr-2"><strong>{{room.roomType.name}}: </strong>{{room.name}}</p>
                     <div class="mb-2">
                         <input id="btn" type="button" class="btn btn-sm btn-primary mr-2"
@@ -62,8 +62,8 @@
                 </div>
             </div>
             <div class="form-group" *ngIf="apartment.amenities"><strong>Amenities: </strong>
-                <div class="border border-success p-2 mb-2" *ngFor="let amenity of apartment.amenities">
-                    <p><strong>Name: </strong>{{amenity.name}}, <strong>Importance: </strong>{{amenity.importance.name}}
+                <div class="border rounded border-success p-2 mb-2" *ngFor="let amenity of apartment.amenities">
+                    <p><strong>{{amenity.name}}, </strong>Importance: <strong>{{amenity.importance.name}}</strong>
                     </p>
                     <p></p>
                     <input type="button" class="btn btn-sm btn-primary mr-2"

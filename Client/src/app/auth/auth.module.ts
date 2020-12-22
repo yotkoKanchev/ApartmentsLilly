@@ -4,6 +4,8 @@ import { authComponents } from '.';
 import { AuthService } from './auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
+import { ModalModule } from '../_modal';
+import { ProfilesModule } from '../profiles/profiles.module';
 
 @NgModule({
   declarations: [
@@ -13,9 +15,11 @@ import { AppRoutingModule } from '../app-routing.module';
     CommonModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    ModalModule,
+    ProfilesModule,
   ],
   providers:[
-    AuthService
+    AuthService,
   ]
 })
 export class AuthModule { }

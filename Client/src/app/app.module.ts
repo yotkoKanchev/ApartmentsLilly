@@ -7,8 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuardService } from './auth/guards/auth-guard.service';
-import { TokenInterceptorService } from './interceptors/token-interceptor.service';
-import { ErrorInterceptorService } from './interceptors/error-interceptor.service';
+import { TokenInterceptorService } from './_interceptors/token-interceptor.service';
+import { ErrorInterceptorService } from './_interceptors/error-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HeaderComponent } from './shared/header/header.component';
@@ -20,6 +20,7 @@ import { RoomsModule } from './rooms/rooms.module';
 import { AddressesModule } from './addresses/addresses.module';
 import { AmenitiesModule } from './amenities/amenities.module';
 import { BedsModule } from './beds/beds.module';
+import { ProfilesModule } from './profiles/profiles.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { BedsModule } from './beds/beds.module';
   ],
   imports: [
     AuthModule,
+    ProfilesModule,
     ApartmentsModule,
     AddressesModule,
     RoomsModule,

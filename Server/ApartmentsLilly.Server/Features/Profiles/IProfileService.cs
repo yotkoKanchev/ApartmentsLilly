@@ -10,7 +10,5 @@
         Task<ProfileServiceModel> ByUser(string userId);
 
         Task<Result> Update(string userId, string email, string firstName, string lastName, string userName, string avatarUrl, string phoneNumber);
-
-        Task<Result> ChangePassword(User user, string password, string newPassword);
     }
 }
