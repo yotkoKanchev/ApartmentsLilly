@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalService } from 'src/app/_modal';
 import { ProfileModel } from '../models/profile.model';
 import { ProfilesService } from '../profiles.service';
 
@@ -11,6 +12,7 @@ export class ProfileComponent implements OnInit {
   profile: ProfileModel;
   constructor(
     private profilesService: ProfilesService,
+    private modalService: ModalService,
   ) { }
 
   ngOnInit(): void {
@@ -24,5 +26,9 @@ export class ProfileComponent implements OnInit {
         this.profile.avatarUrl = 'assets/images/noAvatar.png';
       }
     })
+  }
+
+  openModal(id: string){
+    this.modalService.open(id);
   }
 }

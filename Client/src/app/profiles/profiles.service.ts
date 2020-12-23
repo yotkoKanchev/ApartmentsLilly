@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ForgotPasswordModel } from './models/forgot-password.model';
 import { ProfileModel } from './models/profile.model';
+import { ChangePasswordModel } from './models/change-password.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class ProfilesService {
 
   forgotPassword(data: ForgotPasswordModel): Observable<any> {
       return this.http.post<ForgotPasswordModel>(this.profilesPath + "/ForgotPassword", data);
+  }
+
+  changePassword(data:ChangePasswordModel) :Observable<any>{
+    return this.http.put<ChangePasswordModel>(this.profilesPath + "/ChangePassword", data);
   }
 }
 

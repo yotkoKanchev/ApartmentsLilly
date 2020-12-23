@@ -53,7 +53,7 @@
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPut(nameof(ChangePassword))]
         public async Task<ActionResult> ChangePassword(ChangePasswordRequestModel model)
         {
             var user = await this.userManager.GetUserAsync(this.User);

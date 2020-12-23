@@ -1,6 +1,5 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4"></div>
         <div class="col-lg-4">
             <form [formGroup]="registerForm" (ngSubmit)="register()">
                 <div class="form-group">
@@ -8,43 +7,43 @@
                     <input type="text" class="form-control" formControlName="username">
                 </div>
                 <div class="alert alert-danger" *ngIf="username.touched && username.errors?.required">
-                    Username is required!
+                    Username is required.
                 </div>
                 <div class="alert alert-danger" *ngIf="username.touched && username.errors?.minlength">
-                    Username must be at least 2 symbols.!
+                    Username must be at least 2 symbols.
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
                     <input type="email" class="form-control" formControlName="email">
                 </div>
                 <div class="alert alert-danger" *ngIf="email.touched && email.errors?.required">
-                    Email is required!
+                    Email is required.
                 </div>
                 <div class="alert alert-danger" *ngIf="email.touched && email.errors?.minlength">
-                    Email must be at least 6 symbols.!
+                    Email must be at least 6 symbols.
                 </div>
                 <div class="alert alert-danger" *ngIf="email.dirty && email.errors">
-                    Email must be a valid email address
+                    Email must be a valid email address.
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" class="form-control" formControlName="password">
                 </div>
                 <div class="alert alert-danger" *ngIf="password.touched && password.errors?.required">
-                    Password is required!
+                    Password is required.
                 </div>
                 <div class="alert alert-danger" *ngIf="password.touched && password.errors?.minlength">
-                    Password must be at least 6 symbols.!
+                    Password must be at least 6 symbols.
                 </div>
                 <div class="form-group">
                     <label for="exampleInputConfirmPassword1">Confirm Password</label>
                     <input type="password" class="form-control" formControlName="confirmPassword">
                 </div>
                 <div class="alert alert-danger" *ngIf="confirmPassword.touched && confirmPassword.errors?.required">
-                    Confirm Password is required!
+                    Confirm Password is required.
                 </div>
                 <div class="alert alert-danger" *ngIf="registerForm.hasError('notSame')">
-                    Passwords do not match!
+                    Passwords do not match.
                 </div>
                 <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
             </form>

@@ -25,7 +25,8 @@ export class DetailsApartmentComponent implements OnInit {
     private bedsService: BedsService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private modalService: ModalService) { }
+    private modalService: ModalService,
+    ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
