@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4 offset-md-4">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
             <form [formGroup]="roomForm" (ngSubmit)="create('add-room-modal')">
                 <label>Choose Room Type</label>
                 <select class="form-control mb-3" formControlName="RoomType">
@@ -29,7 +30,7 @@
             </form>
             <br>
             <br>
-
         </div>
+        <div class="col-lg-4"></div>
     </div>
 </div>

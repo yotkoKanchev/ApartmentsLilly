@@ -6,6 +6,8 @@ import { ModalModule } from 'src/app/_modal';
 import { RouterModule } from '@angular/router';
 import { ProfilesService } from './profiles.service';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { DeleteComponent } from './delete/delete.component';
+import { AuthService } from '../auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,11 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
   ],
   providers: [
     ProfilesService,
+    AuthService,
   ],
   exports: [
     ForgotPasswordComponent,
+    DeleteComponent,
   ]
 })
 export class ProfilesModule { }

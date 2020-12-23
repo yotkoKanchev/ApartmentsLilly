@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { LoginModel } from './models/login.model';
+import { DeleteModel } from './models/delete.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { LoginModel } from './models/login.model';
 export class AuthService {
   private loginPath = environment.apiUrl + "identity/login";
   private registerPath = environment.apiUrl + "identity/register";
+  private deletePath = environment.apiUrl + "identity/delete";
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -36,6 +38,20 @@ export class AuthService {
   register(data): Observable<any> {
     this.router.navigate(['/login']);
     return this.http.post(this.registerPath, data);
+  }
+
+  delete(data: DeleteModel): Observable<any> {
+    console.log(data)
+
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: data
+    }
+
+    console.log(options)
+    return this.http.delete(this.deletePath, options)
   }
 
   getUser() {

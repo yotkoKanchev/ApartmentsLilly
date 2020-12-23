@@ -12,14 +12,15 @@ import { ProfilesModule } from '../profiles/profiles.module';
     ...authComponents,
   ],
   imports: [
+    ProfilesModule,
     CommonModule,
     ReactiveFormsModule,
     AppRoutingModule,
     ModalModule,
-    ProfilesModule,
   ],
   providers:[
     AuthService,
-  ]
+  ],
+  exports:[  ]
 })
 export class AuthModule { }

@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4 offset-md-4">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
             <form [formGroup]="bedForm" (ngSubmit)="create('add-bed-modal')">
                 <label>Choose Bed Type</label>
                 <select class="form-control mb-3" formControlName="BedType">
@@ -17,5 +18,6 @@
             <br>
             <br>
         </div>
+        <div class="col-lg-4"></div>
     </div>
 </div>

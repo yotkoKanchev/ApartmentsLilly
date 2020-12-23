@@ -22,8 +22,8 @@
       </div>
       <div class="mb-2 mt-2 ">
         <input type="button" class="btn btn-primary mr-2" routerLink="/profiles/update/" value="Edit Info">
-        <input type="button" class="btn btn-warning mr-2" (click)="openModal('change-password-modal')" value="Change Password">
-        <input type="button" class="btn btn-danger mr-2" routerLink="#" value="Delete">
+        <input type="button" class="btn btn-primary mr-2" (click)="openModal('change-password-modal')" value="Change Password">
+        <input type="button" class="btn btn-primary mr-2" (click)="openModal('delete-account-modal')" value="Delete">
         <input type="button" class="btn btn-primary mr-2" routerLink="/" value="Home">
     </div>
 </div>
@@ -31,5 +31,11 @@
 <jw-modal id="change-password-modal">
     <div>
         <app-change-password></app-change-password>
+    </div>
+</jw-modal>
+
+<jw-modal id="delete-account-modal">
+    <div>
+        <app-delete></app-delete>
     </div>
 </jw-modal>

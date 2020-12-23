@@ -1,6 +1,7 @@
-<div class="container-fluid offset-md-1">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
             <form [formGroup]="apartmentForm" (ngSubmit)="create()">
 
                 <app-choose-address (onAddressIdSelected)="getAddressId($event)"></app-choose-address>
@@ -96,8 +97,7 @@
                 </div>
                 <div *ngIf="(maxOccupants.touched || maxOccupants.dirty) && maxOccupants.errors"
                     class="alert alert-danger">
-                    <span
-                        *ngIf="maxOccupants.errors.min || maxOccupants.errors.max || maxOccupants.errors.required">
+                    <span *ngIf="maxOccupants.errors.min || maxOccupants.errors.max || maxOccupants.errors.required">
                         Maximum Occupants should be between 1 and 100 symbols long!
                     </span>
                 </div>
@@ -106,7 +106,7 @@
             </form>
             <br>
             <br>
-
         </div>
+        <div class="col-lg-4"></div>
     </div>
 </div>

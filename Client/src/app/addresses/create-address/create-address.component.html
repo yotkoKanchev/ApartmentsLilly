@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-5 offset-md-1">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
             <form class="form-horizontal" [formGroup]="addressForm" (ngSubmit)="create()">
                 <div class="form-group">
                     <label>Country</label>
@@ -63,10 +64,11 @@
                     </span>
                 </div>
 
-                    <button type="submit" class="btn btn-primary" [disabled]="addressForm.invalid">Create</button>
-                    <input type="button" class="btn btn-primary ml-3" (click)="closeModal('add-address-modal');" value="Close">
-
+                <button type="submit" class="btn btn-primary" [disabled]="addressForm.invalid">Create</button>
+                <input type="button" class="btn btn-primary ml-3" (click)="closeModal('add-address-modal');"
+                    value="Close">
             </form>
         </div>
+        <div class="col-lg-4"></div>
     </div>
 </div>

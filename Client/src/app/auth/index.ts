@@ -3,5 +3,5 @@ import { RegisterComponent } from './register/register.component';
 
 export const authComponents = [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
 ]

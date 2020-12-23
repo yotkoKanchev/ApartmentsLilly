@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="col-lg-4"></div>
+    <div class="row col-lg-4">
+        <form [formGroup]="deleteForm" (ngSubmit)="delete()">
+            <div class="">
+                <h4 class="text-danger">Please, confirm account deletion.</h4>
+                <form [formGroup]="deleteForm" (ngSubmit)="delete()">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" formControlName="password">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="password.touched && password.errors?.required">
+                        Password is required.
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" class="form-control" formControlName="confirmPassword">
+                    </div>
+                    <div class="alert alert-danger"
+                        *ngIf="deleteForm.hasError('notSame') && confirmPassword.touched">
+                        Passwords do not match.
+                    </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!deleteForm.valid">Delete Account</button>
+                    <input type="button" class="btn btn-primary ml-3" (click)="closeModal();" value="Close">
+                </form>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-4"></div>
+</div>
