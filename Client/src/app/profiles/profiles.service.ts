@@ -9,18 +9,21 @@ import { ProfileModel } from './models/profile.model';
   providedIn: 'root'
 })
 export class ProfilesService {
-  private profilesrPath = environment.apiUrl + "profiles";
+  private profilesPath = environment.apiUrl + "profiles";
 
   constructor(private http: HttpClient) { }
 
   getProfile() : Observable<ProfileModel>
   {
-    console.log('here')
-    return this.http.get<ProfileModel>(this.profilesrPath);
+    return this.http.get<ProfileModel>(this.profilesPath);
+  }
+
+  editProfile(data: any){
+    return this.http.put(this.profilesPath + "/update", data)
   }
 
   forgotPassword(data: ForgotPasswordModel): Observable<any> {
-      return this.http.post<ForgotPasswordModel>(this.profilesrPath + "/ForgotPassword", data);
+      return this.http.post<ForgotPasswordModel>(this.profilesPath + "/ForgotPassword", data);
   }
 }
 

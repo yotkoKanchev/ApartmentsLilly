@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="offset-3 col-lg-6">
+            <form [formGroup]="profileForm">
+                <div class="form-group">
+                    <label >Email</label>
+                    <input type="email" class="form-control" formControlName="email">
+                </div>
+                <div class="alert alert-danger" *ngIf="email.touched && email.errors?.minlength">
+                    Email must be at least 6 symbols.!
+                </div>
+                <div class="alert alert-danger" *ngIf="email.dirty && email.errors">
+                    Email must be a valid email address
+                </div>
+
+                <div class="form-group">
+                    <label>UserName</label>
+                    <input type="text" class="form-control" formControlName="userName">
+                </div>
+                <div *ngIf="(userName.touched || userName.dirty) && userName.errors" class="alert alert-danger">
+                    <span *ngIf="userName.errors.maxlength">
+                        UserName should be maximum 20 symbols long!
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" formControlName="firstName">
+                </div>
+                <div *ngIf="(firstName.touched || firstName.dirty) && firstName.errors" class="alert alert-danger">
+                    <span *ngIf="firstName.errors.maxlength">
+                        First name should be maximum 20 symbols long!
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" formControlName="lastName">
+                </div>
+                <div *ngIf="(lastName.touched || lastName.dirty) && lastName.errors" class="alert alert-danger">
+                    <span *ngIf="lastName.errors.maxlength">
+                        Last name should be maximum 20 symbols long!
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Avatar Url</label>
+                    <input type="text" class="form-control" formControlName="avatarUrl">
+                </div>
+                <div *ngIf="(avatarUrl.touched || avatarUrl.dirty) && avatarUrl.errors" class="alert alert-danger">
+                    <span *ngIf="avatarUrl.errors.pattern">
+                        Plase, add valid url address!
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone number</label>
+                    <input type="text" class="form-control" formControlName="phoneNumber">
+                </div>
+                <div *ngIf="(phoneNumber.touched || phoneNumber.dirty) && phoneNumber.errors"
+                    class="alert alert-danger">
+                    <span *ngIf="phoneNumber.errors.maxlength">
+                        Phone number should be maximum 20 symbols long!
+                    </span>
+                    <span *ngIf="phoneNumber.errors.minlength">
+                        Phone number should be minimum 4 symbols long!
+                    </span>
+                </div>
+                <button type="submit" class="btn btn-primary mr-2" (click)="editProfile()">Update</button>
+                <a class="btn btn-primary" routerLink="/profiles/mine/">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
