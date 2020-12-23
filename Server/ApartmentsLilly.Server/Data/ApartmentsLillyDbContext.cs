@@ -67,6 +67,7 @@
         {
             builder
                 .Entity<User>()
+                .HasQueryFilter(b => !b.IsDeleted)
                 .HasMany(u => u.Reviews)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
@@ -74,6 +75,7 @@
 
             builder
                 .Entity<User>()
+                .HasQueryFilter(b => !b.IsDeleted)
                 .HasMany(u => u.Requests)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
@@ -81,6 +83,7 @@
 
             builder
                 .Entity<User>()
+                .HasQueryFilter(b => !b.IsDeleted)
                 .HasMany(u => u.Bookings)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
@@ -184,6 +187,11 @@
             builder
                 .Entity<ApartmentAmenity>()
                 .HasKey(aa => new { aa.AmenityId, aa.ApartmentId });
+
+            builder
+                .Entity<Profile>()
+                .HasQueryFilter(b => !b.IsDeleted);
+
 
             base.OnModelCreating(builder);
         }

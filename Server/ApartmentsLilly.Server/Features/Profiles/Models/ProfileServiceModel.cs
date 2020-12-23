@@ -6,15 +6,17 @@
 
     public class ProfileServiceModel : IMapFrom<User> 
     {
+        public string Email { get; set; }
+
         public string UserName { get; set; }
-            
+
         [JsonPropertyName("firstName")]
         public string ProfileFirstName { get; set; }
 
         [JsonPropertyName("lastName")]
         public string ProfileLastName { get; set; }
 
-        [JsonPropertyName("mainImage")]
+        [JsonPropertyName("avatarUrl")]
         public string ProfileAvatarUrl { get; set; }
 
         [JsonPropertyName("phoneNumber")]

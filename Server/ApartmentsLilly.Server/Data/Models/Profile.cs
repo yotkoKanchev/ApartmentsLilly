@@ -1,10 +1,11 @@
 ﻿namespace ApartmentsLilly.Server.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using Base;
 
     using static Data.Validation.User;
 
-    public class Profile
+    public class Profile : DeletableEntity
     {
         [Key]
         [Required]

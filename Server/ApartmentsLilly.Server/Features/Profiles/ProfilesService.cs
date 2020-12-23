@@ -9,11 +9,11 @@
     using Models;
     using Microsoft.EntityFrameworkCore;
 
-    public class ProfileService : IProfileService
+    public class ProfilesService : IProfilesService
     {
         private readonly ApartmentsLillyDbContext data;
 
-        public ProfileService(ApartmentsLillyDbContext data) => this.data = data;
+        public ProfilesService(ApartmentsLillyDbContext data) => this.data = data;
 
         public async Task<ProfileServiceModel> ByUser(string userId)
             => await this.data
@@ -106,10 +106,6 @@
 
                 user.UserName = userName;
             }
-            else
-            {
-                return "Provided username is not valid.";
-            }
 
             return true;
         }
@@ -142,5 +138,20 @@
                 profile.PhoneNumber = phoneNumber;
             }
         }
+
+        public async Task<Result> Delete(string id)
+        {
+            var profile = await this.data
+                .Profiles
+                .FirstOrDefaultAsync(p => p.UserId == id);
+
+            if (profile != null)
+            {
+                this.data.Profiles.Remove(profile);
             }
+
+
+            return true;
+        }
+    }
 }

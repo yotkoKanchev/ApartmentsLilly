@@ -89,7 +89,7 @@
             => services
                 .AddScoped<ICurrentUserService, CurrentUserService>()
                 .AddTransient<IIdentityService, IdentityService>()
-                .AddTransient<IProfileService, ProfileService>()
+                .AddTransient<IProfilesService, ProfilesService>()
                 .AddTransient<ISearchService, SearchService>()
                 .AddTransient<IAddressService, AddressService>()
                 .AddTransient<IApartmentsService, ApartmentsService>()

@@ -10,12 +10,12 @@
 
     public class ProfilesController : ApiController
     {
-        private readonly IProfileService profiles;
+        private readonly IProfilesService profiles;
         private readonly ICurrentUserService currentUser;
         private readonly UserManager<User> userManager;
 
         public ProfilesController(
-            IProfileService profiles,
+            IProfilesService profiles,
             ICurrentUserService currentUser,
             UserManager<User> userManager)
         {

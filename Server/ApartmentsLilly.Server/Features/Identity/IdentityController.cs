@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Data.Models;
+    using Features.Profiles;
     using Models;
     using Server.Data;
     using Microsoft.AspNetCore.Authorization;
@@ -19,6 +20,7 @@
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IIdentityService identity;
+        private readonly IProfilesService profiles;
         private readonly AppSettings appSettings;
 
         public IdentityController(
@@ -26,12 +28,14 @@
             UserManager<User> userManager,
             RoleManager<IdentityRole> roleManager,
             IIdentityService identity,
-            IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings,
+            IProfilesService profiles)
         {
             this.data = data;
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.identity = identity;
+            this.profiles = profiles;
             this.appSettings = appSettings.Value;
         }
 
@@ -44,6 +48,8 @@
             {
                 return BadRequest("Passwords do not match.");
             }
+
+            // TODO check if username exists!!!!
 
             var user = new User
             {
@@ -103,6 +109,40 @@
                 Name = user.UserName,
                 IsAdmin = await this.userManager.IsInRoleAsync(user, AdminRole),
             };
+        }
+
+        [HttpDelete]
+        [Route(nameof(Delete))]
+        public async Task<ActionResult> Delete(DeleteUserRequestModel model)
+        {
+            if (model.Password != model.ConfirmPassword)
+            {
+                return BadRequest("Passwords do not match.");
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+            var passwordValid = await this.userManager.CheckPasswordAsync(user, model.Password);
+
+            if (!passwordValid)
+            {
+                return Unauthorized();
+            }
+
+            var result = await this.profiles.Delete(user.Id);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Error);
+            }
+
+            var userDeletionResult = await this.userManager.DeleteAsync(user);
+
+            if (!userDeletionResult.Succeeded)
+            {
+                return BadRequest(userDeletionResult.Errors);
+            }
+
+            return Ok();
         }
     }
 }
