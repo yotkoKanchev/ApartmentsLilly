@@ -16,8 +16,7 @@ export class BedsService {
     return this.http.get<any>(this.bedsPath + '/' + 'bedTypes');
   }
 
-  create(data, roomId: number): Observable<CreateBedModel> {
-    data.roomId = roomId;
+  create(data): Observable<CreateBedModel> {
     return this.http.post<CreateBedModel>(this.bedsPath, data)
   }
 

@@ -21,81 +21,104 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-5">
-            <div class="mb-3">
+        <div class="col-lg-6">
+            <div class="mb-2">
                 <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-room-modal')"
                     value="Add Room">
                 <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-amenity-modal')"
                     value="Add Amenity">
+                <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-bed-modal')"
+                    value="Add Bed">
             </div>
-            <div class="mb-3 form-group"><strong>Address:</strong>
-                <div class="border rounded border-success p-2">
-                    <p class="mb-1">{{apartment.address.city}}, {{apartment.address.country}}</p>
-                    <p class="mb-1" *ngIf="apartment.address.postalCode && apartment.address.neighborhood">
-                        {{apartment.address.postalCode}}, кв. {{apartment.address.neighborhood}}</p>
-                    <p>ул. {{apartment.address.streetAddress}}</p>
-                    <input type="button" class="btn btn-sm btn-primary mr-2"
-                        routerLink="/apartments/{{apartment.id}}/changeAddress" value="Change Address">
-                    <input id="btn" type="button" class="btn btn-sm btn-primary"
-                        [routerLink]="['/addresses/edit', apartment.address.id, id]" value="Edit Address">
+            <div class="mb-3 form-group"><h5>Address:</h5>
+                <div class="row d-flex justify-content-between ml-0 border rounded border-success p-2">
+                    <div>
+                        <p class="mb-1">{{apartment.address.city}}, {{apartment.address.country}}</p>
+                        <p class="mb-1" *ngIf="apartment.address.postalCode && apartment.address.neighborhood">
+                            {{apartment.address.postalCode}}, кв. {{apartment.address.neighborhood}}</p>
+                        <p class="mb-1">ул. {{apartment.address.streetAddress}}</p>
+                    </div>
+                    <div>
+                        <input type="button" class="btn btn-sm btn-outline-primary mr-2"
+                            routerLink="/apartments/{{apartment.id}}/changeAddress" value="Change">
+                        <input id="btn" type="button" class="btn btn-sm btn-outline-primary"
+                            [routerLink]="['/addresses/edit', apartment.address.id, id]" value="Edit">
+                    </div>
                 </div>
             </div>
-            <div class="form-group" *ngIf="apartment.rooms"><strong>Rooms: </strong>
-                <div class="border rounded border-success mb-2 p-2" *ngFor="let room of apartment.rooms">
-                    <p class="mr-2"><strong>{{room.roomType.name}}: </strong>{{room.name}}</p>
-                    <div class="mb-2">
-                        <input id="btn" type="button" class="btn btn-sm btn-primary mr-2"
-                            routerLink="/rooms/edit/{{room.id}}" value="Edit Room">
-                        <button type="button" class="btn btn-sm btn-primary mr-2" (click)="deleteRoom(room.id)">Delete
-                            Room</button>
-                        <input *ngIf="room.isSleepable" type="button" class="btn btn-sm btn-primary"
-                            (click)="openModal('add-bed-modal', room.id)" value="Add Bed">
+            <div class="form-group" *ngIf="apartment.rooms"><h5>Rooms</h5>
+                <div class="row ml-0 border rounded border-success p-2 mb-2 d-flex flex-column "
+                    *ngFor="let room of apartment.rooms">
+                    <div class="d-flex justify-content-between">
+                        <div><strong>{{room.roomType.name}}</strong>
+                            <span *ngIf="room.isSleepable">(sleepable)</span><strong>:</strong> 
+                            {{room.name}}</div>
+                        <div class="mr-2">
+                            <input id="btn" type="button" class="btn btn-sm btn-outline-primary mr-2"
+                                routerLink="/rooms/edit/{{room.id}}" value="Edit">
+                            <input type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="deleteRoom(room.id)"
+                                value="Delete">
+
+                        </div>
                     </div>
                     <div *ngIf="room.beds.length > 0">
-                        <div class="mr-2 form-group"><strong>Beds: </strong>
+                        <div class="mr-2"><strong>Beds: </strong>
                             <div style="display: inline-block;" *ngFor="let bed of room.beds; let i= index">
                                 <a id="color-red" (click)="deleteBed(bed.id)">{{bed.bedType.name}}</a>
                                 <span class="mr-1" *ngIf="i < room.beds.length-1">,</span>
                             </div>
+
+                        </div>
+                    </div>
+                    <div *ngIf="room.beds.length > 0">
+                        <div class="mr-2"><strong>Amenities: </strong>
+                            <div style="display: inline-block;" *ngFor="let bed of room.beds; let i= index">
+                                <a id="color-red" (click)="deleteBed(bed.id)">{{bed.bedType.name}}</a>
+                                <span class="mr-1" *ngIf="i < room.beds.length-1">,</span>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group" *ngIf="apartment.amenities"><strong>Amenities: </strong>
-                <div class="border rounded border-success p-2 mb-2" *ngFor="let amenity of apartment.amenities">
-                    <p><strong>{{amenity.name}}, </strong>Importance: <strong>{{amenity.importance.name}}</strong>
-                    </p>
-                    <p></p>
-                    <input type="button" class="btn btn-sm btn-primary mr-2"
-                        [routerLink]="['/amenities/edit', amenity.id,  id]" value="Edit Amenity">
-                    <button type="button" class="btn btn-sm btn-primary" (click)="deleteAmenity(amenity.id)">Delete
-                        Amenity</button>
+            <div class="form-group" *ngIf="apartment.amenities"><h5>Amenities:</h5>
+                <div class="row ml-0 border rounded border-success p-2 mb-1 d-flex justify-content-between"
+                    *ngFor="let amenity of apartment.amenities">
+                    <div>
+                        <strong>{{amenity.name}}, </strong>Importance: <strong>{{amenity.importance.name}}</strong>
+                    </div>
+                    <div>
+                        <input type="button" class="btn btn-sm btn-outline-primary mr-2"
+                            [routerLink]="['/amenities/edit', amenity.id,  id]" value="Edit">
+                        <button type="button" class="btn btn-sm btn-outline-primary"
+                            (click)="deleteAmenity(amenity.id)">Delete</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-</div>
-
-<jw-modal id="add-room-modal">
-    <div>
-        <app-create-room [apartmentId]='id'></app-create-room>
     </div>
-</jw-modal>
 
-<jw-modal id="add-amenity-modal">
-    <div>
-        <app-create-amenity [apartmentId]='id'></app-create-amenity>
-    </div>
-</jw-modal>
+    <jw-modal id="add-room-modal">
+        <div>
+            <app-create-room [apartmentId]='id'></app-create-room>
+        </div>
+    </jw-modal>
 
-<jw-modal id="add-bed-modal">
-    <div>
-        <app-create-bed [roomId]='childId'></app-create-bed>
-    </div>
-</jw-modal>
+    <jw-modal id="add-amenity-modal">
+        <div>
+            <app-create-amenity [apartmentId]='id'></app-create-amenity>
+        </div>
+    </jw-modal>
 
-<jw-modal id="choose-address-modal">
-    <div>
-        <app-choose-address></app-choose-address>
-    </div>
-</jw-modal>
+    <jw-modal id="add-bed-modal">
+        <div>
+            <app-create-bed [rooms]='apartment.rooms'></app-create-bed>
+        </div>
+    </jw-modal>
+
+    <jw-modal id="choose-address-modal">
+        <div>
+            <app-choose-address></app-choose-address>
+        </div>
+    </jw-modal>

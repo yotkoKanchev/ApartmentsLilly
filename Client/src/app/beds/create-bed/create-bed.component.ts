@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ModalService } from 'src/app/_modal';
 import { BedsService } from '../beds.service';
+import { ApartmentRoomsModel } from '../models/apartment-bed.model';
 
 @Component({
   selector: 'app-create-bed',
@@ -13,7 +14,7 @@ export class CreateBedComponent implements OnInit {
   bedForm: FormGroup;
   bedTypes: any;
   @Input()
-  roomId: number;
+  rooms:Array<ApartmentRoomsModel>
 
   constructor(
     private modalService: ModalService,
@@ -22,6 +23,7 @@ export class CreateBedComponent implements OnInit {
     private toastrService: ToastrService,
   ) {
     this.bedForm = this.fb.group({
+      'RoomId': ['', Validators.required],
       'BedType': ['', Validators.required],
     })
   }
@@ -30,10 +32,12 @@ export class CreateBedComponent implements OnInit {
     this.bedsService.getBedTypes().subscribe(data => {
       this.bedTypes = data;
     })
+
+    this.rooms=this.rooms.filter(r => r.isSleepable)
   }
 
   create(id: string) {
-    this.bedsService.create(this.bedForm.value, this.roomId)
+    this.bedsService.create(this.bedForm.value)
       .subscribe(() => {
         this.toastrService.success("Bed added", "Success");
         this.closeModal(id);
@@ -45,6 +49,10 @@ export class CreateBedComponent implements OnInit {
 
   closeModal(id: string) {
     this.modalService.close(id);
+  }
+
+  get room() {
+    return this.bedForm.get('RoomId');
   }
 
   get bedType() {

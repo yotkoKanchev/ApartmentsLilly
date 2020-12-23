@@ -3,6 +3,11 @@
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
             <form [formGroup]="bedForm" (ngSubmit)="create('add-bed-modal')">
+                <label>Choose Room</label>
+                <select class="form-control mb-3" formControlName="RoomId">
+                    <option disabled value="">choose room</option>
+                    <option *ngFor="let room of rooms" [ngValue]="room.id">{{room.name}}</option>
+                </select>
                 <label>Choose Bed Type</label>
                 <select class="form-control mb-3" formControlName="BedType">
                     <option disabled value="">choose room type</option>
