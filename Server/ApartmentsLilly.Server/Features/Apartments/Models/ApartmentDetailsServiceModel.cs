@@ -2,9 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Globalization;
-    using Amenities.Models;
+    using System.Linq;
     using Data.Models;
     using Features.Addresses.Models;
+    using Features.Amenities.Models;
     using Infrastructure.Mapping;
     using Rooms.Models;
     using AutoMapper;
@@ -37,12 +38,13 @@
 
         public ICollection<RoomDetailsServiceModel> Rooms { get; set; }
 
-        public ICollection<AmenityDetailsServiceModel> Amenities { get; set; }
+        public ICollection<ApartmentAmenityDetailsServiceModel> Amenities { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Apartment, ApartmentDetailsServiceModel>()
-                .ForMember(a => a.Name, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Name)));
+                .ForMember(a => a.Name, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Name)))
+                .ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities.OrderByDescending(i => (int)i.Importance)));
         }
     }
 }

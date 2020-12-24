@@ -6,7 +6,6 @@
     using Data;
     using Data.Models;
     using Features.Addresses;
-    using Features.Amenities;
     using Infrastructure.Mapping;
     using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
@@ -15,13 +14,13 @@
     {
         private readonly ApartmentsLillyDbContext data;
         private readonly IAddressService addresses;
-        private readonly IAmenitiesService amenities;
 
-        public ApartmentsService(ApartmentsLillyDbContext data, IAddressService addresses, IAmenitiesService amenities)
+        public ApartmentsService(
+            ApartmentsLillyDbContext data,
+            IAddressService addresses)
         {
             this.data = data;
             this.addresses = addresses;
-            this.amenities = amenities;
         }
 
         public async Task<Result> Create(int addressId, string name, string description, string entry, int? floor, string number, double? size,
@@ -80,27 +79,21 @@
                 return $"Apartment with Id: {id} does not exists.";
             }
 
-            var rooms = await this.data.Rooms
-                .Where(r => r.ApartmentId == id)
-                .ToListAsync();
+            // TODO may not work
+            var rooms = await this.GetApartment(id)
+                .Select(a => a.Rooms)
+                .FirstOrDefaultAsync();
 
-            foreach (var room in apartment.Rooms)
-            {
-                this.data.Rooms.Remove(room);
-            }
+            this.data.Rooms.RemoveRange(rooms);
 
-            var apartmentAmenities = await this.data.ApartmentAmenities
-                .Where(aa => aa.ApartmentId == id)
-                .ToListAsync();
+            var apartmentAmenities = await this.GetApartment(id)
+                .Select(a => a.Amenities)
+                .FirstOrDefaultAsync();
 
-            foreach (var apartmentAmenity in apartment.Amenities)
-            {
-                await this.amenities.Delete(apartmentAmenity.AmenityId, apartmentAmenity.AmenityId);
-            }
-
+            this.data.ApartmentAmenities.RemoveRange(apartmentAmenities);
             this.data.Apartments.Remove(apartment);
-            await this.data.SaveChangesAsync();
 
+            await this.data.SaveChangesAsync();
             await this.addresses.Delete(apartment.AddressId);
 
             return true;

@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using Base;
     using Beds;
+    using Mappings;
 
     public class Room : Entity
     {
@@ -22,6 +23,8 @@
         public virtual Apartment Apartment { get; set; }
 
         public virtual ICollection<Bed> Beds { get; set; } = new HashSet<Bed>();
+
+        public virtual ICollection<RoomAmenity> Amenities { get; set; }
 
         public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
     }

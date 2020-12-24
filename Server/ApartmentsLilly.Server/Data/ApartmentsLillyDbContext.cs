@@ -49,6 +49,8 @@
 
         public DbSet<ApartmentAmenity> ApartmentAmenities { get; set; }
 
+        public DbSet<RoomAmenity> RoomAmenities { get; set; }
+
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             this.ApplyAuditInformation();
@@ -175,7 +177,7 @@
                 .HasMany(r => r.Beds)
                 .WithOne(a => a.Room)
                 .HasForeignKey(a => a.RoomId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder
                 .Entity<User>()
@@ -187,6 +189,10 @@
             builder
                 .Entity<ApartmentAmenity>()
                 .HasKey(aa => new { aa.AmenityId, aa.ApartmentId });
+
+            builder
+                .Entity<RoomAmenity>()
+                .HasKey(aa => new { aa.AmenityId, aa.RoomId });
 
             builder
                 .Entity<Profile>()

@@ -2,7 +2,9 @@
 {
     public class UpdateAmenityRequestModel
     {
-        public int  ApartmentId { get; set; }
+        public int? ApartmentId { get; set; }
+
+        public int? RoomId { get; set; }
 
         public int AmenityId { get; set; }
 

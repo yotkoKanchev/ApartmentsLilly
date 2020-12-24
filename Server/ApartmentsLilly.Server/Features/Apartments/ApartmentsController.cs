@@ -49,7 +49,7 @@
         [HttpGet]
         [Route(nameof(All))]
         public async Task<IEnumerable<ApartmentListingServiceModel>> All()
-        { 
+        {
             return await this.apartments.GetAll<ApartmentListingServiceModel>();
         }
 
@@ -94,7 +94,7 @@
         }
 
         [HttpPut(nameof(ChangeAddress))]
-        public async Task<ActionResult> ChangeAddress([FromBody]UpdateApartmentAddressRequestModel model)
+        public async Task<ActionResult> ChangeAddress([FromBody] UpdateApartmentAddressRequestModel model)
         {
             var result = await this.apartments.ChangeAddress(model.Id, model.AddressId);
 

@@ -6,6 +6,8 @@
 
         public int Importance { get; set; }
 
-        public int ApartmentId { get; set; }
+        public int? ApartmentId { get; set; }
+
+        public int? RoomId { get; set; }
     }
 }
