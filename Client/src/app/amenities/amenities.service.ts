@@ -17,9 +17,14 @@ export class AmenitiesService {
     return this.http.get<EnumerationModel>(this.amenitiesPath + '/' + 'ImportanceTypes');
   }
 
-  // TODO add createAmenity model here
   create(data, apartmentId: number): Observable<CreateAmenityModel> {
-    data.apartmentId = apartmentId;
+
+    if (data.Owner == 'apartment') {
+      data.apartmentId = apartmentId;
+    } else {
+      data.roomId = data.Owner;
+      delete data.Owner;
+    }
     return this.http.post<CreateAmenityModel>(this.amenitiesPath, data)
   }
 
@@ -27,17 +32,20 @@ export class AmenitiesService {
     return this.http.get<AmenityModel>(this.amenitiesPath + `?id=${id}&apartmentId=${apartmentId}`)
   }
 
-  deleteAmenity(apartmentId: number, roomId, amenityId: number) {
+  deleteAmenity(apartmentId: number, roomId: number, amenityId: number) {
     let options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
       body: {
-        apartmentId: roomId==null? null : apartmentId,
         roomId: roomId,
         amenityId: amenityId
       }
     }
-    return this.http.delete(this.amenitiesPath , options);
+
+    if (!roomId) {
+      options.body['apartmentId'] = apartmentId;
+    }
+    return this.http.delete(this.amenitiesPath, options);
   }
 }

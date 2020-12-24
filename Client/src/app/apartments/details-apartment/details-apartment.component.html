@@ -51,9 +51,8 @@
                 <div class="row ml-0 border rounded border-success p-2 mb-2 d-flex flex-column "
                     *ngFor="let room of apartment.rooms">
                     <div class="d-flex justify-content-between">
-                        <div><strong>{{room.roomType.name}}</strong>
-                            <span *ngIf="room.isSleepable">(sleepable)</span><strong>:</strong>
-                            {{room.name}}
+                        <div>
+                            <strong>{{room.roomType.name}}: </strong>{{room.name}}
                         </div>
                         <div>
                             <input id="btn" type="button" class="btn btn-sm btn-outline-primary mr-2"
@@ -79,22 +78,21 @@
                                 'medium': amenity.importance.name == 'Medium', 
                                 'normal': amenity.importance.name == 'Normal', 
                                 'low': amenity.importance.name == 'Low'}">
-                                <a id="color-red" (click)="deleteAmenity(amenity.id, room.id)">{{amenity.name}}</a>
+                                <a id="color-red" (click)="deleteAmenity(amenity.amenityId, room.id)">{{amenity.name}}</a>
                                 <span class="mr-1" *ngIf="i < room.amenities.length-1">,</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group" *ngIf="apartment.amenities">
+            <div class="form-group" *ngIf="apartment.amenities.length > 0">
                 <h5>Apartment Amenities:</h5>
                 <div class="row ml-0 border rounded border-success p-2 mb-1 d-flex">
-                    <div *ngFor="let amenity of apartment.amenities; let i= index" 
-                    [ngClass]="{'high': amenity.importance.name == 'High',
+                    <div *ngFor="let amenity of apartment.amenities; let i= index" [ngClass]="{'high': amenity.importance.name == 'High',
                     'medium': amenity.importance.name == 'Medium', 
                     'normal': amenity.importance.name == 'Normal', 
                     'low': amenity.importance.name == 'Low'}">
-                        <a id="color-red" (click)="deleteAmenity(amenity.id)">{{amenity.name}}</a>
+                        <a id="color-red" (click)="deleteAmenity(amenity.amenityId)">{{amenity.name}}</a>
                         <span class="mr-1" *ngIf="i < apartment.amenities.length-1">,</span>
                     </div>
                 </div>
@@ -111,7 +109,7 @@
 
     <jw-modal id="add-amenity-modal">
         <div>
-            <app-create-amenity [apartmentId]='id'></app-create-amenity>
+            <app-create-amenity [rooms]='apartment.rooms' [apartmentId]='id'></app-create-amenity>
         </div>
     </jw-modal>
 

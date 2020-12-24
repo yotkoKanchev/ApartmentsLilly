@@ -42,7 +42,7 @@ export class CreateRoomComponent implements OnInit {
         this.closeModal(id);
         setTimeout(() => {
           location.reload();
-        }, 2000);
+        }, 1000);
       })
   }
 

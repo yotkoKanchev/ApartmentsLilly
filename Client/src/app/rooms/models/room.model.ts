@@ -2,7 +2,7 @@ import { AmenityModel } from "src/app/amenities/models/amenity.model";
 import { BedModel } from "src/app/beds/models/bed.model";
 
 export interface RoomModel {
-    id:number;
+    id: number;
     apartmentId: number;
     name: string;
     roomType: any;

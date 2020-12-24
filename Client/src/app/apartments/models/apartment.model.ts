@@ -2,7 +2,7 @@ import { AddressModel } from 'src/app/addresses/models/address.model';
 import { AmenityModel } from 'src/app/amenities/models/amenity.model';
 import { RoomModel } from 'src/app/rooms/models/room.model';
 
-export interface ApartmentModel{
+export interface ApartmentModel {
     id: number;
     name: string;
     description: string;

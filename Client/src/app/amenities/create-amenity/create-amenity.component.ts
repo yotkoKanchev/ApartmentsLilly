@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AmenitiesService } from '../amenities.service';
 import { ToastrService } from 'ngx-toastr';
 import { ModalService } from '../../_modal';
-import { Router } from '@angular/router';
+import { RoomListingModel } from 'src/app/rooms/models/room-listing.model';
 
 @Component({
   selector: 'app-create-amenity',
@@ -15,6 +15,8 @@ export class CreateAmenityComponent implements OnInit {
   @Input()
   apartmentId: number;
   importanceTypes: any;
+  @Input()
+  rooms: Array<RoomListingModel>
 
   constructor(
     private modalService: ModalService,
@@ -23,6 +25,7 @@ export class CreateAmenityComponent implements OnInit {
     private toastrService: ToastrService,
   ) {
     this.amenityForm = this.fb.group({
+      'Owner': ['', Validators.required],
       'Name': ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
       'Importance': ['', Validators.required],
     })
@@ -40,8 +43,8 @@ export class CreateAmenityComponent implements OnInit {
         this.toastrService.success("Amenity added", "Success");
         this.closeModal(id);
         setTimeout(() => {
-        location.reload();
-        }, 2000);
+          location.reload();
+        }, 1000);
       })
   }
 
@@ -51,6 +54,10 @@ export class CreateAmenityComponent implements OnInit {
 
   get name() {
     return this.amenityForm.get('Name');
+  }
+
+  get owner() {
+    return this.amenityForm.get('Owner');
   }
 
   get importance() {

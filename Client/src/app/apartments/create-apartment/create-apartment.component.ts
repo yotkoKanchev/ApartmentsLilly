@@ -22,6 +22,7 @@ export class CreateApartmentComponent implements OnInit {
     private router: Router,
   ) {
     this.apartmentForm = this.fb.group({
+      "Address": [Validators.required],
       'Name': ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
       'Description': ['', [Validators.maxLength(1000)]],
       'MainImageUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
@@ -40,7 +41,6 @@ export class CreateApartmentComponent implements OnInit {
   create() {
     this.apartmentService.create(this.apartmentForm.value, this.addressId)
       .subscribe(data => {
-        console.log(data)
         this.toastrService.success("Success");
         this.router.navigate([`apartments/${data['id']}`])
       });
@@ -52,6 +52,10 @@ export class CreateApartmentComponent implements OnInit {
 
   openModal(id: string) {
     this.modalService.open(id);
+  }
+
+  get address() {
+    return this.apartmentForm.get('Address');
   }
 
   get name() {

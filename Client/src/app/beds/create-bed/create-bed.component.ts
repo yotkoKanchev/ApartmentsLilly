@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { RoomListingModel } from 'src/app/rooms/models/room-listing.model';
 import { ModalService } from 'src/app/_modal';
 import { BedsService } from '../beds.service';
-import { ApartmentRoomsModel } from '../models/apartment-bed.model';
 
 @Component({
   selector: 'app-create-bed',
@@ -14,7 +14,7 @@ export class CreateBedComponent implements OnInit {
   bedForm: FormGroup;
   bedTypes: any;
   @Input()
-  rooms:Array<ApartmentRoomsModel>
+  rooms: Array<RoomListingModel>
 
   constructor(
     private modalService: ModalService,
@@ -33,7 +33,7 @@ export class CreateBedComponent implements OnInit {
       this.bedTypes = data;
     })
 
-    this.rooms=this.rooms.filter(r => r.isSleepable)
+    this.rooms = this.rooms.filter(r => r.isSleepable)
   }
 
   create(id: string) {
@@ -43,7 +43,7 @@ export class CreateBedComponent implements OnInit {
         this.closeModal(id);
         setTimeout(() => {
           location.reload();
-        }, 2000);
+        }, 1000);
       })
   }
 

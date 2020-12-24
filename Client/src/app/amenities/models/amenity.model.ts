@@ -1,5 +1,5 @@
 export interface AmenityModel {
-    id: number;
+    amenityId: number;
     name: string;
     importance: any;
 }

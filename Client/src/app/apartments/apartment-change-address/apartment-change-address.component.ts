@@ -29,10 +29,8 @@ export class ApartmentChangeAddressComponent implements OnInit {
   }
 
   changeAddress() {
-    console.log(this.apartmentId, this.addressId)
     this.apartmentService.changeAddress(this.apartmentId, this.addressId)
       .subscribe(data => {
-        console.log(data)
         this.toastrService.success("Success", "Address has been changed.");
         this.router.navigate([`apartments/${this.apartmentId}`])
       });

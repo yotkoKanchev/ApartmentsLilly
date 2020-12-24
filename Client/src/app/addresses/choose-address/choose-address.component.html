@@ -6,10 +6,11 @@
             {{ad.streetAddress}}</option>
         <option value="addAddress">add new address</option>
     </select>
-    <div *ngIf="(addressSelect.pristine && addressSelect.invalid) || (addressSelect.touched && addressSelect.invalid)"
-            class="alert alert-danger">
-            <div *ngIf="addressSelect.errors.required">Address is required.</div>
-        </div>
+    <div *ngIf="addressSelect.value=='' || addressSelect.value=='addAddress' " class="alert alert-danger">
+        <span >
+            Address is reqired.
+        </span>
+    </div>
 </div>
 
 <jw-modal id="add-address-modal">
