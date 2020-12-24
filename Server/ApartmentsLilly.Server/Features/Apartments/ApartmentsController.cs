@@ -110,6 +110,7 @@
         [Route(Id)]
         public async Task<ActionResult> Delete(int id)
         {
+            // TODO FIX DELETION OF THE ADDRESS
             var result = await this.apartments.Delete(id);
 
             if (result.Failure)

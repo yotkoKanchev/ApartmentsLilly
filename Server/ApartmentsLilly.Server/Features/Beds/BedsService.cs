@@ -53,21 +53,6 @@
             return true;
         }
 
-        public async Task<Result> Update(int id, BedType bedType)
-        {
-            var bed = await this.ById(id).FirstOrDefaultAsync();
-
-            if (bed == null)
-            {
-                return $"Bed with ID: {id} does not exists.";
-            }
-
-            bed.BedType = bedType;
-            await this.data.SaveChangesAsync();
-
-            return true;
-        }
-
         private IQueryable<Bed> ById(int id)
         {
             return this.data.Beds

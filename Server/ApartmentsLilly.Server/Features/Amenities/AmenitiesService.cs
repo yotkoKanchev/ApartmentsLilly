@@ -5,7 +5,6 @@
     using Data;
     using Data.Models.Amenities;
     using Data.Models.Mappings;
-    using Infrastructure.Mapping;
     using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
 
@@ -29,30 +28,6 @@
 
             return await this.CreateRoomAmenity(roomId.Value, amenityId, importance);
         }
-
-        //public async Task<T> GetById<T>(int? apartmentId, int? roomId, int amenityId)
-        //{
-        //    if (apartmentId.HasValue)
-        //    {
-        //        return await this.ApartmentAmenityById(apartmentId.Value, amenityId)
-        //            .To<T>()
-        //            .FirstOrDefaultAsync();
-        //    }
-
-        //    return await this.RoomAmenityById(roomId.Value, amenityId)
-        //        .To<T>()
-        //        .FirstOrDefaultAsync();
-        //}
-
-        //public async Task<Result> Update(int? apartmentId, int? roomId, int amenityId, string name, int importance)
-        //{
-        //    if (apartmentId.HasValue)
-        //    {
-        //        return await this.UpdateApartmentAmenity(apartmentId.Value, amenityId, name, importance);
-        //    }
-
-        //    return await this.UpdateRoomAmenity(roomId.Value, amenityId, name, importance);
-        //}
 
         public async Task<Result> Delete(int? apartmentId, int? roomId, int amenityId)
         {
@@ -90,6 +65,7 @@
                 return "This apartment has this amenity already.";
             }
         }
+
         private async Task<Result> CreateRoomAmenity(int roomId, int amenityId, int importance)
         {
             if (await data.Rooms.AnyAsync(a => a.Id == roomId) == false)
@@ -130,58 +106,6 @@
                 .ApartmentAmenities
                 .Where(aa => aa.ApartmentId == apartmentId && aa.AmenityId == amenityId);
         }
-
-        //private async Task<Result> UpdateRoomAmenity(int roomId, int amenityId, string name, int importance)
-        //{
-        //    var roomAmenity = await this.RoomAmenityById(roomId, amenityId).FirstOrDefaultAsync();
-
-        //    if (roomAmenity == null)
-        //    {
-        //        return $"Amenity with ID: {amenityId} does not below to room with ID: {roomId}.";
-        //    }
-
-        //    var newAmenityId = await this.GetIdByName(name);
-
-        //    if (newAmenityId != amenityId)
-        //    {
-        //        await this.DeleteRoomAmenity(roomId, amenityId);
-        //        await this.CreateRoomAmenity(roomId, newAmenityId, importance);
-        //    }
-        //    else
-        //    {
-        //        roomAmenity.Importance = (AmenityImportance)importance;
-        //    }
-
-        //    await this.data.SaveChangesAsync();
-
-        //    return true;
-        //}
-
-        //private async Task<Result> UpdateApartmentAmenity(int apartmentId, int amenityId, string name, int importance)
-        //{
-        //    var apartmentAmenity = await this.ApartmentAmenityById(apartmentId, amenityId).FirstOrDefaultAsync();
-
-        //    if (apartmentAmenity == null)
-        //    {
-        //        return $"Amenity with ID: {amenityId} does not below to apartment with ID: {apartmentId}.";
-        //    }
-
-        //    var newAmenityId = await this.GetIdByName(name);
-
-        //    if (newAmenityId != amenityId)
-        //    {
-        //        await this.DeleteApartmentAmenity(apartmentId, amenityId);
-        //        await this.CreateApartmentAmenity(apartmentId, newAmenityId, importance);
-        //    }
-        //    else
-        //    {
-        //        apartmentAmenity.Importance = (AmenityImportance)importance;
-        //    }
-
-        //    await this.data.SaveChangesAsync();
-
-        //    return true;
-        //}
 
         private async Task<Result> DeleteRoomAmenity(int roomId, int amenityId)
         {
@@ -242,22 +166,25 @@
             }
         }
 
-        private async Task<int> GetIdByName(string name)
+        private async Task<int> GetIdByName(string inputName)
         {
-            var nameToLower = name.ToLower();
+            var abbreviations = new string[] { "DVD", "WiFi", "AC", "PC", "TV" };
+
+            string name = abbreviations.Contains(inputName) ? inputName : inputName.ToLower();
+
             var amenityId = await this.data.Amenities
-                .Where(a => a.Name == nameToLower)
+                .Where(a => a.Name == name)
                 .Select(a => a.Id)
                 .FirstOrDefaultAsync();
 
-            return amenityId == 0 ? amenityId : await this.CreateAmenity(nameToLower);
+            return amenityId == 0 ? await this.CreateAmenity(name) : amenityId;
         }
 
-        private async Task<int> CreateAmenity(string nameToLower)
+        private async Task<int> CreateAmenity(string name)
         {
             var amenity = new Amenity
             {
-                Name = nameToLower,
+                Name = name,
             };
 
             await this.data.AddAsync(amenity);

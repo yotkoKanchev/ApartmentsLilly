@@ -3,7 +3,6 @@
     using System.Threading.Tasks;
     using Data.Models.Amenities;
     using Infrastructure.Extensions;
-    using Infrastructure.Services;
     using Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -32,25 +31,6 @@
 
             return Created(nameof(this.Create), result.Succeeded);
         }
-
-        //[HttpGet]
-        //public async Task<ApartmentAmenityDetailsServiceModel> Details(AmenityDetailsRequestModel model)
-        //{
-        //    return await this.amenities.GetById<ApartmentAmenityDetailsServiceModel>(model.ApartmentId, model.RoomId, model.Id);
-        //}
-
-        //[HttpPut]
-        //public async Task<ActionResult> Update(UpdateAmenityRequestModel model)
-        //{
-        //    var result = await this.amenities.Update(model.ApartmentId, model.RoomId, model.AmenityId, model.Name, model.Importance);
-
-        //    if (result.Failure)
-        //    {
-        //        return this.BadRequest(result.Error);
-        //    }
-
-        //    return Ok();
-        //}
 
         [HttpDelete]
         public async Task<ActionResult> Delete(DeleteAmenityRequestModel model)

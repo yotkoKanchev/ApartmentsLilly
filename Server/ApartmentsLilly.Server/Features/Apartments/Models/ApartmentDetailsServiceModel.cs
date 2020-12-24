@@ -44,7 +44,13 @@
         {
             configuration.CreateMap<Apartment, ApartmentDetailsServiceModel>()
                 .ForMember(a => a.Name, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Name)))
-                .ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities.OrderByDescending(i => (int)i.Importance)));
+                .ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities
+                                                                    .OrderByDescending(i => (int)i.Importance)
+                                                                    .ThenBy(i => i.Amenity.Name)))
+                .ForMember(a => a.Rooms, opt => opt.MapFrom(a => a.Rooms
+                                                                    .OrderByDescending(r => r.IsSleepable)
+                                                                    .ThenByDescending(r => r.Beds.Count)
+                                                                    .ThenBy(r => r.Name)));
         }
     }
 }

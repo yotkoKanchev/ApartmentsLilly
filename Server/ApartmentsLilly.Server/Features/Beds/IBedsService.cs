@@ -9,7 +9,5 @@
         Task<Result> Create(int roomId, BedType bedType);
 
         Task<Result> Delete(int id);
-
-        Task<Result> Update(int id, BedType bedType);
     }
 }
