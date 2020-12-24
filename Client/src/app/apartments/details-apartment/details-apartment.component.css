@@ -5,4 +5,19 @@
     text-decoration:line-through;
   }
 
+  .high{
+    color:rgb(2, 23, 50);
+  }
+
+  .medium{
+    color:rgb(2, 54, 114);
+  }
+
+  .normal{
+    color:rgb(42, 134, 235);
+  }
+
+  .low{
+    color:rgb(178, 216, 255);
+  }
  

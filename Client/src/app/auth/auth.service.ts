@@ -41,16 +41,13 @@ export class AuthService {
   }
 
   delete(data: DeleteModel): Observable<any> {
-    console.log(data)
-
     let options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
       body: data
     }
-
-    console.log(options)
+    
     return this.http.delete(this.deletePath, options)
   }
 

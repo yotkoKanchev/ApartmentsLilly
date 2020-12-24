@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreateAmenityModel } from './models/create-amenity.model';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AmenityModel } from './models/amenity.model';
 import { EnumerationModel } from '../shared/models/enumeration.model';
 
@@ -27,13 +27,17 @@ export class AmenitiesService {
     return this.http.get<AmenityModel>(this.amenitiesPath + `?id=${id}&apartmentId=${apartmentId}`)
   }
 
-  edit(data, apartmentId: number, amenityId: number) {
-    data.apartmentId = apartmentId;
-    data.amenityId = amenityId;
-    return this.http.put(this.amenitiesPath, data)
-  }
-
-  deleteAmenity(amenityId: number, apartmentId: number) {
-    return this.http.delete(this.amenitiesPath + `?apartmentId=${apartmentId}&amenityId=${amenityId}`);
+  deleteAmenity(apartmentId: number, roomId, amenityId: number) {
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: {
+        apartmentId: roomId==null? null : apartmentId,
+        roomId: roomId,
+        amenityId: amenityId
+      }
+    }
+    return this.http.delete(this.amenitiesPath , options);
   }
 }

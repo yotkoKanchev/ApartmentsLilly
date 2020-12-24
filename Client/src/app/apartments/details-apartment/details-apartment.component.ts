@@ -46,8 +46,8 @@ export class DetailsApartmentComponent implements OnInit {
     });
   }
 
-  deleteAmenity(amenityId: number) {
-    this.amenitiesService.deleteAmenity(amenityId, this.id).subscribe(() => {
+  deleteAmenity(amenityId: number, roomId?) {
+    this.amenitiesService.deleteAmenity(this.id, roomId, amenityId).subscribe(() => {
       this.toastr.success("Amenity has been deleted!", "Success");
       this.fetchApartment(this.id);
     });

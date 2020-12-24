@@ -27,10 +27,10 @@
                     value="Add Room">
                 <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-amenity-modal')"
                     value="Add Amenity">
-                <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-bed-modal')"
-                    value="Add Bed">
+                <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-bed-modal')" value="Add Bed">
             </div>
-            <div class="mb-3 form-group"><h5>Address:</h5>
+            <div class="mb-3 form-group">
+                <h5>Address:</h5>
                 <div class="row d-flex justify-content-between ml-0 border rounded border-success p-2">
                     <div>
                         <p class="mb-1">{{apartment.address.city}}, {{apartment.address.country}}</p>
@@ -46,17 +46,19 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group" *ngIf="apartment.rooms"><h5>Rooms</h5>
+            <div class="form-group" *ngIf="apartment.rooms">
+                <h5>Rooms</h5>
                 <div class="row ml-0 border rounded border-success p-2 mb-2 d-flex flex-column "
                     *ngFor="let room of apartment.rooms">
                     <div class="d-flex justify-content-between">
                         <div><strong>{{room.roomType.name}}</strong>
-                            <span *ngIf="room.isSleepable">(sleepable)</span><strong>:</strong> 
-                            {{room.name}}</div>
-                        <div class="mr-2">
+                            <span *ngIf="room.isSleepable">(sleepable)</span><strong>:</strong>
+                            {{room.name}}
+                        </div>
+                        <div>
                             <input id="btn" type="button" class="btn btn-sm btn-outline-primary mr-2"
                                 routerLink="/rooms/edit/{{room.id}}" value="Edit">
-                            <input type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="deleteRoom(room.id)"
+                            <input type="button" class="btn btn-sm btn-outline-primary" (click)="deleteRoom(room.id)"
                                 value="Delete">
 
                         </div>
@@ -70,28 +72,30 @@
 
                         </div>
                     </div>
-                    <div *ngIf="room.beds.length > 0">
+                    <div *ngIf="room.amenities.length > 0">
                         <div class="mr-2"><strong>Amenities: </strong>
-                            <div style="display: inline-block;" *ngFor="let bed of room.beds; let i= index">
-                                <a id="color-red" (click)="deleteBed(bed.id)">{{bed.bedType.name}}</a>
-                                <span class="mr-1" *ngIf="i < room.beds.length-1">,</span>
+                            <div style="display: inline-block;" *ngFor="let amenity of room.amenities; let i= index"
+                                [ngClass]="{'high': amenity.importance.name == 'High',
+                                'medium': amenity.importance.name == 'Medium', 
+                                'normal': amenity.importance.name == 'Normal', 
+                                'low': amenity.importance.name == 'Low'}">
+                                <a id="color-red" (click)="deleteAmenity(amenity.id, room.id)">{{amenity.name}}</a>
+                                <span class="mr-1" *ngIf="i < room.amenities.length-1">,</span>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group" *ngIf="apartment.amenities"><h5>Amenities:</h5>
-                <div class="row ml-0 border rounded border-success p-2 mb-1 d-flex justify-content-between"
-                    *ngFor="let amenity of apartment.amenities">
-                    <div>
-                        <strong>{{amenity.name}}, </strong>Importance: <strong>{{amenity.importance.name}}</strong>
-                    </div>
-                    <div>
-                        <input type="button" class="btn btn-sm btn-outline-primary mr-2"
-                            [routerLink]="['/amenities/edit', amenity.id,  id]" value="Edit">
-                        <button type="button" class="btn btn-sm btn-outline-primary"
-                            (click)="deleteAmenity(amenity.id)">Delete</button>
+            <div class="form-group" *ngIf="apartment.amenities">
+                <h5>Apartment Amenities:</h5>
+                <div class="row ml-0 border rounded border-success p-2 mb-1 d-flex">
+                    <div *ngFor="let amenity of apartment.amenities; let i= index" 
+                    [ngClass]="{'high': amenity.importance.name == 'High',
+                    'medium': amenity.importance.name == 'Medium', 
+                    'normal': amenity.importance.name == 'Normal', 
+                    'low': amenity.importance.name == 'Low'}">
+                        <a id="color-red" (click)="deleteAmenity(amenity.id)">{{amenity.name}}</a>
+                        <span class="mr-1" *ngIf="i < apartment.amenities.length-1">,</span>
                     </div>
                 </div>
             </div>
