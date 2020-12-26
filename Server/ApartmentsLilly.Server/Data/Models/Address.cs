@@ -5,7 +5,7 @@
     using Base;
 
     using static Data.Validation.Address;
-    public class Address : Entity
+    public class Address : DeletableEntity
     {
         public int Id { get; set; }
 

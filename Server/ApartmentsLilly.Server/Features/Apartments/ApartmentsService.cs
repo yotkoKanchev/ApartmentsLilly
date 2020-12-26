@@ -79,7 +79,6 @@
                 return $"Apartment with Id: {id} does not exists.";
             }
 
-            // TODO may not work
             var rooms = await this.GetApartment(id)
                 .Select(a => a.Rooms)
                 .FirstOrDefaultAsync();
@@ -94,7 +93,7 @@
             this.data.Apartments.Remove(apartment);
 
             await this.data.SaveChangesAsync();
-            await this.addresses.Delete(apartment.AddressId);
+            await this.addresses.Delete(apartment.AddressId.Value);
 
             return true;
         }

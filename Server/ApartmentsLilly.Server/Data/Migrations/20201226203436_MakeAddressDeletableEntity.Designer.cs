@@ -4,14 +4,16 @@ using ApartmentsLilly.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ApartmentsLilly.Server.Data.Migrations
 {
     [DbContext(typeof(ApartmentsLillyDbContext))]
-    partial class ApartmentsLillyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201226203436_MakeAddressDeletableEntity")]
+    partial class MakeAddressDeletableEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,7 +111,7 @@ namespace ApartmentsLilly.Server.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("AddressId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<double?>("BasePrice")
@@ -796,7 +798,8 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     b.HasOne("ApartmentsLilly.Server.Data.Models.Address", "Address")
                         .WithMany("Apartments")
                         .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Address");
                 });

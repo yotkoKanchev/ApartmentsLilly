@@ -48,8 +48,7 @@
         // TODO ad real images upload
         //public virtual Image MainImage { get; set; }
 
-        [Required]
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
 
         public virtual Address Address { get; set; }
 

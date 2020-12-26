@@ -126,6 +126,7 @@
 
             builder
                 .Entity<Address>()
+                .HasQueryFilter(a => !a.IsDeleted)
                 .HasMany(r => r.Apartments)
                 .WithOne(a => a.Address)
                 .HasForeignKey(a => a.AddressId)
