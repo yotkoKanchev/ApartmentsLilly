@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ApartmentsService } from 'src/app/apartments/apartments.service';
@@ -14,7 +14,11 @@ export class StartComponent implements OnInit {
   searchApartmentForm: FormGroup
   apartments: Array<ApartmentListingModel>
   nums: Array<number> = [0, 1, 2, 3];
-  constructor(private apartmentsService: ApartmentsService, private fb: FormBuilder, private sanitizer: DomSanitizer) {
+  constructor(
+    private apartmentsService: ApartmentsService, 
+    private fb: FormBuilder, 
+    private sanitizer: DomSanitizer,
+    ) {
     this.searchApartmentForm = this.fb.group({
       'startDate': ['', Validators.required],
       'endDate': ['', Validators.required],

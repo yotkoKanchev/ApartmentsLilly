@@ -1,5 +1,5 @@
 export interface RoomListingModel {
-    id:number;
+    id: number;
     apartmentId: number;
     name: string;
     roomType: string;

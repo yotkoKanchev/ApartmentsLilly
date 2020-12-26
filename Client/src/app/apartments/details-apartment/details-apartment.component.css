@@ -7,10 +7,12 @@
 
   .high{
     color:rgb(2, 23, 50);
+    font-weight: 700;
   }
 
   .medium{
     color:rgb(2, 54, 114);
+    font-weight: 500;
   }
 
   .normal{

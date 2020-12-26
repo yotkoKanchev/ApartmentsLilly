@@ -29,7 +29,7 @@
                     value="Add Amenity">
                 <input type="button" class="btn btn-primary mr-2" (click)="openModal('add-bed-modal')" value="Add Bed">
             </div>
-            <div class="mb-3 form-group">
+            <div class="mb-3">
                 <h5>Address:</h5>
                 <div class="row d-flex justify-content-between ml-0 border rounded border-success p-2">
                     <div>
@@ -37,13 +37,25 @@
                         <p class="mb-1" *ngIf="apartment.address.postalCode && apartment.address.neighborhood">
                             {{apartment.address.postalCode}}, кв. {{apartment.address.neighborhood}}</p>
                         <p class="mb-1">ул. {{apartment.address.streetAddress}}</p>
+
                     </div>
                     <div>
                         <input type="button" class="btn btn-sm btn-outline-primary mr-2"
                             routerLink="/apartments/{{apartment.id}}/changeAddress" value="Change">
-                        <input id="btn" type="button" class="btn btn-sm btn-outline-primary"
+                        <input type="button" class="btn btn-sm btn-outline-primary mr-2"
                             [routerLink]="['/addresses/edit', apartment.address.id, id]" value="Edit">
+                        <input type="button" class="btn btn-sm btn-outline-primary" *ngIf="!showMap" (click)="getMap()"
+                            value="Show Map">
+                        <input type="button" class="btn btn-sm btn-outline-primary" *ngIf=" showMap" (click)="getMap()"
+                            value="Hide Map">
                     </div>
+                    <!-- <div *ngIf="showMap">
+                        <app-google-map [country]="apartment.address.country" [city]="apartment.address.city"
+                            [streetAddress]="apartment.address.streetAddress" [height]="'250rem'" [width]="'100%'"></app-google-map>
+                    </div> -->
+                    <iframe SameSite=none *ngIf="showMap" height="300rem" width="100%" frameborder="0" style="border:0"
+                        [src]="fullAddress" allowfullscreen>
+                    </iframe>
                 </div>
             </div>
             <div class="form-group" *ngIf="apartment.rooms">
@@ -78,7 +90,8 @@
                                 'medium': amenity.importance.name == 'Medium', 
                                 'normal': amenity.importance.name == 'Normal', 
                                 'low': amenity.importance.name == 'Low'}">
-                                <a id="color-red" (click)="deleteAmenity(amenity.amenityId, room.id)">{{amenity.name}}</a>
+                                <a id="color-red"
+                                    (click)="deleteAmenity(amenity.amenityId, room.id)">{{amenity.name}}</a>
                                 <span class="mr-1" *ngIf="i < room.amenities.length-1">,</span>
                             </div>
                         </div>

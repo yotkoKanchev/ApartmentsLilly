@@ -4,7 +4,7 @@ import { CreateRoomComponent } from './create-room/create-room.component';
 import { EditRoomComponent } from './edit-room/edit-room.component';
 
 const roomsRoutes: Routes = [
-    { path: 'create', component: CreateRoomComponent },
+    // { path: 'create', component: CreateRoomComponent },
     { path: 'edit/:id', component: EditRoomComponent },
 ]
 

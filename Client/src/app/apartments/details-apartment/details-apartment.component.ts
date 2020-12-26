@@ -7,6 +7,8 @@ import { RoomsService } from 'src/app/rooms/rooms.service';
 import { AmenitiesService } from 'src/app/amenities/amenities.service';
 import { ToastrService } from 'ngx-toastr';
 import { BedsService } from 'src/app/beds/beds.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-details-apartment',
@@ -17,6 +19,8 @@ export class DetailsApartmentComponent implements OnInit {
   apartment: ApartmentModel
   id: number;
   childId: number;
+  showMap: boolean;
+  fullAddress:SafeResourceUrl;
 
   constructor(
     private apartmentsService: ApartmentsService,
@@ -26,10 +30,11 @@ export class DetailsApartmentComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private modalService: ModalService,
+    private sanitizer: DomSanitizer,
     ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+      this.route.params.subscribe(params => {
       this.id = params['id'];
       this.fetchApartment(this.id);
     })
@@ -56,6 +61,7 @@ export class DetailsApartmentComponent implements OnInit {
   fetchApartment(id: number) {
     this.apartmentsService.getApartment(id).subscribe(res => {
       this.apartment = res;
+      this.getMapDetails();
     })
   }
 
@@ -69,5 +75,16 @@ export class DetailsApartmentComponent implements OnInit {
       this.toastr.success("Bed has been deleted!", "Success");
       this.fetchApartment(this.id);
     });
+  }
+
+  getMap() {
+    this.showMap = !this.showMap;
+  }
+
+  getMapDetails(){
+    this.showMap = false;
+
+    this.fullAddress = this.sanitizer.bypassSecurityTrustResourceUrl(
+      environment.googleMaps + this.apartment.address.streetAddress + '+' + this.apartment.address.city  + '+' + this.apartment.address.country );
   }
 }
