@@ -1,0 +1,69 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <form [formGroup]="requestForm" (ngSubmit)="create()">
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" formControlName="FirstName">
+                    </div>
+                    <div *ngIf="(firstName.touched || firstName.dirty) && firstName.errors" class="alert alert-danger">
+                        <span *ngIf="firstName.errors.maxlength">
+                            First name should be maximum 20 symbols long!
+                        </span>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label>Last Name</label>
+                        <input type="text" rows="4" class="form-control" formControlName="LastName">
+                    </div>
+                    <div *ngIf="(lastName.touched || lastName.dirty) && lastName.errors" class="alert alert-danger">
+                        <span *ngIf="lastName.errors.maxlength">
+                            Last name should be maximum 20 symbols long!
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label>Email</label>
+                        <input type="email" class="form-control" formControlName="Email">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="email.touched && email.errors?.minlength">
+                        Email must be at least 6 symbols.!
+                    </div>
+                    <div class="alert alert-danger" *ngIf="email.dirty && email.errors">
+                        Email must be a valid email address
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label>Phone Number</label>
+                        <input type="text" class="form-control" formControlName="PhoneNumber">
+                    </div>
+                    <div *ngIf="(phoneNumber.touched || phoneNumber.dirty) && phoneNumber.errors"
+                        class="alert alert-danger">
+                        <span *ngIf="phoneNumber.errors.maxlength">
+                            Phone number should be maximum 20 symbols long!
+                        </span>
+                        <span *ngIf="phoneNumber.errors.minlength">
+                            Phone number should be minimum 4 symbols long!
+                        </span>
+                    </div>
+                </div>
+
+                <div class="border rounded border-success p-2">
+                    <h4>Sending Request for Apartment: {{apartmentName}}</h4>
+                    <h5>From: {{searchApartmentForm.startDate | date:'dd MMM YYYY'}} To: {{searchApartmentForm.endDate |
+                        date:'dd MMM YYYY'}}</h5>
+                    <h6>Adults(13y+): {{searchApartmentForm.adults}}</h6>
+                    <h6 *ngIf="searchApartmentForm.children">Children(3-12y): {{searchApartmentForm.children}}</h6>
+                    <h6 *ngIf="searchApartmentForm.infants">Infants(0-2y): {{searchApartmentForm.infants}}</h6>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="btn btn-primary mr-2" [disabled]="!requestForm.valid">Send</button>
+                    <input type="button" class="btn btn-primary" (click)="closeModal()" value="Cancel">
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>

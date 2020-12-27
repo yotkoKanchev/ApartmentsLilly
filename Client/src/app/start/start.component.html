@@ -1,4 +1,4 @@
-<div class="jumbotron text-center">
+<div class="bg-light pt-5 text-center">
     <h2 *ngIf="!apartments" class="title">Book an apartment in Plovdiv, Bulgaria</h2>
     <div class="row text-center">
         <div class="col-lg-10 offset-lg-1 col-md-12 text-center">
@@ -7,10 +7,12 @@
                     class="form-group form-group-lg" novalidate>
                     <br>
                     <div class="input-group input-group-lg">
-                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" formControlName="startDate" class="form-control col-lg-6 col-md-7 col-sm-12"
+                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
+                            formControlName="startDate" class="form-control col-lg-6 col-md-7 col-sm-12"
                             placeholder="Start date" useValueAsDate>
 
-                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" formControlName="endDate" class="form-control col-lg-6 col-md-7 col-sm-12"
+                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
+                            formControlName="endDate" class="form-control col-lg-6 col-md-7 col-sm-12"
                             placeholder="End date" useValueAsDate>
                     </div>
                     <div *ngIf="startDate.errors">
@@ -26,21 +28,21 @@
                     <label *ngIf="searchApartmentForm.errors">{{ searchApartmentForm.errors?.dates | json }}</label>
                     <br>
                     <div class="input-group input-group-lg">
-                        <select formControlName="Adults" class="form-control col-lg-4 col-md-7 col-sm-12">
+                        <select formControlName="adults" class="form-control col-lg-4 col-md-7 col-sm-12">
                             <option value="" disabled>adults(13+)</option>
                             <option *ngFor="let num of nums" [ngValue]="num">{{num}}</option>
                         </select>
-                        <select formControlName="Children" class="form-control col-lg-4 col-md-7 col-sm-12">
-                            <option value="" disabled>children(2-12)</option>
+                        <select formControlName="children" class="form-control col-lg-4 col-md-7 col-sm-12">
+                            <option value="" disabled>children(3-12)</option>
                             <option *ngFor="let num of nums" [ngValue]="num">{{num}}</option>
                         </select>
-                        <select formControlName="Infants" class="form-control col-lg-4 col-md-7 col-sm-12">
+                        <select formControlName="infants" class="form-control col-lg-4 col-md-7 col-sm-12">
                             <option value="" disabled>infants(0-2)</option>
                             <option *ngFor="let num of nums" [ngValue]="num">{{num}}</option>
                         </select>
                     </div>
                     <br>
-                    <button class="btn btn-success form-control col-lg-5 col-md-5 col-sm-12"
+                    <button class="btn btn-primary form-control col-lg-5 col-md-5 col-sm-12"
                         [disabled]="!searchApartmentForm.valid">Search</button>
                 </form>
                 <br>
@@ -48,13 +50,11 @@
         </div>
     </div>
 
-    <div *ngIf="apartments">
-        <div *ngFor="let ap of apartments">
-            <app-apartment [ap]="ap"> </app-apartment>
+    <div class="container-fluid" *ngIf="apartments">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 mb-2" *ngFor="let ap of apartments">
+                <app-apartment [ap]="ap" [searchApartmentForm]="searchApartmentForm.value"></app-apartment>
+            </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
 </div>

@@ -22,9 +22,9 @@ export class StartComponent implements OnInit {
     this.searchApartmentForm = this.fb.group({
       'startDate': ['', Validators.required],
       'endDate': ['', Validators.required],
-      'Adults': ['', [Validators.min(1), Validators.max(3), Validators.required]],
-      'Children': ['', [Validators.min(0), Validators.max(2)]],
-      'Infants': ['', [Validators.min(0), Validators.max(2)]]
+      'adults': ['', [Validators.min(1), Validators.max(3), Validators.required]],
+      'children': ['', [Validators.min(0), Validators.max(2)]],
+      'infants': ['', [Validators.min(0), Validators.max(2)]]
     },
       { validator: [this.dateLessThan('startDate', 'endDate'), this.datePassed('startDate')] }
     );

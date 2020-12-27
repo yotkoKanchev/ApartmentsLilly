@@ -11,6 +11,7 @@ import { AddressesModule } from '../addresses/addresses.module';
 import { AmenitiesModule } from '../amenities/amenities.module';
 import { BedsModule } from '../beds/beds.module';
 import { GoogleMapComponent } from '../_googleMap/google-map/google-map.component';
+import { ReservationsModule } from '../reservations/reservations.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { GoogleMapComponent } from '../_googleMap/google-map/google-map.componen
     AddressesModule,
     AmenitiesModule,
     BedsModule,
+    ReservationsModule,
   ],
   providers:[
     ApartmentsService,

@@ -1,15 +1,16 @@
 <div class="card mb-3">
-    <h3 class="card-header">{{ap.name}}</h3>
+    <h3 class="card-header bg-info bg-gradient text-white">{{ap.name}}</h3>
     <div class="card-body">
         <h5 class="card-title">{{ap.addressCity}}, {{ap.addressCountry}}</h5>
         <h6 class="card-subtitle text-muted">{{ap.addressNeighborhood}}</h6>
         <h6 class="card-subtitle text-muted">{{ap.addressStreetAddress}}</h6>
     </div>
     <a routerLink="/apartments/{{ap.id}}">
-        <img [src]="ap.mainImageUrl" class="card-img-top" alt="apartment: {{ap.name}},{{ap.addressCity}}">
+        <img [src]="ap.mainImageUrl" class="card-img-bottom" alt="apartment: {{ap.name}},{{ap.addressCity}}">
     </a>
+    <input type="button" class="btn btn-outline-primary m-2" (click)="openModal('create-request-modal')" value="Request Reservation">
     <div class="card-body">
-        <p class="card-text">{{ap.description}}.</p>
+        <p class="card-text">{{ap.description}}</p>
     </div>
     <ul class="list-group list-group-flush">
         <li *ngIf="ap.mainImageUrl" class="list-group-item">{{ap.maxOccupants}} guests</li>
@@ -26,7 +27,12 @@
     <iframe SameSite=none *ngIf="showMap" height="400" frameborder="0" style="border:0" [src]="ap.fullAddress"
         allowfullscreen>
     </iframe>
-        <!-- <app-google-map *ngIf="showMap" [country]=ap.addressCountry [city]=ap.addressCity
-            [streetAddress]=ap.addressStreetAddress></app-google-map> -->
 </div>
 <br>
+
+
+<jw-modal id="create-request-modal">
+    <div>
+        <app-create-request [apartmentId]="ap.id" [apartmentName]="ap.name" [searchApartmentForm]="searchApartmentForm"></app-create-request>
+    </div>
+</jw-modal>

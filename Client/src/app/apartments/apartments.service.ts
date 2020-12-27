@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { CreateApartmentModel } from './models/create-apartment.model';
 import { ApartmentModel } from './models/apartment.model';
 import { ApartmentListingModel } from './models/apartment-listing.model';
-import { addressComponents } from '../addresses';
 
 @Injectable({
   providedIn: 'root'

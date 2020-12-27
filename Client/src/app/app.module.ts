@@ -21,6 +21,7 @@ import { AddressesModule } from './addresses/addresses.module';
 import { AmenitiesModule } from './amenities/amenities.module';
 import { BedsModule } from './beds/beds.module';
 import { ProfilesModule } from './profiles/profiles.module';
+import { ReservationsModule } from './reservations/reservations.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ProfilesModule } from './profiles/profiles.module';
     RoomsModule,
     AmenitiesModule,
     BedsModule,
+    ReservationsModule,
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,

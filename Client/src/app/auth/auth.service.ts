@@ -50,7 +50,7 @@ export class AuthService {
     
     return this.http.delete(this.deletePath, options)
   }
-
+  
   getUser() {
     return JSON.parse(localStorage.getItem('user'));
   }
