@@ -6,49 +6,64 @@
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label>First Name</label>
-                        <input type="text" class="form-control" formControlName="FirstName">
+                        <input type="text" class="form-control" formControlName="firstName">
                     </div>
                     <div *ngIf="(firstName.touched || firstName.dirty) && firstName.errors" class="alert alert-danger">
-                        <span *ngIf="firstName.errors.maxlength">
-                            First name should be maximum 20 symbols long!
+                        <span *ngIf="firstName.errors.maxlength || firstName.errors.minlength">
+                            First Name should be between 2 and 20 symbols.
+                        </span>
+                        <span *ngIf="firstName.errors.required">
+                            First Name is required.
                         </span>
                     </div>
                     <div class="form-group col-lg-6">
                         <label>Last Name</label>
-                        <input type="text" rows="4" class="form-control" formControlName="LastName">
+                        <input type="text" rows="4" class="form-control" formControlName="lastName">
                     </div>
                     <div *ngIf="(lastName.touched || lastName.dirty) && lastName.errors" class="alert alert-danger">
-                        <span *ngIf="lastName.errors.maxlength">
-                            Last name should be maximum 20 symbols long!
+                        <span *ngIf="lastName.errors.maxlength || lastName.errors.minlength">
+                            Last Name should be between 2 and 20 symbols.
+                        </span>
+                        <span *ngIf="lastName.errors.required">
+                            Last Name is required.
                         </span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label>Email</label>
-                        <input type="email" class="form-control" formControlName="Email">
+                        <input type="email" class="form-control" formControlName="email">
                     </div>
-                    <div class="alert alert-danger" *ngIf="email.touched && email.errors?.minlength">
-                        Email must be at least 6 symbols.!
+                    <div *ngIf="(email.touched || email.dirty) && email.errors" class="alert alert-danger">
+                        <span *ngIf="email.errors.email || email.errors.pattern">
+                            Invalid email format.
+                        </span>
+                        <span *ngIf="email.errors.required">
+                            Email is required.
+                        </span>
                     </div>
-                    <div class="alert alert-danger" *ngIf="email.dirty && email.errors">
-                        Email must be a valid email address
+                    <div class="alert alert-danger" *ngIf="email.touched && email.errors?.required">
+                        Required field.
                     </div>
                     <div class="form-group col-lg-6">
                         <label>Phone Number</label>
-                        <input type="text" class="form-control" formControlName="PhoneNumber">
+                        <input type="text" class="form-control" formControlName="phoneNumber">
                     </div>
-                    <div *ngIf="(phoneNumber.touched || phoneNumber.dirty) && phoneNumber.errors"
-                        class="alert alert-danger">
-                        <span *ngIf="phoneNumber.errors.maxlength">
-                            Phone number should be maximum 20 symbols long!
+                    <div *ngIf="(phoneNumber.touched || phoneNumber.dirty) && phoneNumber.errors" class="alert alert-danger">
+                        <span *ngIf="phoneNumber.errors.maxlength || phoneNumber.errors.minlength">
+                            Phone Number should be between 4 and 20 symbols.
                         </span>
-                        <span *ngIf="phoneNumber.errors.minlength">
-                            Phone number should be minimum 4 symbols long!
+                        <span *ngIf="phoneNumber.errors.required">
+                            Phone Number is required.
                         </span>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        <label>Additional Information</label>
+                        <textarea type="text" rows="2" class="form-control" formControlName="additionalInfo"></textarea>
+                    </div>
+                </div>
                 <div class="border rounded border-success p-2">
                     <h4>Sending Request for Apartment: {{apartmentName}}</h4>
                     <h5>From: {{searchApartmentForm.startDate | date:'dd MMM YYYY'}} To: {{searchApartmentForm.endDate |

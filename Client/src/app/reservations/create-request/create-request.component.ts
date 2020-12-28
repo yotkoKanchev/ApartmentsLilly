@@ -29,35 +29,25 @@ export class CreateRequestComponent implements OnInit {
     private toastrService: ToastrService,
   ) {
     this.requestForm = this.fb.group({
-      "FirstName": [Validators.required],
-      "LastName": [Validators.required],
-      "Email": [Validators.required],
-      "PhoneNumber": [Validators.required],
-      "From": [Validators.required],
-      "To": [Validators.required],
-      "Adults": [Validators.required],
-      "Children": [Validators.required],
-      "Infants": [Validators.required],
+      'firstName': ['', [Validators.minLength(2), Validators.maxLength(20), Validators.required]],
+      'lastName': ['', [Validators.minLength(2), Validators.maxLength(20), Validators.required]],
+      'email': ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      'phoneNumber': ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      "additionalInfo": [''],
     });
   }
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
       this.porfileService.getProfile().subscribe(profile => {
+        console.log(profile)
         this.requestForm = this.fb.group({
-          'FirstName': profile.firstName,
-          'LastName': profile.lastName,
-          'Email': profile.email,
-          'PhoneNumber': profile.phoneNumber,
+          'firstName': profile.firstName,
+          'lastName': profile.lastName,
+          'email': profile.email,
+          'phoneNumber': profile.phoneNumber,
         })
       });
-    } else {
-      this.requestForm = this.fb.group({
-        'FirstName': '',
-        'LastName': '',
-        'Email': '',
-        'PhoneNumber': '',
-      })
     }
   }
 
@@ -74,18 +64,22 @@ export class CreateRequestComponent implements OnInit {
   }
 
   get firstName() {
-    return this.requestForm.get('FirstName');
+    return this.requestForm.get('firstName');
   }
 
   get lastName() {
-    return this.requestForm.get('LastName');
+    return this.requestForm.get('lastName');
   }
 
   get email() {
-    return this.requestForm.get('Email');
+    return this.requestForm.get('email');
   }
 
   get phoneNumber() {
-    return this.requestForm.get('PhoneNumber');
+    return this.requestForm.get('phoneNumber');
+  }
+
+  get additionalInfo() {
+    return this.requestForm.get('additionalInfo');
   }
 }

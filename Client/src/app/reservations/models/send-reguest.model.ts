@@ -1,9 +1,10 @@
-export class SendRequestModel{
+export class SendRequestModel {
     apartmentId: number;
     firstName: string;
     lastName: string;
     email: string;
-    phoneNumer: string;
+    phoneNumber: string;
+    additionalInfo: string;
     from: Date;
     to: Date;
     adults: number;
