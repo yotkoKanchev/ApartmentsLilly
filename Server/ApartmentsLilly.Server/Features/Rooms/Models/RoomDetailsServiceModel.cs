@@ -32,7 +32,8 @@
             configuration.CreateMap<Room, RoomDetailsServiceModel>()
                 .ForMember(a => a.Name, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Name)))
                 .ForMember(a => a.RoomType, opt => opt.MapFrom(a => new EnumValue { Name = a.RoomType.ToString(), Value = (int)a.RoomType }))
-                .ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities.OrderByDescending(i => (int)i.Importance)));
+                .ForMember(a => a.Amenities, opt => opt.MapFrom(a => a.Amenities.OrderByDescending(i => (int)i.Importance)))
+                .ForMember(a => a.Beds, opt => opt.MapFrom(a => a.Beds.OrderBy(i => (int)i.BedType)));
         }
     }
 }

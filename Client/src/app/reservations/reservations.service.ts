@@ -31,6 +31,6 @@ export class ReservationsService {
     request.children = !searchForm.children ? 0 : searchForm.infants;
     request.infants = !searchForm.infants ? 0 : searchForm.infants;
     console.log(request)
-    return this.http.post<SendRequestModel>(this.reservationsPath, request);
+    return this.http.post<SendRequestModel>(this.reservationsPath + '/request', request);
   }
 }

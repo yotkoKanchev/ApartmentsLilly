@@ -49,8 +49,6 @@
                 return BadRequest("Passwords do not match.");
             }
 
-            // TODO check if username exists!!!!
-
             var user = new User
             {
                 Email = model.Email,

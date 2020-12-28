@@ -1,26 +1,41 @@
 ﻿namespace ApartmentsLilly.Server.Data.Models.Requests
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using Base;
 
     public class Request : DeletableEntity
     {
         public int Id { get; set; }
 
-        public DateTime StartDate { get; set; }
+        // TODO add validations
+        public string FirstName { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public string LastName { get; set; }
 
-        public int AdultsCount { get; set; }
+        public string Email { get; set; }
 
-        public int? InfantsCount { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public int? ChildrenCount { get; set; }
+        public string AdditionalInfo { get; set; }
+
+        public string Confirmation { get; set; }
+
+        public DateTime From { get; set; }
+
+        public DateTime To { get; set; }
+
+        public int Adults{ get; set; }
+
+        public int Infants { get; set; }
+
+        public int Children{ get; set; }
 
         public Status Status { get; set; }
 
         public string UserId { get; set; }
 
+        [Required]
         public virtual User User { get; set; }
     }
 }

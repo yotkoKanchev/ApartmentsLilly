@@ -3,8 +3,8 @@
     public enum AmenityImportance
     {
         Low = 1,
-        Medium = 2,
-        Normal = 3,
+        Normal = 2,
+        Medium = 3,
         High = 4,
     }
 }

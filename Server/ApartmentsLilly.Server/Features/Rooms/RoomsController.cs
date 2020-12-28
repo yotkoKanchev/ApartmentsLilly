@@ -1,6 +1,5 @@
 ﻿namespace ApartmentsLilly.Server.Features.Rooms
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Data.Models.Rooms;
     using Infrastructure.Extensions;
@@ -35,13 +34,6 @@
             }
 
             return Created(nameof(this.Create), new CreateRoomResponseModel { Id = result.IntValue });
-        }
-
-        [HttpGet]
-        [Route("All/{apartmentId}")]
-        public async Task<IEnumerable<RoomListingServiceModel>> All(int apartmentId)
-        {
-            return await this.rooms.GetAllByApartmentId<RoomListingServiceModel>(apartmentId);
         }
 
         [HttpGet]

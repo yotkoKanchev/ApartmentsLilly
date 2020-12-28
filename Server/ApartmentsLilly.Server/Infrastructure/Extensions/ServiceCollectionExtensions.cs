@@ -23,6 +23,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
+    using ApartmentsLilly.Server.Features.Reservations;
 
     public static class ServiceCollectionExtensions
     {
@@ -95,6 +96,7 @@
                 .AddTransient<IApartmentsService, ApartmentsService>()
                 .AddTransient<IAmenitiesService, AmenitiesService>()
                 .AddTransient<IRoomsService, RoomsService>()
+                .AddTransient<IReservationsService, ReservationsService>()
                 .AddTransient<IBedsService, BedsService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
