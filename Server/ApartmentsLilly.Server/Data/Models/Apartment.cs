@@ -5,6 +5,7 @@
     using Mappings;
     using Base;
     using Bookings;
+    using Requests;
     using Reviews;
     using Rooms;
 
@@ -52,15 +53,16 @@
 
         public virtual Address Address { get; set; }
 
-        public virtual ICollection<Image> CommonImages { get; set; } = new HashSet<Image>();
+        //public virtual ICollection<Image> CommonImages { get; set; } = new HashSet<Image>();
 
-        public virtual ICollection<Room> Rooms { get; set; } = new HashSet<Room>();
-
-        public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+        //public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
 
         public virtual ICollection<Booking> Bookings { get; set; } = new HashSet<Booking>();
 
-        public virtual ICollection<ApartmentAmenity> Amenities { get; set; } = new HashSet<ApartmentAmenity>();
+        public virtual ICollection<Room> Rooms { get; set; } = new HashSet<Room>();
 
+        public virtual ICollection<ApartmentAmenity> Amenities { get; set; } = new HashSet<ApartmentAmenity>();
+        
+        public virtual ICollection<Request> Requests { get; set; } = new HashSet<Request>();
     }
 }

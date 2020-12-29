@@ -67,13 +67,13 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder
-                .Entity<User>()
-                .HasQueryFilter(b => !b.IsDeleted)
-                .HasMany(u => u.Reviews)
-                .WithOne(r => r.User)
-                .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder
+            //    .Entity<User>()
+            //    .HasQueryFilter(b => !b.IsDeleted)
+            //    .HasMany(u => u.Reviews)
+            //    .WithOne(r => r.User)
+            //    .HasForeignKey(r => r.UserId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .Entity<User>()
@@ -101,90 +101,50 @@
 
             //builder
             //    .Entity<Apartment>()
-            //    .HasQueryFilter(c => !c.IsDeleted)
-            //    .HasOne(a => a.MainImageUrl)
-            //    .WithOne()
-            //    .HasForeignKey<Image>(p => p.ApartmentId)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            //    .HasQueryFilter(r => !r.IsDeleted)
+            //    .HasMany(r => r.Reviews)
+            //    .WithOne(a => a.Apartment)
+            //    .HasForeignKey(a => a.ApartmentId);
 
+            builder
+                .Entity<Apartment>()
+                .HasQueryFilter(r => !r.IsDeleted)
+                .HasMany(r => r.Rooms)
+                .WithOne(a => a.Apartment)
+                .HasForeignKey(a => a.ApartmentId);
+
+            builder
+                .Entity<Apartment>()
+                .HasQueryFilter(r => !r.IsDeleted)
+                .HasMany(r => r.Requests)
+                .WithOne(a => a.Apartment)
+                .HasForeignKey(a => a.ApartmentId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .Entity<Apartment>()
                 .HasQueryFilter(r => !r.IsDeleted)
                 .HasMany(r => r.Bookings)
                 .WithOne(a => a.Apartment)
-                .HasForeignKey(a => a.ApartmentId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Apartment>()
-                .HasQueryFilter(r => !r.IsDeleted)
-                .HasMany(r => r.Reviews)
-                .WithOne(a => a.Apartment)
-                .HasForeignKey(a => a.ApartmentId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Address>()
-                .HasQueryFilter(a => !a.IsDeleted)
-                .HasMany(r => r.Apartments)
-                .WithOne(a => a.Address)
-                .HasForeignKey(a => a.AddressId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Booking>()
-                .HasQueryFilter(r => !r.IsDeleted)
-                .HasMany(r => r.Reviews)
-                .WithOne(a => a.Booking)
-                .HasForeignKey(a => a.BookingId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // TODO make user deletable by changing deletableentity to interface
-
-            builder
-                .Entity<Apartment>()
-                .HasQueryFilter(c => !c.IsDeleted)
-                .HasMany(a => a.CommonImages)
-                .WithOne(i => i.Apartment)
-                .HasForeignKey(i => i.ApartmentId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            //builder
-            //    .Entity<Image>()
-            //    .HasQueryFilter(c => !c.IsDeleted)
-            //    .HasOne(i => i.User)
-            //    .WithOne()
-            //    .HasForeignKey<User>(i => i.MainImage)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Image>()
-                .HasQueryFilter(c => !c.IsDeleted)
-                .HasOne(i => i.Room)
-                .WithMany(r => r.Images)
-                .HasForeignKey(i => i.RoomId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Room>()
-                .HasOne(r => r.Apartment)
-                .WithMany(a => a.Rooms)
-                .HasForeignKey(r => r.ApartmentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(a => a.ApartmentId);
 
             builder
                 .Entity<Room>()
                 .HasMany(r => r.Beds)
                 .WithOne(a => a.Room)
-                .HasForeignKey(a => a.RoomId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(a => a.RoomId);
 
             builder
                 .Entity<User>()
                 .HasOne(u => u.Profile)
                 .WithOne()
                 .HasForeignKey<Profile>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Review>()
+                .HasOne(r => r.Booking)
+                .WithOne(b => b.Review)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
@@ -198,7 +158,6 @@
             builder
                 .Entity<Profile>()
                 .HasQueryFilter(b => !b.IsDeleted);
-
 
             base.OnModelCreating(builder);
         }

@@ -85,6 +85,8 @@
 
             this.data.Rooms.RemoveRange(rooms);
 
+            // TODO delete requests and other collections related
+
             var apartmentAmenities = await this.GetApartment(id)
                 .Select(a => a.Amenities)
                 .FirstOrDefaultAsync();

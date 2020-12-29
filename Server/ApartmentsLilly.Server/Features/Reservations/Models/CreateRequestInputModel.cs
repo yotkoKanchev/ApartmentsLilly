@@ -5,6 +5,8 @@
 
     public class CreateRequestInputModel
     {
+        public int ApartmentId { get; set; }
+
         // TODO add validations!
         [Required]
         public string FirstName { get; set; }

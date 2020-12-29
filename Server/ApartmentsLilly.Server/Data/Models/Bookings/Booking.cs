@@ -29,6 +29,6 @@
 
         public virtual Apartment Apartment { get; set; }
 
-        public virtual ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+        public virtual Review Review { get; set; }
     }
 }

@@ -26,6 +26,6 @@
 
         public virtual ICollection<RoomAmenity> Amenities { get; set; }
 
-        public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
+        //public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
     }
 }

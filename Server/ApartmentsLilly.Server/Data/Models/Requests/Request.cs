@@ -25,11 +25,11 @@
 
         public DateTime To { get; set; }
 
-        public int Adults{ get; set; }
+        public int Adults { get; set; }
 
         public int Infants { get; set; }
 
-        public int Children{ get; set; }
+        public int Children { get; set; }
 
         public Status Status { get; set; }
 
@@ -37,5 +37,10 @@
 
         [Required]
         public virtual User User { get; set; }
+
+        public int ApartmentId { get; set; }
+
+        [Required]
+        public Apartment Apartment { get; set; }
     }
 }

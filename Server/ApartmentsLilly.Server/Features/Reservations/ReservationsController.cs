@@ -9,6 +9,7 @@
 
     using static Infrastructure.WebConstants;
     using System;
+    using System.Collections.Generic;
 
     [AllowAnonymous]
     public class ReservationsController : ApiController
@@ -39,7 +40,6 @@
                 user = new User
                 {
                     Email = model.Email,
-                    // TODO may not work because of @
                     UserName = model.Email,
                 };
 
@@ -66,8 +66,8 @@
 
             // TODO add validation if firstName, lastName or email are null
 
-                var confirmation = await this.reservations.Create(user.Id, model.FirstName, model.LastName, model.Email, model.PhoneNumber, model.AdditionalInfo,
-                model.From, model.To, model.Adults, model.Children, model.Infants);
+            var confirmation = await this.reservations.Create(user.Id, model.ApartmentId, model.FirstName, model.LastName, model.Email, model.PhoneNumber, model.AdditionalInfo,
+            model.From, model.To, model.Adults, model.Children, model.Infants);
 
             if (isAuthenticated)
             {
@@ -82,10 +82,17 @@
                 {
                     Confirmation = confirmation,
                     Password = password,
-                    Email = model.Email,
                     UserName = model.Email,
                 });
             }
         }
+        [HttpGet]
+        [Route("requests")]
+        public async Task<IEnumerable<RequestListingServiceModel>> Requests()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            return await this.reservations.GetRequests<RequestListingServiceModel>(user.Id);
+        }
     }
+
 }

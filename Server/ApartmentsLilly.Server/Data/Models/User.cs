@@ -25,11 +25,11 @@
 
         public bool IsDeleted { get; set; }
 
-        public virtual IEnumerable<Review> Reviews { get; } = new HashSet<Review>();
+        public virtual ICollection<Review> Reviews { get; } = new HashSet<Review>();
 
-        public virtual IEnumerable<Request> Requests { get; } = new HashSet<Request>();
+        public virtual ICollection<Request> Requests { get; } = new HashSet<Request>();
 
-        public virtual IEnumerable<Booking> Bookings { get; } = new HashSet<Booking>();
+        public virtual ICollection<Booking> Bookings { get; } = new HashSet<Booking>();
 
         public virtual Profile Profile { get; set; }
     }
