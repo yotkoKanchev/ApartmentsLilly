@@ -1,0 +1,27 @@
+<div *ngIf="requests">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Names</th>
+                <th>Apartment</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let request of requests">
+            <tr>
+                <td>{{request.fullName}}</td>
+                <td>{{request.apartmentName}}</td>
+                <td>{{request.from}}</td>
+                <td>{{request.to}}</td>
+                <td>{{request.status}}</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-primary mr-2">Full Details</a>
+                    <a class="btn btn-sm btn-outline-primary mr-2">Edit</a>
+                    <a class="btn btn-sm btn-outline-primary mr-2">Cancel</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

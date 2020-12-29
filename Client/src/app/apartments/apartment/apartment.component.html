@@ -1,30 +1,30 @@
 <div class="card mb-3">
-    <h3 class="card-header bg-info bg-gradient text-white">{{ap.name}}</h3>
+    <h3 class="card-header bg-info bg-gradient text-white">{{apartment.name}}</h3>
     <div class="card-body">
-        <h5 class="card-title">{{ap.addressCity}}, {{ap.addressCountry}}</h5>
-        <h6 class="card-subtitle text-muted">{{ap.addressNeighborhood}}</h6>
-        <h6 class="card-subtitle text-muted">{{ap.addressStreetAddress}}</h6>
+        <h5 class="card-title">{{apartment.addressCity}}, {{apartment.addressCountry}}</h5>
+        <h6 class="card-subtitle text-muted">{{apartment.addressNeighborhood}}</h6>
+        <h6 class="card-subtitle text-muted">{{apartment.addressStreetAddress}}</h6>
     </div>
-    <a routerLink="/apartments/{{ap.id}}">
-        <img [src]="ap.mainImageUrl" class="card-img-bottom" alt="apartment: {{ap.name}},{{ap.addressCity}}">
+    <a routerLink="/apartmentartments/{{apartment.id}}">
+        <img [src]="apartment.mainImageUrl" class="card-img-bottom" alt="apartmentartment: {{apartment.name}},{{apartment.addressCity}}">
     </a>
     <input type="button" class="btn btn-outline-primary m-2" (click)="openModal('create-request-modal')" value="Request Reservation">
     <div class="card-body">
-        <p class="card-text">{{ap.description}}</p>
+        <p class="card-text">{{apartment.description}}</p>
     </div>
     <ul class="list-group list-group-flush">
-        <li *ngIf="ap.mainImageUrl" class="list-group-item">{{ap.maxOccupants}} guests</li>
-        <li *ngIf="ap.size" class="list-group-item">{{ap.size}} sq.m</li>
-        <li *ngIf="ap.basePrice" class="list-group-item">{{ap.basePrice}} BGN/night</li>
-        <li *ngIf="ap.basePrice" class="list-group-item">{{ap.bedroomCount}} bedrooms - {{ap.bedCount}} beds -
-            {{ap.bathroomCount}} baths</li>
-        <li *ngIf="ap.basePrice" class="list-group-item">
-            <span *ngFor="let item of ap.amenities">{{item}}</span>
+        <li *ngIf="apartment.mainImageUrl" class="list-group-item">{{apartment.maxOccupants}} guests</li>
+        <li *ngIf="apartment.size" class="list-group-item">{{apartment.size}} sq.m</li>
+        <li *ngIf="apartment.basePrice" class="list-group-item">{{apartment.basePrice}} BGN/night</li>
+        <li *ngIf="apartment.basePrice" class="list-group-item">{{apartment.bedroomCount}} bedrooms - {{apartment.bedCount}} beds -
+            {{apartment.bathroomCount}} baths</li>
+        <li *ngIf="apartment.basePrice" class="list-group-item">
+            <span *ngFor="let item of apartment.amenities">{{item}}</span>
         </li>
     </ul>
-    <a class="card-body col-pos" *ngIf="!showMap" (click)="getMap()">Show Map</a>
-    <a class="card-body col-neg" *ngIf="showMap" (click)="getMap()">Hide Map</a>
-    <iframe SameSite=none *ngIf="showMap" height="400" frameborder="0" style="border:0" [src]="ap.fullAddress"
+    <a class="card-body col-pos" *ngIf="!showMap" (click)="getMap()">Show Mapartment</a>
+    <a class="card-body col-neg" *ngIf="showMap" (click)="getMap()">Hide Mapartment</a>
+    <iframe SameSite=none *ngIf="showMap" height="400" frameborder="0" style="border:0" [src]="apartment.fullAddress"
         allowfullscreen>
     </iframe>
 </div>
@@ -33,6 +33,6 @@
 
 <jw-modal id="create-request-modal">
     <div>
-        <app-create-request [apartmentId]="ap.id" [apartmentName]="ap.name" [searchApartmentForm]="searchApartmentForm"></app-create-request>
+        <app-create-request [apartmentId]="apartment.id" [apartmentName]="apartment.name" [searchApartmentForm]="searchApartmentForm"></app-create-request>
     </div>
 </jw-modal>

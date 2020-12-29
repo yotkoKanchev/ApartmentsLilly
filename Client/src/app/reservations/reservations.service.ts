@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { SendRequestModel } from './models/send-reguest.model';
 import { CreateRequestUserDataModel } from './models/create-request-userData.model';
 import { ConfirmationModel } from './models/confirmation.model';
+import { RequestListingModel } from './models/request-listing.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,11 @@ export class ReservationsService {
     request.adults = searchForm.adults;
     request.children = !searchForm.children ? 0 : searchForm.children;
     request.infants = !searchForm.infants ? 0 : searchForm.infants;
-    console.log(request)
     return this.http.post<SendRequestModel>(this.reservationsPath + '/request', request);
+  }
+
+  getRequests(): Observable<Array<RequestListingModel>> {
+    return this.http.get<Array<RequestListingModel>>(this.reservationsPath + '/requests');
   }
 
   setConfirmationDetails(data) {
