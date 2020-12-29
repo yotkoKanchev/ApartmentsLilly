@@ -6,13 +6,14 @@ import { SearchApartmentsModel } from '../apartments/models/search-apartments.mo
 import { Observable } from 'rxjs';
 import { SendRequestModel } from './models/send-reguest.model';
 import { CreateRequestUserDataModel } from './models/create-request-userData.model';
+import { ConfirmationModel } from './models/confirmation.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationsService {
   private reservationsPath = environment.apiUrl + "reservations";
-
+  confirmationDetails: ConfirmationModel;
   constructor(
     private http: HttpClient, private router: Router
   ) { }
@@ -28,9 +29,17 @@ export class ReservationsService {
     request.from = searchForm.startDate;
     request.to = searchForm.endDate;
     request.adults = searchForm.adults;
-    request.children = !searchForm.children ? 0 : searchForm.infants;
+    request.children = !searchForm.children ? 0 : searchForm.children;
     request.infants = !searchForm.infants ? 0 : searchForm.infants;
     console.log(request)
     return this.http.post<SendRequestModel>(this.reservationsPath + '/request', request);
+  }
+
+  setConfirmationDetails(data) {
+    this.confirmationDetails = data;
+  }
+
+  getConfirmationDetails(): ConfirmationModel {
+    return this.confirmationDetails;
   }
 }

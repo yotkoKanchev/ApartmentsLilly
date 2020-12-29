@@ -4,10 +4,11 @@ import { ReservationsService } from './reservations.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from '../_modal';
 import { CreateRequestComponent } from './create-request/create-request.component';
+import { reservationComponents } from '.';
 
 @NgModule({
   declarations: [
-    CreateRequestComponent,
+    ...reservationComponents,
   ],
   imports: [
     CommonModule,

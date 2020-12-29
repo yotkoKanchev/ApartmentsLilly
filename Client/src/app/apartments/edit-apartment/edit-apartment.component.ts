@@ -31,7 +31,7 @@ export class EditApartmentComponent implements OnInit {
       'size': ['', [Validators.min(0), Validators.max(1000)]],
       'basePrice': ['', [Validators.min(0), Validators.max(10000)]],
       'maxOccupants': ['', [Validators.min(0), Validators.max(1000)]],
-      'hasTerrace': ['',],
+      'hasTerrace': [''],
     })
   }
 

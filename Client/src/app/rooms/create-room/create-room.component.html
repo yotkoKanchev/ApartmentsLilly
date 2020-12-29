@@ -25,7 +25,7 @@
                     <input class="mr-2" type="checkbox" id="sleepable" formControlName="IsSleepable">
                     <label for="sleepable">Is Sleepable</label>
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!roomForm.valid">Create</button>
                 <input type="button" class="btn btn-primary ml-3" (click)="closeModal('add-room-modal');" value="Close">
             </form>
             <br>

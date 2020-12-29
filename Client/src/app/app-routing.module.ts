@@ -10,6 +10,7 @@ import { AddressesRoutingModule } from './addresses/addresses-routing.module';
 import { AdminGuardService } from './auth/guards/admin-guard.service';
 import { ProfilesRoutingModule } from './profiles/profiles-routing.module';
 import { DeleteComponent } from './profiles/delete/delete.component';
+import { ReservationsRoutingModule } from './reservations/reservations-routing.module';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: StartComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'apartments', loadChildren: () => ApartmentsRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
   { path: 'addresses', loadChildren: () => AddressesRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
   { path: 'rooms', loadChildren: () => RoomsRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
+  { path: 'reservations', loadChildren: () => ReservationsRoutingModule },
 ];
 
 @NgModule({

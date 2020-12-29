@@ -26,14 +26,7 @@ export class ApartmentComponent implements OnInit {
     this.showMap = !this.showMap;
   }
 
-  makeRequest(){
-    if (!this.authService.isAuthenticated()) {
-    }
-    console.log(this.searchApartmentForm)
-    
-  }
-  
-  openModal(id: string){
+  openModal(id: string) {
     this.modalService.open(id);
   }
 }

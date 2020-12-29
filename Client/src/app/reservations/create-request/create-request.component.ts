@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -33,29 +33,32 @@ export class CreateRequestComponent implements OnInit {
       'lastName': ['', [Validators.minLength(2), Validators.maxLength(20), Validators.required]],
       'email': ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       'phoneNumber': ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      "additionalInfo": [''],
+      'additionalInfo': [''],
     });
   }
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
       this.porfileService.getProfile().subscribe(profile => {
-        console.log(profile)
         this.requestForm = this.fb.group({
           'firstName': profile.firstName,
           'lastName': profile.lastName,
           'email': profile.email,
           'phoneNumber': profile.phoneNumber,
+          'additionalInfo': '',
         })
       });
     }
   }
 
   create() {
-    this.reservationsService.sendRequest(this.apartmentId, this.searchApartmentForm, this.requestForm.value).subscribe(() => {
+    this.reservationsService.sendRequest(this.apartmentId, this.searchApartmentForm, this.requestForm.value).subscribe(data => {
       this.toastrService.success("Request sent", "Success");
       this.closeModal();
-      this.router.navigate(['/']);
+      this.reservationsService.setConfirmationDetails(data);
+
+      var urlToNavigate = this.authService.isAuthenticated() ? "reservations/user-request-confirmation" : "reservations/guest-request-confirmation"
+      this.router.navigate([urlToNavigate])
     })
   }
 
