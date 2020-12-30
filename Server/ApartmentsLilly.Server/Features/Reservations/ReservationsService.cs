@@ -4,9 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using ApartmentsLilly.Server.Infrastructure.Mapping;
     using Data;
     using Data.Models.Requests;
+    using Infrastructure.Mapping;
+    using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
 
     public class ReservationsService : IReservationsService
@@ -17,6 +18,7 @@
         {
             this.data = data;
         }
+
         public async Task<string> Create(string userId, int apartmentId, string firstName, string lastName, string email, string phoneNumber, string additionalInfo,
             DateTime from, DateTime to, int adults, int children, int infants)
         {
@@ -42,7 +44,7 @@
                 Adults = adults,
                 Children = children,
                 Infants = infants,
-                Status = Status.Sent,
+                Status = RequestStatus.Sent,
                 Confirmation = confirmationCode,
             };
 
@@ -54,14 +56,47 @@
 
         public async Task<IEnumerable<T>> GetRequests<T>(string userId)
         {
-            var result = await this.data
+            return await this.data
                 .Requests
                 .Where(r => r.UserId == userId)
                 .OrderByDescending(r => r.From)
                 .To<T>()
                 .ToListAsync();
+        }
 
-            return result;
+        public async Task<T> GetRequestDetails<T>(int requestId)
+        {
+            return await this.data
+                .Requests
+                .Where(r => r.Id == requestId)
+                .To<T>()
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Result> CancelRequest(int requestId, string userId)
+        {
+            return await this.ChangeStatus(requestId, userId, RequestStatus.Canceled);
+        }
+
+        private async Task<Result> ChangeStatus(int requestId, string userId, RequestStatus newStatus)
+        {
+            var request = await this.data.Requests
+                .FirstOrDefaultAsync(r => r.Id == requestId);
+
+            if (request == null)
+            {
+                return $"Request with ID: {requestId} does not exists.";
+            }
+
+            if (request.UserId != userId)
+            {
+                return "You are not allowed to cancel this request.";
+            }
+
+            request.Status = RequestStatus.Canceled;
+            await this.data.SaveChangesAsync();
+
+            return true;
         }
     }
 }

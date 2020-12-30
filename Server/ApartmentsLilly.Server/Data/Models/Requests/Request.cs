@@ -31,7 +31,7 @@
 
         public int Children { get; set; }
 
-        public Status Status { get; set; }
+        public RequestStatus Status { get; set; }
 
         public string UserId { get; set; }
 

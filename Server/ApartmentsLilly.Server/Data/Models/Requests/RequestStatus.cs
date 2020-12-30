@@ -1,6 +1,6 @@
 ﻿namespace ApartmentsLilly.Server.Data.Models.Requests
 {
-    public enum Status
+    public enum RequestStatus
     {
         Sent = 1,
         Pending = 2,

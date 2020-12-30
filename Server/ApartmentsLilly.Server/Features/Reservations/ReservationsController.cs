@@ -1,5 +1,6 @@
 ﻿namespace ApartmentsLilly.Server.Features.Reservations
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Data.Models;
     using Models;
@@ -8,8 +9,6 @@
     using Microsoft.AspNetCore.Mvc;
 
     using static Infrastructure.WebConstants;
-    using System;
-    using System.Collections.Generic;
 
     [AllowAnonymous]
     public class ReservationsController : ApiController
@@ -92,6 +91,29 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
             return await this.reservations.GetRequests<RequestListingServiceModel>(user.Id);
+        }
+
+        [HttpGet]
+        [Route(Id)]
+        public async Task<RequestDetailsServiceModel> Details(int id)
+        {
+            return await this.reservations.GetRequestDetails<RequestDetailsServiceModel>(id);
+        }
+
+        [HttpPut]
+        [Route(Id)]
+        public async Task<ActionResult> CancelRequest(int id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var result = await this.reservations.CancelRequest(id, user.Id);
+
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
         }
     }
 
