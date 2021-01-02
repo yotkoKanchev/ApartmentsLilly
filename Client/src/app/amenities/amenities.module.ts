@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AmenitiesService } from './amenities.service';
 import { amenitiesComponents} from '.';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ModalModule } from 'src/app/_modal';
 import { RouterModule } from '@angular/router';
 import { CreateAmenityComponent } from './create-amenity/create-amenity.component';
 
@@ -14,7 +13,6 @@ import { CreateAmenityComponent } from './create-amenity/create-amenity.componen
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ModalModule,
     RouterModule, 
   ],
   providers:[

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoomsService } from '../rooms.service';
 import { ToastrService } from 'ngx-toastr';
-import { ModalService } from 'src/app/_modal';
+import { EnumerationModel } from 'src/app/shared/models/enumeration.model';
 
 @Component({
   selector: 'app-create-room',
@@ -11,12 +11,11 @@ import { ModalService } from 'src/app/_modal';
 })
 export class CreateRoomComponent implements OnInit {
   roomForm: FormGroup;
-  roomTypes: any;
+  roomTypes: EnumerationModel;
   @Input()
   apartmentId: number;
 
   constructor(
-    private modalService: ModalService,
     private fb: FormBuilder,
     private roomsService: RoomsService,
     private toastrService: ToastrService,
@@ -39,15 +38,10 @@ export class CreateRoomComponent implements OnInit {
     this.roomsService.create(this.roomForm.value, this.apartmentId)
       .subscribe(() => {
         this.toastrService.success("Room added", "Success");
-        this.closeModal(id);
         setTimeout(() => {
           location.reload();
         }, 1000);
       })
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
   }
 
   get name() {

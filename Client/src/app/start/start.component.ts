@@ -14,11 +14,12 @@ export class StartComponent implements OnInit {
   searchApartmentForm: FormGroup
   apartments: Array<ApartmentListingModel>
   nums: Array<number> = [0, 1, 2, 3];
+
   constructor(
-    private apartmentsService: ApartmentsService, 
-    private fb: FormBuilder, 
+    private apartmentsService: ApartmentsService,
+    private fb: FormBuilder,
     private sanitizer: DomSanitizer,
-    ) {
+  ) {
     this.searchApartmentForm = this.fb.group({
       'startDate': ['', Validators.required],
       'endDate': ['', Validators.required],
@@ -38,8 +39,8 @@ export class StartComponent implements OnInit {
       this.apartments = data;
       for (const apart of this.apartments) {
         apart.fullAddress = this.sanitizer.bypassSecurityTrustResourceUrl(
-          environment.googleMaps + apart.addressStreetAddress + '+' + apart.addressCity  + '+' + apart.addressCountry );
-        }
+          environment.googleMaps + apart.addressStreetAddress + '+' + apart.addressCity + '+' + apart.addressCountry);
+      }
     });
   }
 
@@ -68,11 +69,11 @@ export class StartComponent implements OnInit {
       return {};
     }
   }
-  
+
   get startDate() {
     return this.searchApartmentForm.get('startDate');
   }
-  
+
   get endDate() {
     return this.searchApartmentForm.get('endDate');
   }

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RoomModel } from '../models/room.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from 'src/app/_modal';
+import { EnumerationModel } from 'src/app/shared/models/enumeration.model';
 
 @Component({
   selector: 'app-edit-room',
@@ -13,18 +14,14 @@ import { ModalService } from 'src/app/_modal';
 })
 export class EditRoomComponent implements OnInit {
   roomForm: FormGroup
-  roomTypes: any;
+  roomTypes: EnumerationModel;
   room: RoomModel;
+  @Input()
   id: number;
-  apartmentId: number;
-  roomIsSleepable: boolean;
 
   constructor(
     private fb: FormBuilder,
-    private modal: ModalService,
     private roomsService: RoomsService,
-    private route: ActivatedRoute,
-    private router: Router, 
     private toastr: ToastrService,) {
     this.roomForm = this.fb.group({
       'id': [''],
@@ -35,14 +32,8 @@ export class EditRoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
-    });
-
     this.roomsService.getRoom(this.id).subscribe(res => {
       this.room = res;
-      this.roomIsSleepable = res.isSleepable;
-      this.apartmentId = this.room.apartmentId;
       this.roomForm = this.fb.group({
         'id': [this.room.id],
         'name': [this.room.name],
@@ -60,7 +51,9 @@ export class EditRoomComponent implements OnInit {
     this.roomsService.edit(this.roomForm.value, this.id)
       .subscribe(() => {
         this.toastr.success("Room has been updated!", "Success");
-        this.router.navigate([`apartments/${this.apartmentId}`]);
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
       });
   }
 

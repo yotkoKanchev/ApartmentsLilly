@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { RoomListingModel } from 'src/app/rooms/models/room-listing.model';
-import { ModalService } from 'src/app/_modal';
 import { BedsService } from '../beds.service';
 
 @Component({
@@ -15,9 +14,7 @@ export class CreateBedComponent implements OnInit {
   bedTypes: any;
   @Input()
   rooms: Array<RoomListingModel>
-
   constructor(
-    private modalService: ModalService,
     private fb: FormBuilder,
     private bedsService: BedsService,
     private toastrService: ToastrService,
@@ -36,19 +33,14 @@ export class CreateBedComponent implements OnInit {
     this.rooms = this.rooms.filter(r => r.isSleepable)
   }
 
-  create(id: string) {
+  create() {
     this.bedsService.create(this.bedForm.value)
       .subscribe(() => {
         this.toastrService.success("Bed added", "Success");
-        this.closeModal(id);
         setTimeout(() => {
           location.reload();
         }, 1000);
       })
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
   }
 
   get room() {

@@ -6,9 +6,11 @@
         <h6 class="card-subtitle text-muted">{{apartment.addressStreetAddress}}</h6>
     </div>
     <a routerLink="/apartmentartments/{{apartment.id}}">
-        <img [src]="apartment.mainImageUrl" class="card-img-bottom" alt="apartmentartment: {{apartment.name}},{{apartment.addressCity}}">
+        <img [src]="apartment.mainImageUrl" class="card-img-bottom"
+            alt="apartmentartment: {{apartment.name}},{{apartment.addressCity}}">
     </a>
-    <input type="button" class="btn btn-outline-primary m-2" (click)="openModal('create-request-modal')" value="Request Reservation">
+    <input type="button" class="btn btn-outline-primary m-2" (click)="openModal('create-request-modal')"
+        value="Request Reservation">
     <div class="card-body">
         <p class="card-text">{{apartment.description}}</p>
     </div>
@@ -16,7 +18,8 @@
         <li *ngIf="apartment.mainImageUrl" class="list-group-item">{{apartment.maxOccupants}} guests</li>
         <li *ngIf="apartment.size" class="list-group-item">{{apartment.size}} sq.m</li>
         <li *ngIf="apartment.basePrice" class="list-group-item">{{apartment.basePrice}} BGN/night</li>
-        <li *ngIf="apartment.basePrice" class="list-group-item">{{apartment.bedroomCount}} bedrooms - {{apartment.bedCount}} beds -
+        <li *ngIf="apartment.basePrice" class="list-group-item">{{apartment.bedroomCount}} bedrooms -
+            {{apartment.bedCount}} beds -
             {{apartment.bathroomCount}} baths</li>
         <li *ngIf="apartment.basePrice" class="list-group-item">
             <span *ngFor="let item of apartment.amenities">{{item}}</span>
@@ -28,11 +31,9 @@
         allowfullscreen>
     </iframe>
 </div>
-<br>
-
 
 <jw-modal id="create-request-modal">
     <div>
-        <app-create-request [apartmentId]="apartment.id" [apartmentName]="apartment.name" [searchApartmentForm]="searchApartmentForm"></app-create-request>
+        <app-create-request [searchApartmentForm]="searchApartmentForm"></app-create-request>
     </div>
 </jw-modal>

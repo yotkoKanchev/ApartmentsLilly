@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from '../_modal';
 import { CreateRequestComponent } from './create-request/create-request.component';
 import { reservationComponents } from '.';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { reservationComponents } from '.';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    AppRoutingModule,
     ModalModule,
   ],
   providers: [

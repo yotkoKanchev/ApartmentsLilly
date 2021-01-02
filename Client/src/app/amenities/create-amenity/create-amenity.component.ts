@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AmenitiesService } from '../amenities.service';
 import { ToastrService } from 'ngx-toastr';
-import { ModalService } from '../../_modal';
 import { RoomListingModel } from 'src/app/rooms/models/room-listing.model';
 
 @Component({
@@ -19,7 +18,6 @@ export class CreateAmenityComponent implements OnInit {
   rooms: Array<RoomListingModel>
 
   constructor(
-    private modalService: ModalService,
     private fb: FormBuilder,
     private amenitiesService: AmenitiesService,
     private toastrService: ToastrService,
@@ -41,15 +39,10 @@ export class CreateAmenityComponent implements OnInit {
     this.amenitiesService.create(this.amenityForm.value, this.apartmentId)
       .subscribe(() => {
         this.toastrService.success("Amenity added", "Success");
-        this.closeModal(id);
         setTimeout(() => {
           location.reload();
         }, 1000);
       })
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
   }
 
   get name() {

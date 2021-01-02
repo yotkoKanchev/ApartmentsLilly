@@ -53,7 +53,8 @@
     <div class="container-fluid" *ngIf="apartments">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-6 mb-2" *ngFor="let apartment of apartments">
-                <app-apartment [apartment]="apartment" [searchApartmentForm]="searchApartmentForm.value"></app-apartment>
+                <app-apartment [apartment]="apartment" [searchApartmentForm]="searchApartmentForm.value">
+                </app-apartment>
             </div>
         </div>
     </div>

@@ -1,7 +1,12 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create Amenity</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                    aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
             <form [formGroup]="amenityForm" (ngSubmit)="create('add-amenity-modal')">
                 <label>Assign to:</label>
                 <select class="form-control mb-3" formControlName="Owner">
@@ -9,7 +14,7 @@
                     <option value="apartment"><strong>Apartment</strong></option>
                     <option *ngFor="let room of rooms" [ngValue]="room.id">{{room.name}}</option>
                 </select>
-                <div *ngIf="(owner.pristine && owner.invalid) || (owner.touched && owner.invalid)"
+                <div *ngIf="owner.touched && owner.invalid"
                     class="alert alert-danger">
                     <div *ngIf="owner.errors.required">Owner is required.</div>
                 </div>
@@ -17,7 +22,7 @@
                     <label>Name</label>
                     <input type="text" class="form-control" formControlName="Name">
                 </div>
-                <div *ngIf="(name.pristine || name.invalid) && name.errors" class="alert alert-danger">
+                <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
                     <span *ngIf="name.errors.minlength || name.errors.maxlength || name.errors.required">
                         Name should be between 1 and 30 symbols long!
                     </span>
@@ -27,17 +32,16 @@
                     <option disabled value="">choose importance</option>
                     <option *ngFor="let type of importanceTypes" [ngValue]="type.value">{{type.name}}</option>
                 </select>
-                <div *ngIf="(importance.pristine && importance.invalid) || (importance.touched && importance.invalid)"
+                <div *ngIf="importance.touched && importance.invalid"
                     class="alert alert-danger">
                     <div *ngIf="importance.errors.required">Importance level is required.</div>
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
-                <input type="button" class="btn btn-primary ml-3" (click)="closeModal('add-amenity-modal');"
-                    value="Close">
             </form>
-            <br>
-            <br>
         </div>
-        <div class="col-lg-4"></div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="amenityForm.invalid" data-dismiss="modal"
+                (click)="create()">Create</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
     </div>
 </div>

@@ -1,32 +1,36 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
-            <form [formGroup]="bedForm" (ngSubmit)="create('add-bed-modal')">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create Bed</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                    aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="bedForm">
                 <label>Choose Room</label>
-                <select class="form-control mb-3" formControlName="RoomId">
+                <select class="custom-select mb-3" formControlName="RoomId">
                     <option disabled value="">choose room</option>
                     <option *ngFor="let room of rooms" [ngValue]="room.id">{{room.name}}</option>
                 </select>
-                <div *ngIf="(room.pristine && room.invalid) || (room.touched && room.invalid)"
-                    class="alert alert-danger">
+                <div *ngIf="room.touched && room.invalid" class="alert alert-danger">
                     <div *ngIf="room.errors.required">Room is required.</div>
                 </div>
                 <label>Choose Bed Type</label>
-                <select class="form-control mb-3" formControlName="BedType">
+                <select class="custom-select mb-3" formControlName="BedType">
                     <option disabled value="">choose room type</option>
                     <option *ngFor="let type of bedTypes" [ngValue]="type.value">{{type.name}}</option>
                 </select>
-                <div *ngIf="(bedType.pristine && bedType.invalid) || (bedType.touched && bedType.invalid)"
-                    class="alert alert-danger">
+                <div *ngIf="bedType.touched && bedType.invalid" class="alert alert-danger">
                     <div *ngIf="bedType.errors.required">Bed Type is required.</div>
                 </div>
-                <button type="submit" class="btn btn-primary">Create</button>
-                <input type="button" class="btn btn-primary ml-3" (click)="closeModal('add-bed-modal');" value="Close">
+
             </form>
-            <br>
-            <br>
         </div>
-        <div class="col-lg-4"></div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="bedForm.invalid" data-dismiss="modal"
+                (click)="create()">Create</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
     </div>
 </div>

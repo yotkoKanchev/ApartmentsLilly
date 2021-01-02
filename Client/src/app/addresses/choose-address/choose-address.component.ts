@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { AddressesService } from '../addresses.service';
 import { AddressModel } from '../models/address.model';
 import { ModalService } from '../../_modal';
@@ -28,6 +28,7 @@ export class ChooseAddressComponent implements OnInit {
 
   onOptionsSelected(value: any) {
     if (value == "addAddress") {
+      
       this.openModal('add-address-modal');
     }
     else{

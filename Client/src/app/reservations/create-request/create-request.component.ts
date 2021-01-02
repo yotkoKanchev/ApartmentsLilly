@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -15,8 +15,6 @@ import { ReservationsService } from '../reservations.service';
 })
 export class CreateRequestComponent implements OnInit {
   requestForm: FormGroup;
-  @Input() apartmentName: string;
-  @Input() apartmentId: number;
   @Input() searchApartmentForm: SearchApartmentsModel;
 
   constructor(
@@ -48,11 +46,19 @@ export class CreateRequestComponent implements OnInit {
           'additionalInfo': '',
         })
       });
+    } else {
+      this.requestForm = this.fb.group({
+        'firstName': '',
+        'lastName': '',
+        'email': '',
+        'phoneNumber': '',
+        'additionalInfo': '',
+      })
     }
   }
 
   create() {
-    this.reservationsService.sendRequest(this.apartmentId, this.searchApartmentForm, this.requestForm.value).subscribe(data => {
+    this.reservationsService.sendRequest(this.searchApartmentForm, this.requestForm.value).subscribe(data => {
       this.toastrService.success("Request sent", "Success");
       this.closeModal();
       this.reservationsService.setConfirmationDetails(data);

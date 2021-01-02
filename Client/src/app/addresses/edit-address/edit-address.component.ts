@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AddressesService } from '../addresses.service';
 import { AddressModel } from '../models/address.model';
 import { ToastrService } from 'ngx-toastr';
@@ -11,16 +10,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./edit-address.component.css']
 })
 export class EditAddressComponent implements OnInit {
+  @Input() addressId: string;
+  @Input() apartmentId: number;
   addressForm: FormGroup;
-  addressId: string;
-  apartmentId: number;
   address: AddressModel;
+
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private addressService: AddressesService,
-    private toastr: ToastrService,
-    private router: Router) {
+    private toastr: ToastrService,) {
     this.addressForm = this.fb.group({
       'country': ['', [Validators.minLength(2), Validators.maxLength(30)]],
       'city': ['', [Validators.minLength(2), Validators.maxLength(30)]],
@@ -31,18 +29,14 @@ export class EditAddressComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.addressId = params['id'];
-      this.apartmentId = params['apartmentId']
-      this.addressService.getAddress(this.addressId).subscribe(res => {
-        this.address = res;
-        this.addressForm = this.fb.group({
-          'country': [this.address.country],
-          'city': [this.address.city],
-          'postalCode': [this.address.postalCode],
-          'neighborhood': [this.address.neighborhood],
-          'streetAddress': [this.address.streetAddress],
-        })
+    this.addressService.getAddress(this.addressId).subscribe(res => {
+      this.address = res;
+      this.addressForm = this.fb.group({
+        'country': [this.address.country],
+        'city': [this.address.city],
+        'postalCode': [this.address.postalCode],
+        'neighborhood': [this.address.neighborhood],
+        'streetAddress': [this.address.streetAddress],
       })
     })
   }
@@ -50,7 +44,9 @@ export class EditAddressComponent implements OnInit {
   editAddress() {
     this.addressService.editAddress(this.addressForm.value, this.addressId).subscribe(() => {
       this.toastr.success("Address has been edited!", "Success")
-      this.router.navigate([`apartments/${this.apartmentId}`])
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
     })
   }
 

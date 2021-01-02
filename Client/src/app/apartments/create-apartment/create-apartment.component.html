@@ -4,7 +4,7 @@
         <div class="col-lg-4">
             <form [formGroup]="apartmentForm" (ngSubmit)="create()">
 
-                <app-choose-address formControlName="Address" (onAddressIdSelected)="getAddressId($event)"></app-choose-address>
+                <app-choose-address (onAddressIdSelected)="getAddressId($event)"></app-choose-address>
                 <div *ngIf="address.touched && name.errors" class="alert alert-danger">
                     <span *ngIf="address.errors.required">
                         Address is reqired!

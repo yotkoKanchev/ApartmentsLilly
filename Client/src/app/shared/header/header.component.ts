@@ -8,16 +8,18 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
   title: string = "Lilly's"
-  avatar: string = 'assets/images/noAvatar.png';
+  avatar: string;
   toggleNavbar = true;
   constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    const userAvatar = JSON.parse(localStorage.getItem('user'))['avatarUrl'];
+    this.avatar = userAvatar ? userAvatar : 'assets/images/noAvatar.png';
   }
 
   logout() {
-      this.authService.logout();
+    this.authService.logout();
   }
 
 }

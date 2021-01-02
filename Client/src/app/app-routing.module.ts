@@ -5,7 +5,6 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuardService } from './auth/guards/auth-guard.service';
 import { StartComponent } from './start/start.component';
 import { ApartmentsRoutingModule } from './apartments/apartments-routing.module';
-import { RoomsRoutingModule } from './rooms/rooms-routing.module';
 import { AddressesRoutingModule } from './addresses/addresses-routing.module';
 import { AdminGuardService } from './auth/guards/admin-guard.service';
 import { ProfilesRoutingModule } from './profiles/profiles-routing.module';
@@ -20,7 +19,6 @@ const routes: Routes = [
   { path: 'profiles', loadChildren: () => ProfilesRoutingModule },
   { path: 'apartments', loadChildren: () => ApartmentsRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
   { path: 'addresses', loadChildren: () => AddressesRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
-  { path: 'rooms', loadChildren: () => RoomsRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
   { path: 'reservations', loadChildren: () => ReservationsRoutingModule },
 ];
 

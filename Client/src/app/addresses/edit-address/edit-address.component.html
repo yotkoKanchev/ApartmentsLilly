@@ -1,7 +1,12 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create Amenity</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                    aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
             <form [formGroup]="addressForm">
                 <div class="form-group">
                     <label>Country</label>
@@ -63,10 +68,12 @@
                         Street Address should be maximum 50 symbols long!
                     </span>
                 </div>
-                <button class="btn btn-primary mr-2" (click)="editAddress()">Update</button>
-                <input type="button" class="btn btn-primary" routerLink="/apartments/{{apartmentId}}" value="Close">
             </form>
         </div>
-        <div class="col-lg-4"></div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="addressForm.invalid" data-dismiss="modal"
+                (click)="editAddress()">Update</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
     </div>
 </div>

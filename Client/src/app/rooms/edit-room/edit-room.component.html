@@ -1,7 +1,12 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
+<div *ngIf="room" class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Room</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                    aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
             <form [formGroup]="roomForm">
                 <div class="form-group mt-2">
                     <label>Name</label>
@@ -23,16 +28,18 @@
                     <div *ngIf="roomType.errors.required">Room Type is required.</div>
                 </div>
                 <div class="form-group">
-                    <input class="mr-2" type="checkbox" [checked]="roomIsSleepable === true"
-                        formControlName="isSleepable">
-                    <label for="sleepable">Is Sleepable</label>
+                    <label>
+                        <input class="mr-2" type="checkbox" [checked]="room.isSleepable === true"
+                            formControlName="isSleepable">
+                        Is Sleepable
+                    </label>
                 </div>
-                <button type="submit" class="btn btn-primary mr-2" (click)="editRoom()">Update</button>
-                <input type="button" class="btn btn-primary" routerLink="/apartments/{{apartmentId}}" value="Close">
             </form>
-            <br>
-            <br>
         </div>
-        <div class="col-lg-4"></div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="roomForm.invalid" data-dismiss="modal"
+                (click)="editRoom()">Update</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
     </div>
 </div>

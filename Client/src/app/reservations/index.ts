@@ -2,6 +2,7 @@ import { GuestRequestConfirmationComponent } from "./guest-request-confirmation/
 import { UserRequestConfirmationComponent } from "./user-request-confirmation/user-request-confirmation.component";
 import { CreateRequestComponent } from './create-request/create-request.component';
 import { ListRequestsComponent } from "./list-requests/list-requests.component";
+import { DetailsRequestComponent } from "./details-request/details-request.component";
 
 
 export const reservationComponents = [
@@ -9,4 +10,5 @@ export const reservationComponents = [
     UserRequestConfirmationComponent,
     GuestRequestConfirmationComponent,
     ListRequestsComponent,
+    DetailsRequestComponent,
 ]

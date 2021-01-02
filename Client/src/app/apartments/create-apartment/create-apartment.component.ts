@@ -41,8 +41,8 @@ export class CreateApartmentComponent implements OnInit {
   create() {
     this.apartmentService.create(this.apartmentForm.value, this.addressId)
       .subscribe(data => {
-        this.toastrService.success("Success");
         this.router.navigate([`apartments/${data['id']}`])
+        this.toastrService.success("Apartment added.", "Success");
       });
   }
 

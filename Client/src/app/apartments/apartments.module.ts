@@ -12,6 +12,7 @@ import { AmenitiesModule } from '../amenities/amenities.module';
 import { BedsModule } from '../beds/beds.module';
 import { GoogleMapComponent } from '../_googleMap/google-map/google-map.component';
 import { ReservationsModule } from '../reservations/reservations.module';
+import { ApartmentChangeAddressComponent } from './apartment-change-address/apartment-change-address.component';
 
 @NgModule({
   declarations: [
