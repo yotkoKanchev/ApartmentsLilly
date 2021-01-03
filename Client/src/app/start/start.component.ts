@@ -37,10 +37,11 @@ export class StartComponent implements OnInit {
   onSubmit() {
     this.apartmentsService.getAvailableApartments(this.searchApartmentForm.value).subscribe(data => {
       this.apartments = data;
+      console.log(this.apartments)
       for (const apart of this.apartments) {
         apart.fullAddress = this.sanitizer.bypassSecurityTrustResourceUrl(
           environment.googleMaps + apart.addressStreetAddress + '+' + apart.addressCity + '+' + apart.addressCountry);
-      }
+      };
     });
   }
 

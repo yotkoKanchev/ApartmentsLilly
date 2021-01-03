@@ -1,3 +1,6 @@
+<app-create-request [searchApartmentForm]="searchApartmentForm" class="modal fade" id="createRequest" tabindex="-1"
+    aria-labelledby="createRequestLabel" aria-hidden="true"></app-create-request>
+
 <div class="card mb-3">
     <h3 class="card-header bg-info bg-gradient text-white">{{apartment.name}}</h3>
     <div class="card-body">
@@ -9,8 +12,9 @@
         <img [src]="apartment.mainImageUrl" class="card-img-bottom"
             alt="apartmentartment: {{apartment.name}},{{apartment.addressCity}}">
     </a>
-    <input type="button" class="btn btn-outline-primary m-2" (click)="openModal('create-request-modal')"
-        value="Request Reservation">
+    <button type="button" class="btn btn-sm btn-outline-primary m-2" data-toggle="modal" (click)="onButtonClick()" data-target="#createRequest">
+        Request Reservation
+    </button>
     <div class="card-body">
         <p class="card-text">{{apartment.description}}</p>
     </div>
@@ -31,9 +35,3 @@
         allowfullscreen>
     </iframe>
 </div>
-
-<jw-modal id="create-request-modal">
-    <div>
-        <app-create-request [searchApartmentForm]="searchApartmentForm"></app-create-request>
-    </div>
-</jw-modal>

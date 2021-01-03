@@ -10,22 +10,23 @@ import { ToastrService } from 'ngx-toastr';
 export class ErrorInterceptorService implements HttpInterceptor {
 
   constructor(private toastrService: ToastrService) { }
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-
       retry(1),
       catchError((err: HttpErrorResponse) => {
         let message = ""
 
         switch (err.status) {
-          case 401 || 404:
+          case 400 || 401 || 404:
             message = err.error;
             break;
-          case 400:
-            message = Object.keys(err.error.errors)
-              .map(e => err.error.errors[e])
-              .join('\n');
-            break;
+          // case 400:
+          //   console.log(err)
+          //   message = Object.keys(err.error.errors)
+          //     .map(e => err.error.errors[e])
+          //     .join('\n');
+          //   break;
           case 403:
             message = "Unauthorized access."
             break;
@@ -34,7 +35,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
             break;
         }
 
-        this.toastrService.error(message)
+        this.toastrService.error(message, "Bad request")
         return throwError(err)
       })
     )

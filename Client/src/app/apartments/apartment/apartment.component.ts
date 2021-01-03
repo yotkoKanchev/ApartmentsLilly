@@ -18,14 +18,15 @@ export class ApartmentComponent implements OnInit {
 
   ngOnInit(): void {
     // TODO pass apartmentId to reservation service trough create-request component!
-    this.reservationService.setApartmentId(this.apartment.id)
   }
 
   getMap() {
     this.showMap = !this.showMap;
   }
 
-  openModal(id: string) {
-    this.modalService.open(id);
+  onButtonClick() {
+    this.reservationService.setApartmentId(this.apartment.id);
+    this.reservationService.setApartmentName(this.apartment.name);
   }
 }
+

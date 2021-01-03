@@ -15,14 +15,17 @@ import { RequestDetailsModel } from './models/request-details.model';
 export class ReservationsService {
   private reservationsPath = environment.apiUrl + "reservations";
   confirmationDetails: ConfirmationModel;
-  apartmentId:number;
+  apartmentId: number;
+  apartmentName: string;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
 
   sendRequest(searchForm: SearchApartmentsModel, data: CreateRequestUserDataModel): Observable<SendRequestModel> {
+    
+    const id = this.getApartmentId();
     const request = new SendRequestModel();
-    request.apartmentId = this.apartmentId;
+    request.apartmentId = id;
     request.firstName = data.firstName;
     request.lastName = data.lastName;
     request.email = data.email;
@@ -58,11 +61,18 @@ export class ReservationsService {
   }
 
   setApartmentId(id: number) {
-    this.apartmentId= id;
+    this.apartmentId = id;
   }
 
-  getApartmentId(){
+  setApartmentName(name: string) {
+    this.apartmentName = name;
+  }
+
+  getApartmentId() {
     return this.apartmentId;
   }
 
+  getApartmentName() {
+    return this.apartmentName;
+  }
 }

@@ -1,7 +1,12 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Send Request</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                    aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
             <form [formGroup]="requestForm" (ngSubmit)="create()">
                 <div class="row">
                     <div class="form-group col-lg-6">
@@ -65,21 +70,19 @@
                         <textarea type="text" rows="2" class="form-control" formControlName="additionalInfo"></textarea>
                     </div>
                 </div>
-                <div class="border rounded border-success p-2">
-                    <!-- <h4>Sending Request for Apartment: {{apartmentName}}</h4> -->
+                <div *ngIf="searchApartmentForm" class="border rounded border-success p-2">
+                    <h4>Sending Request for Apartment: {{reservationsService.getApartmentName()}}</h4>
                     <h5>From: {{searchApartmentForm.startDate | date:'dd MMM YYYY'}} To: {{searchApartmentForm.endDate |
                         date:'dd MMM YYYY'}}</h5>
                     <h6>Adults(13y+): {{searchApartmentForm.adults}}</h6>
                     <h6 *ngIf="searchApartmentForm.children">Children(3-12y): {{searchApartmentForm.children}}</h6>
                     <h6 *ngIf="searchApartmentForm.infants">Infants(0-2y): {{searchApartmentForm.infants}}</h6>
                 </div>
-
-                <div class="pt-2">
-                    <button type="submit" class="btn btn-primary mr-2" [disabled]="!requestForm.valid">Send</button>
-                    <input type="button" class="btn btn-primary" (click)="closeModal()" value="Cancel">
-                </div>
             </form>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="requestForm.invalid" data-dismiss="modal" (click)="create()">Send</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
     </div>
 </div>
