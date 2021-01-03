@@ -1,4 +1,8 @@
 <div class="container-fluid">
+
+  <app-forgot-password class="modal fade" id="forgotPassword" tabindex="-1" aria-labelledby="forgotPasswordLabel"
+    aria-hidden="true"></app-forgot-password>
+
   <div class="row">
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
@@ -13,7 +17,8 @@
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" formControlName="password">
-          <a (click)="openModal('forgot-password-modal')" class="form-group">Forgot your password?</a>
+
+          <a data-toggle="modal" data-target="#forgotPassword" class="form-group">Forgot your password?</a>
         </div>
         <div class="alert alert-danger" *ngIf="password.touched && password.errors?.required">
           This field is required!
@@ -29,9 +34,3 @@
 
   </div>
 </div>
-
-<jw-modal id="forgot-password-modal">
-  <div>
-    <app-forgot-password></app-forgot-password>
-  </div>
-</jw-modal>

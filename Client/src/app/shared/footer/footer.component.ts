@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -6,14 +6,13 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   year: number = new Date().getFullYear();
   title: string;
-  constructor(private titleService: Title) {
+
+  constructor(
+    private titleService: Title,
+  ) {
     this.title = this.titleService.getTitle();
-   }
-
-  ngOnInit(): void {
   }
-
 }

@@ -9,10 +9,12 @@ import { ReservationsService } from '../reservations.service';
 })
 export class GuestRequestConfirmationComponent implements OnInit {
   confirmationDetails: ConfirmationModel;
-  constructor(private reservationService: ReservationsService) { }
+
+  constructor(
+    private reservationService: ReservationsService,
+  ) { }
 
   ngOnInit(): void {
     this.confirmationDetails = this.reservationService.getConfirmationDetails();
   }
-
 }

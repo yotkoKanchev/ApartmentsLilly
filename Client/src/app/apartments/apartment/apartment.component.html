@@ -12,7 +12,8 @@
         <img [src]="apartment.mainImageUrl" class="card-img-bottom"
             alt="apartmentartment: {{apartment.name}},{{apartment.addressCity}}">
     </a>
-    <button type="button" class="btn btn-sm btn-outline-primary m-2" data-toggle="modal" (click)="onButtonClick()" data-target="#createRequest">
+    <button type="button" class="btn btn-sm btn-outline-primary m-2" data-toggle="modal" (click)="onButtonClick()"
+        data-target="#createRequest">
         Request Reservation
     </button>
     <div class="card-body">
@@ -29,8 +30,8 @@
             <span *ngFor="let item of apartment.amenities">{{item}}</span>
         </li>
     </ul>
-    <a class="card-body col-pos" *ngIf="!showMap" (click)="getMap()">Show Mapartment</a>
-    <a class="card-body col-neg" *ngIf="showMap" (click)="getMap()">Hide Mapartment</a>
+    <a class="card-body col-pos" *ngIf="!showMap" (click)="getMap()">Show Map</a>
+    <a class="card-body col-neg" *ngIf="showMap" (click)="getMap()">Hide Map</a>
     <iframe SameSite=none *ngIf="showMap" height="400" frameborder="0" style="border:0" [src]="apartment.fullAddress"
         allowfullscreen>
     </iframe>

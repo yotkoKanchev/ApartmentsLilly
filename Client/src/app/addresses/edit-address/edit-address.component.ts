@@ -18,7 +18,8 @@ export class EditAddressComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private addressService: AddressesService,
-    private toastr: ToastrService,) {
+    private toastr: ToastrService,
+  ) {
     this.addressForm = this.fb.group({
       'country': ['', [Validators.minLength(2), Validators.maxLength(30)]],
       'city': ['', [Validators.minLength(2), Validators.maxLength(30)]],

@@ -19,10 +19,13 @@
             </p>
             <p *ngIf="request.addtionalInfo" class="card-text">{{request.addtionalInfo}}</p>
             <p class="card-text">Status: <strong>{{request.status.name}}</strong></p>
-            <input *ngIf="request.status.name == 'Accepted'" type="button" class="btn btn-sm btn-primary mr-2" value="Book">
+            <input *ngIf="request.status.name == 'Accepted'" type="button" class="btn btn-sm btn-primary mr-2"
+                value="Book">
             <input type="button" class="btn btn-sm btn-outline-primary mr-2" value="Edit">
-            <input *ngIf="request.status.name != 'Canceled' && request.status.name != 'Arhived'" type="button" class="btn btn-sm btn-outline-primary mr-2" (click)="cancelRequest(request.id)" value="Cancel">
-            <input type="button" class="btn btn-sm btn-outline-primary" routerLink="/reservations/requests" value ="Back">
+            <input *ngIf="request.status.name != 'Canceled' && request.status.name != 'Arhived'" type="button"
+                class="btn btn-sm btn-outline-primary mr-2" (click)="cancelRequest(request.id)" value="Cancel">
+            <input type="button" class="btn btn-sm btn-outline-primary" routerLink="/reservations/requests"
+                value="Back">
         </div>
     </div>
     <div class="col-lg-3"></div>

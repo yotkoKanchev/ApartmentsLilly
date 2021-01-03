@@ -15,18 +15,22 @@ export class AuthService {
   private registerPath = environment.apiUrl + "identity/register";
   private deletePath = environment.apiUrl + "identity/delete";
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) { }
 
   login(data): Observable<any> {
     return this.http.post<LoginModel>(this.loginPath, data)
-      .pipe(map(user => {
-        if (user.isAdmin) {
+      .pipe(map(res => {
+        const user = res;
+        if (!user.isAdmin) {
+          delete user.isAdmin;
           localStorage.setItem('user', JSON.stringify(user));
-        } else {
-          localStorage.setItem('name', user['name']);
-          localStorage.setItem('token', user['token']);
         }
-        return user;
+        else {
+          localStorage.setItem('lillysAdmin', JSON.stringify(user));
+        }
       }));
   }
 
@@ -47,29 +51,36 @@ export class AuthService {
       }),
       body: data
     }
-    
+
     return this.http.delete(this.deletePath, options)
   }
-  
+
   getUser() {
-    return JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('user'));
+    return user ? user : JSON.parse(localStorage.getItem('lillysAdmin'));
   }
 
   getToken() {
     let user = this.getUser();
-    return user ? user.token : localStorage.getItem('token');
+    return user ? user['token'] : null;
   }
 
   getName() {
     let user = this.getUser();
-    return user ? user.name : localStorage.getItem('name');
+    return user ? user['name'] : null;
+  }
+
+  getAvatar() {
+    let user = this.getUser();
+    return user ? user['avatarUrl'] : null;
   }
 
   isAuthenticated() {
-    return localStorage.getItem('user') || localStorage.getItem('token');
+    return this.getUser();
   }
 
   isAdmin() {
-    return this.getUser();
+    let user = this.getUser();
+    return user? user.isAdmin : null
   }
 }

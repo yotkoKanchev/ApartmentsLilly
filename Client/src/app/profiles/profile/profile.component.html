@@ -1,41 +1,38 @@
 <div *ngIf="profile" class="jumbotron ">
+
+    <app-change-password class="modal fade" id="changePassword" tabindex="-1" aria-labelledby="changePasswordLabel"
+        aria-hidden="true"></app-change-password>
+    <app-delete-profile class="modal fade" id="deleteProfile" tabindex="-1" aria-labelledby="deleteProfileLabel"
+        aria-hidden="true"></app-delete-profile>
+
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row no-gutters">
-          <div class="col-md-4 align-self-center p-2">
-            <a class="">
-                <img [src]="profile.avatarUrl" class="card-img-top w-100"
-                    alt="Person: {{profile.firstName}} {{profile.lastName}}">
-            </a>
-          </div>
-          
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Username: {{profile.userName}}</h5>
-              <p class="card-text">First Name: {{profile.firstName}}</p>
-              <p class="card-text">Last Name: {{profile.lastName}}</p>
-              <p class="card-text">Phone Number: {{profile.phoneNumber}}</p>
-              <p class="card-text">Email: {{profile.email}}</p>
-              <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+            <div class="col-md-4 align-self-center p-2">
+                <a class="">
+                    <img [src]="profile.avatarUrl" class="card-img-top w-100"
+                        alt="Person: {{profile.firstName}} {{profile.lastName}}">
+                </a>
             </div>
-          </div>
+
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Username: {{profile.userName}}</h5>
+                    <p class="card-text">First Name: {{profile.firstName}}</p>
+                    <p class="card-text">Last Name: {{profile.lastName}}</p>
+                    <p class="card-text">Phone Number: {{profile.phoneNumber}}</p>
+                    <p class="card-text">Email: {{profile.email}}</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="mb-2 mt-2 ">
+    </div>
+    <div class="mb-2 mt-2 ">
         <input type="button" class="btn btn-primary mr-2" routerLink="/profiles/update/" value="Edit Info">
-        <input type="button" class="btn btn-primary mr-2" (click)="openModal('change-password-modal')" value="Change Password">
-        <input type="button" class="btn btn-primary mr-2" (click)="openModal('delete-account-modal')" value="Delete">
+        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#changePassword">
+            Change Password
+        </button>
+        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#deleteProfile">
+            Delete
+        </button>
         <input type="button" class="btn btn-primary mr-2" routerLink="/" value="Home">
     </div>
 </div>
-
-<jw-modal id="change-password-modal">
-    <div>
-        <app-change-password></app-change-password>
-    </div>
-</jw-modal>
-
-<jw-modal id="delete-account-modal">
-    <div>
-        <app-delete></app-delete>
-    </div>
-</jw-modal>

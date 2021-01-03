@@ -1,21 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApartmentsService } from '../apartments.service';
 import { ToastrService } from 'ngx-toastr';
-import { ModalService } from '../../_modal';
 
 @Component({
   selector: 'app-create-apartment',
   templateUrl: './create-apartment.component.html',
   styleUrls: ['./create-apartment.component.css']
 })
-export class CreateApartmentComponent implements OnInit {
+export class CreateApartmentComponent {
   apartmentForm: FormGroup;
   addressId: number;
 
   constructor(
-    private modalService: ModalService,
     private fb: FormBuilder,
     private apartmentService: ApartmentsService,
     private toastrService: ToastrService,
@@ -35,9 +33,6 @@ export class CreateApartmentComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-  }
-
   create() {
     this.apartmentService.create(this.apartmentForm.value, this.addressId)
       .subscribe(data => {
@@ -48,10 +43,6 @@ export class CreateApartmentComponent implements OnInit {
 
   getAddressId(data: number) {
     this.addressId = data;
-  }
-
-  openModal(id: string) {
-    this.modalService.open(id);
   }
 
   get address() {

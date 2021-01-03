@@ -28,6 +28,7 @@ export class ProfilesService {
   }
 
   changePassword(data:ChangePasswordModel) :Observable<any>{
+    console.log(data)
     return this.http.put<ChangePasswordModel>(this.profilesPath + "/ChangePassword", data);
   }
 }

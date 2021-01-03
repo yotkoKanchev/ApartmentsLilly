@@ -1,26 +1,23 @@
 <div *ngIf='apartment' class="jumbotron">
 
+    <app-edit-apartment [id]="apartment.id" class="modal fade" id="editApartment" tabindex="-1" aria-labelledby="editApartmentLabel"
+        aria-hidden="true"></app-edit-apartment>
     <app-create-bed [rooms]='apartment.rooms' class="modal fade" id="addBed" tabindex="-1" aria-labelledby="addBedLabel"
         aria-hidden="true"></app-create-bed>
     <app-create-amenity [rooms]='apartment.rooms' [apartmentId]='id' class="modal fade" id="addAmenity" tabindex="-1"
         aria-labelledby="addAmenityLabel" aria-hidden="true"></app-create-amenity>
     <app-create-room [apartmentId]='id' class="modal fade" id="addRoom" tabindex="-1" aria-labelledby="addRoomLabel"
         aria-hidden="true"></app-create-room>
-    <app-edit-address [apartmentId]='id' [addressId]="apartment.address.id" class="modal fade" id="editAddress" tabindex="-1"
-        aria-labelledby="editAddressLabel" aria-hidden="true"></app-edit-address>
-<!-- 
-
-        <app-choose-address  class="modal fade" id="changeAddress" tabindex="-1"
-        aria-labelledby="changeAddressLabel" aria-hidden="true"></app-choose-address>
-
-        <app-choose-address class="modal fade" id="chooseAddress" tabindex="-1" aria-labelledby="chooseAddressLabel"
-aria-hidden="true"></app-choose-address> -->
+    <app-edit-address [apartmentId]='id' [addressId]="apartment.address.id" class="modal fade" id="editAddress"
+        tabindex="-1" aria-labelledby="editAddressLabel" aria-hidden="true"></app-edit-address>
 
     <div class="row d-flex justify-content-center">
         <div class="col-lg-5 mb-2">
             <div class="mb-2">
-                <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}"
-                    value="Edit Info">
+                <!-- <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}"
+                    value="Edit Info"> -->
+                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#editApartment">
+                    Edit Info</button>
                 <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
             </div>
             <div class="card" style="max-width: 26rem;">
@@ -61,10 +58,8 @@ aria-hidden="true"></app-choose-address> -->
                     <div>
                         <input type="button" class="btn btn-sm btn-outline-primary mr-2"
                             routerLink="/apartments/{{apartment.id}}/changeAddress" value="Change">
-                            <!-- <button type="button" class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal" data-target="#chooseAddress">
-                                Change Address
-                            </button> -->
-                        <button type="button" class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal" data-target="#editAddress">
+                        <button type="button" class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal"
+                            data-target="#editAddress">
                             Edit
                         </button>
                         <input type="button" class="btn btn-sm btn-outline-primary" *ngIf="!showMap" (click)="getMap()"
@@ -137,11 +132,11 @@ aria-hidden="true"></app-choose-address> -->
                 </div>
             </div>
         </div>
-
     </div>
+</div>
 
-    <jw-modal id="choose-address-modal">
-        <div>
-            <app-choose-address></app-choose-address>
-        </div>
-    </jw-modal>
+<jw-modal id="choose-address-modal">
+    <div>
+        <app-choose-address></app-choose-address>
+    </div>
+</jw-modal>

@@ -12,8 +12,7 @@ import { EnumerationModel } from 'src/app/shared/models/enumeration.model';
 export class CreateRoomComponent implements OnInit {
   roomForm: FormGroup;
   roomTypes: EnumerationModel;
-  @Input()
-  apartmentId: number;
+  @Input() apartmentId: number;
 
   constructor(
     private fb: FormBuilder,

@@ -11,14 +11,16 @@ import { EnumerationModel } from '../shared/models/enumeration.model';
 })
 export class AmenitiesService {
   amenitiesPath: string = environment.apiUrl + 'Amenities';
-  constructor(private http: HttpClient) { }
+
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   getImportanceTypes(): Observable<EnumerationModel> {
     return this.http.get<EnumerationModel>(this.amenitiesPath + '/' + 'ImportanceTypes');
   }
 
   create(data, apartmentId: number): Observable<CreateAmenityModel> {
-
     if (data.Owner == 'apartment') {
       data.apartmentId = apartmentId;
     } else {

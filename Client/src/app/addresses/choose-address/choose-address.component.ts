@@ -15,10 +15,8 @@ export class ChooseAddressComponent implements OnInit {
 
   constructor(
     private addressesService: AddressesService,
-    private modalService: ModalService,) {  }
-
-  create(): void{
-  }
+    private modalService: ModalService,
+  ) { }
 
   ngOnInit(): void {
     this.addressesService.getAddresses().subscribe(data => {
@@ -28,10 +26,10 @@ export class ChooseAddressComponent implements OnInit {
 
   onOptionsSelected(value: any) {
     if (value == "addAddress") {
-      
+
       this.openModal('add-address-modal');
     }
-    else{
+    else {
       this.onAddressIdSelected.emit(+value)
     }
   }

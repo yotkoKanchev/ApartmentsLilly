@@ -12,8 +12,8 @@ import { BedsService } from '../beds.service';
 export class CreateBedComponent implements OnInit {
   bedForm: FormGroup;
   bedTypes: any;
-  @Input()
-  rooms: Array<RoomListingModel>
+  @Input() rooms: Array<RoomListingModel>
+
   constructor(
     private fb: FormBuilder,
     private bedsService: BedsService,

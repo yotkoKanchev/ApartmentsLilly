@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ApartmentsService } from 'src/app/apartments/apartments.service';
@@ -10,7 +10,7 @@ import { ApartmentListingModel } from '../apartments/models/apartment-listing.mo
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.css']
 })
-export class StartComponent implements OnInit {
+export class StartComponent {
   searchApartmentForm: FormGroup
   apartments: Array<ApartmentListingModel>
   nums: Array<number> = [0, 1, 2, 3];
@@ -29,9 +29,6 @@ export class StartComponent implements OnInit {
     },
       { validator: [this.dateLessThan('startDate', 'endDate'), this.datePassed('startDate')] }
     );
-  }
-
-  ngOnInit(): void {
   }
 
   onSubmit() {

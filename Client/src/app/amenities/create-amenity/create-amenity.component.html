@@ -14,8 +14,7 @@
                     <option value="apartment"><strong>Apartment</strong></option>
                     <option *ngFor="let room of rooms" [ngValue]="room.id">{{room.name}}</option>
                 </select>
-                <div *ngIf="owner.touched && owner.invalid"
-                    class="alert alert-danger">
+                <div *ngIf="owner.touched && owner.invalid" class="alert alert-danger">
                     <div *ngIf="owner.errors.required">Owner is required.</div>
                 </div>
                 <div class="form-group">
@@ -32,8 +31,7 @@
                     <option disabled value="">choose importance</option>
                     <option *ngFor="let type of importanceTypes" [ngValue]="type.value">{{type.name}}</option>
                 </select>
-                <div *ngIf="importance.touched && importance.invalid"
-                    class="alert alert-danger">
+                <div *ngIf="importance.touched && importance.invalid" class="alert alert-danger">
                     <div *ngIf="importance.errors.required">Importance level is required.</div>
                 </div>
             </form>

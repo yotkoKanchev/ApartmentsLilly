@@ -1,7 +1,12 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Apartment Info</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                    aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
             <form [formGroup]="apartmentForm">
                 <div class="form-group">
                     <label>Name</label>
@@ -100,10 +105,14 @@
                         </span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mr-2" (click)="editApartment()">Update</button>
-                <a class="btn btn-primary" routerLink="/apartments/{{apartmentId}}">Cancel</a>
+                <!-- <button type="submit" class="btn btn-primary mr-2" (click)="editApartment()">Update</button>
+                <a class="btn btn-primary" routerLink="/apartments/{{apartmentId}}">Cancel</a> -->
             </form>
         </div>
-        <div class="col-lg-4"></div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="apartmentForm.invalid" data-dismiss="modal"
+                (click)="editApartment()">Update</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
     </div>
 </div>

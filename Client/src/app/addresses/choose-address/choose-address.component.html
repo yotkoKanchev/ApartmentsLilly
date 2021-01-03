@@ -12,42 +12,9 @@
         </span>
     </div>
 </div>
-<div id="testModal" class="modal fade" tabindex="-1" aria-labelledby="testModalLabel" aria-hidden="true">
-    <p>TEST</p>
-</div>
+
 <jw-modal id="add-address-modal">
     <div>
         <app-create-address></app-create-address>
     </div>
 </jw-modal>
-<!-- 
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Change Address</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
-                    aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label>Choose Address</label>
-                <select #addressSelect class="form-control mb-3" (change)='onOptionsSelected(addressSelect.value)'>
-                    <option disabled selected value="">choose address</option>
-                    <option *ngFor="let ad of addresses" value="{{ad.id}}">{{ad.country}}, {{ad.city}} -
-                        {{ad.streetAddress}}</option>
-                    <option value="addAddress">add new address</option>
-                </select>
-                <div *ngIf="addressSelect.value=='' || addressSelect.value=='addAddress' " class="alert alert-danger">
-                    <span>
-                        Address is reqired.
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" [disabled] data-dismiss="modal">Change</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-    </div>
-</div> -->

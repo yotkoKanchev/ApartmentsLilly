@@ -10,7 +10,10 @@ import { AddressModel } from './models/address.model';
 })
 export class AddressesService {
   private addressPath = environment.apiUrl + 'addresses';
-  constructor(private http: HttpClient) { }
+
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   create(data): Observable<CreateAddressModel> {
     return this.http.post<CreateAddressModel>(this.addressPath, data)

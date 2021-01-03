@@ -8,14 +8,14 @@ import { ApartmentsRoutingModule } from './apartments/apartments-routing.module'
 import { AddressesRoutingModule } from './addresses/addresses-routing.module';
 import { AdminGuardService } from './auth/guards/admin-guard.service';
 import { ProfilesRoutingModule } from './profiles/profiles-routing.module';
-import { DeleteComponent } from './profiles/delete/delete.component';
 import { ReservationsRoutingModule } from './reservations/reservations-routing.module';
+import { DeleteProfileComponent } from './profiles/delete-profile/delete-profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: StartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'delete', component: DeleteComponent },
+  { path: 'delete', component: DeleteProfileComponent },
   { path: 'profiles', loadChildren: () => ProfilesRoutingModule },
   { path: 'apartments', loadChildren: () => ApartmentsRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
   { path: 'addresses', loadChildren: () => AddressesRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },

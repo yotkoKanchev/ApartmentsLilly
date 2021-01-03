@@ -5,6 +5,7 @@
             <form [formGroup]="apartmentForm" (ngSubmit)="create()">
 
                 <app-choose-address (onAddressIdSelected)="getAddressId($event)"></app-choose-address>
+
                 <div *ngIf="address.touched && name.errors" class="alert alert-danger">
                     <span *ngIf="address.errors.required">
                         Address is reqired!
@@ -42,6 +43,7 @@
                         Plase, add valid url address!
                     </span>
                 </div>
+
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label>Entry</label>
@@ -110,6 +112,7 @@
                     <button type="submit" class="btn btn-primary mr-2" [disabled]="!apartmentForm.valid">Create</button>
                     <input type="submit" class="btn btn-primary" routerLink="/apartments" value="Cancel">
                 </div>
+
             </form>
             <br>
             <br>

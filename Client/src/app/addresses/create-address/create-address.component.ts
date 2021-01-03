@@ -10,13 +10,14 @@ import { ModalService } from 'src/app/_modal';
   styleUrls: ['./create-address.component.css']
 })
 export class CreateAddressComponent {
-
   addressForm: FormGroup;
+
   constructor(
     private modalService: ModalService,
     private fb: FormBuilder,
     private addressService: AddressesService,
-    private toastrService: ToastrService, ) {
+    private toastrService: ToastrService,
+  ) {
     this.addressForm = this.fb.group({
       'Country': ['', [Validators.minLength(2), Validators.maxLength(30)]],
       'City': ['', [Validators.minLength(2), Validators.maxLength(30)]],
@@ -37,7 +38,7 @@ export class CreateAddressComponent {
   closeModal(id: string) {
     this.modalService.close(id);
   }
-  
+
   get country() {
     return this.addressForm.get('Country');
   }

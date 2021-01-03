@@ -4,7 +4,7 @@
         <div class="col-lg-4">
             <form [formGroup]="profileForm">
                 <div class="form-group">
-                    <label >Email</label>
+                    <label>Email</label>
                     <input type="email" class="form-control" formControlName="email">
                 </div>
                 <div class="alert alert-danger" *ngIf="email.touched && email.errors?.minlength">

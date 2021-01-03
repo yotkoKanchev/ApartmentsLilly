@@ -11,7 +11,10 @@ import { EnumerationModel } from '../shared/models/enumeration.model';
 })
 export class RoomsService {
   private roomsPath = environment.apiUrl + 'Rooms';
-  constructor(private http: HttpClient) { }
+
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   getRoomTypes(): Observable<EnumerationModel> {
     return this.http.get<EnumerationModel>(this.roomsPath + '/' + 'roomTypes');

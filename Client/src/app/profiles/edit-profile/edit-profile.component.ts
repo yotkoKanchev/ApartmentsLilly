@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileModel } from '../models/profile.model';
 import { ProfilesService } from '../profiles.service';
@@ -16,7 +16,6 @@ export class EditProfileComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private profilesService: ProfilesService,
     private toastr: ToastrService,

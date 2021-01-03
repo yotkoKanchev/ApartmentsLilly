@@ -11,28 +11,31 @@ import { ApartmentListingModel } from '../models/apartment-listing.model';
 })
 export class ListApartmentsComponent implements OnInit {
   apartments: Array<ApartmentListingModel>
-  
-  constructor(private apartmentService: ApartmentsService, private router: Router, private authService: AuthService) { }
+
+  constructor(
+    private apartmentService: ApartmentsService,
+    private router: Router,
+    private authService: AuthService, // used in view
+  ) { }
 
   ngOnInit(): void {
     this.fetchApartments();
   }
-  
+
   fetchApartments() {
     this.apartmentService.getApartments()
-    .subscribe(apartments => {
-      this.apartments = apartments;
+      .subscribe(apartments => {
+        this.apartments = apartments;
       })
   }
 
   editApartment(id: number) {
-    this.router.navigate(["apartments","edit", id]);
+    this.router.navigate(["apartments", "edit", id]);
   }
 
   deleteApartment(id: string) {
     this.apartmentService.deleteApartment(id).subscribe(() => {
       this.fetchApartments()
     })
-
   }
 }

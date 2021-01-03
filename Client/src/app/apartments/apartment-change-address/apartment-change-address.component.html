@@ -3,6 +3,7 @@
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
             <app-choose-address (onAddressIdSelected)="getAddressId($event)"></app-choose-address>
+
             <button type="submit" class="btn btn-primary mr-2" (click)="changeAddress()">Change</button>
             <input type="submit" class="btn btn-primary" routerLink="/apartments/{{apartmentId}}" value="Cancel">
             <br>
@@ -11,24 +12,3 @@
         <div class="col-lg-4"></div>
     </div>
 </div>
-<!-- 
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create Amenity</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
-                    aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <app-choose-address (onAddressIdSelected)="getAddressId($event)"></app-choose-address>
-        </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary mr-2" (click)="changeAddress()">Change</button>
-            <input type="submit" class="btn btn-primary" routerLink="/apartments/{{apartmentId}}" value="Cancel">
-            <button type="submit" class="btn btn-primary" [disabled]="amenityForm.invalid" data-dismiss="modal"
-                (click)="create()">Create</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-    </div>
-</div> -->

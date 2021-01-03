@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoomsService } from '../rooms.service';
 import { ToastrService } from 'ngx-toastr';
 import { RoomModel } from '../models/room.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ModalService } from 'src/app/_modal';
 import { EnumerationModel } from 'src/app/shared/models/enumeration.model';
 
 @Component({
@@ -16,8 +14,7 @@ export class EditRoomComponent implements OnInit {
   roomForm: FormGroup
   roomTypes: EnumerationModel;
   room: RoomModel;
-  @Input()
-  id: number;
+  @Input() id: number;
 
   constructor(
     private fb: FormBuilder,

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { ModalService } from 'src/app/_modal';
 import { ProfilesService } from '../profiles.service';
 
 @Component({
@@ -13,11 +12,10 @@ export class ChangePasswordComponent implements OnInit {
   changePasswordForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder, 
-    private modalService: ModalService,
+    private fb: FormBuilder,
     private profilesService: ProfilesService,
     private toastr: ToastrService,
-    ) {
+  ) {
     this.changePasswordForm = this.fb.group({
       'password': ['', [Validators.required, Validators.minLength(6)]],
       'newPassword': ['', [Validators.required, Validators.minLength(6)]],
@@ -25,7 +23,7 @@ export class ChangePasswordComponent implements OnInit {
     },
       { validator: [this.checkPasswords] }
     );
-   }
+  }
 
   ngOnInit(): void {
     this.changePasswordForm.reset();
@@ -38,16 +36,12 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword() {
-    this.profilesService.changePassword(this.changePasswordForm.value).subscribe(() =>
-    this.closeModal());
+    this.profilesService.changePassword(this.changePasswordForm.value).subscribe(() => {
+      this.toastr.success("Password has been changed.", "Success")
+    })
     this.changePasswordForm.reset();
-    this.toastr.success("Password has been changed.", "Success")
   }
 
-  closeModal() {
-    this.modalService.close("change-password-modal");
-  }
-  
   get password() {
     return this.changePasswordForm.get('password')
   }
@@ -59,5 +53,4 @@ export class ChangePasswordComponent implements OnInit {
   get newConfirmPassword() {
     return this.changePasswordForm.get('newConfirmPassword')
   }
-
 }

@@ -18,13 +18,15 @@ export class ReservationsService {
   apartmentId: number;
   apartmentName: string;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   sendRequest(searchForm: SearchApartmentsModel, data: CreateRequestUserDataModel): Observable<SendRequestModel> {
-    
+
     const id = this.getApartmentId();
     const request = new SendRequestModel();
+
     request.apartmentId = id;
     request.firstName = data.firstName;
     request.lastName = data.lastName;

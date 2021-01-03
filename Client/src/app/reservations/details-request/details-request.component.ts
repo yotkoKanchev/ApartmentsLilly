@@ -12,6 +12,7 @@ import { ReservationsService } from '../reservations.service';
 export class DetailsRequestComponent implements OnInit {
   id: number;
   request: RequestDetailsModel;
+  
   constructor(
     private reservationsService: ReservationsService, 
     private route: ActivatedRoute,

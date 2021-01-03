@@ -20,7 +20,7 @@ export class DetailsApartmentComponent implements OnInit {
   id: number;
   childId: number;
   showMap: boolean;
-  fullAddress:SafeResourceUrl;
+  fullAddress: SafeResourceUrl;
 
   constructor(
     private apartmentsService: ApartmentsService,
@@ -31,10 +31,10 @@ export class DetailsApartmentComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: ModalService,
     private sanitizer: DomSanitizer,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-      this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.id = params['id'];
       this.fetchApartment(this.id);
     })
@@ -81,10 +81,10 @@ export class DetailsApartmentComponent implements OnInit {
     this.showMap = !this.showMap;
   }
 
-  getMapDetails(){
+  getMapDetails() {
     this.showMap = false;
 
     this.fullAddress = this.sanitizer.bypassSecurityTrustResourceUrl(
-      environment.googleMaps + this.apartment.address.streetAddress + '+' + this.apartment.address.city  + '+' + this.apartment.address.country );
+      environment.googleMaps + this.apartment.address.streetAddress + '+' + this.apartment.address.city + '+' + this.apartment.address.country);
   }
 }

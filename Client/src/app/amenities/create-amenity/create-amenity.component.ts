@@ -11,11 +11,9 @@ import { RoomListingModel } from 'src/app/rooms/models/room-listing.model';
 })
 export class CreateAmenityComponent implements OnInit {
   amenityForm: FormGroup;
-  @Input()
-  apartmentId: number;
   importanceTypes: any;
-  @Input()
-  rooms: Array<RoomListingModel>
+  @Input() apartmentId: number;
+  @Input() rooms: Array<RoomListingModel>
 
   constructor(
     private fb: FormBuilder,
@@ -35,7 +33,7 @@ export class CreateAmenityComponent implements OnInit {
     })
   }
 
-  create(id: string) {
+  create() {
     this.amenitiesService.create(this.amenityForm.value, this.apartmentId)
       .subscribe(() => {
         this.toastrService.success("Amenity added", "Success");

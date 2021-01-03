@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -12,8 +12,9 @@ import { ApartmentModel } from '../models/apartment.model';
 })
 export class EditApartmentComponent implements OnInit {
   apartmentForm: FormGroup;
-  apartmentId: number;
+  @Input() id: number;
   apartment: ApartmentModel;
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -36,9 +37,8 @@ export class EditApartmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.apartmentId = params['id'];
-      this.apartmentsService.getApartment(this.apartmentId).subscribe(res => {
+    
+      this.apartmentsService.getApartment(this.id).subscribe(res => {
         this.apartment = res;
         this.apartmentForm = this.fb.group({
           'id': [this.apartment.id],
@@ -54,7 +54,6 @@ export class EditApartmentComponent implements OnInit {
           'hasTerrace': [this.apartment.hasTerrace],
         })
       })
-    })
   }
 
   editApartment() {
@@ -71,7 +70,6 @@ export class EditApartmentComponent implements OnInit {
   get description() {
     return this.apartmentForm.get('description');
   }
-
 
   get mainImageUrl() {
     return this.apartmentForm.get('mainImageUrl');
@@ -96,7 +94,7 @@ export class EditApartmentComponent implements OnInit {
   get basePrice() {
     return this.apartmentForm.get('basePrice');
   }
-  
+
   get maxOccupants() {
     return this.apartmentForm.get('maxOccupants');
   }
