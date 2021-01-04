@@ -1,5 +1,7 @@
 <div *ngIf='apartment' class="jumbotron">
 
+    <app-delete-apartment [apartmentId]="apartment.id" class="modal fade" id="delApartment" tabindex="-1"
+        aria-labelledby="delApartmentLabel" aria-hidden="true"> </app-delete-apartment>
     <app-edit-apartment [id]="apartment.id" class="modal fade" id="editApartment" tabindex="-1"
         aria-labelledby="editApartmentLabel" aria-hidden="true"></app-edit-apartment>
     <app-create-bed [rooms]='apartment.rooms' class="modal fade" id="addBed" tabindex="-1" aria-labelledby="addBedLabel"
@@ -16,8 +18,8 @@
             <div class="mb-2">
                 <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#editApartment">
                     Edit Info</button>
-                <button type="button" class="btn btn-danger mr-2"
-                    (click)="deleteApartment(apartment.id)">Delete</button>
+                <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#delApartment">
+                    Delete</button>
                 <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
             </div>
             <div class="card" style="max-width: 26rem;">
@@ -36,14 +38,12 @@
         </div>
         <div class="col-lg-6">
             <div class="mb-2">
-                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#addRoom">Add
-                    Room</button>
+                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#addRoom">
+                    Add Room</button>
                 <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#addBed">
-                    Add Bed
-                </button>
+                    Add Bed</button>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAmenity">
-                    Add Amenity
-                </button>
+                    Add Amenity</button>
             </div>
             <div class="mb-3">
                 <h5>Address:</h5>
@@ -59,9 +59,7 @@
                         <input type="button" class="btn btn-sm btn-outline-primary mr-2"
                             routerLink="/apartments/{{apartment.id}}/changeAddress" value="Change">
                         <button type="button" class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal"
-                            data-target="#editAddress">
-                            Edit
-                        </button>
+                            data-target="#editAddress">Edit</button>
                         <input type="button" class="btn btn-sm btn-outline-primary" *ngIf="!showMap" (click)="getMap()"
                             value="Show Map">
                         <input type="button" class="btn btn-sm btn-outline-primary" *ngIf=" showMap" (click)="getMap()"
@@ -81,8 +79,25 @@
                 <div class="row ml-0 border rounded border-success p-2 mb-2 d-flex flex-column "
                     *ngFor="let room of apartment.rooms">
                     <app-edit-room [id]="room.id" class="modal fade" id="editRoom" tabindex="-1"
-                        aria-labelledby="editRoomLabel" aria-hidden="true">
-                    </app-edit-room>
+                        aria-labelledby="editRoomLabel" aria-hidden="true"></app-edit-room>
+                        
+                    <!--Delete Room Modal template-->
+                    <div class="modal fade" id="delRoom" tabindex="-1" aria-labelledby="delRoomLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Are you shure?</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger" data-dismiss="modal"
+                                        (click)="deleteRoom(room.id)">Yes, Delete</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="d-flex justify-content-between">
                         <div>
                             <strong>{{room.roomType.name}}: </strong>{{room.name}}
@@ -91,29 +106,32 @@
                             <button type="button" class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal"
                                 data-target="#editRoom">Edit
                             </button>
-                            <input type="button" class="btn btn-sm btn-outline-primary" (click)="deleteRoom(room.id)"
-                                value="Delete">
+                            <button type="button" class="btn btn-sm btn-outline-danger mr-2" data-toggle="modal"
+                                data-target="#delRoom">Delete
+                            </button>
+                            <!-- <input type="button" class="btn btn-sm btn-outline-primary" (click)="deleteRoom(room.id)"
+                                value="Delete"> -->
                         </div>
                     </div>
                     <div *ngIf="room.beds.length > 0">
                         <div class="mr-2"><strong>Beds: </strong>
-                            <div style="display: inline-block;" *ngFor="let bed of room.beds; let i= index">
+                            <div style="display: inline-block;" *ngFor="let bed of room.beds; let i=index">
                                 <a id="color-red" (click)="deleteBed(bed.id)">{{bed.bedType.name}}</a>
-                                <span class="mr-1" *ngIf="i < room.beds.length-1">,</span>
+                                <span class="mr-1" *ngIf="i<room.beds.length-1">,</span>
                             </div>
 
                         </div>
                     </div>
                     <div *ngIf="room.amenities.length > 0">
                         <div class="mr-2"><strong>Amenities: </strong>
-                            <div style="display: inline-block;" *ngFor="let amenity of room.amenities; let i= index"
-                                [ngClass]="{'high': amenity.importance.name == 'High',
-                                'medium': amenity.importance.name == 'Medium', 
-                                'normal': amenity.importance.name == 'Normal', 
-                                'low': amenity.importance.name == 'Low'}">
+                            <div style="display:inline-block;" *ngFor="let amenity of room.amenities; let i=index"
+                                [ngClass]="{'high': amenity.importance.name=='High',
+                                'medium':amenity.importance.name=='Medium', 
+                                'normal':amenity.importance.name=='Normal', 
+                                'low':amenity.importance.name=='Low'}">
                                 <a id="color-red"
                                     (click)="deleteAmenity(amenity.amenityId, room.id)">{{amenity.name}}</a>
-                                <span class="mr-1" *ngIf="i < room.amenities.length-1">,</span>
+                                <span class="mr-1" *ngIf="i<room.amenities.length-1">,</span>
                             </div>
                         </div>
                     </div>
@@ -122,21 +140,15 @@
             <div class="form-group" *ngIf="apartment.amenities.length > 0">
                 <h5>Apartment Amenities:</h5>
                 <div class="row ml-0 border rounded border-success p-2 mb-1 d-flex">
-                    <div *ngFor="let amenity of apartment.amenities; let i= index" [ngClass]="{'high': amenity.importance.name == 'High',
-                    'medium': amenity.importance.name == 'Medium', 
-                    'normal': amenity.importance.name == 'Normal', 
-                    'low': amenity.importance.name == 'Low'}">
+                    <div *ngFor="let amenity of apartment.amenities; let i=index" [ngClass]="{'high':amenity.importance.name=='High',
+                    'medium':amenity.importance.name=='Medium', 
+                    'normal':amenity.importance.name=='Normal', 
+                    'low':amenity.importance.name=='Low'}">
                         <a id="color-red" (click)="deleteAmenity(amenity.amenityId)">{{amenity.name}}</a>
-                        <span class="mr-1" *ngIf="i < apartment.amenities.length-1">,</span>
+                        <span class="mr-1" *ngIf="i<apartment.amenities.length-1">,</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<jw-modal id="choose-address-modal">
-    <div>
-        <app-choose-address></app-choose-address>
-    </div>
-</jw-modal>

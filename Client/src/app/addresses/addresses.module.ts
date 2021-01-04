@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
-import { ModalModule } from './../_modal';
 import { addressComponents } from '.';
 import { AddressesService } from './addresses.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,7 +22,6 @@ import { CreateAddressComponent } from './create-address/create-address.componen
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    ModalModule,
   ],
   providers:[
     AddressesService,

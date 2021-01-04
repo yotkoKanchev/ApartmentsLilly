@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ApartmentsService } from '../apartments.service';
 import { ApartmentModel } from '../models/apartment.model';
-import { RoomsService } from 'src/app/rooms/rooms.service';
 import { AmenitiesService } from 'src/app/amenities/amenities.service';
 import { ToastrService } from 'ngx-toastr';
 import { BedsService } from 'src/app/beds/beds.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { RoomsService } from 'src/app/rooms/rooms.service';
 
 @Component({
   selector: 'app-details-apartment',
@@ -27,7 +27,6 @@ export class DetailsApartmentComponent implements OnInit {
     private amenitiesService: AmenitiesService,
     private bedsService: BedsService,
     private route: ActivatedRoute,
-    private router: Router,
     private toastr: ToastrService,
     private sanitizer: DomSanitizer,
   ) { }
@@ -52,19 +51,6 @@ export class DetailsApartmentComponent implements OnInit {
       this.fetchApartment(this.id);
     });
   }
-  
-  deleteApartment(id: string) {
-    this.apartmentsService.deleteApartment(id).subscribe(() => {
-      this.router.navigate(['apartments'])
-    })
-  }
-
-  fetchApartment(id: number) {
-    this.apartmentsService.getApartment(id).subscribe(res => {
-      this.apartment = res;
-      this.getMapDetails();
-    })
-  }
 
   deleteBed(bedId: number) {
     this.bedsService.deleteBed(bedId).subscribe(() => {
@@ -77,9 +63,16 @@ export class DetailsApartmentComponent implements OnInit {
     this.showMap = !this.showMap;
   }
 
-  getMapDetails() {
+  private getMapDetails() {
     this.showMap = false;
     this.fullAddress = this.sanitizer.bypassSecurityTrustResourceUrl(
       environment.googleMaps + this.apartment.address.streetAddress + '+' + this.apartment.address.city + '+' + this.apartment.address.country);
+  }
+
+  private fetchApartment(id: number) {
+    this.apartmentsService.getApartment(id).subscribe(res => {
+      this.apartment = res;
+      this.getMapDetails();
+    })
   }
 }
