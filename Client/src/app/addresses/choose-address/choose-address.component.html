@@ -1,6 +1,6 @@
 <div class="form-group">
     <label>Choose Address</label>
-    <select #addressSelect class="form-control mb-3" (change)='onOptionsSelected(addressSelect.value)'>
+    <select #addressSelect class="form-control mb-3" (change)='onOptionsSelected(addressSelect.value, content)'>
         <option disabled selected value="">choose address</option>
         <option *ngFor="let ad of addresses" value="{{ad.id}}">{{ad.country}}, {{ad.city}} -
             {{ad.streetAddress}}</option>
@@ -18,3 +18,9 @@
         <app-create-address></app-create-address>
     </div>
 </jw-modal>
+
+<ng-template #content let-modal>
+    <app-create-address></app-create-address>
+</ng-template>
+
+<!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->

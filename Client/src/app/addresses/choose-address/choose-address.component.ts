@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { AddressesService } from '../addresses.service';
 import { AddressModel } from '../models/address.model';
-import { ModalService } from '../../_modal';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-choose-address',
@@ -15,7 +15,7 @@ export class ChooseAddressComponent implements OnInit {
 
   constructor(
     private addressesService: AddressesService,
-    private modalService: ModalService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit(): void {
@@ -24,17 +24,16 @@ export class ChooseAddressComponent implements OnInit {
     });
   }
 
-  onOptionsSelected(value: any) {
+  onOptionsSelected(value: any, content) {
     if (value == "addAddress") {
-
-      this.openModal('add-address-modal');
+      this.openModal(content);
     }
     else {
       this.onAddressIdSelected.emit(+value)
     }
   }
 
-  openModal(id: string) {
-    this.modalService.open(id);
+  openModal(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-create-address' });
   }
 }

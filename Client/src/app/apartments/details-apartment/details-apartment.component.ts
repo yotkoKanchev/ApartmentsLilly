@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApartmentsService } from '../apartments.service';
 import { ApartmentModel } from '../models/apartment.model';
-import { ModalService } from '../../_modal';
 import { RoomsService } from 'src/app/rooms/rooms.service';
 import { AmenitiesService } from 'src/app/amenities/amenities.service';
 import { ToastrService } from 'ngx-toastr';
@@ -28,8 +27,8 @@ export class DetailsApartmentComponent implements OnInit {
     private amenitiesService: AmenitiesService,
     private bedsService: BedsService,
     private route: ActivatedRoute,
+    private router: Router,
     private toastr: ToastrService,
-    private modalService: ModalService,
     private sanitizer: DomSanitizer,
   ) { }
 
@@ -38,10 +37,6 @@ export class DetailsApartmentComponent implements OnInit {
       this.id = params['id'];
       this.fetchApartment(this.id);
     })
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
   }
 
   deleteRoom(id: number) {
@@ -57,17 +52,18 @@ export class DetailsApartmentComponent implements OnInit {
       this.fetchApartment(this.id);
     });
   }
+  
+  deleteApartment(id: string) {
+    this.apartmentsService.deleteApartment(id).subscribe(() => {
+      this.router.navigate(['apartments'])
+    })
+  }
 
   fetchApartment(id: number) {
     this.apartmentsService.getApartment(id).subscribe(res => {
       this.apartment = res;
       this.getMapDetails();
     })
-  }
-
-  openModal(id: string, childId?: number) {
-    this.childId = childId;
-    this.modalService.open(id);
   }
 
   deleteBed(bedId: number) {
@@ -83,7 +79,6 @@ export class DetailsApartmentComponent implements OnInit {
 
   getMapDetails() {
     this.showMap = false;
-
     this.fullAddress = this.sanitizer.bypassSecurityTrustResourceUrl(
       environment.googleMaps + this.apartment.address.streetAddress + '+' + this.apartment.address.city + '+' + this.apartment.address.country);
   }

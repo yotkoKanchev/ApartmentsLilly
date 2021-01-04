@@ -1,5 +1,5 @@
 <div class="container-fluid jumbotron">
-    <button *ngIf="authService.isAdmin()" class="btn btn-primary mb-3" routerLink='create'>Create</button>
+    <button *ngIf="isAdmin()" class="btn btn-primary mb-3" routerLink='create'>Create</button>
     <div class="row">
         <div class="col-lg-4 d-flex mb-2" *ngFor="let apartment of apartments">
             <a routerLink={{apartment.id}}>

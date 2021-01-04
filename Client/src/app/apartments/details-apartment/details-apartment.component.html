@@ -1,7 +1,7 @@
 <div *ngIf='apartment' class="jumbotron">
 
-    <app-edit-apartment [id]="apartment.id" class="modal fade" id="editApartment" tabindex="-1" aria-labelledby="editApartmentLabel"
-        aria-hidden="true"></app-edit-apartment>
+    <app-edit-apartment [id]="apartment.id" class="modal fade" id="editApartment" tabindex="-1"
+        aria-labelledby="editApartmentLabel" aria-hidden="true"></app-edit-apartment>
     <app-create-bed [rooms]='apartment.rooms' class="modal fade" id="addBed" tabindex="-1" aria-labelledby="addBedLabel"
         aria-hidden="true"></app-create-bed>
     <app-create-amenity [rooms]='apartment.rooms' [apartmentId]='id' class="modal fade" id="addAmenity" tabindex="-1"
@@ -14,10 +14,10 @@
     <div class="row d-flex justify-content-center">
         <div class="col-lg-5 mb-2">
             <div class="mb-2">
-                <!-- <input type="button" class="btn btn-primary mr-2" routerLink="/apartments/edit/{{apartment.id}}"
-                    value="Edit Info"> -->
                 <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#editApartment">
                     Edit Info</button>
+                <button type="button" class="btn btn-danger mr-2"
+                    (click)="deleteApartment(apartment.id)">Delete</button>
                 <input type="button" class="btn btn-primary mr-2" routerLink="/apartments" value="Back to list">
             </div>
             <div class="card" style="max-width: 26rem;">

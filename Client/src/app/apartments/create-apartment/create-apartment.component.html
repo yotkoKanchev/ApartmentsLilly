@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
-            <form [formGroup]="apartmentForm" (ngSubmit)="create()">
+            <form [formGroup]="apartmentForm">
 
                 <app-choose-address (onAddressIdSelected)="getAddressId($event)"></app-choose-address>
 
@@ -109,11 +109,14 @@
                             Maximum Occupants should be between 1 and 100 symbols long!
                         </span>
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2" [disabled]="!apartmentForm.valid">Create</button>
-                    <input type="submit" class="btn btn-primary" routerLink="/apartments" value="Cancel">
-                </div>
 
+                </div>
             </form>
+            <div>
+                <button type="submit" class="btn btn-primary mr-2" [disabled]="apartmentForm.invalid"
+                    (click)="create()">Create</button>
+                <input type="submit" class="btn btn-primary" routerLink="/apartments" value="Cancel">
+            </div>
             <br>
             <br>
         </div>

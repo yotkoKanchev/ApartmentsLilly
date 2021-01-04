@@ -22,6 +22,8 @@ import { AmenitiesModule } from './amenities/amenities.module';
 import { BedsModule } from './beds/beds.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { ReservationsModule } from './reservations/reservations.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SandboxComponent } from './sandbox/sandbox.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { ReservationsModule } from './reservations/reservations.module';
     HeaderComponent,
     FooterComponent,
     StartComponent,
+    SandboxComponent,
   ],
   imports: [
     AuthModule,
@@ -45,6 +48,7 @@ import { ReservationsModule } from './reservations/reservations.module';
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    NgbModule,
   ],
   providers: [
     AuthService,

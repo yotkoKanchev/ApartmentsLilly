@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressesService } from '../addresses.service';
 import { ToastrService } from 'ngx-toastr';
-import { ModalService } from 'src/app/_modal';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-create-address',
@@ -13,10 +13,10 @@ export class CreateAddressComponent {
   addressForm: FormGroup;
 
   constructor(
-    private modalService: ModalService,
     private fb: FormBuilder,
     private addressService: AddressesService,
     private toastrService: ToastrService,
+    private modalService: NgbModal,
   ) {
     this.addressForm = this.fb.group({
       'Country': ['', [Validators.minLength(2), Validators.maxLength(30)]],
@@ -35,8 +35,8 @@ export class CreateAddressComponent {
       })
   }
 
-  closeModal(id: string) {
-    this.modalService.close(id);
+  closeModal() {
+    this.modalService.dismissAll();
   }
 
   get country() {
