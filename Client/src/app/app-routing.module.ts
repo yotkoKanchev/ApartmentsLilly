@@ -11,9 +11,12 @@ import { ProfilesRoutingModule } from './profiles/profiles-routing.module';
 import { ReservationsRoutingModule } from './reservations/reservations-routing.module';
 import { DeleteProfileComponent } from './profiles/delete-profile/delete-profile.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 const routes: Routes = [
+
   { path: '', pathMatch: 'full', component: StartComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'sandbox', component: SandboxComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -22,8 +25,8 @@ const routes: Routes = [
   { path: 'apartments', loadChildren: () => ApartmentsRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
   { path: 'addresses', loadChildren: () => AddressesRoutingModule, canLoad: [AuthGuardService, AdminGuardService] },
   { path: 'reservations', loadChildren: () => ReservationsRoutingModule },
+  { path: 'dashboard', data: { layout: DashboardComponent } , component: DashboardComponent}
 ];
-
 
 // TODO add caLoad and canActivate properly
 

@@ -11,7 +11,7 @@
                 <a class="nav-link" href="/">About </a>
             </li>
             <li class="nav-item">
-                <a *ngIf="authService.isAdmin()" class="nav-link" href="/apartments/">Apartments</a>
+                <a *ngIf="authService.isAdmin()" class="nav-link" href="dashboard">Dashboard</a>
             </li>
             <li *ngIf="!authService.isAuthenticated()" class="nav-item">
                 <a class="nav-link" routerLink="/login/">Login</a>
