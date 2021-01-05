@@ -1,6 +1,6 @@
 import { EnumerationModel } from "src/app/shared/models/enumeration.model"
 
-export interface RequestDetailsModel {
+export interface ReservationDetailsModel {
     id: number,
     firstName: string,
     lastName: string,

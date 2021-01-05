@@ -1,4 +1,4 @@
-export class SendRequestModel {
+export class CreateReservationModel {
     apartmentId: number;
     firstName: string;
     lastName: string;

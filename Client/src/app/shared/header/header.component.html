@@ -20,8 +20,8 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                     aria-expanded="false"><span class="mr-2"><img id="avatar" src="{{authService.getAvatar()}}"></span>{{authService.getName()}}</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/bookings/">Bookings</a>
-                    <a class="dropdown-item" href="reservations/requests">Requests</a>
+                    <!-- <a class="dropdown-item" href="/bookings/">Bookings</a> -->
+                    <a class="dropdown-item" href="reservations/all">Reservations</a>
                     <a class="dropdown-item" href="/profiles/mine">Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" (click)="logout()">Logout</a>

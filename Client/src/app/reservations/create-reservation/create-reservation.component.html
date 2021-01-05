@@ -1,13 +1,13 @@
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Send Request</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Send Reservation Request</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
                     aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <form [formGroup]="requestForm" (ngSubmit)="create()">
+            <form [formGroup]="reservationRequestForm" (ngSubmit)="create()">
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label>First Name</label>
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div *ngIf="searchApartmentForm" class="border rounded border-success p-2">
-                    <h4>Sending Request for Apartment: {{reservationsService.getApartmentName()}}</h4>
+                    <h4>Sending Request for: {{reservationsService.getApartmentName()}}</h4>
                     <h5>From: {{searchApartmentForm.startDate | date:'dd MMM YYYY'}} To: {{searchApartmentForm.endDate |
                         date:'dd MMM YYYY'}}</h5>
                     <h6>Adults(13y+): {{searchApartmentForm.adults}}</h6>
@@ -81,7 +81,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" [disabled]="requestForm.invalid" data-dismiss="modal"
+            <button type="submit" class="btn btn-primary" [disabled]="reservationRequestForm.invalid" data-dismiss="modal"
                 (click)="create()">Send</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>

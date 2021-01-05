@@ -1,4 +1,4 @@
-export interface CreateRequestUserDataModel{
+export interface UserInfoReservationModel{
     apartmentId: number;
     firstName?: string;
     lastName?: string;

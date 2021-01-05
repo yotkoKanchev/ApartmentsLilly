@@ -8,12 +8,12 @@ import { ProfilesService } from 'src/app/profiles/profiles.service';
 import { ReservationsService } from '../reservations.service';
 
 @Component({
-    selector: 'app-create-request',
-    templateUrl: './create-request.component.html',
-    styleUrls: ['./create-request.component.css']
+    selector: 'app-create-reservation',
+    templateUrl: './create-reservation.component.html',
+    styleUrls: ['./create-reservation.component.css']
 })
-export class CreateRequestComponent implements OnInit {
-    requestForm: FormGroup;
+export class CreateReservationComponent implements OnInit {
+    reservationRequestForm: FormGroup;
     @Input() searchApartmentForm: SearchApartmentsModel;
 
     constructor(
@@ -24,7 +24,7 @@ export class CreateRequestComponent implements OnInit {
         private fb: FormBuilder,
         private toastrService: ToastrService,
     ) {
-        this.requestForm = this.fb.group({
+        this.reservationRequestForm = this.fb.group({
             'firstName': ['', [Validators.minLength(2), Validators.maxLength(20), Validators.required]],
             'lastName': ['', [Validators.minLength(2), Validators.maxLength(20), Validators.required]],
             'email': ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
@@ -36,7 +36,7 @@ export class CreateRequestComponent implements OnInit {
     ngOnInit(): void {
         if (this.authService.isAuthenticated()) {
             this.porfileService.getProfile().subscribe(profile => {
-                this.requestForm = this.fb.group({
+                this.reservationRequestForm = this.fb.group({
                     'firstName': profile.firstName,
                     'lastName': profile.lastName,
                     'email': profile.email,
@@ -45,7 +45,7 @@ export class CreateRequestComponent implements OnInit {
                 })
             });
         } else {
-            this.requestForm = this.fb.group({
+            this.reservationRequestForm = this.fb.group({
                 'firstName': '',
                 'lastName': '',
                 'email': '',
@@ -56,31 +56,31 @@ export class CreateRequestComponent implements OnInit {
     }
 
     create() {
-        this.reservationsService.sendRequest(this.searchApartmentForm, this.requestForm.value).subscribe(data => {
-            this.toastrService.success("Request sent", "Success");
+        this.reservationsService.sendReservationRequest(this.searchApartmentForm, this.reservationRequestForm.value).subscribe(data => {
+            this.toastrService.success("Reservation Request sent", "Success");
             this.reservationsService.setConfirmationDetails(data);
-            var urlToNavigate = this.authService.isAuthenticated() ? "reservations/user-request-confirmation" : "reservations/guest-request-confirmation"
+            var urlToNavigate = this.authService.isAuthenticated() ? "reservations/user-confirmation" : "reservations/guest-confirmation"
             this.router.navigate([urlToNavigate])
         })
     }
 
     get firstName() {
-        return this.requestForm.get('firstName');
+        return this.reservationRequestForm.get('firstName');
     }
 
     get lastName() {
-        return this.requestForm.get('lastName');
+        return this.reservationRequestForm.get('lastName');
     }
 
     get email() {
-        return this.requestForm.get('email');
+        return this.reservationRequestForm.get('email');
     }
 
     get phoneNumber() {
-        return this.requestForm.get('phoneNumber');
+        return this.reservationRequestForm.get('phoneNumber');
     }
 
     get additionalInfo() {
-        return this.requestForm.get('additionalInfo');
+        return this.reservationRequestForm.get('additionalInfo');
     }
 }

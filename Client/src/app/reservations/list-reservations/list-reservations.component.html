@@ -1,4 +1,4 @@
-<div *ngIf="requests" class="mt-2">
+<div *ngIf="reservations" class="mt-2">
     <table class="table table-hover">
         <thead>
             <tr class="table-active">
@@ -10,19 +10,19 @@
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-        <tbody *ngFor="let request of requests">
+        <tbody *ngFor="let reservation of reservations">
             <tr class="table-light">
-                <td>{{request.fullName}}</td>
-                <td>{{request.apartmentName}}</td>
-                <td>{{request.from}}</td>
-                <td>{{request.to}}</td>
-                <td>{{request.status}}</td>
+                <td>{{reservation.fullName}}</td>
+                <td>{{reservation.apartmentName}}</td>
+                <td>{{reservation.from}}</td>
+                <td>{{reservation.to}}</td>
+                <td>{{reservation.status}}</td>
                 <td>
                     <input type="button" class="btn btn-sm btn-outline-primary mr-2"
-                        routerLink="/reservations/requests/{{request.id}}" value="Details">
+                        routerLink="/reservations/{{reservation.id}}" value="Details">
                     <input type="button" class="btn btn-sm btn-outline-primary mr-2" value="Edit">
-                    <input *ngIf="request.status != 'Arhived' && request.status != 'Canceled'" type="button"
-                        class="btn btn-sm btn-outline-primary mr-2" (click)="cancelRequest(request.id)" value="Cancel">
+                    <input *ngIf="reservation.status != 'Arhived' && reservation.status != 'Canceled'" type="button"
+                        class="btn btn-sm btn-outline-primary mr-2" (click)="cancelReservation(reservation.id)" value="Cancel">
                 </td>
             </tr>
         </tbody>

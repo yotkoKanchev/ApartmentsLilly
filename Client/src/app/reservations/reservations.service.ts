@@ -3,18 +3,18 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { SearchApartmentsModel } from '../apartments/models/search-apartments.model';
 import { Observable } from 'rxjs';
-import { SendRequestModel } from './models/send-reguest.model';
-import { CreateRequestUserDataModel } from './models/create-request-userData.model';
-import { ConfirmationModel } from './models/confirmation.model';
-import { RequestListingModel } from './models/request-listing.model';
-import { RequestDetailsModel } from './models/request-details.model';
+import { CreateReservationModel } from './models/create-reservation.model';
+import { UserInfoReservationModel } from './models/userInfo-reservation.model';
+import { ReservationConfirmationModel } from './models/reservation-confirmation.model';
+import { ReservationListingModel } from './models/reservation-listing.model';
+import { ReservationDetailsModel } from './models/reservation-details.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationsService {
   private reservationsPath = environment.apiUrl + "reservations";
-  confirmationDetails: ConfirmationModel;
+  confirmationDetails: ReservationConfirmationModel;
   apartmentId: number;
   apartmentName: string;
 
@@ -22,10 +22,10 @@ export class ReservationsService {
     private http: HttpClient,
   ) { }
 
-  sendRequest(searchForm: SearchApartmentsModel, data: CreateRequestUserDataModel): Observable<SendRequestModel> {
+  sendReservationRequest(searchForm: SearchApartmentsModel, data: UserInfoReservationModel): Observable<CreateReservationModel> {
 
     const id = this.getApartmentId();
-    const request = new SendRequestModel();
+    const request = new CreateReservationModel();
 
     request.apartmentId = id;
     request.firstName = data.firstName;
@@ -39,26 +39,26 @@ export class ReservationsService {
     request.children = !searchForm.children ? 0 : searchForm.children;
     request.infants = !searchForm.infants ? 0 : searchForm.infants;
 
-    return this.http.post<SendRequestModel>(this.reservationsPath + '/request', request);
+    return this.http.post<CreateReservationModel>(this.reservationsPath, request);
   }
 
-  getRequests(): Observable<Array<RequestListingModel>> {
-    return this.http.get<Array<RequestListingModel>>(this.reservationsPath + '/requests');
+  getReservations(): Observable<Array<ReservationListingModel>> {
+    return this.http.get<Array<ReservationListingModel>>(this.reservationsPath + '/all');
   }
 
-  getRequest(id: number): Observable<RequestDetailsModel> {
-    return this.http.get<RequestDetailsModel>(this.reservationsPath + `/requests/${id}`);
+  getReservation(id: number): Observable<ReservationDetailsModel> {
+    return this.http.get<ReservationDetailsModel>(this.reservationsPath + '/' + id);
   }
 
-  cancelRequest(id: number) {
-    return this.http.put(this.reservationsPath + `/requests/${id}`, {});
+  cancelReservation(id: number) {
+    return this.http.put(this.reservationsPath + '/' + id, {});
   }
 
   setConfirmationDetails(data) {
     this.confirmationDetails = data;
   }
 
-  getConfirmationDetails(): ConfirmationModel {
+  getConfirmationDetails(): ReservationConfirmationModel {
     return this.confirmationDetails;
   }
 

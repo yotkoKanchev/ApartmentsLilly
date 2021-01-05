@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ReservationsService } from '../reservations.service';
 
 @Component({
-  selector: 'app-user-request-confirmation',
-  templateUrl: './user-request-confirmation.component.html',
-  styleUrls: ['./user-request-confirmation.component.css']
+  selector: 'app-user-reservation-confirmation',
+  templateUrl: './user-reservation-confirmation.component.html',
+  styleUrls: ['./user-reservation-confirmation.component.css']
 })
-export class UserRequestConfirmationComponent implements OnInit {
+export class UserReservationConfirmationComponent implements OnInit {
   confirmation: string;
 
   constructor(

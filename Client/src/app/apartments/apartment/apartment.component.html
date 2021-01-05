@@ -1,5 +1,5 @@
-<app-create-request [searchApartmentForm]="searchApartmentForm" class="modal fade" id="createRequest" tabindex="-1"
-    aria-labelledby="createRequestLabel" aria-hidden="true"></app-create-request>
+<app-create-reservation [searchApartmentForm]="searchApartmentForm" class="modal fade" id="createReservation" tabindex="-1"
+    aria-labelledby="createReservationLabel" aria-hidden="true"></app-create-reservation>
 
 <div class="card mb-3">
     <h3 class="card-header bg-info bg-gradient text-white">{{apartment.name}}</h3>
@@ -13,7 +13,7 @@
             alt="apartmentartment: {{apartment.name}},{{apartment.addressCity}}">
     </a>
     <button type="button" class="btn btn-sm btn-outline-primary m-2" data-toggle="modal" (click)="onButtonClick()"
-        data-target="#createRequest">
+        data-target="#createReservation">
         Request Reservation
     </button>
     <div class="card-body">

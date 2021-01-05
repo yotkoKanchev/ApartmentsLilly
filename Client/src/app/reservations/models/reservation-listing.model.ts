@@ -1,4 +1,4 @@
-export interface RequestListingModel {
+export interface ReservationListingModel {
     id: number;
     apartmentName: string;
     fullName: string;
