@@ -1,6 +1,6 @@
 ﻿namespace ApartmentsLilly.Server.Features.Reservations.Models
 {
-    public class CreateRequestResponceModel
+    public class CreateReservationResponceModel
     {
         public string Confirmation { get; set; }
     }

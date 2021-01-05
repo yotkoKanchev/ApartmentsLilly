@@ -62,7 +62,7 @@
             }
             else
             {
-                return "This apartment has this amenity already.";
+                return "The apartment has that amenity already.";
             }
         }
 
@@ -89,7 +89,7 @@
             }
             else
             {
-                return "This room has this amenity already.";
+                return "The room has that amenity already.";
             }
         }
 

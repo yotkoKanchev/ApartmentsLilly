@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Data;
-    using Data.Models.Requests;
+    using Data.Models.Reservations;
     using Infrastructure.Mapping;
     using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
@@ -30,7 +30,7 @@
                 !char.IsDigit(dateHash[0]) ? dateHash[1..] : dateHash
                 );
 
-            var request = new Request
+            var request = new Reservation
             {
                 UserId = userId,
                 ApartmentId = apartmentId,
@@ -44,43 +44,44 @@
                 Adults = adults,
                 Children = children,
                 Infants = infants,
-                Status = RequestStatus.Sent,
+                Status = ReservationStatus.Requested,
                 Confirmation = confirmationCode,
             };
 
-            await this.data.Requests.AddAsync(request);
+            await this.data.Reservations.AddAsync(request);
             await this.data.SaveChangesAsync();
 
             return confirmationCode;
         }
 
-        public async Task<IEnumerable<T>> GetRequests<T>(string userId)
+        public async Task<IEnumerable<T>> GetAll<T>(string userId)
         {
             return await this.data
-                .Requests
+                .Reservations
                 .Where(r => r.UserId == userId)
-                .OrderByDescending(r => r.From)
+                .OrderBy(r => (int)r.Status)
+                .ThenByDescending(r => r.From)
                 .To<T>()
                 .ToListAsync();
         }
 
-        public async Task<T> GetRequestDetails<T>(int requestId)
+        public async Task<T> GetDetails<T>(int requestId)
         {
             return await this.data
-                .Requests
+                .Reservations
                 .Where(r => r.Id == requestId)
                 .To<T>()
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Result> CancelRequest(int requestId, string userId)
+        public async Task<Result> Cancel(int requestId, string userId)
         {
-            return await this.ChangeStatus(requestId, userId, RequestStatus.Canceled);
+            return await this.ChangeStatus(requestId, userId, ReservationStatus.Canceled);
         }
 
-        private async Task<Result> ChangeStatus(int requestId, string userId, RequestStatus newStatus)
+        private async Task<Result> ChangeStatus(int requestId, string userId, ReservationStatus newStatus)
         {
-            var request = await this.data.Requests
+            var request = await this.data.Reservations
                 .FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null)
@@ -93,7 +94,7 @@
                 return "You are not allowed to cancel this request.";
             }
 
-            request.Status = RequestStatus.Canceled;
+            request.Status = ReservationStatus.Canceled;
             await this.data.SaveChangesAsync();
 
             return true;

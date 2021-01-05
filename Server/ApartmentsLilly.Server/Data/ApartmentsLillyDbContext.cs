@@ -9,9 +9,8 @@
     using Models.Amenities;
     using Models.Base;
     using Models.Beds;
-    using Models.Bookings;
     using Models.Mappings;
-    using Models.Requests;
+    using Models.Reservations;
     using Models.Reviews;
     using Models.Rooms;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -43,9 +42,7 @@
 
         public DbSet<Review> Reviews { get; set; }
 
-        public DbSet<Request> Requests { get; set; }
-
-        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
         public DbSet<ApartmentAmenity> ApartmentAmenities { get; set; }
 
@@ -78,15 +75,7 @@
             builder
                 .Entity<User>()
                 .HasQueryFilter(b => !b.IsDeleted)
-                .HasMany(u => u.Requests)
-                .WithOne(r => r.User)
-                .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<User>()
-                .HasQueryFilter(b => !b.IsDeleted)
-                .HasMany(u => u.Bookings)
+                .HasMany(u => u.Reservations)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
@@ -116,17 +105,10 @@
             builder
                 .Entity<Apartment>()
                 .HasQueryFilter(r => !r.IsDeleted)
-                .HasMany(r => r.Requests)
+                .HasMany(r => r.Reservations)
                 .WithOne(a => a.Apartment)
                 .HasForeignKey(a => a.ApartmentId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .Entity<Apartment>()
-                .HasQueryFilter(r => !r.IsDeleted)
-                .HasMany(r => r.Bookings)
-                .WithOne(a => a.Apartment)
-                .HasForeignKey(a => a.ApartmentId);
 
             builder
                 .Entity<Room>()
@@ -143,7 +125,7 @@
 
             builder
                 .Entity<Review>()
-                .HasOne(r => r.Booking)
+                .HasOne(r => r.Reservation)
                 .WithOne(b => b.Review)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -157,6 +139,10 @@
 
             builder
                 .Entity<Profile>()
+                .HasQueryFilter(b => !b.IsDeleted);
+
+            builder
+                .Entity<Address>()
                 .HasQueryFilter(b => !b.IsDeleted);
 
             base.OnModelCreating(builder);

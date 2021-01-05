@@ -101,11 +101,13 @@
                 roles.FirstOrDefault(),
             this.appSettings.Secret);
 
+            var profileUrl = await this.data.Profiles.Where(p => p.UserId == user.Id).Select(p => p.AvatarUrl).FirstOrDefaultAsync();
             return new LoginResponseModel
             {
                 Token = token,
                 Name = user.UserName,
                 IsAdmin = await this.userManager.IsInRoleAsync(user, AdminRole),
+                AvatarUrl = profileUrl,
             };
         }
 

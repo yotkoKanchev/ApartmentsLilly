@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class CreateRequestInputModel
+    public class CreateReservationInputModel
     {
         public int ApartmentId { get; set; }
 

@@ -1,11 +1,11 @@
 ﻿namespace ApartmentsLilly.Server.Features.Reservations.Models
 {
     using System.Globalization;
-    using Data.Models.Requests;
+    using Data.Models.Reservations;
     using Infrastructure.Mapping;
     using AutoMapper;
 
-    public class RequestListingServiceModel : IMapFrom<Request>, IHaveCustomMappings
+    public class ReservationListingServiceModel : IMapFrom<Reservation>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -21,7 +21,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Request, RequestListingServiceModel>()
+            configuration.CreateMap<Reservation, ReservationListingServiceModel>()
                 .ForMember(r => r.FullName, opt => opt.MapFrom(r => r.FirstName + ' ' + r.LastName))
                 .ForMember(a => a.ApartmentName, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Apartment.Name)))
                 .ForMember(r => r.From, opt => opt.MapFrom(r => r.From.ToString("ddMMMyyyy")))

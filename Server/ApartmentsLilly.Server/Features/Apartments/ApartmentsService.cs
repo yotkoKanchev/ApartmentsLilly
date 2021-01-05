@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using ApartmentsLilly.Server.Data.Models.Reservations;
     using Data;
     using Data.Models;
     using Features.Addresses;
@@ -143,9 +144,10 @@
             return await this.data
                 .Apartments
                 .Where(a => a.Rooms.Any())
-                .Where(a => !a.Bookings
-                    .Any(b => (b.StartDate >= startDate && b.EndDate <= startDate) &&
-                              (b.StartDate >= endDate && b.EndDate <= endDate)))
+                .Where(a => !a.Reservations
+                    .Where(r => r.Status == ReservationStatus.Confirmed)
+                    .Any(b => (b.From >= startDate && b.To <= startDate) &&
+                              (b.From >= endDate && b.To <= endDate)))
                 .OrderBy(a => a.Name)
                 .To<T>()
                 .ToListAsync();

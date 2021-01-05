@@ -2,13 +2,13 @@
 {
     using System;
     using System.Globalization;
-    using Data.Models.Requests;
+    using Data.Models.Reservations;
     using Infrastructure.Mapping;
     using AutoMapper;
 
     using static Infrastructure.Extensions.EnumExtensions;
 
-    public class RequestDetailsServiceModel : IMapFrom<Request>, IHaveCustomMappings
+    public class ReservationDetailsServiceModel : IMapFrom<Reservation>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -40,9 +40,11 @@
 
         public string ApartmentName { get; set; }
 
+        public string ApartmentMainImageUrl { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Request, RequestDetailsServiceModel>()
+            configuration.CreateMap<Reservation, ReservationDetailsServiceModel>()
                 .ForMember(a => a.ApartmentName, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Apartment.Name)))
                 .ForMember(a => a.Status, opt => opt.MapFrom(a => new EnumValue { Name = a.Status.ToString(), Value = (int)a.Status }));
         }

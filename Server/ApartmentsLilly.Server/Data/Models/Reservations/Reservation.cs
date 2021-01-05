@@ -1,10 +1,11 @@
-﻿namespace ApartmentsLilly.Server.Data.Models.Requests
+﻿namespace ApartmentsLilly.Server.Data.Models.Reservations
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using ApartmentsLilly.Server.Data.Models.Reviews;
     using Base;
 
-    public class Request : DeletableEntity
+    public class Reservation : DeletableEntity
     {
         public int Id { get; set; }
 
@@ -31,7 +32,7 @@
 
         public int Children { get; set; }
 
-        public RequestStatus Status { get; set; }
+        public ReservationStatus Status { get; set; }
 
         public string UserId { get; set; }
 
@@ -42,5 +43,7 @@
 
         [Required]
         public Apartment Apartment { get; set; }
+
+        public Review Review { get; set; }
     }
 }

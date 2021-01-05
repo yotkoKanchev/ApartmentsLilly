@@ -4,8 +4,7 @@
     using System.Collections.Generic;
 
     using Base;
-    using Bookings;
-    using Requests;
+    using Reservations;
     using Reviews;
     using Microsoft.AspNetCore.Identity;
 
@@ -27,9 +26,7 @@
 
         public virtual ICollection<Review> Reviews { get; } = new HashSet<Review>();
 
-        public virtual ICollection<Request> Requests { get; } = new HashSet<Request>();
-
-        public virtual ICollection<Booking> Bookings { get; } = new HashSet<Booking>();
+        public virtual ICollection<Reservation> Reservations { get; } = new HashSet<Reservation>();
 
         public virtual Profile Profile { get; set; }
     }

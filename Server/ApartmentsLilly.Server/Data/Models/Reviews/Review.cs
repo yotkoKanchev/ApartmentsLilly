@@ -1,7 +1,7 @@
 ﻿namespace ApartmentsLilly.Server.Data.Models.Reviews
 {
+    using ApartmentsLilly.Server.Data.Models.Reservations;
     using Base;
-    using Bookings;
 
     public class Review : DeletableEntity
     {
@@ -19,8 +19,8 @@
 
         public virtual Apartment Apartment { get; set; }
 
-        public int BookingId { get; set; }
+        public int ReservationId { get; set; }
 
-        public virtual Booking Booking { get; set; }
+        public virtual Reservation Reservation { get; set; }
     }
 }

@@ -23,8 +23,7 @@
         }
 
         [HttpPost]
-        [Route("request")]
-        public async Task<ActionResult> CreateRequest(CreateRequestInputModel model)
+        public async Task<ActionResult> Create(CreateReservationInputModel model)
         {
             User user;
             string password = null;
@@ -70,14 +69,14 @@
 
             if (isAuthenticated)
             {
-                return Created(nameof(Created), new CreateRequestResponceModel
+                return Created(nameof(Created), new CreateReservationResponceModel
                 {
                     Confirmation = confirmation,
                 });
             }
             else
             {
-                return Created(nameof(Created), new CreateRequestNewUserResponceModel
+                return Created(nameof(Created), new CreateReservationNewUserResponceModel
                 {
                     Confirmation = confirmation,
                     Password = password,
@@ -86,27 +85,27 @@
             }
         }
         [HttpGet]
-        [Route("requests")]
-        public async Task<IEnumerable<RequestListingServiceModel>> Requests()
+        [Route("all")]
+        public async Task<IEnumerable<ReservationListingServiceModel>> Mine()
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            return await this.reservations.GetRequests<RequestListingServiceModel>(user.Id);
+            return await this.reservations.GetAll<ReservationListingServiceModel>(user.Id);
         }
 
         [HttpGet]
         [Route(Id)]
-        public async Task<RequestDetailsServiceModel> Details(int id)
+        public async Task<ReservationDetailsServiceModel> Details(int id)
         {
-            return await this.reservations.GetRequestDetails<RequestDetailsServiceModel>(id);
+            return await this.reservations.GetDetails<ReservationDetailsServiceModel>(id);
         }
 
         [HttpPut]
         [Route(Id)]
-        public async Task<ActionResult> CancelRequest(int id)
+        public async Task<ActionResult> Cancel(int id)
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
-            var result = await this.reservations.CancelRequest(id, user.Id);
+            var result = await this.reservations.Cancel(id, user.Id);
 
             if (result.Failure)
             {
