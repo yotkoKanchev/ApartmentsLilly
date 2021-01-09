@@ -13,11 +13,17 @@
 
         public string FullName { get; set; }
 
+        public string PhoneNumber { get; set; }
+
+        public string Confirmation { get; set; }
+
         public string From { get; set; }
 
         public string To { get; set; }
 
         public string Status { get; set; }
+
+        public string Guests { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
@@ -25,7 +31,8 @@
                 .ForMember(r => r.FullName, opt => opt.MapFrom(r => r.FirstName + ' ' + r.LastName))
                 .ForMember(a => a.ApartmentName, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Apartment.Name)))
                 .ForMember(r => r.From, opt => opt.MapFrom(r => r.From.ToString("ddMMMyyyy")))
-                .ForMember(r => r.To, opt => opt.MapFrom(r => r.To.ToString("ddMMMyyyy")));
+                .ForMember(r => r.To, opt => opt.MapFrom(r => r.To.ToString("ddMMMyyyy")))
+                .ForMember(r => r.Guests, opt => opt.MapFrom(r => $"{r.Adults}/{r.Children}/{r.Infants}"));
         }
     }
 }

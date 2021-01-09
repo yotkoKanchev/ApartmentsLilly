@@ -54,11 +54,21 @@
             return confirmationCode;
         }
 
-        public async Task<IEnumerable<T>> GetAll<T>(string userId)
+        public async Task<IEnumerable<T>> GetMine<T>(string userId)
         {
             return await this.data
                 .Reservations
                 .Where(r => r.UserId == userId)
+                .OrderBy(r => (int)r.Status)
+                .ThenByDescending(r => r.From)
+                .To<T>()
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAll<T>()
+        {
+            return await this.data
+                .Reservations
                 .OrderBy(r => (int)r.Status)
                 .ThenByDescending(r => r.From)
                 .To<T>()

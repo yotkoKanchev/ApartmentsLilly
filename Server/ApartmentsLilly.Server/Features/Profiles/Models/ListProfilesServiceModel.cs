@@ -1,10 +1,9 @@
 ﻿namespace ApartmentsLilly.Server.Features.Profiles.Models
 {
+    using System.Text.Json.Serialization;
     using Data.Models;
     using Infrastructure.Mapping;
-    using System.Text.Json.Serialization;
-
-    public class ProfileServiceModel : IMapFrom<User> 
+    public class ListProfilesServiceModel : IMapFrom<User>
     {
         public string Email { get; set; }
 
@@ -16,10 +15,9 @@
         [JsonPropertyName("lastName")]
         public string ProfileLastName { get; set; }
 
-        [JsonPropertyName("avatarUrl")]
-        public string ProfileAvatarUrl { get; set; }
-
         [JsonPropertyName("phoneNumber")]
         public string ProfilePhoneNumber { get; set; }
+
+        public sbyte Role { get; set; }
     }
 }

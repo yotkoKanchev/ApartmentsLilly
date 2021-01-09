@@ -9,6 +9,8 @@
     using Microsoft.AspNetCore.Mvc;
 
     using static Infrastructure.WebConstants;
+    using ApartmentsLilly.Server.Infrastructure.Extensions;
+    using ApartmentsLilly.Server.Data.Models.Reservations;
 
     [AllowAnonymous]
     public class ReservationsController : ApiController
@@ -84,12 +86,21 @@
                 });
             }
         }
+
         [HttpGet]
-        [Route("all")]
+        [Route("mine")]
         public async Task<IEnumerable<ReservationListingServiceModel>> Mine()
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            return await this.reservations.GetAll<ReservationListingServiceModel>(user.Id);
+            return await this.reservations.GetMine<ReservationListingServiceModel>(user.Id);
+        }
+
+        [HttpGet]
+        [Route(nameof(All))]
+        [Authorize(Roles = "Admin")]
+        public async Task<IEnumerable<ReservationListingServiceModel>> All()
+        {
+            return await this.reservations.GetAll<ReservationListingServiceModel>();
         }
 
         [HttpGet]
@@ -113,6 +124,15 @@
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route(nameof(Statuses))]
+        public ActionResult Statuses()
+        {
+            var types = EnumExtensions.GetValues<ReservationStatus>();
+
+            return Ok(types);
         }
     }
 

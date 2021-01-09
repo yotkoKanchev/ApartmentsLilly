@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
 
     public class ProfilesController : ApiController
     {
@@ -28,6 +29,14 @@
         public async Task<ProfileServiceModel> Mine()
         {
             return await this.profiles.ByUser(this.currentUser.GetId());
+        }
+
+        [HttpGet]
+        [Route(nameof(All))]
+        [Authorize(Roles ="Admin")]
+        public async Task<IEnumerable<ListProfilesServiceModel>> All()
+        {
+            return await this.profiles.GetAll<ListProfilesServiceModel>();
         }
 
         [HttpPut]
