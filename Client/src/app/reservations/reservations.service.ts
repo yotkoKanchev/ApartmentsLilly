@@ -8,6 +8,7 @@ import { UserInfoReservationModel } from './models/userInfo-reservation.model';
 import { ReservationConfirmationModel } from './models/reservation-confirmation.model';
 import { ReservationListingModel } from './models/reservation-listing.model';
 import { ReservationDetailsModel } from './models/reservation-details.model';
+import { EnumerationModel } from '../shared/models/enumeration.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,16 +43,24 @@ export class ReservationsService {
     return this.http.post<CreateReservationModel>(this.reservationsPath, request);
   }
 
-  getReservations(): Observable<Array<ReservationListingModel>> {
+  getMine(): Observable<Array<ReservationListingModel>> {
+    return this.http.get<Array<ReservationListingModel>>(this.reservationsPath + '/mine');
+  }
+
+  getAll(): Observable<Array<ReservationListingModel>> {
     return this.http.get<Array<ReservationListingModel>>(this.reservationsPath + '/all');
   }
 
-  getReservation(id: number): Observable<ReservationDetailsModel> {
+  get(id: number): Observable<ReservationDetailsModel> {
     return this.http.get<ReservationDetailsModel>(this.reservationsPath + '/' + id);
   }
 
-  cancelReservation(id: number) {
+  cancel(id: number) {
     return this.http.put(this.reservationsPath + '/' + id, {});
+  }
+
+  getStatuses(): Observable<EnumerationModel> {
+    return this.http.get<EnumerationModel>(this.reservationsPath + '/' + 'statuses');
   }
 
   setConfirmationDetails(data) {

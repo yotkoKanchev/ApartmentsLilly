@@ -4,5 +4,8 @@ export interface ReservationListingModel {
     fullName: string;
     from: string;
     to: string;
+    phoneNumber: string;
+    confirmation: string;
     status: string;
+    guests: string;
 }

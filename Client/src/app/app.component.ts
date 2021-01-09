@@ -16,8 +16,8 @@ export class AppComponent {
   ) {
     this.titleService.setTitle(this.title);
 
-    if (this.location.path().startsWith('/dashboard')) {
-      this.show = false;
-    }
+    // if (this.location.path().startsWith('/administration')) {
+    //   this.show = false;
+    // }
   }
 }

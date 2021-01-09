@@ -20,9 +20,13 @@
     display: -webkit-box;
   } */
 
-  .flex-column{
+  /* .flex-column{
     flex-direction: row !important;
-  }
+  } */
+}
+
+.sidebar .col{
+  flex-direction: column;
 }
 
 .sidebar-sticky {
@@ -85,4 +89,9 @@
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
+}
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
 }

@@ -24,7 +24,7 @@ import { ProfilesModule } from './profiles/profiles.module';
 import { ReservationsModule } from './reservations/reservations.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SandboxComponent } from './sandbox/sandbox.component';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { DashboardComponent } from './administration/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [

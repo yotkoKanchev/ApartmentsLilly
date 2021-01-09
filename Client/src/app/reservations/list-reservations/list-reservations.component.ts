@@ -20,7 +20,7 @@ export class ListReservationsComponent implements OnInit {
   }
 
   cancelReservation(id: number) {
-    this.reservationsService.cancelReservation(id).subscribe(() => {
+    this.reservationsService.cancel(id).subscribe(() => {
       this.toastr.success("Success", "Reservation has been canceled.");
       setTimeout(() => {
         location.reload()
@@ -29,7 +29,7 @@ export class ListReservationsComponent implements OnInit {
   }
 
   fetchReservations() {
-    this.reservationsService.getReservations().subscribe(data => {
+    this.reservationsService.getMine().subscribe(data => {
       this.reservations = data;
     })
   }

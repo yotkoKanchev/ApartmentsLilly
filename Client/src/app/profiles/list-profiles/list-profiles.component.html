@@ -1,0 +1,24 @@
+<div *ngIf="profiles" class="mt-2">
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-active">
+                <th scope="col">Username</th>
+                <th scope="col">Names</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let profile of profiles">
+            <tr class="table-light">
+                <td>{{profile.userName}}</td>
+                <td>{{profile.firstName}} {{profile.lastName}}</td>
+                <td>{{profile.email}}</td>
+                <td>{{profile.role}}</td>
+                <td>
+                    <input type="button" class="btn btn-sm btn-outline-primary mr-2" routerLink="profiles/edit" value="Edit">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

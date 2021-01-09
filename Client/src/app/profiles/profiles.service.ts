@@ -19,6 +19,11 @@ export class ProfilesService {
     return this.http.get<ProfileModel>(this.profilesPath);
   }
 
+  getAll() : Observable<Array<ProfileModel>>
+  {
+    return this.http.get<Array<ProfileModel>>(this.profilesPath + '/all');
+  }
+
   editProfile(data: any){
     return this.http.put(this.profilesPath + "/update", data)
   }

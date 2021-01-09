@@ -31,13 +31,13 @@ export class DetailsReservationComponent implements OnInit {
   }
 
   fetchReservation(id: number) {
-    this.reservationsService.getReservation(id).subscribe(req => {
+    this.reservationsService.get(id).subscribe(req => {
       this.reservation = req;
     })
   }
 
   cancelReservation(id: number) {
-    this.reservationsService.cancelReservation(id).subscribe(() => {
+    this.reservationsService.cancel(id).subscribe(() => {
       this.toastr.success("Success", "Reservation has been canceled.");
       this.router.navigate(['reservations/all'])
     })
