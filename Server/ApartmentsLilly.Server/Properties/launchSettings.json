@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Catstagram.Server": {
+    "ApartmentsLilly.Server": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

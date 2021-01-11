@@ -13,6 +13,6 @@
 
         Task<Result> Delete(string id);
 
-        Task<IEnumerable<T>> GetAll<T>();
+        Task<IEnumerable<T>> GetAll<T>(List<string> ids);
     }
 }

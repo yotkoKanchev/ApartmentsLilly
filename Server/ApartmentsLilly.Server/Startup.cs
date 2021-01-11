@@ -18,17 +18,13 @@ namespace ApartmentsLilly.Server
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAntiforgery(options =>
-            //{
-            //    options.HeaderName = "X-CSRF-TOKEN";
-            //});
-
             services
                 .AddDatabase(this.Configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetApplicationSettings(this.Configuration))
                 .AddApplicationServices()
                 .AddSwagger()
+                .AddEmailSender(this.Configuration)
                 .AddCors()
                 .ConfigureCookiePolicyOptions()
                 .ConfigureDataProtectionTokenLifeSpan()

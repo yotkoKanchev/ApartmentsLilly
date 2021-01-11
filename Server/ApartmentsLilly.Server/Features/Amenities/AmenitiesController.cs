@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using static Infrastructure.WebConstants;
+    using static Infrastructure.GlobalConstants;
 
     [Authorize(Roles = AdminRole)]
     public class AmenitiesController : ApiController

@@ -24,6 +24,7 @@
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
     using ApartmentsLilly.Server.Features.Reservations;
+    using ApartmentsLilly.Server.Infrastructure.Messaging;
 
     public static class ServiceCollectionExtensions
     {
@@ -40,6 +41,9 @@
             => services
                 .AddDbContext<ApartmentsLillyDbContext>(options => options
                     .UseSqlServer(configuration.GetDefaultConnectionString()));
+
+        public static IServiceCollection AddEmailSender(this IServiceCollection services, IConfiguration configuration)
+            => services.AddTransient<IEmailSender>(x => new SendGridEmailSender(configuration["SendGrid:ApiKey"]));
 
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {

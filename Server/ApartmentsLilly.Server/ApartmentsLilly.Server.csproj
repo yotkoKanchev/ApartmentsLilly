@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
-    <UserSecretsId>aspnet-Catstagram.Server-8077F3A7-0459-4263-A48B-42A7C1791354</UserSecretsId>
+    <UserSecretsId>aspnet-ApartmentsLilly.Server-8077F3A7-0459-4263-A48B-42A7C1791354</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +16,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.1" />
+    <PackageReference Include="SendGrid" Version="9.22.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 

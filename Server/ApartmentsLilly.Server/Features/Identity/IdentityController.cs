@@ -12,7 +12,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Options;
 
-    using static Infrastructure.WebConstants;
+    using static Infrastructure.GlobalConstants;
 
     public class IdentityController : ApiController
     {

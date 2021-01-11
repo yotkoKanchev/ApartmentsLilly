@@ -3,14 +3,15 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Data.Models;
+    using Data.Models.Reservations;
+    using Infrastructure.Extensions;
     using Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     using static Infrastructure.WebConstants;
-    using ApartmentsLilly.Server.Infrastructure.Extensions;
-    using ApartmentsLilly.Server.Data.Models.Reservations;
+    using static Infrastructure.GlobalConstants;
 
     [AllowAnonymous]
     public class ReservationsController : ApiController

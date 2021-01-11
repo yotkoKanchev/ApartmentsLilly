@@ -74,7 +74,7 @@
 
             builder
                 .Entity<User>()
-                .HasQueryFilter(b => !b.IsDeleted)
+                //.HasQueryFilter(b => !b.IsDeleted)
                 .HasMany(u => u.Reservations)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)

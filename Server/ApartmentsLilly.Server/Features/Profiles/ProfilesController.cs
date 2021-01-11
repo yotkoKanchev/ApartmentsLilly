@@ -8,6 +8,9 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
+    using System.Linq;
+
+    using static Infrastructure.GlobalConstants;
 
     public class ProfilesController : ApiController
     {
@@ -33,10 +36,23 @@
 
         [HttpGet]
         [Route(nameof(All))]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = AdminRole)]
         public async Task<IEnumerable<ListProfilesServiceModel>> All()
         {
-            return await this.profiles.GetAll<ListProfilesServiceModel>();
+            var users = await this.userManager.GetUsersInRoleAsync("Admin");
+            var ids = users.Select(u => u.Id).ToList();
+
+            var profiles = await this.profiles.GetAll<ListProfilesServiceModel>(ids);
+
+            foreach (var profile in profiles)
+            {
+                if (ids.Contains(profile.Id))
+                {
+                    profile.isAdmin = true;
+                }
+            }
+
+            return profiles;
         }
 
         [HttpPut]

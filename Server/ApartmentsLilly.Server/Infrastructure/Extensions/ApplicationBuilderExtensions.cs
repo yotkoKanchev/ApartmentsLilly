@@ -8,7 +8,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
 
-    using static Infrastructure.WebConstants;
+    using static Infrastructure.GlobalConstants;
 
     public static class ApplicationBuilderExtensions
     {

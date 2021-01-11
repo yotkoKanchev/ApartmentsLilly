@@ -9,6 +9,7 @@
     using Infrastructure.Services;
     using Models;
     using Microsoft.EntityFrameworkCore;
+    using System;
 
     public class ProfilesService : IProfilesService
     {
@@ -151,13 +152,14 @@
                 this.data.Profiles.Remove(profile);
             }
 
-
             return true;
         }
 
-        public async Task<IEnumerable<T>> GetAll<T>()
+        public async Task<IEnumerable<T>> GetAll<T>(List<string> ids)
         {
             return await this.data.Users
+                .OrderBy(u => u.IsDeleted ? 1 : 0)
+                .ThenByDescending(u => ids.Contains(u.Id) ? 1 : 0)
                 .To<T>()
                 .ToListAsync();
         }
