@@ -81,6 +81,6 @@ export class AuthService {
 
   isAdmin() {
     let user = this.getUser();
-    return user? user.isAdmin : null
+    return user == null ? null : user.isAdmin;
   }
 }

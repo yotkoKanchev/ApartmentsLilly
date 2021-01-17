@@ -6,7 +6,7 @@
                 <th scope="col">Names</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone Number</th>
-                <th scope="col">Role</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody *ngFor="let profile of profiles">
@@ -14,9 +14,12 @@
                 <td>{{profile.userName}}</td>
                 <td>{{profile.firstName}} {{profile.lastName}}</td>
                 <td>{{profile.email}}</td>
-                <td>{{profile.role}}</td>
+                <td>{{profile.phoneNumber}}</td>
                 <td>
-                    <input type="button" class="btn btn-sm btn-outline-primary mr-2" routerLink="profiles/edit" value="Edit">
+                    <input *ngIf="!profile.isAdmin && !profile.isDeleted" type="button" class="btn btn-sm btn-outline-primary mr-2" value="Make Admin">
+                    <span *ngIf="profile.isAdmin" class="mr-2 text-danger font-weight-bold">Administrator</span>
+                    <span *ngIf="profile.isDeleted" class="mr-1 text-danger font-weight-bold">Profile Deleted</span>
+                    <input type="button" class="btn btn-sm btn-outline-primary" routerLink="/profiles/update" value="Edit">
                 </td>
             </tr>
         </tbody>

@@ -25,4 +25,20 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
+
+  getAvatar(){
+    return this.authService.getAvatar();
+  }
+
+  getName(){
+    return this.authService.getName();
+  }
+
+  isAdmin(){
+    return this.authService.isAdmin();
+  }
+
+  isAuthenticated(){
+    return this.authService.isAuthenticated();
+  }
 }

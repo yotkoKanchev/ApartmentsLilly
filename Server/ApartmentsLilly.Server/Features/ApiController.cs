@@ -3,8 +3,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using static Infrastructure.WebConstants;
-
     [Authorize]
     [ApiController]
     [Route("[controller]")]

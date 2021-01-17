@@ -5,5 +5,6 @@ export interface ProfileModel {
     lastName: string;
     avatarUrl: string;
     phoneNumber: string;
-    role: string;
+    isDeleted: boolean;
+    isAdmin: boolean;
 }
