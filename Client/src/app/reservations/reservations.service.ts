@@ -59,6 +59,10 @@ export class ReservationsService {
     return this.http.put(this.reservationsPath + '/' + id, {});
   }
 
+  edit(id: number, data) {
+    return this.http.put(this.reservationsPath + '/edit/' + id, data);
+  }
+
   getStatuses(): Observable<EnumerationModel> {
     return this.http.get<EnumerationModel>(this.reservationsPath + '/' + 'statuses');
   }

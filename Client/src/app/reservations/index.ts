@@ -3,6 +3,7 @@ import { UserReservationConfirmationComponent } from "./user-reservation-confirm
 import { CreateReservationComponent } from './create-reservation/create-reservation.component';
 import { ListReservationsComponent } from "./list-reservations/list-reservations.component";
 import { DetailsReservationComponent } from "./details-reservation/details-reservation.component";
+import { EditReservationComponent } from "./edit-reservation/edit-reservation.component";
 
 
 export const reservationComponents = [
@@ -11,4 +12,5 @@ export const reservationComponents = [
     GuestReservationConfirmationComponent,
     ListReservationsComponent,
     DetailsReservationComponent,
+    EditReservationComponent,
 ]

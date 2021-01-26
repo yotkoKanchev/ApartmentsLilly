@@ -17,7 +17,6 @@ export class EditApartmentComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private apartmentsService: ApartmentsService,
     private router: Router,
     private toastr: ToastrService) {

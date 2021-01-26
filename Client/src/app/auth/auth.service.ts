@@ -72,7 +72,8 @@ export class AuthService {
 
   getAvatar() {
     let user = this.getUser();
-    return user ? user['avatarUrl'] : null;
+    let avatar = user ? user['avatarUrl'] : null;
+    return avatar != null ? avatar  : 'assets/images/noAvatar.png'
   }
 
   isAuthenticated() {
