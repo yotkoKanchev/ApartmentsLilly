@@ -26,7 +26,7 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreateReservationInputModel model)
+        public async Task<ActionResult> Create(CreateReservationRequestModel model)
         {
             User user;
             string password = null;
@@ -118,6 +118,32 @@
             var user = await this.userManager.GetUserAsync(this.User);
 
             var result = await this.reservations.Cancel(id, user.Id);
+
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("edit/" + Id)]
+        public async Task<ActionResult> Edit(int id, EditReservationRequestModel model)
+        {
+            var result = await this.reservations.Update(
+               id,
+               model.FirstName,
+               model.LastName,
+               model.Email,
+               model.PhoneNumber,
+               model.AdditionalInfo,
+               model.From,
+               model.To,
+               model.Status,
+               model.Adults,
+               model.Children,
+               model.Infants);
 
             if (result.Failure)
             {

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Data;
     using Data.Models.Reservations;
     using Infrastructure.Mapping;
@@ -87,6 +88,35 @@
         public async Task<Result> Cancel(int requestId, string userId)
         {
             return await this.ChangeStatus(requestId, userId, ReservationStatus.Canceled);
+        }
+
+        public async Task<Result> Update(int id, string firstName, string lastName, string email, string phoneNumber, string additionalInfo,
+            DateTime from, DateTime to, ReservationStatus status, int adults, int children, int infants)
+        {
+            var reservation = await this.data
+                .Reservations
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (reservation == null)
+            {
+                return $"Reservation with Id: {id} does not exists.";
+            }
+
+            reservation.FirstName = firstName;
+            reservation.LastName = lastName;
+            reservation.Email = email;
+            reservation.PhoneNumber = phoneNumber;
+            reservation.AdditionalInfo = additionalInfo;
+            reservation.From = from;
+            reservation.To = to;
+            reservation.Status = status;
+            reservation.Adults = adults;
+            reservation.Children = children;
+            reservation.Infants = infants;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
         }
 
         private async Task<Result> ChangeStatus(int requestId, string userId, ReservationStatus newStatus)

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ApartmentsLilly.Server.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,7 +21,10 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -106,7 +109,7 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     BasePrice = table.Column<double>(type: "float", nullable: true),
                     MaxOccupants = table.Column<int>(type: "int", nullable: true),
                     MainImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -268,38 +271,6 @@ namespace ApartmentsLilly.Server.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Requests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AdultsCount = table.Column<int>(type: "int", nullable: false),
-                    InfantsCount = table.Column<int>(type: "int", nullable: true),
-                    ChildrenCount = table.Column<int>(type: "int", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Requests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Requests_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ApartmentAmenities",
                 columns: table => new
                 {
@@ -329,18 +300,24 @@ namespace ApartmentsLilly.Server.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookings",
+                name: "Reservations",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AdultsCount = table.Column<int>(type: "int", nullable: false),
-                    InfantsCount = table.Column<int>(type: "int", nullable: true),
-                    ChildrenCount = table.Column<int>(type: "int", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdditionalInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Confirmation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    From = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    To = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Adults = table.Column<int>(type: "int", nullable: false),
+                    Infants = table.Column<int>(type: "int", nullable: false),
+                    Children = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ApartmentId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -352,15 +329,15 @@ namespace ApartmentsLilly.Server.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookings", x => x.Id);
+                    table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bookings_Apartments_ApartmentId",
+                        name: "FK_Reservations_Apartments_ApartmentId",
                         column: x => x.ApartmentId,
                         principalTable: "Apartments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Bookings_AspNetUsers_UserId",
+                        name: "FK_Reservations_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -390,7 +367,7 @@ namespace ApartmentsLilly.Server.Data.Migrations
                         column: x => x.ApartmentId,
                         principalTable: "Apartments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -403,7 +380,7 @@ namespace ApartmentsLilly.Server.Data.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ApartmentId = table.Column<int>(type: "int", nullable: false),
-                    BookingId = table.Column<int>(type: "int", nullable: false),
+                    ReservationId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -420,7 +397,7 @@ namespace ApartmentsLilly.Server.Data.Migrations
                         column: x => x.ApartmentId,
                         principalTable: "Apartments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reviews_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -428,9 +405,9 @@ namespace ApartmentsLilly.Server.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Reviews_Bookings_BookingId",
-                        column: x => x.BookingId,
-                        principalTable: "Bookings",
+                        name: "FK_Reviews_Reservations_ReservationId",
+                        column: x => x.ReservationId,
+                        principalTable: "Reservations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -496,7 +473,7 @@ namespace ApartmentsLilly.Server.Data.Migrations
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -583,16 +560,6 @@ namespace ApartmentsLilly.Server.Data.Migrations
                 column: "RoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_ApartmentId",
-                table: "Bookings",
-                column: "ApartmentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bookings_UserId",
-                table: "Bookings",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Images_ApartmentId",
                 table: "Images",
                 column: "ApartmentId");
@@ -613,8 +580,13 @@ namespace ApartmentsLilly.Server.Data.Migrations
                 column: "UserId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requests_UserId",
-                table: "Requests",
+                name: "IX_Reservations_ApartmentId",
+                table: "Reservations",
+                column: "ApartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservations_UserId",
+                table: "Reservations",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -623,9 +595,10 @@ namespace ApartmentsLilly.Server.Data.Migrations
                 column: "ApartmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_BookingId",
+                name: "IX_Reviews_ReservationId",
                 table: "Reviews",
-                column: "BookingId");
+                column: "ReservationId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_UserId",
@@ -673,9 +646,6 @@ namespace ApartmentsLilly.Server.Data.Migrations
                 name: "Profiles");
 
             migrationBuilder.DropTable(
-                name: "Requests");
-
-            migrationBuilder.DropTable(
                 name: "Reviews");
 
             migrationBuilder.DropTable(
@@ -685,7 +655,7 @@ namespace ApartmentsLilly.Server.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Bookings");
+                name: "Reservations");
 
             migrationBuilder.DropTable(
                 name: "Amenities");
