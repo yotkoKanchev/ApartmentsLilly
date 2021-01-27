@@ -6,7 +6,7 @@ export interface ReservationDetailsModel {
     lastName: string,
     email: string,
     phoneNumber: string,
-    addtionalInfo: string,
+    additionalInfo: string,
     confirmation: string,
     from: Date,
     to: Date,

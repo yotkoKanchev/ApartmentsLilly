@@ -75,6 +75,10 @@ export class ReservationsService {
     return this.confirmationDetails;
   }
 
+  getReservationStatuses(): Observable<EnumerationModel>{
+    return this.http.get<EnumerationModel>(this.reservationsPath + '/' + 'statuses');
+  }
+
   setApartmentId(id: number) {
     this.apartmentId = id;
   }

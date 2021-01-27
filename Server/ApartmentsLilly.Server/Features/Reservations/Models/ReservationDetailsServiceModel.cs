@@ -20,7 +20,7 @@
 
         public string PhoneNumber { get; set; }
 
-        public string AddtionalInfo { get; set; }
+        public string AdditionalInfo { get; set; }
 
         public string Confirmation { get; set; }
 

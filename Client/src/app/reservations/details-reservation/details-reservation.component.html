@@ -19,7 +19,7 @@
                 <span *ngIf="reservation.children > 0" class="card-title">, Children:{{reservation.children}}</span>
                 <span *ngIf="reservation.infants > 0" class="card-title">, Infants:{{reservation.infants}}</span>
             </p>
-            <p *ngIf="reservation.addtionalInfo" class="card-text">{{reservation.addtionalInfo}}</p>
+            <p *ngIf="reservation.additionalInfo" class="card-text">{{reservation.additionalInfo}}</p>
             <p class="card-text">Status: <strong>{{reservation.status.name}}</strong></p>
             <input *ngIf="reservation.status.name == 'Accepted'" type="button" class="btn btn-sm btn-primary mr-2"
                 value="Book">
@@ -27,7 +27,7 @@
                 data-toggle="tooltip" data-placement="top" title="{{bookInfo}}">
                 Book
             </button> -->
-            <input type="button" class="btn btn-sm btn-outline-primary mr-2" value="Edit">
+            <input type="button" class="btn btn-sm btn-outline-primary mr-2" routerLink="/reservations/edit/{{reservation.id}}" value="Edit">
             <input *ngIf="reservation.status.name != 'Canceled' && reservation.status.name != 'Arhived'" type="button"
                 class="btn btn-sm btn-outline-primary mr-2" (click)="cancelReservation(reservation.id)" value="Cancel">
             <input type="button" class="btn btn-sm btn-outline-primary" routerLink="/reservations/all"
