@@ -66,10 +66,19 @@
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAll<T>()
+        public async Task<IEnumerable<T>> GetAll<T>(string status)
         {
-            return await this.data
-                .Reservations
+            Enum.TryParse<ReservationStatus>(status, true, out ReservationStatus statusEnum);
+            IQueryable<Reservation> reservations = this.data
+                .Reservations;
+
+            if (statusEnum != 0)
+            {
+                reservations = reservations
+                .Where(r => r.Status == statusEnum);
+            }
+
+            return await reservations
                 .OrderBy(r => (int)r.Status)
                 .ThenByDescending(r => r.From)
                 .To<T>()

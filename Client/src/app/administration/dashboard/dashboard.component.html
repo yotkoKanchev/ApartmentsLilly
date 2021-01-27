@@ -19,31 +19,31 @@
                     </h6>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" [routerLink]="['/reservations/all', 'requested']">
                                 <span data-feather="file"></span>
                                 New
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" [routerLink]="['/reservations/all', 'edited']">
                                 <span data-feather="shopping-cart"></span>
                                 Edited
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" [routerLink]="['/reservations/all', 'upcoming']">
                                 <span data-feather="users"></span>
                                 Upcoming
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" [routerLink]="['/reservations/all', 'confirmed']">
                                 <span data-feather="bar-chart-2"></span>
                                 Confirmed
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" [routerLink]="['/reservations/all', 'pending']">
                                 <span data-feather="layers"></span>
                                 Pending
                             </a>
@@ -57,13 +57,13 @@
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link" [queryParams]="{status:canceled}" routerLink="reservations/all">
+                            <a class="nav-link" [routerLink]="['/reservations/all', 'canceled']">
                                 <span data-feather="file-text"></span>
                                 Canceled
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" [routerLink]="['/reservations/all', 'arhived']">
                                 <span data-feather="file-text"></span>
                                 Arhived
                             </a>

@@ -14,7 +14,7 @@
 
         Task<IEnumerable<T>> GetMine<T>(string userId);
 
-        Task<IEnumerable<T>> GetAll<T>();
+        Task<IEnumerable<T>> GetAll<T>(string status);
 
         Task<T> GetDetails<T>(int requestId);
 

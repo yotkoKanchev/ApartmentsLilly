@@ -4,6 +4,7 @@ import { CreateReservationComponent } from './create-reservation/create-reservat
 import { MineReservationsComponent } from "./mine-reservations/mine-reservations.component";
 import { DetailsReservationComponent } from "./details-reservation/details-reservation.component";
 import { EditReservationComponent } from "./edit-reservation/edit-reservation.component";
+import { ListReservationsComponent } from "./list-reservations/list-reservations.component";
 
 
 export const reservationComponents = [
@@ -13,4 +14,5 @@ export const reservationComponents = [
     MineReservationsComponent,
     DetailsReservationComponent,
     EditReservationComponent,
+    ListReservationsComponent,
 ]

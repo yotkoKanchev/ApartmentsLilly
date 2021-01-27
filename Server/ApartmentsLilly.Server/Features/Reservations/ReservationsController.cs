@@ -2,16 +2,18 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Data.Models;
     using Data.Models.Reservations;
     using Infrastructure.Extensions;
     using Models;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    using static Infrastructure.WebConstants;
     using static Infrastructure.GlobalConstants;
+    using static Infrastructure.WebConstants;
 
     [AllowAnonymous]
     public class ReservationsController : ApiController
@@ -99,9 +101,9 @@
         [HttpGet]
         [Route(nameof(All))]
         [Authorize(Roles = "Admin")]
-        public async Task<IEnumerable<ReservationListingServiceModel>> All()
+        public async Task<IEnumerable<ReservationListingServiceModel>> All(string status)
         {
-            return await this.reservations.GetAll<ReservationListingServiceModel>();
+            return await this.reservations.GetAll<ReservationListingServiceModel>(status);
         }
 
         [HttpGet]
