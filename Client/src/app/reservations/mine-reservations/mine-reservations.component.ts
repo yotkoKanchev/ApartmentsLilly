@@ -4,11 +4,11 @@ import { ReservationListingModel } from '../models/reservation-listing.model';
 import { ReservationsService } from '../reservations.service';
 
 @Component({
-  selector: 'app-list-reservations',
-  templateUrl: './list-reservations.component.html',
-  styleUrls: ['./list-reservations.component.css']
+  selector: 'app-mine-reservations',
+  templateUrl: './mine-reservations.component.html',
+  styleUrls: ['./mine-reservations.component.css']
 })
-export class ListReservationsComponent implements OnInit {
+export class MineReservationsComponent implements OnInit {
   reservations: Array<ReservationListingModel>
   constructor(
     private reservationsService: ReservationsService,

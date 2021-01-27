@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { SearchApartmentsModel } from '../apartments/models/search-apartments.model';
@@ -47,8 +47,9 @@ export class ReservationsService {
     return this.http.get<Array<ReservationListingModel>>(this.reservationsPath + '/mine');
   }
 
-  getAll(): Observable<Array<ReservationListingModel>> {
-    return this.http.get<Array<ReservationListingModel>>(this.reservationsPath + '/all');
+  getAll(status?: string): Observable<Array<ReservationListingModel>> {
+    const params = new HttpParams().append('status', status ? status : null);
+    return this.http.get<Array<ReservationListingModel>>(this.reservationsPath + '/all', { params });
   }
 
   get(id: number): Observable<ReservationDetailsModel> {
@@ -75,7 +76,7 @@ export class ReservationsService {
     return this.confirmationDetails;
   }
 
-  getReservationStatuses(): Observable<EnumerationModel>{
+  getReservationStatuses(): Observable<EnumerationModel> {
     return this.http.get<EnumerationModel>(this.reservationsPath + '/' + 'statuses');
   }
 

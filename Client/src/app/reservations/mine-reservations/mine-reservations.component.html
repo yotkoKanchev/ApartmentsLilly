@@ -22,7 +22,8 @@
                         routerLink="/reservations/{{reservation.id}}" value="Details">
                     <input type="button" class="btn btn-sm btn-outline-primary mr-2" value="Edit">
                     <input *ngIf="reservation.status != 'Arhived' && reservation.status != 'Canceled'" type="button"
-                        class="btn btn-sm btn-outline-primary mr-2" (click)="cancelReservation(reservation.id)" value="Cancel">
+                        class="btn btn-sm btn-outline-primary mr-2" (click)="cancelReservation(reservation.id)"
+                        value="Cancel">
                 </td>
             </tr>
         </tbody>
