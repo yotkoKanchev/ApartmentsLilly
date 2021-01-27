@@ -1,31 +1,40 @@
 <div *ngIf="reservations" class="mt-2">
-    <table class="table table-hover">
-        <thead>
-            <tr class="table-active">
-                <th scope="col">Names</th>
-                <th scope="col">Apartment</th>
-                <th scope="col">From</th>
-                <th scope="col">To</th>
-                <th scope="col">Status</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let reservation of reservations">
-            <tr class="table-light">
-                <td>{{reservation.fullName}}</td>
-                <td>{{reservation.apartmentName}}</td>
-                <td>{{reservation.from}}</td>
-                <td>{{reservation.to}}</td>
-                <td>{{reservation.status}}</td>
-                <td>
-                    <input type="button" class="btn btn-sm btn-outline-primary mr-2"
-                        routerLink="/reservations/{{reservation.id}}" value="Details">
-                    <input type="button" class="btn btn-sm btn-outline-primary mr-2" value="Edit">
-                    <input *ngIf="reservation.status != 'Arhived' && reservation.status != 'Canceled'" type="button"
-                        class="btn btn-sm btn-outline-primary mr-2" (click)="cancelReservation(reservation.id)"
-                        value="Cancel">
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="table table-hover">
+    <thead>
+      <tr class="table-active">
+        <th scope="col">Names</th>
+        <th scope="col">Apartment</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let reservation of reservations">
+      <tr
+        class="table-light clickable-row"
+        (click)="goToLink('reservations', reservation.id)"
+      >
+        <td>{{ reservation.fullName }}</td>
+        <td>{{ reservation.apartmentName }}</td>
+        <td>{{ reservation.from }}</td>
+        <td>{{ reservation.to }}</td>
+        <td>{{ reservation.status }}</td>
+        <td>
+          <input
+            type="button"
+            class="btn btn-sm btn-outline-primary mr-2"
+            routerLink="/reservations/{{ reservation.id }}"
+            value="Details"
+          />
+          <input
+            type="button"
+            class="btn btn-sm btn-outline-primary mr-2"
+            routerLink="/reservations/edit/{{ reservation.id }}"
+            value="Edit"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

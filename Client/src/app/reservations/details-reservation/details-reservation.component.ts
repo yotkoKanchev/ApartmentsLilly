@@ -39,7 +39,7 @@ export class DetailsReservationComponent implements OnInit {
   cancelReservation(id: number) {
     this.reservationsService.cancel(id).subscribe(() => {
       this.toastr.success("Success", "Reservation has been canceled.");
-      this.router.navigate(['reservations/all'])
+      this.router.navigate([`reservations/${this.id}`])
     })
   }
 }

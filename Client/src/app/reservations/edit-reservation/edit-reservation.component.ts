@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,7 @@ import { EnumerationModel } from 'src/app/shared/models/enumeration.model';
   styleUrls: ['./edit-reservation.component.css']
 })
 export class EditReservationComponent implements OnInit {
-  id: number;
+ id: number;
   reservation: ReservationDetailsModel;
   reservationForm: FormGroup;
   reservationStatuses: EnumerationModel;
@@ -49,7 +49,6 @@ export class EditReservationComponent implements OnInit {
 
     this.reservationsService.get(this.id).subscribe(res => {
       this.reservation = res;
-      console.log(res)
       this.reservationForm = this.fb.group({
         'id': [this.id],
         'confirmation': [this.reservation.confirmation],

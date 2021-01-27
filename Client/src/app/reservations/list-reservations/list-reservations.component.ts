@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReservationListingModel } from '../models/reservation-listing.model';
 import { ReservationsService } from '../reservations.service';
 
@@ -14,6 +14,7 @@ export class ListReservationsComponent implements OnInit {
   constructor(
     private reservationsService: ReservationsService,
     private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -26,5 +27,13 @@ export class ListReservationsComponent implements OnInit {
     this.reservationsService.getAll(status).subscribe(data => {
       this.reservations = data;
     })
+  }
+
+  goToLink(route: string, id?: number) {
+    if (id) {
+      this.router.navigate([route, id]);
+    } else {
+      this.router.navigate([route]);
+    }
   }
 }

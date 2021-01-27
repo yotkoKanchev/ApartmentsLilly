@@ -1,37 +1,65 @@
-<div *ngIf='reservation' class="row mt-2">
+<div *ngIf="reservation" class="row mt-2">
     <div class="col-lg-3"></div>
     <div class="card mb-3 col-lg-6">
         <img [src]="reservation.apartmentMainImageUrl" class="card-img-top"
-            alt="Apartment {{reservation.apartmentName}}">
+            alt="Apartment {{ reservation.apartmentName }}" />
 
         <div class="card-body">
-            <h5 class="card-title">Confirmation: {{reservation.confirmation}}</h5>
-            <h6 class="card-title">Apartment: {{reservation.apartmentName}}</h6>
-            <h6 class="card-title">Dates: {{reservation.from | date:'mediumDate'}} - {{reservation.to |
-                date:'mediumDate'}}</h6>
-            <hr>
-            <h6 class="card-title">Names: {{reservation.firstName}} {{reservation.lastName}}</h6>
-            <h6 class="card-title">Email: {{reservation.email}}</h6>
-            <h6 class="card-title">Phone Number: {{reservation.phoneNumber}}</h6>
-            <hr>
+            <h5 class="card-title">Confirmation: {{ reservation.confirmation }}</h5>
+            <h6 class="card-title">Apartment: {{ reservation.apartmentName }}</h6>
+            <h6 class="card-title">
+                Dates: {{ reservation.from | date: "mediumDate" }} -
+                {{ reservation.to | date: "mediumDate" }}
+            </h6>
+            <hr />
+            <h6 class="card-title">
+                Names: {{ reservation.firstName }} {{ reservation.lastName }}
+            </h6>
+            <h6 class="card-title">Email: {{ reservation.email }}</h6>
+            <h6 class="card-title">Phone Number: {{ reservation.phoneNumber }}</h6>
+            <hr />
             <p class="card-text">
-                Adults: {{reservation.adults}}
-                <span *ngIf="reservation.children > 0" class="card-title">, Children:{{reservation.children}}</span>
-                <span *ngIf="reservation.infants > 0" class="card-title">, Infants:{{reservation.infants}}</span>
+                Adults: {{ reservation.adults }}
+                <span *ngIf="reservation.children > 0" class="card-title">, Children:{{ reservation.children }}</span>
+                <span *ngIf="reservation.infants > 0" class="card-title">, Infants:{{ reservation.infants }}</span>
             </p>
-            <p *ngIf="reservation.additionalInfo" class="card-text">{{reservation.additionalInfo}}</p>
-            <p class="card-text">Status: <strong>{{reservation.status.name}}</strong></p>
+            <p *ngIf="reservation.additionalInfo" class="card-text">
+                {{ reservation.additionalInfo }}
+            </p>
+            <p class="card-text">
+                Status: <strong>{{ reservation.status.name }}</strong>
+            </p>
             <input *ngIf="reservation.status.name == 'Accepted'" type="button" class="btn btn-sm btn-primary mr-2"
-                value="Book">
-            <!-- <button *ngIf="reservation.status.name == 'Accepted'" type="button" class="btn btn-sm btn-primary mr-2"
-                data-toggle="tooltip" data-placement="top" title="{{bookInfo}}">
-                Book
-            </button> -->
-            <input type="button" class="btn btn-sm btn-outline-primary mr-2" routerLink="/reservations/edit/{{reservation.id}}" value="Edit">
-            <input *ngIf="reservation.status.name != 'Canceled' && reservation.status.name != 'Arhived'" type="button"
-                class="btn btn-sm btn-outline-primary mr-2" (click)="cancelReservation(reservation.id)" value="Cancel">
-            <input type="button" class="btn btn-sm btn-outline-primary" routerLink="/reservations/all"
-                value="Back">
+                value="Book" />
+            <div class="modal fade" id="cancelReservation" tabindex="-1" aria-labelledby="cancelReservationLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Are you shure?</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger" data-dismiss="modal"
+                                (click)="cancelReservation(reservation.id)">
+                                Yes, Cancel
+                            </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="button" class="btn btn-sm btn-outline-primary mr-2"
+                routerLink="/reservations/edit/{{ reservation.id }}" value="Edit" />
+            <button *ngIf="
+          reservation.status.name != 'Canceled' &&
+          reservation.status.name != 'Arhived'
+        " type="button" class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal"
+                data-target="#cancelReservation">
+                Cancel
+            </button>
+            <input type="button" class="btn btn-sm btn-outline-primary" routerLink="/reservations/all" value="Back" />
         </div>
     </div>
     <div class="col-lg-3"></div>
