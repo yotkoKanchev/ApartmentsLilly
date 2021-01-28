@@ -48,6 +48,8 @@
 
         public DbSet<RoomAmenity> RoomAmenities { get; set; }
 
+        public DbSet<ContactFormEntry> ContactFormEntries { get; set; }
+
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             this.ApplyAuditInformation();
