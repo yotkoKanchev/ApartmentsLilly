@@ -4,13 +4,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using ApartmentsLilly.Server.Features.Contacts.Models;
+
     using Data;
     using Data.Models;
     using Infrastructure.Mapping;
     using Infrastructure.Messaging;
+    using Models;
 
     using Microsoft.EntityFrameworkCore;
+    using ApartmentsLilly.Server.Infrastructure.Services;
 
     public class ContactsService : IContactsService
     {
@@ -23,11 +25,12 @@
             this.emailSender = emailSender;
         }
 
-        public async Task Create(string userId, string name, string email, string title, string content)
+        public async Task Create(string userId, string ip, string name, string email, string title, string content)
         {
             var contactFormEntry = new ContactFormEntry
             {
                 AuthUserId = userId,
+                Ip = ip,
                 Name = name,
                 Email = email,
                 Title = title,
@@ -44,7 +47,7 @@
                 "Thank you for your enquiery. We will get back to you soon");
         }
 
-        public async Task<T> GetByIdAsync<T>(int id)
+        public async Task<T> GetById<T>(int id)
         {
             var form = await this.data
                 .ContactFormEntries
@@ -55,7 +58,7 @@
             return form;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync<T>()
+        public async Task<IEnumerable<T>> GetAll<T>()
         {
             var query = await this.data
                 .ContactFormEntries
@@ -67,9 +70,9 @@
             return query;
         }
 
-        public async Task ReplyAsync(int id, string replyContent)
+        public async Task<Result> Reply(int id, string replyContent)
         {
-            var replyInfo = await this.GetByIdAsync<ReplyInfoServiceModel>(id);
+            var replyInfo = await this.GetById<ReplyInfoServiceModel>(id);
 
             // TODO add HTML content here
             await this.emailSender.SendEmailAsync(
@@ -77,19 +80,24 @@
                         $"Appartments Lilly Enquiery: {replyInfo.Title}",
                         $"Dear {replyInfo}, /n {replyContent}");
 
-            await this.SetReplyedAsync(id, replyContent);
+            return await this.SetReplyedAsync(id, replyContent);
         }
 
-        public async Task IgnoreAsync(int id)
+        public async Task<Result> Ignore(int id)
         {
-            await this.SetReplyedAsync(id, "IGNORED");
+            return await this.SetReplyedAsync(id, "IGNORED");
         }
 
-        private async Task SetReplyedAsync(int id, string replyContent)
+        private async Task<Result> SetReplyedAsync(int id, string replyContent)
         {
             var form = data
                 .ContactFormEntries
                 .FirstOrDefault(r => r.Id == id);
+
+            if (form == null)
+            {
+                return $"Contact Request with ID: {id} does not exists.";
+            }
 
             form.Reply = replyContent;
             form.IsReplyed = true;
@@ -97,6 +105,8 @@
 
             this.data.ContactFormEntries.Update(form);
             await this.data.SaveChangesAsync();
+
+            return true;
         }
     }
 }
