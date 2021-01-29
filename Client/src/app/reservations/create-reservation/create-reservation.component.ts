@@ -17,7 +17,7 @@ export class CreateReservationComponent implements OnInit {
     @Input() searchApartmentForm: SearchApartmentsModel;
 
     constructor(
-        private porfileService: ProfilesService,
+        private profilesService: ProfilesService,
         private authService: AuthService,
         private reservationsService: ReservationsService,
         private router: Router,
@@ -35,7 +35,7 @@ export class CreateReservationComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.authService.isAuthenticated()) {
-            this.porfileService.getProfile().subscribe(profile => {
+            this.profilesService.getProfile().subscribe(profile => {
                 this.reservationRequestForm = this.fb.group({
                     'firstName': profile.firstName,
                     'lastName': profile.lastName,

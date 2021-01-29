@@ -28,7 +28,7 @@
                 </div>
                 <div *ngIf="(description.touched || description.dirty) && description.errors"
                     class="alert alert-danger">
-                    <span *ngIf="name.errors.maxlength">
+                    <span *ngIf="description.errors.maxlength">
                         Description should be maximum 1000 symbols long!
                     </span>
                 </div>

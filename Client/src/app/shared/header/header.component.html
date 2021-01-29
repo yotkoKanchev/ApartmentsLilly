@@ -11,6 +11,9 @@
                 <a class="nav-link" href="/">About </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/contacts">Contact Us </a>
+            </li>
+            <li class="nav-item">
                 <a *ngIf="isAdmin()" class="nav-link" routerLink="administration">Dashboard</a>
             </li>
             <li *ngIf="!isAuthenticated()" class="nav-item">
