@@ -1,0 +1,25 @@
+<div *ngIf="messages" class="mt-2">
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-active">
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Title</th>
+                <th scope="col">IP</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let message of messages">
+            <tr class="table-light clickable-row" (click)="goToLink('contacts', message.id)">
+                <td>{{message.name}}</td>
+                <td>{{message.email}}</td>
+                <td>{{message.title}}</td>
+                <td>{{message.ip}}</td>
+                <td>
+                    <input type="button" class="btn btn-sm btn-outline-primary mr-2" routerLink="/contacts/{{message.id}}" value="Details">
+                    <input type="button" class="btn btn-sm btn-outline-primary" (click)="ignore(message.id)" value="Ignore">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

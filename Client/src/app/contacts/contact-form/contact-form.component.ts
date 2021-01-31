@@ -53,7 +53,7 @@ export class ContactFormComponent implements OnInit {
   submit() {
     this.contactsService.submitContactForm(this.contactForm.value).subscribe(data => {
       this.toastrService.success("Message sent", "Success");
-      this.router.navigate(["tankYou"])
+      this.router.navigate(["contacts/thankYou"])
     })
   }
 

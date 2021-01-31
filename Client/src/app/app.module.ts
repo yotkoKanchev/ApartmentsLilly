@@ -24,7 +24,7 @@ import { ProfilesModule } from './profiles/profiles.module';
 import { ReservationsModule } from './reservations/reservations.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './administration/dashboard/dashboard.component';
-import { ContactFormComponent } from './shared/contact-form/contact-form.component';
+import { ContactsModule } from './contacts/contacts.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,6 @@ import { ContactFormComponent } from './shared/contact-form/contact-form.compone
     FooterComponent,
     StartComponent,
     DashboardComponent,
-    ContactFormComponent,
   ],
   imports: [
     AuthModule,
@@ -44,6 +43,7 @@ import { ContactFormComponent } from './shared/contact-form/contact-form.compone
     AmenitiesModule,
     BedsModule,
     ReservationsModule,
+    ContactsModule,
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,

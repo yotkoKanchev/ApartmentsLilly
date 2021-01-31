@@ -1,10 +1,18 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3"></div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 pt-5">
+            <div class="border rounded border-success p-2">
+                <h4>Апартаменти Лили</h4>
+                <h6>гр. Пловдив, 4000</h6>
+                <h6>ул. Беласица 72</h6>
+                <h6>тел. 0895 690730</h6>
+
+            </div>
+            <h5 class="pt-5">Изпратете ни съобщение:</h5>
             <form [formGroup]="contactForm">
                 <div class="form-group">
-                    <label>Name</label>
+                    <label>Имена</label>
                     <input type="text" class="form-control" formControlName="name">
                 </div>
                 <div *ngIf="(name.touched || name.dirty) && name.errors" class="alert alert-danger">
@@ -14,7 +22,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Email</label>
+                    <label>Имейл</label>
                     <input type="email" class="form-control" formControlName="email">
                 </div>
                 <div *ngIf="(email.touched || email.dirty) && email.errors" class="alert alert-danger">
@@ -27,7 +35,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Title</label>
+                    <label>Относно</label>
                     <input type="text" class="form-control" formControlName="title">
                 </div>
                 <div *ngIf="(title.touched || title.dirty) && title.errors" class="alert alert-danger">
@@ -37,7 +45,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Content</label>
+                    <label>Съобщение</label>
                     <textarea type="text" rows="4" class="form-control" formControlName="content"></textarea>
                 </div>
                 <div *ngIf="(content.touched || content.dirty) && content.errors" class="alert alert-danger">
@@ -49,8 +57,8 @@
             </form>
             <div>
                 <button type="submit" class="btn btn-primary mr-2" [disabled]="contactForm.invalid"
-                    (click)="submit()">Send</button>
-                <input type="submit" class="btn btn-primary" routerLink="/" value="Cancel">
+                    (click)="submit()">Изпрати</button>
+                <input type="submit" class="btn btn-primary" routerLink="/" value="Откажи">
             </div>
             <br>
             <br>

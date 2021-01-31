@@ -11,7 +11,7 @@ import { ProfilesRoutingModule } from './profiles/profiles-routing.module';
 import { ReservationsRoutingModule } from './reservations/reservations-routing.module';
 import { DeleteProfileComponent } from './profiles/delete-profile/delete-profile.component';
 import { AdministrationsRoutingModule } from './administration/administration-routing.module';
-import { ContactFormComponent } from './shared/contact-form/contact-form.component';
+import { ContactsRoutingModule } from './contacts/contacts-routing.module';
 
 const routes: Routes = [
 
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'delete', component: DeleteProfileComponent },
-  { path: 'contacts', component: ContactFormComponent },
+  { path: 'contacts', loadChildren: () => ContactsRoutingModule },
   { path: 'profiles', loadChildren: () => ProfilesRoutingModule },
   { path: 'apartments', loadChildren: () => ApartmentsRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
   { path: 'addresses', loadChildren: () => AddressesRoutingModule, canLoad: [AuthGuardService, AdminGuardService] },

@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
     const user = localStorage.getItem('user');
     const avatar = user ? JSON.parse(user)['avatarUrl'] : localStorage.getItem('avatarUrl');
     this.avatar = avatar ? avatar : 'assets/images/noAvatar.png';
-    console.log(this.getAvatar())
   }
 
   logout() {

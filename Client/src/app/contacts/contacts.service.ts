@@ -14,8 +14,21 @@ export class ContactsService {
     private http: HttpClient,
   ) { }
 
-  submitContactForm(data: any):  Observable<any> {
-    console.log(data)
+  submitContactForm(data: any): Observable<any> {
     return this.http.post<ContactFormModel>(this.contactFormPath, data);
+  }
+
+  getAll(): Observable<Array<ContactFormModel>> {
+    return this.http.get<Array<ContactFormModel>>(this.contactFormPath + '/all');
+  }
+
+  // ignore(id: number) {
+  //   console.log(id)
+  //   return this.http.delete(this.contactFormPath + '/' + id);
+  // }
+
+  ignore(id: number) {
+    console.log(this.contactFormPath + '/' + id)
+    return this.http.delete(this.contactFormPath + '/' + id);
   }
 }
