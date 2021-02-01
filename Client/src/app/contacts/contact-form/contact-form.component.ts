@@ -33,20 +33,13 @@ export class ContactFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
       this.profilesService.getProfile().subscribe(profile => {
-        this.contactForm = this.fb.group({
+        this.contactForm.setValue({
           'name': profile.firstName + ' ' + profile.lastName,
           'email': profile.email,
-          'title': '',
-          'content': '',
+          "title": [''],
+          "content": ['']
         })
       });
-    } else {
-      this.contactForm = this.fb.group({
-        'name': '',
-        'email': '',
-        'title': '',
-        'content': '',
-      })
     }
   }
 

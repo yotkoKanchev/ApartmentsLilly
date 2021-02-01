@@ -77,7 +77,7 @@
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link" (click)="goToLink('/administration/profiles')">
+                            <a class="nav-link" routerLink='/administration/profiles'>
                                 <span data-feather="file-text"></span>
                                 Profiles
                             </a>
@@ -89,7 +89,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/administration/messages">
+                            <a class="nav-link" routerLink="/administration/messages">
                                 <span data-feather="file-text"></span>
                                 Messages
                             </a>
@@ -108,7 +108,7 @@
                     </a></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group me-2">
-                        <a (click)="goToLink('/apartments')" class="btn btn-sm btn-outline-secondary">Apartments</a>
+                        <a routerLink ='/apartments' class="btn btn-sm btn-outline-secondary">Apartments</a>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Admins</button>
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
@@ -136,7 +136,7 @@
                         </tr>
                     </thead>
                     <tbody *ngFor="let reservation of newReservations">
-                        <tr class="table-light clickable-row" (click)='goToLink("reservations", reservation.id)'>
+                        <tr class="table-light clickable-row" routerLink="/reservations/{{ reservation.id }}">
                             <td>{{reservation.from}}</td>
                             <td>{{reservation.to}}</td>
                             <td>{{reservation.apartmentName}}</td>

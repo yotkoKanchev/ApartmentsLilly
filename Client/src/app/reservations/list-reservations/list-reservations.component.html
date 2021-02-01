@@ -11,28 +11,17 @@
       </tr>
     </thead>
     <tbody *ngFor="let reservation of reservations">
-      <tr
-        class="table-light clickable-row"
-        (click)="goToLink('reservations', reservation.id)"
-      >
+      <tr class="table-light clickable-row" routerLink="/reservations/{{ reservation.id }}">
         <td>{{ reservation.fullName }}</td>
         <td>{{ reservation.apartmentName }}</td>
         <td>{{ reservation.from }}</td>
         <td>{{ reservation.to }}</td>
         <td>{{ reservation.status }}</td>
         <td>
-          <input
-            type="button"
-            class="btn btn-sm btn-outline-primary mr-2"
-            routerLink="/reservations/{{ reservation.id }}"
-            value="Details"
-          />
-          <input
-            type="button"
-            class="btn btn-sm btn-outline-primary mr-2"
-            routerLink="/reservations/edit/{{ reservation.id }}"
-            value="Edit"
-          />
+          <input type="button" class="btn btn-sm btn-outline-primary mr-2"
+            routerLink="/reservations/{{ reservation.id }}" value="Details" />
+          <input type="button" class="btn btn-sm btn-outline-primary mr-2"
+            routerLink="/reservations/edit/{{ reservation.id }}" value="Edit" />
         </td>
       </tr>
     </tbody>

@@ -28,12 +28,4 @@ export class ListReservationsComponent implements OnInit {
       this.reservations = data;
     })
   }
-
-  goToLink(route: string, id?: number) {
-    if (id) {
-      this.router.navigate([route, id]);
-    } else {
-      this.router.navigate([route]);
-    }
-  }
 }

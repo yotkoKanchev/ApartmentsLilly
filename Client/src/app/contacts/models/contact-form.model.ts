@@ -3,4 +3,5 @@ export interface ContactFormModel{
     email: string,
     title: string,
     content: string,
+    createdOn: Date,
 }

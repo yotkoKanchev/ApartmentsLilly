@@ -6,18 +6,25 @@
                 <th scope="col">Email</th>
                 <th scope="col">Title</th>
                 <th scope="col">IP</th>
+                <th scope="col">Created On</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody *ngFor="let message of messages">
-            <tr class="table-light clickable-row" (click)="goToLink('contacts', message.id)">
+            <app-ignore-message [id]="message.id" class="modal fade" id="ignoreMessage" tabindex="-1"
+                aria-labelledby="ignoreMessageLabel" aria-hidden="true"> </app-ignore-message>
+
+            <tr class="table-light">
                 <td>{{message.name}}</td>
                 <td>{{message.email}}</td>
                 <td>{{message.title}}</td>
                 <td>{{message.ip}}</td>
+                <td>{{message.createdOn | date: 'ddMMMyyyy:HH:MM'}}</td>
                 <td>
-                    <input type="button" class="btn btn-sm btn-outline-primary mr-2" routerLink="/contacts/{{message.id}}" value="Details">
-                    <input type="button" class="btn btn-sm btn-outline-primary" (click)="ignore(message.id)" value="Ignore">
+                    <input type="button" class="btn btn-sm btn-outline-primary mr-2"
+                        routerLink="/contacts/{{message.id}}" value="Details">
+                    <input type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+                        data-target="#ignoreMessage" value="Ignore" />
                 </td>
             </tr>
         </tbody>

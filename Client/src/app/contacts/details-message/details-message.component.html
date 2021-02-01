@@ -1,0 +1,42 @@
+<div *ngIf="message" class="jumbotron ">
+    <app-ignore-message [id]="message.id" class="modal fade" id="ignoreMessage" tabindex="-1"
+        aria-labelledby="ignoreMessageLabel" aria-hidden="true"> </app-ignore-message>
+
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+            <div class="card-body">
+                <h5 class="card-title">Имена: {{message.name}}</h5>
+                <p class="card-text">Имейл: {{message.email}}</p>
+                <p class="card-text">От Дата: {{message.createdOn | date: 'ddMMMyyyy:HH:MM'}}</p>
+                <p class="card-text">Заглавие: {{message.title}}</p>
+                <p class="card-text">Съдържание: {{message.content}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="mb-2 mt-2 ">
+        <input *ngIf="!show" type="button" class="btn btn-primary mr-2" (click)="showReply()" value="Отговори">
+        <button *ngIf="!show" type="button" class="btn btn-primary mr-2" data-toggle="modal"
+            data-target="#ignoreMessage">
+            Игнорирай
+        </button>
+        <input type="button" class="btn btn-primary mr-2" routerLink="/administration/messages" value="Обратно">
+    </div>
+    <div *ngIf="show" class="pt-2">
+        <form [formGroup]="replyForm">
+            <div class="form-group">
+                <label>Отговор</label>
+                <textarea type="text" rows="4" class="form-control" formControlName="content"></textarea>
+            </div>
+            <div *ngIf="(content.touched || content.dirty) && content.errors" class="alert alert-danger">
+                <span *ngIf="content.errors.required || content.errors.minlength || content.errors.maxlength">
+                    Description should be between 5 and 1000 symbols long!
+                </span>
+            </div>
+        </form>
+        <div>
+            <button type="submit" class="btn btn-primary mr-2" [disabled]="replyForm.invalid"
+                (click)="reply()">Изпрати</button>
+            <input type="submit" class="btn btn-primary" (click)="showReply()" value="Откажи">
+        </div>
+    </div>
+</div>

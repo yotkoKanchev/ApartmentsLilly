@@ -36,12 +36,4 @@ export class DashboardComponent implements OnInit {
       this.reservationsStatuses = data;
     });
   }
-
-  goToLink(route: string, id?: number) {
-    if (id) {
-      this.router.navigate([route, id]);
-    } else {
-      this.router.navigate([route]);
-    }
-  }
 }
