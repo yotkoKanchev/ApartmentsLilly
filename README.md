@@ -44,3 +44,10 @@ To play with the app, you must follow these simple steps:
 7. Hit **Ctrl + F5**
 
 ## Screenshots
+<img src="https://res.cloudinary.com/dziee8jfp/image/upload/v1612302006/apartmentsLilly/results_cbbjnn.jpg" width="600"/>
+<img src="https://res.cloudinary.com/dziee8jfp/image/upload/v1612302006/apartmentsLilly/request_ycc3bo.jpg" width="600"/> 
+<img src="https://res.cloudinary.com/dziee8jfp/image/upload/v1612302006/apartmentsLilly/admin_dashboard_cqjbjz.jpg" width="600"/>
+<img src="https://res.cloudinary.com/dziee8jfp/image/upload/v1612302006/apartmentsLilly/ap_management_laugas.jpg" width="600"/>
+<img src="https://res.cloudinary.com/dziee8jfp/image/upload/v1612302006/apartmentsLilly/user_jzj2uo.jpg" width="600"/>
+<img src="https://res.cloudinary.com/dziee8jfp/image/upload/v1612302006/apartmentsLilly/contact_form_sghebf.jpg" width="600"/>
+
