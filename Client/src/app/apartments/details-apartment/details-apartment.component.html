@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <h5 *ngIf="apartment.basePrice">Base price: {{apartment.basePrice}}</h5>
                     <h5 *ngIf="apartment.maxOccupants">Max occupants: {{apartment.maxOccupants}}</h5>
-                    <h5 *ngIf="apartment.size">SIze: {{apartment.size}}sq.m</h5>
+                    <h5 *ngIf="apartment.size">Size: {{apartment.size}}sq.m</h5>
                     <h5>Entry: {{apartment.entry}}</h5>
                     <h5>Fllor: {{apartment.floor}}</h5>
                     <h5>Number: {{apartment.number}}</h5>
@@ -52,7 +52,7 @@
                         <p class="mb-1">{{apartment.address.city}}, {{apartment.address.country}}</p>
                         <p class="mb-1" *ngIf="apartment.address.postalCode && apartment.address.neighborhood">
                             {{apartment.address.postalCode}}, кв. {{apartment.address.neighborhood}}</p>
-                        <p class="mb-1">ул. {{apartment.address.streetAddress}}</p>
+                        <p class="mb-1">{{apartment.address.streetAddress}}</p>
 
                     </div>
                     <div>

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ProfilesService } from 'src/app/profiles/profiles.service';
 import { ReservationListingModel } from 'src/app/reservations/models/reservation-listing.model';
 import { ReservationsService } from 'src/app/reservations/reservations.service';
 import { EnumerationModel } from 'src/app/shared/models/enumeration.model';
+import { CalendarOptions } from '@fullcalendar/angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,9 +16,7 @@ export class DashboardComponent implements OnInit {
   reservationsStatuses: EnumerationModel;
 
   constructor(
-    private profilesService: ProfilesService,
     private reservationsService: ReservationsService,
-    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -35,5 +32,19 @@ export class DashboardComponent implements OnInit {
     this.reservationsService.getStatuses().subscribe(data => {
       this.reservationsStatuses = data;
     });
+  }
+
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    // weekends: false, 
+    dateClick: this.handleDateClick.bind(this), // bind is important!
+    events: [
+      { title: 'event 1', date: '2021-02-21' },
+      { title: 'event 2', date: '2021-02-12' }
+    ]
+  };
+
+  handleDateClick(arg) {
+    alert('date click! ' + arg.dateStr)
   }
 }

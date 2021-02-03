@@ -25,6 +25,18 @@ import { ReservationsModule } from './reservations/reservations.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './administration/dashboard/dashboard.component';
 import { ContactsModule } from './contacts/contacts.module';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  listPlugin,
+  interactionPlugin
+])
 
 @NgModule({
   declarations: [
@@ -51,6 +63,7 @@ import { ContactsModule } from './contacts/contacts.module';
     HttpClientModule,
     ToastrModule.forRoot(),
     NgbModule,
+    FullCalendarModule
   ],
   providers: [
     AuthService,

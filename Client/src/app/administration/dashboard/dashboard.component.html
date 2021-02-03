@@ -15,7 +15,7 @@
                 <div>
                     <h6 [routerLink]="['/reservations/all', '']"
                         class="clickable sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        Reservations 
+                        Reservations
                     </h6>
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -108,7 +108,7 @@
                     </a></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group me-2">
-                        <a routerLink ='/apartments' class="btn btn-sm btn-outline-secondary">Apartments</a>
+                        <a routerLink='/apartments' class="btn btn-sm btn-outline-secondary">Apartments</a>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Admins</button>
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
@@ -118,9 +118,48 @@
                 </div>
             </div>
             <h4 class="text-danger">Calendars</h4>
-            <!--calendars place-->
-            <canvas class="my-4 w-100 " id="myChart" width="900" height="200"></canvas>
-            <router-outlet></router-outlet>
+            <!-- <div class="row mb-2">
+                <div class="col-1 p-4 border rounded-left text-center"><strong>Date</strong></div>
+                <div class="col-1 p-4 border text-center">10 Feb</div>
+                <div class="col-1 p-4 border text-center">11 Feb</div>
+                <div class="col-1 p-4 border text-center">12 Feb</div>
+                <div class="col-1 p-4 border text-center">13 Feb</div>
+                <div class="col-1 p-4 border text-center">14 Feb</div>
+                <div class="col-1 p-4 border text-center">15 Feb</div>
+                <div class="col-1 p-4 border text-center">16 Feb</div>
+                <div class="col-1 p-4 border text-center">17 Feb</div>
+                <div class="col-1 p-4 border text-center">18 Feb</div>
+                <div class="col-1 p-4 border rounded-right text-center">19 Feb</div>
+            </div>
+            <div class="row text-light">
+                <div class="col-1 p-4 border rounded-left text-center text-dark"><strong>Lilly 1</strong></div>
+                <div class="col-1 p-4 border text-center bg-primary">60 BGN</div>
+                <div class="col-1 p-4 border text-center bg-primary">60 BGN</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Yotko K</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Yotko K</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Yotko K</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Yotko K</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Yotko K</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Yotko K</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Yotko K</div>
+                <div class="col-1 p-4 border rounded-right text-center bg-secondary">Yotko K</div>
+            </div>
+            <div class="row text-light">
+                <div class="col-1 p-4 border rounded-left text-center text-dark"><strong>Lilly 2</strong></div>
+                <div class="col-1 p-4 border text-center bg-primary">75 BGN</div>
+                <div class="col-1 p-4 border text-center bg-primary">70 BGN</div>
+                <div class="col-1 p-4 border text-center bg-primary">60 BGN</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Petar A</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Petar A</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Petar A</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Petar A</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Petar A</div>
+                <div class="col-1 p-4 border text-center bg-secondary">Petar A</div>
+                <div class="col-1 p-4 border rounded-right text-center bg-secondary">Petar A</div>
+            </div>
+            <canvas class="my-4 w-100 " id="myChart" width="900" height="20"></canvas>
+            <router-outlet></router-outlet> -->
+            <full-calendar [options]="calendarOptions"></full-calendar>
 
             <h4 class="text-danger">New Reservations</h4>
             <div *ngIf="newReservations" class="table-responsive">
