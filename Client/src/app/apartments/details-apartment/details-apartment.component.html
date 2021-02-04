@@ -81,23 +81,6 @@
                     <app-edit-room [id]="room.id" class="modal fade" id="editRoom" tabindex="-1"
                         aria-labelledby="editRoomLabel" aria-hidden="true"></app-edit-room>
 
-                    <!--Delete Room Modal template-->
-                    <div class="modal fade" id="delRoom" tabindex="-1" aria-labelledby="delRoomLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Are you shure?</h5>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-danger" data-dismiss="modal"
-                                        (click)="deleteRoom(room.id)">Yes, Delete</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="d-flex justify-content-between">
                         <div>
                             <strong>{{room.roomType.name}}: </strong>{{room.name}}
@@ -106,11 +89,13 @@
                             <button type="button" class="btn btn-sm btn-outline-primary mr-2" data-toggle="modal"
                                 data-target="#editRoom">Edit
                             </button>
+
+                            <app-delete-room class="modal fade" id="delRoom" tabindex="-1"
+                                aria-labelledby="delRoomLabel" aria-hidden="true">
+                            </app-delete-room>
+
                             <button type="button" class="btn btn-sm btn-outline-danger mr-2" data-toggle="modal"
-                                data-target="#delRoom">Delete
-                            </button>
-                            <!-- <input type="button" class="btn btn-sm btn-outline-primary" (click)="deleteRoom(room.id)"
-                                value="Delete"> -->
+                                data-target="#delRoom" (click)="setRoomId(room.id)">Delete</button>
                         </div>
                     </div>
                     <div *ngIf="room.beds.length > 0">

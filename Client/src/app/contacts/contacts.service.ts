@@ -9,8 +9,7 @@ import { MessageReplyModel } from './models/message-reply.model';
   providedIn: 'root'
 })
 export class ContactsService {
-  private contactFormPath = environment.apiUrl + "contacts";
-
+  private contactFormPath = environment.apiUrl + "Contacts";
   constructor(
     private http: HttpClient,
   ) { }
@@ -28,8 +27,10 @@ export class ContactsService {
   }
 
   ignore(id: number) {
+    console.log('delete')
     console.log(this.contactFormPath + '/' + id)
-    return this.http.delete(this.contactFormPath + '/' + id);
+    // return this.http.get(this.contactFormPath + '/' + id);
+    return this.http.put<number>(this.contactFormPath + '/' + id, id);
   }
 
   reply(id: number, data: any) {

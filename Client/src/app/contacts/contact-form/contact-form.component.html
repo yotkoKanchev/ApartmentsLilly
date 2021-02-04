@@ -1,7 +1,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3"></div>
-        <div class="col-lg-6 pt-5">
+        <div *ngIf="isSent" class="p-5">
+            <h4 class="p-2">Съобщението Ви беше изпратено успешно!</h4>
+            <h5 class="p-2">Ще Ви отговорим, на посоченият имейл адрес възможно най-скоро.</h5>
+        </div>
+        <div *ngIf="!isSent" class="col-lg-6 pt-5">
             <div class="border rounded border-success p-2">
                 <h4>Апартаменти Лили</h4>
                 <h6>гр. Пловдив, 4000</h6>

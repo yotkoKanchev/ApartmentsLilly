@@ -3,10 +3,11 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
+    using Data.Models;
     using Models;
 
     using Microsoft.AspNetCore.Mvc;
-    using ApartmentsLilly.Server.Data.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
 
     using static Infrastructure.WebConstants;
@@ -23,14 +24,15 @@
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        //[AutoValidateAntiforgeryToken]
         public async Task<ActionResult> Create(CreateContactEntryRequestModel model)
         {
             var user = await this.userManager.GetUserAsync(this.User);
             var ip = this.HttpContext.Connection.RemoteIpAddress.ToString();
 
-            //var userId = user != null ? user.Id : null;
             await this.contactsService.Create(
-                user.Id ?? null,
+                user == null ? null : user.Id,
                 ip,
                 model.Name,
                 model.Email,
@@ -48,7 +50,7 @@
         }
 
         [HttpGet]
-        [Route(Id)]
+        [Route(nameof(All))]
         public async Task<IEnumerable<ContactEntryListingServiceModel>> All()
         {
             return await this.contactsService.GetAll<ContactEntryListingServiceModel>();
@@ -67,7 +69,8 @@
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpPut]
+        [Route(Id)]
         public async Task<ActionResult> Ignore(int id)
         {
             var result = await this.contactsService.Ignore(id);

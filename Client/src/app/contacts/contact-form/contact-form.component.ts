@@ -13,6 +13,7 @@ import { ContactsService } from '../contacts.service';
 })
 export class ContactFormComponent implements OnInit {
   contactForm: FormGroup;
+  isSent: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -44,9 +45,10 @@ export class ContactFormComponent implements OnInit {
   }
 
   submit() {
-    this.contactsService.submitContactForm(this.contactForm.value).subscribe(data => {
+    this.contactsService.submitContactForm(this.contactForm.value).subscribe(() => {
       this.toastrService.success("Message sent", "Success");
-      this.router.navigate(["contacts/thankYou"])
+      this.isSent = true;
+      // this.router.navigate(["contacts/thankYou"])
     })
   }
 

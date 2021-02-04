@@ -41,7 +41,7 @@
 
             if (result.Failure)
             {
-                this.BadRequest(result.Error);
+                return this.BadRequest(result.Error);
             }
 
             return Ok();

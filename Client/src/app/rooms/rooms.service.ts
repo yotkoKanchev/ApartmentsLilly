@@ -11,7 +11,7 @@ import { EnumerationModel } from '../shared/models/enumeration.model';
 })
 export class RoomsService {
   private roomsPath = environment.apiUrl + 'Rooms';
-
+  private id: number;
   constructor(
     private http: HttpClient,
   ) { }
@@ -39,5 +39,13 @@ export class RoomsService {
 
   getRooms(id: number): Observable<RoomModel[]> {
     return this.http.get<RoomModel[]>(this.roomsPath + `/All/${id}`)
+  }
+
+  setRoomId(id: number) {
+    this.id = id;
+  }
+
+  getRoomId(): number {
+    return this.id;
   }
 }

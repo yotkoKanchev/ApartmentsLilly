@@ -17,8 +17,9 @@ export class IgnoreMessageComponent {
   ) { }
 
   ignore() {
-    this.contactsService.ignore(this.id);
-    this.toastr.success("Message has been ignored.", "Success");
-    this.router.navigate(["administration/messages"])
+    this.contactsService.ignore(this.id).subscribe(() => {
+      this.toastr.success("Message has been ignored.", "Success");
+      this.router.navigate(["administration/messages"])
+    });
   }
 }

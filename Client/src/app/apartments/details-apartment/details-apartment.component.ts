@@ -38,8 +38,8 @@ export class DetailsApartmentComponent implements OnInit {
     })
   }
 
-  deleteRoom(id: number) {
-    this.roomsService.deleteRoom(id).subscribe(() => {
+  deleteRoom(roomId: number) {
+    this.roomsService.deleteRoom(roomId).subscribe(() => {
       this.toastr.success("Room has been deleted!", "Success");
       this.fetchApartment(this.id);
     });
@@ -61,6 +61,10 @@ export class DetailsApartmentComponent implements OnInit {
 
   getMap() {
     this.showMap = !this.showMap;
+  }
+
+  setRoomId(id: number){
+    this.roomsService.setRoomId(id);
   }
 
   private getMapDetails() {

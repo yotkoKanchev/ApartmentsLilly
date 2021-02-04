@@ -6,6 +6,7 @@ import { RoomsService } from './rooms.service';
 import { CreateRoomComponent } from './create-room/create-room.component';
 import { EditRoomComponent } from './edit-room/edit-room.component';
 import { RouterModule } from '@angular/router';
+import { DeleteRoomComponent } from './delete-room/delete-room.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { RouterModule } from '@angular/router';
   exports: [
     CreateRoomComponent,
     EditRoomComponent,  
+    DeleteRoomComponent
   ]
 })
 export class RoomsModule { }

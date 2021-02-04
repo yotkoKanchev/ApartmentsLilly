@@ -48,7 +48,7 @@ export class DetailsMessageComponent implements OnInit {
       this.router.navigate(["/administration/messages"])
     })
   }
-
+  
   get content() {
     return this.replyForm.get('content');
   }
