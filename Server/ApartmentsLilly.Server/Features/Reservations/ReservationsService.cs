@@ -78,6 +78,12 @@
                 .Where(r => r.Status == statusEnum);
             }
 
+            if (status != "canceled")
+            {
+                reservations = reservations
+                .Where(r => r.Status != ReservationStatus.Canceled && r.Status != ReservationStatus.Arhived);
+            }
+
             return await reservations
                 .OrderBy(r => (int)r.Status)
                 .ThenByDescending(r => r.From)

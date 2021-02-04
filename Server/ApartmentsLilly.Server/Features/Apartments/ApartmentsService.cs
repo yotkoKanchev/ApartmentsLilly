@@ -159,9 +159,9 @@
                 .Apartments
                 .Where(a => a.Rooms.Any())
                 .Where(a => !a.Reservations
-                    .Where(r => r.Status == ReservationStatus.Confirmed)
-                    .Any(b => (b.From >= startDate && b.To <= startDate) &&
-                              (b.From >= endDate && b.To <= endDate)))
+                     .Where(r => r.Status != ReservationStatus.Canceled && r.Status != ReservationStatus.Arhived)
+                    .Any(b => (startDate.Date >= b.From.Date  && startDate.Date < b.To.Date ) ||
+                              (startDate.Date <= b.From.Date && endDate.Date > b.From.Date)))
                 .OrderBy(a => a.Name)
                 .To<T>()
                 .ToListAsync();
