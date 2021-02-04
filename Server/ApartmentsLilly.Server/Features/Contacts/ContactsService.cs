@@ -62,6 +62,7 @@
         {
             var query = await this.data
                 .ContactFormEntries
+                .Where(c => !c.IsReplyed)
                 .OrderBy(r => r.CreatedOn)
                 .Where(r => r.IsReplyed == false)
                 .To<T>()
@@ -78,7 +79,7 @@
             await this.emailSender.SendEmailAsync(
                         replyInfo.Email,
                         $"Appartments Lilly Enquiery: {replyInfo.Title}",
-                        $"Dear {replyInfo}, /n {replyContent}");
+                        $"Dear {replyInfo.Name}, /n {replyContent}");
 
             return await this.SetReplyedAsync(id, replyContent);
         }

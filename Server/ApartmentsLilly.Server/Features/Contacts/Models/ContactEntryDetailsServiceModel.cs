@@ -1,5 +1,7 @@
 ﻿namespace ApartmentsLilly.Server.Features.Contacts.Models
 {
+    using System;
+
     using Data.Models;
     using Infrastructure.Mapping;
 
@@ -14,5 +16,7 @@
         public string Title { get; set; }
 
         public string Content { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

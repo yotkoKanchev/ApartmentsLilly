@@ -15,6 +15,8 @@ import { EnumerationModel } from '../shared/models/enumeration.model';
 })
 export class ReservationsService {
   private reservationsPath = environment.apiUrl + "reservations";
+  
+
   confirmationDetails: ReservationConfirmationModel;
   apartmentId: number;
   apartmentName: string;

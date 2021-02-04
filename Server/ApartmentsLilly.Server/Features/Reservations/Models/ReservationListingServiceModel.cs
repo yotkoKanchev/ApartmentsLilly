@@ -30,8 +30,8 @@
             configuration.CreateMap<Reservation, ReservationListingServiceModel>()
                 .ForMember(r => r.FullName, opt => opt.MapFrom(r => r.FirstName + ' ' + r.LastName))
                 .ForMember(a => a.ApartmentName, opt => opt.MapFrom(a => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(a.Apartment.Name)))
-                .ForMember(r => r.From, opt => opt.MapFrom(r => r.From.ToString("ddMMMyyyy")))
-                .ForMember(r => r.To, opt => opt.MapFrom(r => r.To.ToString("ddMMMyyyy")))
+                .ForMember(r => r.From, opt => opt.MapFrom(r => r.From.Date.ToString("yyyy-MM-dd")))
+                .ForMember(r => r.To, opt => opt.MapFrom(r => r.To.Date.ToString("yyyy-MM-dd")))
                 .ForMember(r => r.Guests, opt => opt.MapFrom(r => $"{r.Adults}/{r.Children}/{r.Infants}"));
         }
     }

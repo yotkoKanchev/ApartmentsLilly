@@ -107,7 +107,7 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <!-- <router-outlet></router-outlet> -->
-            <full-calendar class="pt-2" [options]="calendarOptions"></full-calendar>
+            <app-calendar></app-calendar>
 
             <h4 class="text-danger">New Reservations</h4>
             <div *ngIf="newReservations" class="table-responsive">
@@ -124,8 +124,8 @@
                     </thead>
                     <tbody *ngFor="let reservation of newReservations">
                         <tr class="table-light clickable-row" routerLink="/reservations/{{ reservation.id }}">
-                            <td>{{reservation.from}}</td>
-                            <td>{{reservation.to}}</td>
+                            <td>{{reservation.from | date:'ddMMMyyyy'}}</td>
+                            <td>{{reservation.to | date:'ddMMMyyyy'}}</td>
                             <td>{{reservation.apartmentName}}</td>
                             <td>{{reservation.phoneNumber}}</td>
                             <td>{{reservation.confirmation}}</td>

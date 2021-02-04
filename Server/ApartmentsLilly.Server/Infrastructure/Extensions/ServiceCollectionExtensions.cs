@@ -2,18 +2,23 @@
 {
     using System;
     using System.Text;
+
     using Data;
     using Data.Models;
     using Features.Addresses;
     using Features.Amenities;
     using Features.Apartments;
     using Features.Beds;
+    using Features.Contacts;
     using Features.Identity;
     using Features.Profiles;
+    using Features.Reservations;
     using Features.Rooms;
     using Features.Search;
     using Filters;
+    using Messaging;
     using Services;
+
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
@@ -23,8 +28,6 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
-    using ApartmentsLilly.Server.Features.Reservations;
-    using ApartmentsLilly.Server.Infrastructure.Messaging;
 
     public static class ServiceCollectionExtensions
     {
@@ -101,7 +104,8 @@
                 .AddTransient<IAmenitiesService, AmenitiesService>()
                 .AddTransient<IRoomsService, RoomsService>()
                 .AddTransient<IReservationsService, ReservationsService>()
-                .AddTransient<IBedsService, BedsService>();
+                .AddTransient<IBedsService, BedsService>()
+                .AddTransient<IContactsService, ContactsService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
             => services.AddSwaggerGen(c =>
@@ -117,9 +121,11 @@
 
         public static void AddApiControllers(this IServiceCollection services)
             => services
-                .AddControllers(options => options
-                    .Filters
-                    .Add<ModelOrNotFoundActionFilter>());
+                .AddControllers(options =>
+                {
+                    options.Filters
+                        .Add<ModelOrNotFoundActionFilter>();
+                });
 
         public static IServiceCollection ConfigureCookiePolicyOptions(this IServiceCollection services)
             => services.Configure<CookiePolicyOptions>(

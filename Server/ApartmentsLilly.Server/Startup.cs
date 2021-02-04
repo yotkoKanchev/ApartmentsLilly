@@ -29,6 +29,11 @@ namespace ApartmentsLilly.Server
                 .ConfigureCookiePolicyOptions()
                 .ConfigureDataProtectionTokenLifeSpan()
                 .AddApiControllers();
+
+            //services.AddAntiforgery(options =>
+            //{
+            //    options.HeaderName = "X-XSRF-TOKEN";
+            //});
         }
 
 

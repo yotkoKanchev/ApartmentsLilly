@@ -30,6 +30,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
+import { CalendarComponent } from './calendar/calendar/calendar.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -45,6 +46,7 @@ FullCalendarModule.registerPlugins([
     FooterComponent,
     StartComponent,
     DashboardComponent,
+    CalendarComponent,
   ],
   imports: [
     AuthModule,
@@ -78,7 +80,10 @@ FullCalendarModule.registerPlugins([
       useClass: ErrorInterceptorService,
       multi: true
     }
-],
+  ],
+  exports: [
+    CalendarComponent
+  ],
   bootstrap: [AppComponent]
 })
 
