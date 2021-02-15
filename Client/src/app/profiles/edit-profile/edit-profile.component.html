@@ -1,7 +1,18 @@
-<div class="container-fluid">
+<div *ngIf="profile" class="container-fluid">
+
+    <app-upload-files class="modal fade" id="uploadFiles" tabindex="-1" aria-labelledby="uploadFilesLabel"
+        aria-hidden="true"></app-upload-files>
+
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
+            <div class="align-self-center p-3">
+                <a class="red-tooltip" data-toggle="modal" data-target="#uploadFiles" data-placement="right"
+                    title="Click to change image">
+                    <img [src]="profile.avatarUrl" class="card-img-top w-100" alt="User avatar">
+                </a>
+            </div>
+
             <form [formGroup]="profileForm">
                 <div class="form-group">
                     <label>Email</label>
@@ -45,16 +56,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Avatar Url</label>
-                    <input type="text" class="form-control" formControlName="avatarUrl">
-                </div>
-                <div *ngIf="(avatarUrl.touched || avatarUrl.dirty) && avatarUrl.errors" class="alert alert-danger">
-                    <span *ngIf="avatarUrl.errors.pattern">
-                        Plase, add valid url address!
-                    </span>
-                </div>
-
-                <div class="form-group">
                     <label>Phone number</label>
                     <input type="text" class="form-control" formControlName="phoneNumber">
                 </div>
@@ -67,6 +68,7 @@
                         Phone number should be minimum 4 symbols long!
                     </span>
                 </div>
+
                 <button type="submit" class="btn btn-primary mr-2" (click)="editProfile()">Update</button>
                 <a class="btn btn-primary" routerLink="/profiles/mine/">Close</a>
             </form>

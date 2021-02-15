@@ -30,7 +30,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
-import { CalendarComponent } from './calendar/calendar/calendar.component';
+import { CalendarComponent } from './_calendar/calendar.component';
+import { UploadFileService } from './_filesUpload/upload-files.service';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -69,6 +70,7 @@ FullCalendarModule.registerPlugins([
   ],
   providers: [
     AuthService,
+    UploadFileService,
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,
@@ -82,7 +84,6 @@ FullCalendarModule.registerPlugins([
     }
   ],
   exports: [
-    CalendarComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -27,8 +27,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "src/assets/bootstrap.min.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "node_modules/fullcalendar/dist/fullcalendar.min.css"
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js", 

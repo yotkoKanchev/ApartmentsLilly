@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular'; // useful for typechecking
 import { ReservationListingModel } from 'src/app/reservations/models/reservation-listing.model';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-calendar',
@@ -23,10 +23,10 @@ export class CalendarComponent implements OnInit {
       data.forEach(reservation => {
         this.posts.push({
           // id: reservation.id.toString(),
-          title: reservation.apartmentName +' - ' + reservation.fullName,
+          title: reservation.apartmentName + ' - ' + reservation.fullName,
           start: reservation.from,
           end: reservation.to,
-          backgroundColor: reservation.apartmentName == "Лили 1" ? 'red' : (reservation.apartmentName == 'Лили 2' ? 'blue': 'orange')
+          backgroundColor: reservation.apartmentName == "Лили 1" ? 'red' : (reservation.apartmentName == 'Лили 2' ? 'blue' : 'orange')
         })
       });
       this.posts.push(data);

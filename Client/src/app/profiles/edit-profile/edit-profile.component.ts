@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileModel } from '../models/profile.model';
 import { ProfilesService } from '../profiles.service';
@@ -19,13 +20,14 @@ export class EditProfileComponent implements OnInit {
     private router: Router,
     private profilesService: ProfilesService,
     private toastr: ToastrService,
+    private modalService: NgbModal,
   ) {
     this.profileForm = this.fb.group({
       'email': ['', [Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       'userName': ['', [Validators.minLength(2), Validators.maxLength(20)]],
       'firstName': ['', [Validators.minLength(2), Validators.maxLength(20)]],
       'lastName': ['', [Validators.minLength(2), Validators.maxLength(20)]],
-      'avatarUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
+      // 'avatarUrl': ['', Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')],
       'phoneNumber': ['', [Validators.minLength(4), Validators.maxLength(20)]],
     })
   }
@@ -33,12 +35,15 @@ export class EditProfileComponent implements OnInit {
   ngOnInit(): void {
     this.profilesService.getProfile().subscribe(res => {
       this.profile = res;
+      if (!this.profile.avatarUrl) {
+        this.profile.avatarUrl = 'assets/images/noAvatar.png';
+      }
       this.profileForm = this.fb.group({
         'email': [this.profile.email],
         'userName': [this.profile.userName],
         'firstName': [this.profile.firstName],
         'lastName': [this.profile.lastName],
-        'avatarUrl': [this.profile.avatarUrl],
+        // 'avatarUrl': [this.profile.avatarUrl],
         'phoneNumber': [this.profile.phoneNumber],
       })
     })
@@ -49,6 +54,11 @@ export class EditProfileComponent implements OnInit {
       this.router.navigate(["profiles/mine"]);
       this.toastr.success("Profile has been updated.", "Success")
     })
+  }
+
+  openModal() {
+    console.log('here')
+    this.modalService.open({ ariaLabelledBy: 'modal-upload-avatar' });
   }
 
   get email() {
@@ -65,10 +75,6 @@ export class EditProfileComponent implements OnInit {
 
   get lastName() {
     return this.profileForm.get('lastName');
-  }
-
-  get avatarUrl() {
-    return this.profileForm.get('avatarUrl');
   }
 
   get phoneNumber() {
