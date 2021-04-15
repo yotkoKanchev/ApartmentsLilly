@@ -1,6 +1,5 @@
 ﻿namespace ApartmentsLilly.Server.Features.Apartments
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -13,15 +12,11 @@
     using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
-    using SendGrid;
-    using SendGrid.Helpers.Mail;
 
     public class ApartmentsService : IApartmentsService
     {
         private readonly ApartmentsLillyDbContext data;
         private readonly IAddressService addresses;
-        private readonly IConfiguration configuration;
-        private readonly IEmailSender emailSender;
 
         public ApartmentsService(
             ApartmentsLillyDbContext data,
@@ -31,8 +26,6 @@
         {
             this.data = data;
             this.addresses = addresses;
-            this.configuration = configuration;
-            this.emailSender = emailSender;
         }
 
         public async Task<Result> Create(int addressId, string name, string description, string entry, int? floor, string number, double? size,
@@ -149,12 +142,8 @@
                 .Apartments
                 .AnyAsync(a => a.Id == apartmentId);
         }
-
         public async Task<IEnumerable<T>> GetAllAvailable<T>(System.DateTime startDate, System.DateTime endDate)
         {
-
-            //await this.emailSender.SendEmailAsync("yokraka@gmail.com", "test", "test");
-
             return await this.data
                 .Apartments
                 .Where(a => a.Rooms.Any())

@@ -105,9 +105,7 @@
             return new LoginResponseModel
             {
                 Token = token,
-                Name = user.UserName,
                 IsAdmin = await this.userManager.IsInRoleAsync(user, AdminRole),
-                AvatarUrl = profileUrl,
             };
         }
 

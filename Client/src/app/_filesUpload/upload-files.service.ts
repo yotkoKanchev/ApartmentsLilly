@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class UploadFileService {
 
   private baseUrl = 'http://localhost:8080';
+  // private baseUrl = 'https://api.cloudinary.com/v1_1/$dziee8jfp/upload';
 
   constructor(private http: HttpClient) { }
 

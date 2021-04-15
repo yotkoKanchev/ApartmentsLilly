@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'apartments', loadChildren: () => ApartmentsRoutingModule, canActivate: [AuthGuardService, AdminGuardService] },
   { path: 'addresses', loadChildren: () => AddressesRoutingModule, canLoad: [AuthGuardService, AdminGuardService] },
   { path: 'reservations', loadChildren: () => ReservationsRoutingModule },
-  { path: 'administration', loadChildren: () => AdministrationsRoutingModule, canActivate:[AdminGuardService] }
+  { path: 'administration', loadChildren: () => AdministrationsRoutingModule, canActivate: [AdminGuardService] }
 ];
 
 // TODO add canLoad and canActivate properly

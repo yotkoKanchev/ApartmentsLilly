@@ -26,5 +26,4 @@ namespace ApartmentsLilly.Server.Infrastructure.Extensions
             public int Value { get; set; }
         }
     }
-   
 }

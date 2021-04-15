@@ -32,6 +32,9 @@ import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarComponent } from './_calendar/calendar.component';
 import { UploadFileService } from './_filesUpload/upload-files.service';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import { Cloudinary } from '@cloudinary/angular-5.x';
+// import * as  Cloudinary from 'cloudinary-core';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -66,7 +69,8 @@ FullCalendarModule.registerPlugins([
     HttpClientModule,
     ToastrModule.forRoot(),
     NgbModule,
-    FullCalendarModule
+    FullCalendarModule,
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'dziee8jfp' }),
   ],
   providers: [
     AuthService,
